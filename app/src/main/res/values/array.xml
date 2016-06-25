@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="loginType_array">
+        <item>账套1</item>
+        <item>账套2</item>
+        <item>账套3</item>
+        <item>账套4</item>
+    </string-array>
+</resources>

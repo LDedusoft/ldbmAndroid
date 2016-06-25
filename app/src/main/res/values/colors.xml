@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="loginBackground">#f3f1f6</color><!-- 登录页面背景色-->
+    <color name="loginButton">#56adf9</color><!-- 登录按钮颜色-->
+    <color name="loginText">#b5bccc</color><!-- 登录页面文字颜色-->
+    <color name="loginLine">#b6bdcd</color><!-- 登录页面线条颜色-->
+    <color name="loginInputLeftLine">#50cb3b</color><!-- 登录页面输入框左侧的竖线-->
+    <color name="bottomBarBackground">#f9f9f9</color> <!-- 下工具栏背景色-->
+    <color name="bottomBarText">#929292</color><!-- 下工具栏文字颜色-->
+    <color name="bootomBarTextSelected">#194c6d</color><!-- 下工具栏文字选中颜色-->
+    <color name="homeTitleTextWhite">#ffffff</color><!-- 首页标题文字颜色-->
+    <color name="homeTitleText2">#a4ffffff</color><!-- 首页标题文字颜色-->
+    <color name="menuText">#cccccc</color><!--菜单文字颜色-->
+
+</resources>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bottomBarBackground"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/bottomBarText"
+        >
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        >
+
+        <!-- 首页 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <Button
+                android:id="@+id/btn_toolbar_home"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bottom_bar_home"
+                />
+            <TextView
+                android:id="@+id/txt_toolbar_home"
+                android:layout_marginTop="3dp"
+                android:text="@string/bottom_bar_home"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/bottomBarText"
+                />
+        </LinearLayout>
+
+        <!-- 维修 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            >
+            <Button
+                android:id="@+id/btn_toolbar_repair"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bottom_bar_weixiu"
+                />
+            <TextView
+                android:id="@+id/txt_bar_weixiu"
+                android:layout_marginTop="3dp"
+                android:text="@string/bottom_bar_weixiu"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/bottomBarText"
+                />
+        </LinearLayout>
+        <!-- 整车 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            >
+            <Button
+                android:id="@+id/btn_toolbar_wholecar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bottom_bar_zhengche"
+                />
+            <TextView
+                android:id="@+id/txt_bar_zhengche"
+                android:layout_marginTop="3dp"
+                android:text="@string/bottom_bar_zhengche"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/bottomBarText"
+                />
+        </LinearLayout>
+
+        <!-- 配件 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            >
+            <Button
+                android:id="@+id/btn_toolbar_part"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bottom_bar_peijian"
+                />
+            <TextView
+                android:id="@+id/txt_bar_peijian"
+                android:layout_marginTop="3dp"
+                android:text="@string/bottom_bar_peijian"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/bottomBarText"
+                />
+        </LinearLayout>
+
+        <!-- 报表 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            >
+            <Button
+                android:id="@+id/btn_toolbar_report"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bottom_bar_baobiao"
+                />
+            <TextView
+                android:id="@+id/txt_bar_baobiao"
+                android:layout_marginTop="3dp"
+                android:text="@string/bottom_bar_baobiao"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/bottomBarText"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
