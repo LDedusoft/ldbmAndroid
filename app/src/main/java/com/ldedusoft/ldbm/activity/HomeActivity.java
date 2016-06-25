@@ -2,11 +2,12 @@ package com.ldedusoft.ldbm.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.component.adapters.MenuListAdapter;
+import com.ldedusoft.ldbm.component.widge.sideslip.DelSlideListView;
+import com.ldedusoft.ldbm.component.widge.sideslip.ListViewonSingleTapUpListenner;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnDeleteListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
 
 import java.util.ArrayList;
@@ -15,11 +16,12 @@ import java.util.List;
 /**
  * Created by wangjianwei on 2016/6/22.
  */
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements OnDeleteListioner, ListViewonSingleTapUpListenner{
 
-    private TextView userName;
-    private TextView userType;
-    private TextView sysmode;
+    private DelSlideListView menuListView;
+
+    private MenuListAdapter adapter;
+
 
     private List<MenuItem> menuDataList;
     @Override
@@ -28,8 +30,11 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.ldbm_home);
 
         initMenuListData();
-        MenuListAdapter adapter = new MenuListAdapter(HomeActivity.this,R.layout.ldbm_menu_item,menuDataList);
-        ListView menuListView = (ListView)findViewById(R.id.home_menu_list);
+        adapter = new MenuListAdapter(HomeActivity.this,R.layout.ldbm_menu_item,menuDataList);
+        menuListView = (DelSlideListView)findViewById(R.id.home_menu_list);
+        menuListView.setDeleteListioner(this);
+        menuListView.setSingleTapUpListenner(this);
+        adapter.setOnDeleteListioner(this);
         menuListView.setAdapter(adapter);
 
 
@@ -41,6 +46,34 @@ public class HomeActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onSingleTapUp() {
+
+    }
+
+
+    @Override
+    public boolean isCandelete(int position) {
+        return true;
+    }
+
+
+    @Override
+    public void onDelete(int ID) {
+        menuDataList.remove(ID);
+        menuListView.deleteItem();
+        adapter.notifyDataSetChanged();
+        //TODO-更新用户配置
+    }
+
+
+    @Override
+    public void onBack() {
+
+    }
+
+
 
     private void initMenuListData(){
         menuDataList = new ArrayList<MenuItem>();

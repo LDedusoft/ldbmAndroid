@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnDeleteListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 public class MenuListAdapter extends ArrayAdapter<MenuItem> {
     private int resourceId;
+    private OnDeleteListioner mOnDeleteListioner;
 
     public MenuListAdapter(Context context,int textViewResourceId, List<MenuItem> objects){
         super(context,textViewResourceId,objects);
@@ -28,7 +30,7 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final MenuItem menuItem = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         if(menuItem!=null) {
@@ -37,6 +39,18 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
             TextView menuItemDescribe = (TextView) view.findViewById(R.id.menu_item_describe);
             LinearLayout menuItemCreateLayout = (LinearLayout) view.findViewById(R.id.menu_item_createLayout);
             Button menuItemCreateButton = (Button) view.findViewById(R.id.menu_item_createButton);
+
+            TextView deleteAction = (TextView)view.findViewById(R.id.delete_action);
+
+            deleteAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnDeleteListioner != null)
+                        mOnDeleteListioner.onDelete(position);
+                }
+            });
+
+
             menuItemIcon.setImageResource(menuItem.getIconId());
             menuItemTitle.setText(menuItem.getMenuTitle());
             menuItemDescribe.setText(menuItem.getMenuDescribe());
@@ -58,5 +72,8 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
             menuItemFoot.setVisibility(View.VISIBLE);
         }
         return view;
+    }
+    public void setOnDeleteListioner(OnDeleteListioner mOnDeleteListioner) {
+        this.mOnDeleteListioner = mOnDeleteListioner;
     }
 }

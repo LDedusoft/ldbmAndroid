@@ -12,5 +12,7 @@
     <string name="bottom_bar_peijian">配件</string>
     <string name="bottom_bar_baobiao">报表</string>
     <string name="home_view_search"> 搜索</string>
-    <string name="menu_tiem_addShortcut">添加快捷功能</string>
+    <string name="menu_item_addShortcut">添加快捷功能</string>
+    <string name="menu_item_top">置顶</string>
+    <string name="menu_item_delete">移除</string>
 </resources>

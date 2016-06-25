@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<com.ldedusoft.ldbm.component.widge.sideslip.ScrollLinerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="#ffffff"
+    android:layout_height="wrap_content"
+    android:background="@color/loginBackground"
     >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/loginBackground"
+        >
     <!--菜单-->
     <LinearLayout
         android:id="@+id/menu_item_body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/menu_item_height"
         android:orientation="horizontal"
         >
 
@@ -22,8 +29,8 @@
         >
         <ImageView
             android:id="@+id/menu_item_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/menu_item_icon"
+            android:layout_height="@dimen/menu_item_icon"
             />
     </RelativeLayout>
 
@@ -36,7 +43,7 @@
     <!--标题-->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/menu_item_height"
         android:orientation="vertical"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
@@ -65,20 +72,20 @@
     <LinearLayout
         android:id="@+id/menu_item_createLayout"
         android:orientation="horizontal"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/menu_button_width"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:visibility="gone"
         >
         <RelativeLayout
             android:layout_width="1px"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/menu_item_height"
             android:background="@color/menuText"
             >
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/menu_item_height"
             android:gravity="center"
             >
             <Button
@@ -98,22 +105,22 @@
         android:id="@+id/menu_item_foot"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/menu_foot_height"
         android:orientation="horizontal"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/menu_foot_height"
             android:orientation="horizontal"
             android:gravity="center_vertical|center_horizontal"
             >
             <Button
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="@dimen/menu_foot_icon"
+                android:layout_height="@dimen/menu_foot_icon"
                 android:background="@drawable/menu_add"
                 />
             <TextView
-                android:text="@string/menu_tiem_addShortcut"
+                android:text="@string/menu_item_addShortcut"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -122,4 +129,29 @@
 
 
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/top_action"
+        android:text="@string/menu_item_top"
+        android:layout_width="@dimen/menu_delete_btn"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="7dip"
+        android:textSize="18dip"
+        android:textColor="#000"
+        android:background="@color/menuTop"
+        />
+    <TextView
+        android:id="@+id/delete_action"
+        android:text="@string/menu_item_delete"
+        android:layout_width="@dimen/menu_delete_btn"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="7dip"
+        android:textSize="18dip"
+        android:textColor="#FFF"
+        android:background="@color/menuDelete"
+        />
+</com.ldedusoft.ldbm.component.widge.sideslip.ScrollLinerLayout>
