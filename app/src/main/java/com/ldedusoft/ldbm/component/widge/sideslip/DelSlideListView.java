@@ -14,6 +14,7 @@ public class DelSlideListView extends ListView implements
 
 	private GestureDetector mDetector;
 	private OnDeleteListioner mOnDeleteListioner;
+	private OnSettopListioner mOnSettopListioner;
 	private int position;
 	private float velocityX, velocityY;
 
@@ -32,6 +33,10 @@ public class DelSlideListView extends ListView implements
 
 	public void setDeleteListioner(OnDeleteListioner mOnDeleteListioner) {
 		this.mOnDeleteListioner = mOnDeleteListioner;
+	}
+
+	public void setSettopListioner(OnSettopListioner mOnSettopListioner){
+		this.mOnSettopListioner = mOnSettopListioner;
 	}
 
 	public void setSingleTapUpListenner(
@@ -222,5 +227,9 @@ public class DelSlideListView extends ListView implements
 		if (mScrollLinerLayout != null) {
 			mScrollLinerLayout.snapToScreen(0);
 		}
+	}
+
+	public void settopItem(){
+		deleteItem();
 	}
 }

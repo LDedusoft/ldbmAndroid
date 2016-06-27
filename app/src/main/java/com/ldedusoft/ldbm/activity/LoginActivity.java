@@ -21,15 +21,12 @@ import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.component.adapters.LoginSpinnerAdapter;
+import com.ldedusoft.ldbm.model.InterfaceParam;
 import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.StringReader;
+import com.ldedusoft.ldbm.util.ParseXML;
 
 /**
  * Created by wangjianwei on 2016/6/22.
@@ -112,8 +109,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             "请输入密码!", Toast.LENGTH_SHORT).show();
                     password.findFocus();
                 }else {
-                    ldbmLogin();
-                   // loginSuccess();
+                   // ldbmLogin();
+                    loginSuccess();
                 }
 
         }
@@ -124,30 +121,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      */
     private void ldbmLogin(){
         showProgressDialog();
-        serverPath =(String) getResources().getText(R.string.server_path);
-        paramXml =  "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
-                "  <soap:Header>" +
-                "    <MySoapHeader xmlns=\"LDBM4S\">" +
-                "      <UserName>admin</UserName>" +
-                "      <PassWord>zwj6756</PassWord>" +
-                "    </MySoapHeader>" +
-                "  </soap:Header>" +
-                "  <soap:Body>" +
-                "    <Login xmlns=\"LDBM4S\">" +
-                "      <UName>@userName</UName>" +
-                "      <Pwd>@passWord</Pwd>" +
-                "    </Login>" +
-                "  </soap:Body>" +
-                "</soap:Envelope>";
-        paramXml = paramXml.replace("@userName",username.getText());
-        paramXml = paramXml.replace("@passWord",password.getText());
+        serverPath =InterfaceParam.SERVER_PATH;
+        paramXml = InterfaceParam.getInstance().getLogin(username.getText().toString(), password.getText().toString());
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        loginResult = Integer.parseInt(parseXML(response, "LoginResult"));
+                        loginResult = Integer.parseInt(ParseXML.getItemValueWidthName(response, "LoginResult"));
                         if (loginResult == -1) {
                             //登录失败方法
                             loginError();
@@ -191,6 +173,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         String selectedType = loginTypeSpinner.getSelectedItem().toString();
         SysProperty.getInstance().setMode(selectedType);
         UserProperty.getInstance().setUserName(username.getText().toString());
+        UserProperty.getInstance().setPassWord(password.getText().toString());
         UserProperty.getInstance().setUserType(loginResult);
         Log.d("LoginActivity", username.getText().toString() + "登录");
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -202,36 +185,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
     }
 
-    private String parseXML(String xmlData, String itemName){
-        String result = "";
-        try{
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            XmlPullParser xmlPullParser = factory.newPullParser();
-            xmlPullParser.setInput(new StringReader(xmlData));
-            int eventType = xmlPullParser.getEventType();
-            String id = "";
-            while(eventType != XmlPullParser.END_DOCUMENT){
-                String nodeName = xmlPullParser.getName();
-                switch (eventType){
-                    case XmlPullParser.START_TAG:{
-                        if(itemName.equals(nodeName)){
-                            result = xmlPullParser.nextText();
-                        }
-                        break;
-                    }
-                    case XmlPullParser.END_TAG:{
-                        break;
-                    }
-                    default:
-                        break;
-                }
-                eventType = xmlPullParser.next();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return result;
-    }
+
 
     /**
      * @param root 最外层布局，需要调整的布局

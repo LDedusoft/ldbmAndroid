@@ -11,6 +11,28 @@ public class MenuItem {
     /*图标id*/
     private int iconId;
 
+    /*是否是首页菜单，可以滑动删除置顶*/
+    private boolean isHomeMenu = false;
+
+    /*是否是子标题*/
+    private boolean isSubTitle = false;
+
+    public boolean isSubTitle() {
+        return isSubTitle;
+    }
+
+    public void setIsSubTitle(boolean isSubTitle) {
+        this.isSubTitle = isSubTitle;
+    }
+
+    public boolean isHomeMenu() {
+        return isHomeMenu;
+    }
+
+    public void setIsHomeMenu(boolean isHomeMenu) {
+        this.isHomeMenu = isHomeMenu;
+    }
+
     public int getIconId() {
         return iconId;
     }

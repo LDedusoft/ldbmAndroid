@@ -6,4 +6,14 @@
         <item>账套3</item>
         <item>账套4</item>
     </string-array>
+    <string-array name="home_menu_item">
+        <item>供应商</item>
+        <item>库存查询1</item>
+        <item>库存查询2</item>
+        <item>库存查询3</item>
+        <item>库存查询4</item>
+        <item>库存查询5</item>
+        <item>库存查询6</item>
+        <item>库存查询7</item>
+    </string-array>
 </resources>

@@ -12,7 +12,7 @@
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/bottom_bar_height"
         android:orientation="horizontal"
         android:paddingTop="2dp"
         >
@@ -20,15 +20,15 @@
         <!-- 首页 -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
             >
             <Button
                 android:id="@+id/btn_toolbar_home"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_home"
                 />
             <TextView
@@ -46,7 +46,7 @@
         <!-- 维修 -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
@@ -54,8 +54,8 @@
             >
             <Button
                 android:id="@+id/btn_toolbar_repair"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_weixiu"
                 />
             <TextView
@@ -72,7 +72,7 @@
         <!-- 整车 -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
@@ -80,8 +80,8 @@
             >
             <Button
                 android:id="@+id/btn_toolbar_wholecar"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_zhengche"
                 />
             <TextView
@@ -99,7 +99,7 @@
         <!-- 配件 -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
@@ -107,8 +107,8 @@
             >
             <Button
                 android:id="@+id/btn_toolbar_part"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_peijian"
                 />
             <TextView
@@ -126,7 +126,7 @@
         <!-- 报表 -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
@@ -134,8 +134,8 @@
             >
             <Button
                 android:id="@+id/btn_toolbar_report"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_baobiao"
                 />
             <TextView

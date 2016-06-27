@@ -9,6 +9,8 @@ public class UserProperty {
 
     private String userName;
 
+    private String passWord;
+
     private int userType;
 
     /*私有构造函数*/
@@ -37,5 +39,13 @@ public class UserProperty {
 
     public void setUserType(int userType) {
         this.userType = userType;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 }

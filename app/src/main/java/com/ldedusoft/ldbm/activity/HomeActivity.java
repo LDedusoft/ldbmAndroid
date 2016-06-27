@@ -1,41 +1,61 @@
 package com.ldedusoft.ldbm.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.component.adapters.MenuListAdapter;
 import com.ldedusoft.ldbm.component.widge.sideslip.DelSlideListView;
 import com.ldedusoft.ldbm.component.widge.sideslip.ListViewonSingleTapUpListenner;
 import com.ldedusoft.ldbm.component.widge.sideslip.OnDeleteListioner;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuAddClickListioner;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuShortcutClickListioner;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuTitleClickListioner;
+import com.ldedusoft.ldbm.component.widge.sideslip.OnSettopListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
+import com.ldedusoft.ldbm.model.SysProperty;
+import com.ldedusoft.ldbm.model.UserProperty;
+import com.ldedusoft.ldbm.util.InitParamUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wangjianwei on 2016/6/22.
  */
-public class HomeActivity extends BaseActivity implements OnDeleteListioner, ListViewonSingleTapUpListenner{
+public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSettopListioner, ListViewonSingleTapUpListenner,OnMenuAddClickListioner,OnMenuTitleClickListioner,OnMenuShortcutClickListioner{
 
     private DelSlideListView menuListView;
 
     private MenuListAdapter adapter;
 
+    private SharedPreferences pref;
 
-    private List<MenuItem> menuDataList;
+    private SharedPreferences.Editor editor;
+
+    private ArrayList<MenuItem> menuDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_home);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         initMenuListData();
         adapter = new MenuListAdapter(HomeActivity.this,R.layout.ldbm_menu_item,menuDataList);
         menuListView = (DelSlideListView)findViewById(R.id.home_menu_list);
         menuListView.setDeleteListioner(this);
+        menuListView.setSettopListioner(this);
         menuListView.setSingleTapUpListenner(this);
         adapter.setOnDeleteListioner(this);
+        adapter.setmOnSettopListioner(this);
+        adapter.setOnMenuTitleClickListioner(this);
+        adapter.setOnMenuAddClickListioner(this);
+        adapter.setOnMenuShortcutClickListioner(this);
         menuListView.setAdapter(adapter);
+
 
 
     }
@@ -59,95 +79,97 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner, Lis
     }
 
 
+    /**
+     * 列表项删除
+     * @param ID
+     */
     @Override
     public void onDelete(int ID) {
         menuDataList.remove(ID);
         menuListView.deleteItem();
         adapter.notifyDataSetChanged();
+        //暂存到全局变量
+       // SysProperty.getInstance().setHomeMenuList(menuDataList);
         //TODO-更新用户配置
+        updateUserConfig();
     }
 
+    /**
+     * 列表项置顶
+     * @param ID
+     */
+    @Override
+    public void onSettop(int ID) {
+        MenuItem item = menuDataList.get(ID);
+        menuDataList.remove(ID);
+        menuDataList.add(0, item);
+        menuListView.settopItem();
+        adapter.notifyDataSetChanged();
+        //暂存到全局变量
+       // SysProperty.getInstance().setHomeMenuList(menuDataList);
+        //TODO-更新用户配置
+        updateUserConfig();
+    }
+
+    /**
+     * 更新用户配置
+     */
+    private void updateUserConfig(){
+        StringBuilder menuItems = new StringBuilder();
+        for(MenuItem item: menuDataList){
+            if(item!=null) {
+                menuItems.append(item.getMenuTitle());
+                menuItems.append(",");
+            }
+        }
+        String menuItemsStr = menuItems.toString();
+        if(!TextUtils.isEmpty(menuItemsStr)){
+            menuItemsStr =  menuItemsStr.substring(0,menuItemsStr.length()-1);
+        }
+        editor = pref.edit();
+        editor.putString(UserProperty.getInstance().getUserName(), menuItems.toString());
+        editor.commit();
+    }
 
     @Override
     public void onBack() {
 
     }
 
+    @Override
+    public void OnMenuTitleClick(int ID) {
+        Toast.makeText(this,"选中位置"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void OnMenuAddClick(int ID) {
+        Toast.makeText(this,"添加位置"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnMenuShortcutClick(int ID) {
+        Toast.makeText(this,"添加功能",Toast.LENGTH_SHORT).show();
+    }
 
     private void initMenuListData(){
         menuDataList = new ArrayList<MenuItem>();
-        MenuItem  menuItem = new MenuItem();
-        menuItem.setIconId(R.drawable.list_icon_1);
-        menuItem.setMenuTitle("供应商");
-        menuItem.setMenuDescribe("商品采购渠道");
-        menuItem.setAllowCreate(true);
-        menuDataList.add(menuItem);
+        ArrayList<MenuItem> allMenuItemList = InitParamUtil.initMenuList();//初始化菜单
+        SysProperty.getInstance().setHomeMenuList(allMenuItemList);//全部菜单项设置到系统属性
+        String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
+        String[] userItemsArray = this.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
+        if(!TextUtils.isEmpty(userItemsStr)){
+            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
+        }
+            for (String itemName : userItemsArray) {
+                for (MenuItem itemObj : allMenuItemList ) {
+                    if (itemName.equals(itemObj.getMenuTitle())) {
+                        menuDataList.add(itemObj);
+                        break;
+                    }
+                }
+            }
 
-        MenuItem  menuItem2 = new MenuItem();
-        menuItem2.setIconId(R.drawable.list_icon_2);
-        menuItem2.setMenuTitle("库存查询");
-        menuItem2.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem2.setAllowCreate(false);
-        menuDataList.add(menuItem2);
-
-        MenuItem  menuItem3 = new MenuItem();
-        menuItem3.setIconId(R.drawable.list_icon_3);
-        menuItem3.setMenuTitle("库存查询");
-        menuItem3.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem3.setAllowCreate(true);
-        menuDataList.add(menuItem3);
-
-        MenuItem  menuItem4 = new MenuItem();
-        menuItem4.setIconId(R.drawable.list_icon_4);
-        menuItem4.setMenuTitle("库存查询");
-        menuItem4.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem4.setAllowCreate(false);
-        menuDataList.add(menuItem4);
-
-        MenuItem  menuItem5 = new MenuItem();
-        menuItem5.setIconId(R.drawable.list_icon_3);
-        menuItem5.setMenuTitle("库存查询");
-        menuItem5.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem5.setAllowCreate(false);
-        menuDataList.add(menuItem5);
-
-        MenuItem  menuItem6 = new MenuItem();
-        menuItem6.setIconId(R.drawable.list_icon_2);
-        menuItem6.setMenuTitle("库存查询");
-        menuItem6.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem6.setAllowCreate(true);
-        menuDataList.add(menuItem6);
-
-        MenuItem  menuItem7 = new MenuItem();
-        menuItem7.setIconId(R.drawable.list_icon_2);
-        menuItem7.setMenuTitle("库存查询");
-        menuItem7.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem7.setAllowCreate(true);
-        menuDataList.add(menuItem7);
-
-        MenuItem  menuItem8 = new MenuItem();
-        menuItem8.setIconId(R.drawable.list_icon_1);
-        menuItem8.setMenuTitle("库存查询");
-        menuItem8.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem8.setAllowCreate(false);
-        menuDataList.add(menuItem8);
-
-        MenuItem  menuItem9 = new MenuItem();
-        menuItem9.setIconId(R.drawable.list_icon_4);
-        menuItem9.setMenuTitle("库存查询");
-        menuItem9.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem9.setAllowCreate(false);
-        menuDataList.add(menuItem9);
-
-        MenuItem  menuItem0 = new MenuItem();
-        menuItem0.setIconId(R.drawable.list_icon_4);
-        menuItem0.setMenuTitle("库存查询");
-        menuItem0.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem0.setAllowCreate(false);
-        menuDataList.add(menuItem0);
-
-        menuDataList.add(null);
+        menuDataList.add(null); //添加快捷功能按钮
 
 
 

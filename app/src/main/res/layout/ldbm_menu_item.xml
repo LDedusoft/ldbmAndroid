@@ -42,12 +42,14 @@
 
     <!--标题-->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/menu_item_title_layout"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/menu_item_height"
         android:orientation="vertical"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
+        android:layout_marginRight="@dimen/menu_button_width"
         >
         <TextView
             android:text=""

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.component.adapters.MyPagerAdapter;
@@ -30,9 +29,9 @@ public class WelcomeViewActivity extends Activity {
 
         LayoutInflater mInflater = getLayoutInflater().from(this);
 
-        View v1 = mInflater.inflate(R.layout.layout1, null);
-        View v2 = mInflater.inflate(R.layout.layout2, null);
-        View v3 = mInflater.inflate(R.layout.layout3, null);
+        View v1 = mInflater.inflate(R.layout.ldbm_welcome1, null);
+        View v2 = mInflater.inflate(R.layout.ldbm_welcome2, null);
+        View v3 = mInflater.inflate(R.layout.ldbm_welcome3, null);
 
         //添加页面数据
         viewList = new ArrayList<View>();
@@ -45,8 +44,6 @@ public class WelcomeViewActivity extends Activity {
         mViewPager.setCurrentItem(0); //设置默认当前页
 
         View view = viewList.get(2);
-        TextView textView = (TextView) view.findViewById(R.id.text_1);
-        textView.setText("我是第3页");
         Button button = (Button) view.findViewById(R.id.button_1);
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
