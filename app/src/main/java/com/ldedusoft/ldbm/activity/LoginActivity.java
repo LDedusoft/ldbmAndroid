@@ -20,8 +20,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
-import com.ldedusoft.ldbm.component.adapters.LoginSpinnerAdapter;
-import com.ldedusoft.ldbm.model.InterfaceParam;
+import com.ldedusoft.ldbm.activity.home.HomeActivity;
+import com.ldedusoft.ldbm.adapters.LoginSpinnerAdapter;
+import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
 import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;

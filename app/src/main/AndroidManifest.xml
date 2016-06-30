@@ -9,19 +9,56 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.WelcomeViewActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.HomeActivity"></activity>
-        <activity android:name=".activity.RepairActivity"></activity>
-        <activity android:name=".activity.WholecarActivity"></activity>
-        <activity android:name=".activity.PartActivity"></activity>
-        <activity android:name=".activity.ReportActivity"></activity>
+       <!-- <activity android:name=".activity.LoginActivity"></activity>
+       -->
+        <activity android:name=".activity.home.HomeActivity"></activity><!--首页-->
+        <activity android:name=".activity.repair.RepairActivity"></activity><!--维修管理-->
+        <activity android:name=".activity.wholeCar.WholecarActivity"></activity><!--整车管理-->
+        <activity android:name=".activity.part.PartActivity"></activity><!--配件管理-->
+        <activity android:name=".activity.report.ReportActivity"></activity><!--报表管理-->
+
+        <!--维修预约-->
+        <activity android:name=".activity.repair.AppointmentActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+            <intent-filter>
+                <action android:name="activity.repair.AppointmentActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--选择车辆信息-->
+        <activity android:name=".activity.selectActivity.CarCodeSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.CarCodeSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--经手人信息-->
+        <activity android:name=".activity.selectActivity.SalesmanSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.SalesmanSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--维修类型列表-->
+        <activity android:name=".activity.selectActivity.RepairTypeSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.RepairTypeSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

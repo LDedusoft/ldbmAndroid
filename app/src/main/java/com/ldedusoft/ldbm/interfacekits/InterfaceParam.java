@@ -1,4 +1,6 @@
-package com.ldedusoft.ldbm.model;
+package com.ldedusoft.ldbm.interfacekits;
+
+import com.ldedusoft.ldbm.model.UserProperty;
 
 /**
  * Created by wangjianwei on 2016/6/27.
@@ -275,6 +277,19 @@ public class InterfaceParam {
     }
     /**车辆信息列表*/
     public String getPub_CarCode() {
+        Pub_CarCode = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_CarCode xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_CarCode = Pub_CarCode.replace("@sysUser",SYS_USER);
+        Pub_CarCode = Pub_CarCode.replace("@sysPassword",SYS_PASSWORD);
         return Pub_CarCode;
     }
     /**车辆颜色列表*/
@@ -311,6 +326,19 @@ public class InterfaceParam {
     }
     /**经手人信息列表*/
     public String getPub_Salesman() {
+        Pub_Salesman = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_Salesman xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_Salesman = Pub_Salesman.replace("@sysUser",SYS_USER);
+        Pub_Salesman = Pub_Salesman.replace("@sysPassword",SYS_PASSWORD);
         return Pub_Salesman;
     }
     /**保存车辆信息(客户车辆)*/
@@ -330,7 +358,25 @@ public class InterfaceParam {
         return RP_ProgressList;
     }
     /**新建单据*/
-    public String getRP_ReceptionNew() {
+    public String getRP_ReceptionNew(String type) {
+        RP_ReceptionNew = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_ReceptionNew xmlns=\"LDBM4S\">\n" +
+                "      <UName>@userName</UName>\n" +
+                "      <Type>@type</Type>\n" +
+                "    </RP_ReceptionNew>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_ReceptionNew = RP_ReceptionNew.replace("@sysUser",SYS_USER);
+        RP_ReceptionNew = RP_ReceptionNew.replace("@sysPassword",SYS_PASSWORD);
+        RP_ReceptionNew = RP_ReceptionNew.replace("@userName", UserProperty.getInstance().getUserName());
+        RP_ReceptionNew = RP_ReceptionNew.replace("@type",type);
         return RP_ReceptionNew;
     }
     /**保存维修接待*/
@@ -339,6 +385,19 @@ public class InterfaceParam {
     }
     /**维修方式*/
     public String getRP_RepaireType() {
+        RP_RepaireType = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_RepaireType xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_RepaireType = RP_RepaireType.replace("@sysUser",SYS_USER);
+        RP_RepaireType = RP_RepaireType.replace("@sysPassword",SYS_PASSWORD);
         return RP_RepaireType;
     }
     /**维修接待列表*/

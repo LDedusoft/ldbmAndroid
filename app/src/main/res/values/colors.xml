@@ -16,5 +16,6 @@
     <color name="menuText">#cccccc</color><!--菜单文字颜色-->
     <color name="menuDelete">#ff0000</color><!--菜单移除按钮背景色-->
     <color name="menuTop">#c6c6c6</color><!--菜单置顶按钮背景色-->
+    <color name="toopBarBackground">#1a5075</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.ldedusoft.ldbm.component.adapters;
+package com.ldedusoft.ldbm.adapters;
 
 /**
  * Created by wangjianwei on 2016/6/23.

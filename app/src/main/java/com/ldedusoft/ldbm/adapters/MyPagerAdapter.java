@@ -1,4 +1,4 @@
-package com.ldedusoft.ldbm.component.adapters;
+package com.ldedusoft.ldbm.adapters;
 
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;

@@ -180,6 +180,8 @@ public class DelSlideListView extends ListView implements
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+
+
 		if (scroll || deleteView) {
 			return true;
 		}

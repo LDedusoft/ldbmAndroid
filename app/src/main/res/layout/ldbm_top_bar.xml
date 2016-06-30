@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="@dimen/top_bar_height"
+    android:background="@color/toopBarBackground"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/top_bar_menu"
+            android:layout_width="@dimen/top_menu_icon_width"
+            android:layout_height="@dimen/top_menu_icon_height"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/home_title_menu"
+            />
+        <TextView
+            android:id="@+id/top_bar_title"
+            android:text="Title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/top_bar_height"
+            android:textSize="@dimen/top_menu_text_size"
+            android:textColor="@color/homeTitleTextWhite"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/top_menu_icon_width"
+
+            />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,11 +1,10 @@
-package com.ldedusoft.ldbm.component.adapters;
+package com.ldedusoft.ldbm.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +29,11 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
     private OnMenuTitleClickListioner mOnMenuTitleClickListioner;
     private OnMenuAddClickListioner mOnMenuAddClickListioner;
     private OnMenuShortcutClickListioner mOnMenuShortcutClickListioner;
+//    private TextView deleteAction;
+//    private TextView settopAction;
+//LinearLayout actionLayout;
+//    private  ImageView menuItemIcon;
+    private LinearLayout tempLayout; //临时保存actionLayout
 
 
     public MenuListAdapter(Context context,int textViewResourceId, List<MenuItem> objects){
@@ -40,37 +44,20 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final MenuItem menuItem = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
+
+
+        final View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         if(menuItem!=null) {
             ImageView menuItemIcon = (ImageView) view.findViewById(R.id.menu_item_icon);
             TextView menuItemTitle = (TextView) view.findViewById(R.id.menu_item_title);
             TextView menuItemDescribe = (TextView) view.findViewById(R.id.menu_item_describe);
             LinearLayout menuItemCreateLayout = (LinearLayout) view.findViewById(R.id.menu_item_createLayout);
-            Button menuItemCreateButton = (Button) view.findViewById(R.id.menu_item_createButton);
+            TextView menuItemCreateButton = (TextView) view.findViewById(R.id.menu_item_createButton);
             LinearLayout menu_item_title_layout = (LinearLayout)view.findViewById(R.id.menu_item_title_layout);
-
-            //标题区域点击监听
-            menu_item_title_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(mOnMenuTitleClickListioner != null){
-                        mOnMenuTitleClickListioner.OnMenuTitleClick(position);
-                    }
-                }
-            });
-
-            //新建按钮点击监听
-            menuItemCreateButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(mOnMenuAddClickListioner!=null){
-                        mOnMenuAddClickListioner.OnMenuAddClick(position);
-                    }
-                }
-            });
-
+            LinearLayout menuBody = (LinearLayout)view.findViewById(R.id.menu_item_body);
             TextView deleteAction = (TextView)view.findViewById(R.id.delete_action);
             TextView settopAction = (TextView)view.findViewById(R.id.top_action);
+            LinearLayout actionLayout = (LinearLayout)view.findViewById(R.id.top_del_layout);
 
             deleteAction.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +75,52 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
                     }
                 }
             });
+
+
+            if(menuItem.isHomeMenu()) { //如果是首页菜单，监听长按事件
+                //标题区长按事件
+                menu_item_title_layout.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if (tempLayout != null) {
+                            tempLayout.setVisibility(View.GONE);
+                        }
+                        LinearLayout actionLayout = (LinearLayout) v.findViewById(R.id.top_del_layout);
+                        actionLayout.setVisibility(View.VISIBLE);
+                        tempLayout = actionLayout;
+                        return true;
+                    }
+                });
+            }
+
+
+            //标题区域点击监听
+            menu_item_title_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(tempLayout!=null){
+                        tempLayout.setVisibility(View.GONE);
+                    }
+                    if(mOnMenuTitleClickListioner != null){
+                        mOnMenuTitleClickListioner.OnMenuTitleClick(position);
+                    }
+                }
+            });
+
+            //新建按钮点击监听
+            menuItemCreateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(tempLayout!=null){
+                        tempLayout.setVisibility(View.GONE);
+                    }
+                    if(mOnMenuAddClickListioner!=null){
+                        mOnMenuAddClickListioner.OnMenuAddClick(position);
+                    }
+                }
+            });
+
+
 
 
             menuItemIcon.setImageResource(menuItem.getIconId());
@@ -113,7 +146,7 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
             menuItemFoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mOnMenuShortcutClickListioner!=null){
+                    if (mOnMenuShortcutClickListioner != null) {
                         mOnMenuShortcutClickListioner.OnMenuShortcutClick(position);
                     }
                 }

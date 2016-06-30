@@ -19,6 +19,7 @@
 
         <!-- 首页 -->
         <LinearLayout
+            android:id="@+id/layout_toolbar_home"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
@@ -45,6 +46,7 @@
 
         <!-- 维修 -->
         <LinearLayout
+            android:id="@+id/layout_toolbar_repair"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
@@ -71,6 +73,7 @@
         </LinearLayout>
         <!-- 整车 -->
         <LinearLayout
+            android:id="@+id/layout_toolbar_wholecar"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
@@ -98,6 +101,7 @@
 
         <!-- 配件 -->
         <LinearLayout
+            android:id="@+id/layout_toolbar_part"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"
@@ -125,6 +129,7 @@
 
         <!-- 报表 -->
         <LinearLayout
+            android:id="@+id/layout_toolbar_report"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bottom_bar_icon_height"
             android:layout_weight="1"

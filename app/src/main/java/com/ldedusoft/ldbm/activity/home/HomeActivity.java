@@ -1,4 +1,4 @@
-package com.ldedusoft.ldbm.activity;
+package com.ldedusoft.ldbm.activity.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +8,9 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
-import com.ldedusoft.ldbm.component.adapters.MenuListAdapter;
+import com.ldedusoft.ldbm.activity.BaseActivity;
+import com.ldedusoft.ldbm.activity.LoginActivity;
+import com.ldedusoft.ldbm.adapters.MenuListAdapter;
 import com.ldedusoft.ldbm.component.widge.sideslip.DelSlideListView;
 import com.ldedusoft.ldbm.component.widge.sideslip.ListViewonSingleTapUpListenner;
 import com.ldedusoft.ldbm.component.widge.sideslip.OnDeleteListioner;
@@ -32,7 +34,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private MenuListAdapter adapter;
 
-    private SharedPreferences pref;
+    private SharedPreferences pref; //保存文件
 
     private SharedPreferences.Editor editor;
 
@@ -44,6 +46,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         initMenuListData();
+        initListView();
+    }
+
+    /**
+     * 初始化列表
+     */
+    private void initListView(){
         adapter = new MenuListAdapter(HomeActivity.this,R.layout.ldbm_menu_item,menuDataList);
         menuListView = (DelSlideListView)findViewById(R.id.home_menu_list);
         menuListView.setDeleteListioner(this);
@@ -55,8 +64,24 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         adapter.setOnMenuAddClickListioner(this);
         adapter.setOnMenuShortcutClickListioner(this);
         menuListView.setAdapter(adapter);
+        adapter.setOnMenuTitleClickListioner(this);
+        adapter.setOnMenuAddClickListioner(this);
+    }
 
+    @Override
+    public void OnMenuTitleClick(int ID) {
+        String value = menuDataList.get(ID).getValue();
+    }
 
+    @Override
+    public void OnMenuAddClick(int ID) {
+        String value = menuDataList.get(ID).getValue();
+        String intentPath =  menuDataList.get(ID).getIntentPath();
+        if(!TextUtils.isEmpty(intentPath)) {
+            Intent intent = new Intent(intentPath);
+            intent.putExtra("param", value);
+            startActivity(intent);
+        }
 
     }
 
@@ -136,19 +161,19 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     }
 
-    @Override
-    public void OnMenuTitleClick(int ID) {
-        Toast.makeText(this,"选中位置"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void OnMenuAddClick(int ID) {
-        Toast.makeText(this,"添加位置"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void OnMenuTitleClick(int ID) {
+//        Toast.makeText(this,"选中标题"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void OnMenuAddClick(int ID) {
+//        Toast.makeText(this,"添加"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public void OnMenuShortcutClick(int ID) {
-        Toast.makeText(this,"添加功能",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"快捷功能",Toast.LENGTH_SHORT).show();
     }
 
     private void initMenuListData(){

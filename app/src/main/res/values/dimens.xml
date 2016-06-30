@@ -13,5 +13,9 @@
     <dimen name="bottom_bar_icon_height">45dp</dimen><!-- 底工具栏图标区域高度 -->
     <dimen name="bottom_bar_btn_size">25dp</dimen> <!-- 底工具栏按钮尺寸 -->
     <dimen name="bottom_bar_height">46dp</dimen><!-- 底工具栏整体高度 -->
-
+    <dimen name="top_bar_height">45dp</dimen><!--顶部工具栏高度-->
+    <dimen name="top_menu_icon_width">50dp</dimen><!--顶部工具栏菜单图片宽度-->
+    <dimen name="top_menu_icon_height">40dp</dimen><!--顶部工具栏菜单图片高度-->
+    <dimen name="top_menu_text_size">15sp</dimen><!--顶部工具栏文字尺寸-->
+ <dimen name="input_list_item_height">60dp</dimen><!--输入表单item高度-->
 </resources>

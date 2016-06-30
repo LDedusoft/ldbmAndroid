@@ -11,11 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
-import com.ldedusoft.ldbm.activity.HomeActivity;
-import com.ldedusoft.ldbm.activity.PartActivity;
-import com.ldedusoft.ldbm.activity.RepairActivity;
-import com.ldedusoft.ldbm.activity.ReportActivity;
-import com.ldedusoft.ldbm.activity.WholecarActivity;
+import com.ldedusoft.ldbm.activity.home.HomeActivity;
+import com.ldedusoft.ldbm.activity.part.PartActivity;
+import com.ldedusoft.ldbm.activity.repair.RepairActivity;
+import com.ldedusoft.ldbm.activity.report.ReportActivity;
+import com.ldedusoft.ldbm.activity.wholeCar.WholecarActivity;
 
 /**
  * Created by wangjianwei on 2016/6/24.
@@ -34,6 +34,17 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
         repairTxt.setOnClickListener(this);
         wholecarTxt.setOnClickListener(this);
         reportTxt.setOnClickListener(this);
+
+        LinearLayout homeLayout = (LinearLayout)findViewById(R.id.layout_toolbar_home);
+        LinearLayout partLayout = (LinearLayout)findViewById(R.id.layout_toolbar_part);
+        LinearLayout repairLayout = (LinearLayout)findViewById(R.id.layout_toolbar_repair);
+        LinearLayout wholecarLayout = (LinearLayout)findViewById(R.id.layout_toolbar_wholecar);
+        LinearLayout reportLayout = (LinearLayout)findViewById(R.id.layout_toolbar_report);
+        homeLayout.setOnClickListener(this);
+        partLayout.setOnClickListener(this);
+        repairLayout.setOnClickListener(this);
+        wholecarLayout.setOnClickListener(this);
+        reportLayout.setOnClickListener(this);
 
         Button homeBtn = (Button)findViewById(R.id.btn_toolbar_home); //主页
         Button partBtn = (Button)findViewById(R.id.btn_toolbar_part); //配件
@@ -81,7 +92,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
-            case R.id.txt_toolbar_home:
+            case R.id.layout_toolbar_home:
                 if(activityName.indexOf("HomeActivity")==-1) {
                     intent.setClass(v.getContext(), HomeActivity.class);
                     getContext().startActivity(intent);
@@ -95,7 +106,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
-            case R.id.txt_bar_weixiu:
+            case R.id.layout_toolbar_repair:
                 if(activityName.indexOf("RepairActivity")==-1) {
                     intent.setClass(v.getContext(), RepairActivity.class);
                     getContext().startActivity(intent);
@@ -109,7 +120,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
-            case R.id.txt_bar_zhengche:
+            case R.id.layout_toolbar_wholecar:
                 if(activityName.indexOf("WholecarActivity")==-1) {
                     intent.setClass(v.getContext(), WholecarActivity.class);
                     getContext().startActivity(intent);
@@ -123,7 +134,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
-            case R.id.txt_bar_peijian:
+            case R.id.layout_toolbar_part:
                 if(activityName.indexOf("PartActivity")==-1) {
                     intent.setClass(v.getContext(), PartActivity.class);
                     getContext().startActivity(intent);
@@ -137,7 +148,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
-            case R.id.txt_bar_baobiao:
+            case R.id.layout_toolbar_report:
                 if(activityName.indexOf("ReportActivity")==-1) {
                     intent.setClass(v.getContext(), ReportActivity.class);
                     getContext().startActivity(intent);

@@ -1,19 +1,21 @@
-package com.ldedusoft.ldbm.activity;
+package com.ldedusoft.ldbm.activity.part;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.ldedusoft.ldbm.R;
+import com.ldedusoft.ldbm.activity.BaseActivity;
+import com.ldedusoft.ldbm.activity.home.HomeActivity;
 
 /**
  * Created by wangjianwei on 2016/6/24.
  */
-public class ReportActivity extends BaseActivity {
+public class PartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ldbm_report);
+        setContentView(R.layout.ldbm_part);
     }
 
 

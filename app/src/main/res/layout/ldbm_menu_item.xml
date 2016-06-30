@@ -36,6 +36,7 @@
 
     <!--标题和新建按钮-->
     <RelativeLayout
+        android:id="@+id/menu_item_title_creat_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -45,61 +46,112 @@
         android:id="@+id/menu_item_title_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/menu_item_height"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:layout_marginRight="@dimen/menu_button_width"
+        android:orientation="horizontal"
         >
-        <TextView
-            android:text=""
-            android:id="@+id/menu_item_title"
-            android:textSize="16dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:layout_weight="1"/>
-        <TextView
-            android:text=""
-            android:id="@+id/menu_item_describe"
-            android:textSize="12dp"
-            android:textColor="@color/menuText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:text=""
+                android:id="@+id/menu_item_title"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:text=""
+                android:id="@+id/menu_item_describe"
+                android:textSize="12dp"
+                android:textColor="@color/menuText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+
 
         <!--新建按钮-->
-    <LinearLayout
-        android:id="@+id/menu_item_createLayout"
-        android:orientation="horizontal"
-        android:layout_width="@dimen/menu_button_width"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:visibility="gone"
-        >
-        <RelativeLayout
-            android:layout_width="1px"
-            android:layout_height="@dimen/menu_item_height"
-            android:background="@color/menuText"
+        <LinearLayout
+            android:id="@+id/menu_item_createLayout"
+            android:orientation="horizontal"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             >
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/menu_item_height"
-            android:gravity="center"
-            >
-            <Button
-                android:id="@+id/menu_item_createButton"
+            <RelativeLayout
+                android:layout_width="1px"
+                android:layout_height="@dimen/menu_item_height"
+                android:background="@color/menuText"
+                >
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/menu_item_add"
-                />
-        </RelativeLayout>
+                android:layout_height="@dimen/menu_item_height"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/menu_item_createButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/menu_item_add"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
 
+        <!--置顶移除-->
+        <LinearLayout
+            android:id="@+id/top_del_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+
+            >
+            <TextView
+                android:id="@+id/top_action"
+                android:text="@string/menu_item_top"
+                android:layout_width="@dimen/menu_delete_btn"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dip"
+                android:textSize="18dip"
+                android:textColor="#000"
+                android:background="@color/menuTop"
+                />
+            <TextView
+                android:id="@+id/delete_action"
+                android:text="@string/menu_item_delete"
+                android:layout_width="@dimen/menu_delete_btn"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="7dip"
+                android:textSize="18dip"
+                android:textColor="#FFF"
+                android:background="@color/menuDelete"
+                />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+
+
     </RelativeLayout>
     </LinearLayout>
     <!--添加-->
@@ -128,32 +180,9 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-
     </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/top_action"
-        android:text="@string/menu_item_top"
-        android:layout_width="@dimen/menu_delete_btn"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="7dip"
-        android:textSize="18dip"
-        android:textColor="#000"
-        android:background="@color/menuTop"
-        />
-    <TextView
-        android:id="@+id/delete_action"
-        android:text="@string/menu_item_delete"
-        android:layout_width="@dimen/menu_delete_btn"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="7dip"
-        android:textSize="18dip"
-        android:textColor="#FFF"
-        android:background="@color/menuDelete"
-        />
+
+
+
 </com.ldedusoft.ldbm.component.widge.sideslip.ScrollLinerLayout>

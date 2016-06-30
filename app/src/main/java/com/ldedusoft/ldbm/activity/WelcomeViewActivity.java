@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.ldedusoft.ldbm.R;
-import com.ldedusoft.ldbm.component.adapters.MyPagerAdapter;
+import com.ldedusoft.ldbm.adapters.MyPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

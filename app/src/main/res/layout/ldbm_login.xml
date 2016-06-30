@@ -73,6 +73,7 @@
                         android:textColorHint="@color/loginText"
                         android:textSize="15dp"
                         android:text="李涛"
+                        android:focusable="false"
                         android:hint="@string/input_userName" />
 
                     <RelativeLayout
@@ -121,6 +122,7 @@
                         android:inputType="textPassword"
                         android:textSize="15dp"
                         android:text="123456"
+                        android:focusable="false"
                         android:hint="@string/input_password" />
 
                     <RelativeLayout
