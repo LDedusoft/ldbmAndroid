@@ -13,7 +13,7 @@ import com.ldedusoft.ldbm.component.customComp.TopBar;
 import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuAddClickListioner;
 import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuTitleClickListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
-import com.ldedusoft.ldbm.util.InitParamUtil;
+import com.ldedusoft.ldbm.model.SysProperty;
 
 import java.util.ArrayList;
 
@@ -42,8 +42,7 @@ public class RepairActivity extends BaseActivity implements OnMenuTitleClickList
         repairTopBar.setTitle("维修");
     }
     private void initRepairMenuList(){
-        menuDataList = new ArrayList<MenuItem>();
-        menuDataList = InitParamUtil.initRepairList();
+        menuDataList = SysProperty.getInstance().getRepairMenuList();//从系统属性中获取菜单列表。登录时已初始化
         repairListView = (ListView)findViewById(R.id.repair_menu_list);
         adapter = new MenuListAdapter(this,R.layout.ldbm_menu_item,menuDataList);
         repairListView.setAdapter(adapter);

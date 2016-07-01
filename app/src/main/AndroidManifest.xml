@@ -25,11 +25,11 @@
         <activity android:name=".activity.report.ReportActivity"></activity><!--报表管理-->
 
         <!--维修预约-->
-        <activity android:name=".activity.repair.AppointmentActivity"
+        <activity android:name=".activity.repair.form.AppointmentActivityYY"
             android:windowSoftInputMode="adjustPan"
             >
             <intent-filter>
-                <action android:name="activity.repair.AppointmentActivity"/>
+                <action android:name="activity.repair.form.AppointmentActivityYY"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
@@ -67,9 +67,24 @@
         </activity>
 
         <!--预约维修查询列表-->
-        <activity android:name=".activity.queryActivity.AppointmentQuery">
+        <activity android:name=".activity.queryActivity.AppointmentQueryYY">
             <intent-filter>
-                <action android:name="activity.queryActivity.AppointmentQuery"/>
+                <action android:name="activity.queryActivity.AppointmentQueryYY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--维修接待-->
+        <activity android:name=".activity.repair.form.AppointmentActivityWX">
+            <intent-filter>
+                <action android:name="activity.repair.form.AppointmentActivityWX"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.queryActivity.AppointmentQueryWX">
+            <intent-filter>
+                <action android:name="activity.queryActivity.AppointmentQueryWX"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

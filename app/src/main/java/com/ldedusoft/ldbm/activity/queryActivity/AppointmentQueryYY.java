@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * 选择业务类别
  * Created by wangjianwei on 2016/6/29.
  */
-public class AppointmentQuery extends BaseActivity {
+public class AppointmentQueryYY extends BaseActivity {
     private ArrayList<Appointment> listData; //!!
     private ListView selectListView;
     private QueryAppointmentAdapter adapter; //!!

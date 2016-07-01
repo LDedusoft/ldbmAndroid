@@ -1,4 +1,4 @@
-package com.ldedusoft.ldbm.activity.repair;
+package com.ldedusoft.ldbm.activity.repair.form;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * 预约维修
  * Created by wangjianwei on 2016/6/28.
  */
-public class AppointmentActivity extends BaseActivity implements View.OnClickListener{
+public class AppointmentActivityYY extends BaseActivity implements View.OnClickListener{
     private ArrayList<InputItem> listData;
     private ListView inputListView;
     private InputListAdapter adapter;
@@ -47,7 +47,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
 
     /*启动活动方法*/
     public static void actionStart(Context context,String data){
-        Intent intent = new Intent(context,AppointmentActivity.class);
+        Intent intent = new Intent(context,AppointmentActivityYY.class);
         intent.putExtra("param", data);
         context.startActivity(intent);
     }
@@ -68,7 +68,6 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(AppointmentActivity.this, response, Toast.LENGTH_SHORT).show();
                         //   TextView tv = (TextView) findViewById(R.id.appointment_text);
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.RP_ReceptionNewResult);
                         updateListView(result);
@@ -134,7 +133,6 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
             case R.id.apponintemnt_submit:
                 inputListView.clearFocus();//清除列表的焦点
                 saveAppointment();
-//                Toast.makeText(AppointmentActivity.this,str.toString(),Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -151,7 +149,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
             dataJsonObj.remove("Number");
             String info = dataJsonObj.toString();
             Toast.makeText(this,info,Toast.LENGTH_LONG).show();
-            Log.d("保存信息：",info);
+            Log.d("保存信息：", info);
           //  saveHandler(number,info);
         }catch (Exception e){
             e.printStackTrace();
@@ -172,7 +170,8 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
             }
@@ -182,7 +181,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -192,7 +191,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
                     }
                 });
             }

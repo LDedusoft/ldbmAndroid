@@ -183,24 +183,35 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     }
 
     private void initMenuListData(){
-        menuDataList = new ArrayList<MenuItem>();
-        ArrayList<MenuItem> allMenuItemList = InitParamUtil.initMenuList();//初始化菜单
-        SysProperty.getInstance().setHomeMenuList(allMenuItemList);//全部菜单项设置到系统属性
-        String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
-        String[] userItemsArray = this.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
-        if(!TextUtils.isEmpty(userItemsStr)){
-            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
+        InitParamUtil initParam = new InitParamUtil(this);
+        if(SysProperty.getInstance().getAllMenuList() == null) {
+            initParam.initAllMenuList();
+            initParam.initHomeMenuList();
+            initParam.initRepairMenuList();
+        }else {
+            initParam.initHomeMenuList();
         }
-            for (String itemName : userItemsArray) {
-                for (MenuItem itemObj : allMenuItemList ) {
-                    if (itemName.equals(itemObj.getMenuTitle())) {
-                        menuDataList.add(itemObj);
-                        break;
-                    }
-                }
-            }
-
-        menuDataList.add(null); //添加快捷功能按钮
+        menuDataList = SysProperty.getInstance().getHomeMenuList();
+//
+//
+//        menuDataList = new ArrayList<MenuItem>();
+//        ArrayList<MenuItem> allMenuItemList = InitParamUtil.initMenuList();//初始化菜单
+//        SysProperty.getInstance().setHomeMenuList(allMenuItemList);//全部菜单项设置到系统属性
+//        String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
+//        String[] userItemsArray = this.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
+//        if(!TextUtils.isEmpty(userItemsStr)){
+//            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
+//        }
+//            for (String itemName : userItemsArray) {
+//                for (MenuItem itemObj : allMenuItemList ) {
+//                    if (itemName.equals(itemObj.getMenuTitle())) {
+//                        menuDataList.add(itemObj);
+//                        break;
+//                    }
+//                }
+//            }
+//
+//        menuDataList.add(null); //添加快捷功能按钮
 
 
 

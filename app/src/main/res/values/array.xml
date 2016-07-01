@@ -8,13 +8,15 @@
     </string-array>
     <string-array name="home_menu_item">
         <item>预约维修</item>
+        <item>维修接待</item>
         <item>库存查询1</item>
         <item>库存查询2</item>
-        <item>库存查询3</item>
         <item>库存查询4</item>
-        <item>库存查询5</item>
-        <item>库存查询6</item>
-        <item>库存查询7</item>
-        <item>库存查询8</item>
+    </string-array>
+    <string-array name="repair_menu_item">
+        <item>预约维修</item>
+        <item>维修接待</item>
+        <item>预约维修查询</item>
+        <item>维修接待查询</item>
     </string-array>
 </resources>

@@ -1,10 +1,23 @@
 package com.ldedusoft.ldbm.util;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.MenuItem;
+import com.ldedusoft.ldbm.model.SysProperty;
+import com.ldedusoft.ldbm.model.UserProperty;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -12,138 +25,129 @@ import java.util.ArrayList;
  */
 public class InitParamUtil {
 
+    private SharedPreferences pref; //保存文件
+    private Context mContent;
+    public InitParamUtil(Context context){
+     mContent = context;
+    }
+    /**
+     * 从assets中读取txt
+     */
+    private String readConfig(String fileName) {
+        String content = "";
+        try {
+            InputStream is = mContent.getAssets().open(fileName);
+            content = readTextFromFile(is);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
 
     /**
-     * 首页菜单
+     * 按行读取txt
+     *
+     * @param is
      * @return
+     * @throws Exception
      */
-    public static ArrayList<MenuItem> initMenuList(){
-        ArrayList<MenuItem> homeMenuList = new ArrayList<MenuItem>();
-
-        MenuItem  menuItem = new MenuItem();
-        menuItem.setIconId(R.drawable.list_icon_1);
-        menuItem.setMenuTitle("预约维修");
-        menuItem.setMenuDescribe("商品采购渠道");
-        menuItem.setAllowCreate(true);//是否可以新建
-        menuItem.setIsHomeMenu(true);//是否是首页菜单，可以置顶移除
-        menuItem.setCreateIntentPath("activity.repair.AppointmentActivity");
-        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
-        menuItem.setValue("YY");
-        homeMenuList.add(menuItem);
-
-
-
-        MenuItem  menuItem2 = new MenuItem();
-        menuItem2.setIconId(R.drawable.list_icon_2);
-        menuItem2.setMenuTitle("库存查询1");
-        menuItem2.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem2.setAllowCreate(false);
-        menuItem2.setIsHomeMenu(true);
-        homeMenuList.add(menuItem2);
-
-        MenuItem  menuItem3 = new MenuItem();
-        menuItem3.setIconId(R.drawable.list_icon_3);
-        menuItem3.setMenuTitle("库存查询2");
-        menuItem3.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem3.setAllowCreate(true);
-        menuItem3.setIsHomeMenu(true);
-        homeMenuList.add(menuItem3);
-
-        MenuItem  menuItem4 = new MenuItem();
-        menuItem4.setIconId(R.drawable.list_icon_4);
-        menuItem4.setMenuTitle("库存查询3");
-        menuItem4.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem4.setAllowCreate(false);
-        menuItem4.setIsHomeMenu(true);
-        homeMenuList.add(menuItem4);
-
-        MenuItem  menuItem5 = new MenuItem();
-        menuItem5.setIconId(R.drawable.list_icon_3);
-        menuItem5.setMenuTitle("库存查询4");
-        menuItem5.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem5.setAllowCreate(false);
-        menuItem5.setIsHomeMenu(true);
-        homeMenuList.add(menuItem5);
-
-        MenuItem  menuItem6 = new MenuItem();
-        menuItem6.setIconId(R.drawable.list_icon_2);
-        menuItem6.setMenuTitle("库存查询5");
-        menuItem6.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem6.setAllowCreate(true);
-        menuItem6.setIsHomeMenu(true);
-        homeMenuList.add(menuItem6);
-
-        MenuItem  menuItem7 = new MenuItem();
-        menuItem7.setIconId(R.drawable.list_icon_2);
-        menuItem7.setMenuTitle("库存查询6");
-        menuItem7.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem7.setAllowCreate(true);
-        menuItem7.setIsHomeMenu(true);
-        homeMenuList.add(menuItem7);
-
-        MenuItem  menuItem8 = new MenuItem();
-        menuItem8.setIconId(R.drawable.list_icon_1);
-        menuItem8.setMenuTitle("库存查询7");
-        menuItem8.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem8.setAllowCreate(false);
-        menuItem8.setIsHomeMenu(true);
-        homeMenuList.add(menuItem8);
-
-        MenuItem  menuItem9 = new MenuItem();
-        menuItem9.setIconId(R.drawable.list_icon_4);
-        menuItem9.setMenuTitle("库存查询8");
-        menuItem9.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem9.setAllowCreate(false);
-        menuItem9.setIsHomeMenu(true);
-        homeMenuList.add(menuItem9);
-
-        MenuItem  menuItem0 = new MenuItem();
-        menuItem0.setIconId(R.drawable.list_icon_4);
-        menuItem0.setMenuTitle("库存查询9");
-        menuItem0.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem0.setAllowCreate(false);
-        menuItem0.setIsHomeMenu(true);
-        homeMenuList.add(menuItem0);
-        return homeMenuList;
+    private String readTextFromFile(InputStream is) throws Exception {
+        InputStreamReader reader = new InputStreamReader(is);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        StringBuffer buffer = new StringBuffer("");
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+            buffer.append(str);
+            buffer.append("\n");
+        }
+        return buffer.toString();
     }
 
-    /*维修*/
-    public static ArrayList<MenuItem> initRepairList(){
-        ArrayList<MenuItem> repairMenuList = new ArrayList<MenuItem>();
-        MenuItem  menuItem = new MenuItem();
-        menuItem.setIconId(R.drawable.list_icon_1);
-        menuItem.setMenuTitle("预约维修");
-        menuItem.setMenuDescribe("商品采购渠道");
-        menuItem.setAllowCreate(true);
-        menuItem.setValue("YY");
-        menuItem.setCreateIntentPath("activity.repair.AppointmentActivity");
-        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
-        repairMenuList.add(menuItem);
-
-        MenuItem  menuItem2 = new MenuItem();
-        menuItem2.setIconId(R.drawable.list_icon_2);
-        menuItem2.setMenuTitle("维修接待");
-        menuItem2.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem2.setAllowCreate(true);
-        menuItem2.setValue("WX");
-        repairMenuList.add(menuItem2);
-
-        MenuItem  menuItem3 = new MenuItem();
-        menuItem3.setIconId(R.drawable.list_icon_3);
-        menuItem3.setMenuTitle("维修预约查询");
-        menuItem3.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem3.setAllowCreate(false);
-        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
-        repairMenuList.add(menuItem3);
-
-        MenuItem  menuItem4 = new MenuItem();
-        menuItem4.setIconId(R.drawable.list_icon_4);
-        menuItem4.setMenuTitle("维修接待查询");
-        menuItem4.setMenuDescribe("商品售价、剩余库存查询");
-        menuItem4.setAllowCreate(false);
-        repairMenuList.add(menuItem4);
-        return repairMenuList;
+    /*初始化全部菜单*/
+    public void initAllMenuList() {
+        ArrayList<MenuItem> allMenuList = new ArrayList<MenuItem>();
+       String config = readConfig("allMenuItem.txt");
+        try {
+            JSONArray jsonArray = new JSONArray(config);
+            int length = jsonArray.length();
+            for (int i=0;i<length;i++){
+                MenuItem menuItem = new MenuItem();
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Class<com.ldedusoft.ldbm.R.drawable> cls = R.drawable.class;
+                int iconId = cls.getDeclaredField(jsonObject.getString("iconId")).getInt(null);
+                menuItem.setMenuTitle(jsonObject.getString("menuTitle"));
+                menuItem.setMenuDescribe(jsonObject.getString("menuDescribe"));
+                menuItem.setIconId(iconId);
+                menuItem.setAllowCreate(jsonObject.getBoolean("allowCreate"));
+                menuItem.setValue(jsonObject.getString("value"));
+                menuItem.setTitleIntentPath(jsonObject.getString("titleIntentPath"));
+                menuItem.setCreateIntentPath(jsonObject.getString("createIntentPath"));
+                allMenuList.add(menuItem);
+            }
+            SysProperty.getInstance().setAllMenuList(allMenuList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+    /*初始化首页菜单*/
+    public void initHomeMenuList() {
+        pref = PreferenceManager.getDefaultSharedPreferences(mContent);
+        ArrayList<MenuItem> homeMenuItemList = new ArrayList<MenuItem>();
+        ArrayList<MenuItem> allMenuItemList = SysProperty.getInstance().getAllMenuList();
+        String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
+        String[] userItemsArray = mContent.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
+        if(!TextUtils.isEmpty(userItemsStr)){  //如果用户已修改菜单，则使用用户配置
+            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
+        }
+        for (String itemName : userItemsArray) {
+            for (MenuItem itemObj : allMenuItemList ) {
+                if (itemName.equals(itemObj.getMenuTitle())) {
+                    itemObj.setIsHomeMenu(true); //加入首页时需要设置标志
+                    homeMenuItemList.add(itemObj);
+                    break;
+                }
+            }
+        }
+        homeMenuItemList.add(null); //添加快捷功能按钮
+        SysProperty.getInstance().setHomeMenuList(homeMenuItemList);
+    }
+
+    /*初始化维修页面菜单*/
+    public void initRepairMenuList() {
+        ArrayList<MenuItem> repairMenuItemList = new ArrayList<MenuItem>();
+        ArrayList<MenuItem> allMenuItemList = SysProperty.getInstance().getAllMenuList();
+        String[] userItemsArray = mContent.getResources().getStringArray(R.array.repair_menu_item);//从配置中获取默认的菜单项
+        for (String itemName : userItemsArray) {
+            for (MenuItem itemObj : allMenuItemList ) {
+                if (itemName.equals(itemObj.getMenuTitle())) {
+                    repairMenuItemList.add(itemObj);
+                    break;
+                }
+            }
+        }
+        SysProperty.getInstance().setRepairMenuList(repairMenuItemList);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*维修预约*/
     public static ArrayList<InputItem> initRP_ReceptionNew_YY(){
