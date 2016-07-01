@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--维修接待-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:id="@+id/appointment_WX_text"
+        android:text="维修接待"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/apponintemnt_WX_submit"
+            android:text="确定"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            />
+    <ListView
+        android:id="@+id/appointment_WX_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:transcriptMode="normal"
+        android:layout_above="@id/apponintemnt_WX_submit"
+        android:layout_below="@id/appointment_WX_text"
+        ></ListView>
+
+    </RelativeLayout>
+</LinearLayout>
