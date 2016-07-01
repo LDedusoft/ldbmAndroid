@@ -67,6 +67,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         loginTypeSpinner = (Spinner)findViewById(R.id.spinner_loginType);
         loginBtn = (Button)findViewById(R.id.btn_login);
         loginBtn.setOnClickListener(this);
+        username.setSelection(username.getText().length());
 
         //注册下拉列表监听器
         loginTypeSpinner.setOnItemSelectedListener(this);
@@ -110,8 +111,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             "请输入密码!", Toast.LENGTH_SHORT).show();
                     password.findFocus();
                 }else {
-                   // ldbmLogin();
-                    loginSuccess();
+                    ldbmLogin();
+                   // loginSuccess();
                 }
 
         }

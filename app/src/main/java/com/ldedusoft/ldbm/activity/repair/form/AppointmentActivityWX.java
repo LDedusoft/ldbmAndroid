@@ -1,6 +1,5 @@
 package com.ldedusoft.ldbm.activity.repair.form;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,11 @@ import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
 import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.RepaireType;
+import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.TrafficClass;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.InitParamUtil;
@@ -36,31 +39,25 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ldbm_repair_appointment);
+        setContentView(R.layout.ldbm_repair_appointment_wx); //!!
         String value =  getIntent().getStringExtra("param");
-        listData = InitParamUtil.initRP_ReceptionNew_YY();
-        submitText = (TextView)findViewById(R.id.apponintemnt_submit);
+        listData = InitParamUtil.getInstance(this).initRP_ReceptionNew_WX(); //!!
+        submitText = (TextView)findViewById(R.id.apponintemnt_WX_submit);//!!
         submitText.setOnClickListener(this);
         getData();
         initList();
     }
 
-    /*启动活动方法*/
-    public static void actionStart(Context context,String data){
-        Intent intent = new Intent(context,AppointmentActivityWX.class);
-        intent.putExtra("param", data);
-        context.startActivity(intent);
-    }
 
     private void initList(){
-        inputListView = (ListView)findViewById(R.id.appointment_YY_list);
+        inputListView = (ListView)findViewById(R.id.appointment_WX_list); //!!
         adapter = new InputListAdapter(this,R.layout.ldbm_input_item,listData);
         inputListView.setAdapter(adapter);
     }
 
     private void getData(){
         String serverPath = InterfaceParam.SERVER_PATH;
-        String typeValue =  getIntent().getStringExtra("param");
+        String typeValue =  getIntent().getStringExtra("param"); //菜单初始化时定义了type 为：WX
         String paramXml = InterfaceParam.getInstance().getRP_ReceptionNew(typeValue);
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
@@ -68,11 +65,8 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //   TextView tv = (TextView) findViewById(R.id.appointment_text);
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.RP_ReceptionNewResult);
                         updateListView(result);
-
-
                     }
                 });
             }
@@ -109,19 +103,39 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
-            case 1:
+            case 1: //车牌选择
                 if(resultCode == RESULT_OK){
-                    String resultData = data.getStringExtra("data_return");
+                    CarCode car = (CarCode)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
-                    updateListItem(resultData,inputListPosition);
+                    updateListItem(car.getCarCode(), inputListPosition);
+                }
+                break;
+            case 2: //维修类型
+                if(resultCode == RESULT_OK){
+                    RepaireType repaireType = (RepaireType)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(repaireType.getTypeName(), inputListPosition);
+                }
+                break;
+            case 3: //业务类别
+                if(resultCode == RESULT_OK){
+                    TrafficClass trafficClass = (TrafficClass)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(trafficClass.getTypeName(), inputListPosition);
+                }
+                break;
+            case 4://业务员
+                if(resultCode == RESULT_OK){
+                    SalesMan salesMan = (SalesMan)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(salesMan.getName(),inputListPosition);
                 }
                 break;
 
             default:
                 if(resultCode == RESULT_OK){
-                    String resultData = data.getStringExtra("data_return");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
-                    updateListItem(resultData, inputListPosition);
+                    updateListItem("", inputListPosition);
                 }
                 break;
         }
@@ -130,7 +144,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.apponintemnt_submit:
+            case R.id.apponintemnt_WX_submit:
                 inputListView.clearFocus();//清除列表的焦点
                 saveAppointment();
                 break;
@@ -163,7 +177,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
      */
     private void saveHandler(String number, String info){
         String serverPath = InterfaceParam.SERVER_PATH;
-        String paramXml = InterfaceParam.getInstance().getAP_AppointmentSave(number, info);
+        String paramXml = InterfaceParam.getInstance().getRP_ReceptionSave(number, info);//!!
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
@@ -171,6 +185,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         Toast.makeText(AppointmentActivityWX.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
             }

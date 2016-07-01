@@ -1,11 +1,13 @@
 package com.ldedusoft.ldbm.model;
 
+import java.io.Serializable;
+
 /**
  * 车辆信息
  * Created by wangjianwei on 2016/6/29.
  */
 //{CarCode：车牌号；color：颜色；brand：品牌；Name：客户名称；LinkMan：联系人；Telephone：电话；Mobilephone：手机}
-public class CarCode {
+public class CarCode implements Serializable {
     private String carCode;
     private String color;
     private String brand;

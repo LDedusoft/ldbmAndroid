@@ -50,8 +50,10 @@ public class RepairTypeSelect extends BaseActivity {
                 //返回数据到上一个活动
                 Intent intent = new Intent();
                 intent.putExtra("inputListPosition",inputListPosition);//表单传来的item位置，返回回去
-                intent.putExtra("data_return",repaireType.getTypeName());
-                setResult(RESULT_OK,intent);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item",repaireType);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

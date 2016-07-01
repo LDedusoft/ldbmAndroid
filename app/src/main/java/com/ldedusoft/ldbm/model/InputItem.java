@@ -9,7 +9,7 @@ public class InputItem {
     private String itemId;
     /*标题，左侧显示*/
     private String itemTitle;
-    /*输入类型 0,文本不可修改 1,输入框 2,文本选中跳转 3,日期 4,单选 5,复选*/
+    /*输入类型 0,文本不可修改 1,输入框 2,文本点击跳转 3,日期 4,单选 5,复选 6输入框限定数字*/
     private int inputType;
     /*默认值*/
     private String defaultValue;

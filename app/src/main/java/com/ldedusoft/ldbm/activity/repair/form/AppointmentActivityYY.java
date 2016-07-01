@@ -14,7 +14,11 @@ import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
 import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.RepaireType;
+import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.TrafficClass;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.InitParamUtil;
@@ -23,6 +27,8 @@ import com.ldedusoft.ldbm.util.ParseXML;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 预约维修
@@ -36,9 +42,9 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ldbm_repair_appointment);
-        String value =  getIntent().getStringExtra("param");
-        listData = InitParamUtil.initRP_ReceptionNew_YY();
+        setContentView(R.layout.ldbm_repair_appointment_yy);
+        String value =  getIntent().getStringExtra("param");//菜单初始化时定义了type 为：YY
+        listData = InitParamUtil.getInstance(this).initRP_ReceptionNew_YY();
         submitText = (TextView)findViewById(R.id.apponintemnt_submit);
         submitText.setOnClickListener(this);
         getData();
@@ -109,19 +115,39 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
-            case 1:
+            case 1: //车牌选择
                 if(resultCode == RESULT_OK){
-                    String resultData = data.getStringExtra("data_return");
+                    CarCode car = (CarCode)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
-                    updateListItem(resultData,inputListPosition);
+                    updateListItem(car.getCarCode(), inputListPosition);
+                }
+                break;
+            case 2: //维修类型
+                if(resultCode == RESULT_OK){
+                    RepaireType repaireType = (RepaireType)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(repaireType.getTypeName(), inputListPosition);
+                }
+                break;
+            case 3: //业务类别
+                if(resultCode == RESULT_OK){
+                    TrafficClass trafficClass = (TrafficClass)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(trafficClass.getTypeName(), inputListPosition);
+                }
+                break;
+            case 4://业务员
+                if(resultCode == RESULT_OK){
+                    SalesMan salesMan = (SalesMan)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(salesMan.getName(),inputListPosition);
                 }
                 break;
 
             default:
                 if(resultCode == RESULT_OK){
-                    String resultData = data.getStringExtra("data_return");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
-                    updateListItem(resultData, inputListPosition);
+                    updateListItem("", inputListPosition);
                 }
                 break;
         }
@@ -139,6 +165,9 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
         }
     }
 
+    /**
+     * 保存预约维修表单
+     */
     private void saveAppointment(){
         try {
             JSONObject dataJsonObj = new JSONObject();
@@ -148,9 +177,9 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
             String number = dataJsonObj.getString("Number");
             dataJsonObj.remove("Number");
             String info = dataJsonObj.toString();
-            Toast.makeText(this,info,Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,info,Toast.LENGTH_LONG).show();
             Log.d("保存信息：", info);
-          //  saveHandler(number,info);
+            saveHandler(number,info);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -171,7 +200,14 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
-                        finish();
+
+                        TimerTask task = new TimerTask(){
+                         public void run(){
+                             finish();
+                            }
+                        };
+                        Timer timer = new Timer();
+                        timer.schedule(task, 1000);
                     }
                 });
             }

@@ -50,7 +50,7 @@ public class WelcomeViewActivity extends Activity {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(WelcomeViewActivity.this,LoginActivity.class);
                 v.getContext().startActivity(intent);
-              //  finish();
+                finish();
             }
         });
     }

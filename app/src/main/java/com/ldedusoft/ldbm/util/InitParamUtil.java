@@ -30,38 +30,11 @@ public class InitParamUtil {
     public InitParamUtil(Context context){
      mContent = context;
     }
-    /**
-     * 从assets中读取txt
-     */
-    private String readConfig(String fileName) {
-        String content = "";
-        try {
-            InputStream is = mContent.getAssets().open(fileName);
-            content = readTextFromFile(is);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return content;
+
+    public static InitParamUtil getInstance(Context context){
+        return new InitParamUtil(context);
     }
 
-    /**
-     * 按行读取txt
-     *
-     * @param is
-     * @return
-     * @throws Exception
-     */
-    private String readTextFromFile(InputStream is) throws Exception {
-        InputStreamReader reader = new InputStreamReader(is);
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        StringBuffer buffer = new StringBuffer("");
-        String str;
-        while ((str = bufferedReader.readLine()) != null) {
-            buffer.append(str);
-            buffer.append("\n");
-        }
-        return buffer.toString();
-    }
 
     /*初始化全部菜单*/
     public void initAllMenuList() {
@@ -130,94 +103,79 @@ public class InitParamUtil {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*维修预约*/
-    public static ArrayList<InputItem> initRP_ReceptionNew_YY(){
-        ArrayList<InputItem> dataList = new ArrayList<InputItem>();
-
-        InputItem inputItem = new InputItem();
-        inputItem.setItemTitle("单号");
-        inputItem.setItemId("Number");
-        inputItem.setInputType(0);
-        inputItem.setDefaultValue("123456789");
-        dataList.add(inputItem);
-
-        InputItem inputItem2 = new InputItem();
-        inputItem2.setItemTitle("车牌号");
-        inputItem2.setItemId("CarCode");
-        inputItem2.setInputType(2);
-        inputItem2.setValue("A88888");
-        inputItem2.setHint("请选择");
-        inputItem2.setIntentPath("activity.selectActivity.CarCodeSelect");
-        inputItem2.setIntentRequestCode(1);
-        dataList.add(inputItem2);
-
-        InputItem inputItem22 = new InputItem();
-        inputItem22.setItemTitle("维修类型");
-        inputItem22.setItemId("RepairType");
-        inputItem22.setInputType(2);
-        inputItem22.setValue("");
-        inputItem22.setIntentPath("activity.selectActivity.RepairTypeSelect");
-        inputItem22.setIntentRequestCode(3);
-        dataList.add(inputItem22);
-
-        InputItem inputItem23 = new InputItem();
-        inputItem23.setItemTitle("业务类型");
-        inputItem23.setItemId("BusinessType");
-        inputItem23.setInputType(2);
-        inputItem23.setDefaultValue("");
-        inputItem23.setIntentPath("activity.selectActivity.TrafficClassSelect");
-        inputItem23.setIntentRequestCode(4);
-
-        inputItem23.setHint("请输入");
-        dataList.add(inputItem23);
-
-        InputItem inputItem24 = new InputItem();
-        inputItem24.setItemTitle("预约时间");
-        inputItem24.setItemId("yyTime");
-        inputItem24.setInputType(3);
-        inputItem24.setDefaultValue("");
-        inputItem24.setHint("请选择");
-        dataList.add(inputItem24);
-
-        InputItem inputItem25 = new InputItem();
-        inputItem25.setItemTitle("业务员");
-        inputItem25.setItemId("Salesman");
-        inputItem25.setInputType(2);
-        inputItem25.setDefaultValue("");
-        inputItem25.setIntentPath("activity.selectActivity.SalesmanSelect");
-        inputItem25.setIntentRequestCode(4);
-        inputItem25.setHint("请输入");
-        dataList.add(inputItem25);
-
-
-        InputItem inputItem26 = new InputItem();
-        inputItem26.setItemTitle("弹性时间");
-        inputItem26.setItemId("dxTime");
-        inputItem26.setInputType(1);
-        inputItem26.setDefaultValue("");
-        inputItem26.setHint("请输入");
-        dataList.add(inputItem26);
-
-
-        return dataList;
+    public  ArrayList<InputItem> initRP_ReceptionNew_YY() {
+        String config = readConfig("repairYY.txt");
+        return createInputItemList(config);
     }
+
+    /*维修接待*/
+    public  ArrayList<InputItem> initRP_ReceptionNew_WX() {
+        String config = readConfig("repairWX.txt");
+        return createInputItemList(config);
+    }
+
+    /**
+     * 生成输入表单item列表
+     * @param config
+     * @return
+     */
+    private ArrayList<InputItem>  createInputItemList(String config){
+        ArrayList<InputItem> itemList = new ArrayList<InputItem>();
+        try {
+            JSONArray jsonArray = new JSONArray(config);
+            int length = jsonArray.length();
+            for (int i = 0; i < length; i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                InputItem inputItem = new InputItem();
+                inputItem.setItemTitle(jsonObject.getString("itemTitle"));
+                inputItem.setValue(jsonObject.getString("value"));
+                inputItem.setHint(jsonObject.getString("hint"));
+                inputItem.setDefaultValue(jsonObject.getString("defaultValue"));
+                inputItem.setInputType(jsonObject.getInt("inputType"));
+                inputItem.setIntentPath(jsonObject.getString("intentPath"));
+                inputItem.setIntentRequestCode(jsonObject.getInt("intentRequestCode"));
+                inputItem.setItemId(jsonObject.getString("itemId"));
+                itemList.add(inputItem);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return itemList;
+    }
+
+    /**
+     * 从assets中读取txt
+     */
+    private String readConfig(String fileName) {
+        String content = "";
+        try {
+            InputStream is = mContent.getAssets().open(fileName);
+            content = readTextFromFile(is);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
+
+    /**
+     * 按行读取txt
+     *
+     * @param is
+     * @return
+     * @throws Exception
+     */
+    private String readTextFromFile(InputStream is) throws Exception {
+        InputStreamReader reader = new InputStreamReader(is);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        StringBuffer buffer = new StringBuffer("");
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+            buffer.append(str);
+            buffer.append("\n");
+        }
+        return buffer.toString();
+    }
+
+
 }

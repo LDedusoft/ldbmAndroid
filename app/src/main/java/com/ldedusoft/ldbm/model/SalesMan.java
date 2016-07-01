@@ -1,9 +1,11 @@
 package com.ldedusoft.ldbm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by wangjianwei on 2016/6/30.
  */
-public class SalesMan {
+public class SalesMan implements Serializable {
     private int id;
     private String number;
     private String name;

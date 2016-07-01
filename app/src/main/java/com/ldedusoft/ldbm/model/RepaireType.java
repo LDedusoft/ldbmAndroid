@@ -1,9 +1,11 @@
 package com.ldedusoft.ldbm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by wangjianwei on 2016/6/30.
  */
-public class RepaireType {
+public class RepaireType implements Serializable {
     private int id;
     private String typeName;
 

@@ -4,8 +4,11 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/input_item_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/input_list_item_height">
+        android:layout_height="@dimen/input_list_item_height"
+        android:orientation="horizontal"
+        >
 
 <TextView
     android:id="@+id/input_item_title"
@@ -15,51 +18,56 @@
     android:layout_height="match_parent"
     android:layout_marginRight="20dp"
     />
-
+<!--输入框-->
     <EditText
         android:id="@+id/input_item_edittext"
-        android:text="输入框"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         />
-
+<!--文本不可点击-->
     <TextView
         android:id="@+id/input_item_textview"
-        android:text="文本内容"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         />
-
+<!--文本 点击跳转-->
         <TextView
             android:id="@+id/input_item_clicktext"
-            android:text="文本内容"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
             />
-
+<!--时间选择-->
         <TextView
             android:id="@+id/input_item_timetext"
-            android:text="文本内容"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
             />
-
+<!--复选框-->
     <CheckBox
         android:text="复选框"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         />
-    <RadioButton
+
+        <!--单选框-->
+        <RadioButton
         android:text="单选框"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
-
+        <!--输入框 限定数字-->
+        <EditText
+            android:id="@+id/input_item_edittext_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:numeric="integer"
+            />
     </LinearLayout>
 
 </LinearLayout>

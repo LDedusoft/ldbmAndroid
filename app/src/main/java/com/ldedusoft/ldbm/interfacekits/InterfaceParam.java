@@ -412,7 +412,25 @@ public class InterfaceParam {
         return RP_ReceptionNew;
     }
     /**保存维修接待*/
-    public String getRP_ReceptionSave() {
+    public String getRP_ReceptionSave(String number, String info) {
+        RP_ReceptionSave="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_ReceptionSave xmlns=\"LDBM4S\">\n" +
+                "      <Number>@number</Number>\n" +
+                "      <Info>@info</Info>\n" +
+                "    </RP_ReceptionSave>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_ReceptionSave = RP_ReceptionSave.replace("@sysUser",SYS_USER);
+        RP_ReceptionSave = RP_ReceptionSave.replace("@sysPassword",SYS_PASSWORD);
+        RP_ReceptionSave = RP_ReceptionSave.replace("@number",number);
+        RP_ReceptionSave = RP_ReceptionSave.replace("@info",info);
         return RP_ReceptionSave;
     }
     /**维修方式*/
