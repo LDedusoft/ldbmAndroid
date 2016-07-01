@@ -16,16 +16,25 @@ public class MenuItem {
     private boolean isSubTitle = false;
     /*菜单值（用于向下传递）*/
     private String value;
-    /*跳转页面路径*/
-    private String intentPath;
+    /*标题点击跳转路径*/
+    private String titleIntentPath;
+    /*添加按钮跳转页面路径*/
+    private String createIntentPath;
 
-
-    public String getIntentPath() {
-        return intentPath;
+    public String getTitleIntentPath() {
+        return titleIntentPath;
     }
 
-    public void setIntentPath(String intentPath) {
-        this.intentPath = intentPath;
+    public void setTitleIntentPath(String titleIntentPath) {
+        this.titleIntentPath = titleIntentPath;
+    }
+
+    public String getCreateIntentPath() {
+        return createIntentPath;
+    }
+
+    public void setCreateIntentPath(String createIntentPath) {
+        this.createIntentPath = createIntentPath;
     }
 
     public String getValue() {

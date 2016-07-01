@@ -1,9 +1,11 @@
 package com.ldedusoft.ldbm.interfacekits;
 
+import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.TrafficClass;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +24,58 @@ public class InterfaceResault {
     public static String RP_ReceptionNewResult = "RP_ReceptionNewResult";
     /*维修类型列表*/
     public static String RP_RepaireTypeResult = "RP_RepaireTypeResult";
+    /*业务类型列表*/
+    public static String RP_TrafficClassResult = "RP_TrafficClassResult";
+    /*预约维修列表*/
+    public static String AP_AppointmentListResult = "AP_AppointmentListResult";
 
+    /**
+     * 预约维修列表
+     *  {Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；
+     * MingCheng：客户名称；wxFangShi：维修方式；ywLeiBie：业务类别}
+     */
+    public static  ArrayList<Appointment> getAP_AppointmentListResult(ArrayList<Appointment> listData,String result){
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Appointment appointment = new Appointment();
+                appointment.setId(jsonObject.getInt("Id"));
+                appointment.setDanHao(jsonObject.getString("DanHao"));
+                appointment.setDjTime(jsonObject.getString("djTime"));
+                appointment.setYyTime(jsonObject.getString("yyTime"));
+                appointment.setCarCode(jsonObject.getString("CarCode"));
+                appointment.setMingCheng(jsonObject.getString("MingCheng"));
+                appointment.setWxFangShi(jsonObject.getString("wxFangShi"));
+                appointment.setYwLeiBie(jsonObject.getString("ywLeiBie"));
+                listData.add(appointment);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+    /**
+     * 维修类型列表返回值
+     * @param listData
+     * @param result
+     * @return
+     */
+    public static ArrayList<TrafficClass> getRP_TrafficClassResult(ArrayList<TrafficClass> listData,String result){
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                TrafficClass trafficClass = new TrafficClass();
+                trafficClass.setId(jsonObject.getInt("ID"));
+                trafficClass.setTypeName(jsonObject.getString("ClassName"));
+                listData.add(trafficClass);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
     /**
      * 维修类型列表返回值
      * @param listData

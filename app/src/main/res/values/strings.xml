@@ -14,4 +14,6 @@
     <string name="menu_item_addShortcut">添加快捷功能</string>
     <string name="menu_item_top">置顶</string>
     <string name="menu_item_delete">移除</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
 </resources>

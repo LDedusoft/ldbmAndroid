@@ -109,7 +109,7 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                             new DatePickerDialog(mContext,new DatePickerDialog.OnDateSetListener() {
                                         @Override
                                         public void onDateSet(DatePicker dp, int year, int mounth, int day) {
-                                            timeHashMap.put(position , year + "-" + (mounth + 1) + "-" + day);
+                                            timeHashMap.put(position , year + "-" + (mounth + 1) + "-" + day +" 00:00:00");
                                             notifyDataSetChanged();
                                         }
                                     },

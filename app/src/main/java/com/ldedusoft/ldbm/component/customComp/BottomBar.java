@@ -99,6 +99,13 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
+            case R.id.txt_toolbar_home:
+                if(activityName.indexOf("HomeActivity")==-1) {
+                    intent.setClass(v.getContext(), HomeActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                }
+                break;
             case R.id.btn_toolbar_repair:
                 if(activityName.indexOf("RepairActivity")==-1) {
                     intent.setClass(v.getContext(), RepairActivity.class);
@@ -107,6 +114,13 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                 }
                 break;
             case R.id.layout_toolbar_repair:
+                if(activityName.indexOf("RepairActivity")==-1) {
+                    intent.setClass(v.getContext(), RepairActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                }
+                break;
+            case R.id.txt_bar_weixiu:
                 if(activityName.indexOf("RepairActivity")==-1) {
                     intent.setClass(v.getContext(), RepairActivity.class);
                     getContext().startActivity(intent);
@@ -127,6 +141,13 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
+            case R.id.txt_bar_zhengche:
+                if(activityName.indexOf("WholecarActivity")==-1) {
+                    intent.setClass(v.getContext(), WholecarActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                }
+                break;
             case R.id.btn_toolbar_part:
                 if(activityName.indexOf("PartActivity")==-1) {
                     intent.setClass(v.getContext(), PartActivity.class);
@@ -141,6 +162,13 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                     ((Activity) getContext()).finish();
                 }
                 break;
+            case R.id.txt_bar_peijian:
+                if(activityName.indexOf("PartActivity")==-1) {
+                    intent.setClass(v.getContext(), PartActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                }
+                break;
             case R.id.btn_toolbar_report:
                 if(activityName.indexOf("ReportActivity")==-1) {
                     intent.setClass(v.getContext(), ReportActivity.class);
@@ -149,6 +177,13 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
                 }
                 break;
             case R.id.layout_toolbar_report:
+                if(activityName.indexOf("ReportActivity")==-1) {
+                    intent.setClass(v.getContext(), ReportActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                }
+                break;
+            case R.id.txt_bar_baobiao:
                 if(activityName.indexOf("ReportActivity")==-1) {
                     intent.setClass(v.getContext(), ReportActivity.class);
                     getContext().startActivity(intent);

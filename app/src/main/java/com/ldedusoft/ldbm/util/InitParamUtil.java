@@ -26,7 +26,8 @@ public class InitParamUtil {
         menuItem.setMenuDescribe("商品采购渠道");
         menuItem.setAllowCreate(true);//是否可以新建
         menuItem.setIsHomeMenu(true);//是否是首页菜单，可以置顶移除
-        menuItem.setIntentPath("activity.repair.AppointmentActivity");
+        menuItem.setCreateIntentPath("activity.repair.AppointmentActivity");
+        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
         menuItem.setValue("YY");
         homeMenuList.add(menuItem);
 
@@ -115,7 +116,8 @@ public class InitParamUtil {
         menuItem.setMenuDescribe("商品采购渠道");
         menuItem.setAllowCreate(true);
         menuItem.setValue("YY");
-        menuItem.setIntentPath("activity.repair.AppointmentActivity");
+        menuItem.setCreateIntentPath("activity.repair.AppointmentActivity");
+        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
         repairMenuList.add(menuItem);
 
         MenuItem  menuItem2 = new MenuItem();
@@ -131,6 +133,7 @@ public class InitParamUtil {
         menuItem3.setMenuTitle("维修预约查询");
         menuItem3.setMenuDescribe("商品售价、剩余库存查询");
         menuItem3.setAllowCreate(false);
+        menuItem.setTitleIntentPath("activity.queryActivity.AppointmentQuery");
         repairMenuList.add(menuItem3);
 
         MenuItem  menuItem4 = new MenuItem();
@@ -177,7 +180,7 @@ public class InitParamUtil {
         inputItem23.setItemId("BusinessType");
         inputItem23.setInputType(2);
         inputItem23.setDefaultValue("");
-        inputItem23.setIntentPath("activity.selectActivity.RepairTypeSelect");
+        inputItem23.setIntentPath("activity.selectActivity.TrafficClassSelect");
         inputItem23.setIntentRequestCode(4);
 
         inputItem23.setHint("请输入");

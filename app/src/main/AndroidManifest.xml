@@ -58,6 +58,22 @@
             </intent-filter>
         </activity>
 
+        <!--业务类别列表-->
+        <activity android:name=".activity.selectActivity.TrafficClassSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.TrafficClassSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--预约维修查询列表-->
+        <activity android:name=".activity.queryActivity.AppointmentQuery">
+            <intent-filter>
+                <action android:name="activity.queryActivity.AppointmentQuery"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
 
     </application>
 

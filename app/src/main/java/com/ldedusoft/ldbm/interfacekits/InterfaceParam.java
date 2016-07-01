@@ -167,10 +167,42 @@ public class InterfaceParam {
 
     /**预约维修列表*/
     public String getAP_AppointmentList() {
+        AP_AppointmentList ="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <AP_AppointmentList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        AP_AppointmentList = AP_AppointmentList.replace("@sysUser",SYS_USER);
+        AP_AppointmentList = AP_AppointmentList.replace("@sysPassword",SYS_PASSWORD);
         return AP_AppointmentList;
     }
     /**保存预约维修*/
-    public String getAP_AppointmentSave() {
+    public String getAP_AppointmentSave(String number, String info) {
+
+        AP_AppointmentSave="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <AP_AppointmentSave xmlns=\"LDBM4S\">\n" +
+                "      <Number>@number</Number>\n" +
+                "      <Info>@info</Info>\n" +
+                "    </AP_AppointmentSave>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        AP_AppointmentSave = AP_AppointmentSave.replace("@sysUser",SYS_USER);
+        AP_AppointmentSave = AP_AppointmentSave.replace("@sysPassword",SYS_PASSWORD);
+        AP_AppointmentSave = AP_AppointmentSave.replace("@number",number);
+        AP_AppointmentSave = AP_AppointmentSave.replace("@info",info);
         return AP_AppointmentSave;
     }
     /**库存成本异常*/
@@ -406,6 +438,19 @@ public class InterfaceParam {
     }
     /**业务类别*/
     public String getRP_TrafficClass() {
+        RP_TrafficClass = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_TrafficClass xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_TrafficClass = RP_TrafficClass.replace("@sysUser",SYS_USER);
+        RP_TrafficClass = RP_TrafficClass.replace("@sysPassword",SYS_PASSWORD);
         return RP_TrafficClass;
     }
     /**销售洽谈(新建)*/

@@ -71,12 +71,18 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     @Override
     public void OnMenuTitleClick(int ID) {
         String value = menuDataList.get(ID).getValue();
+        String intentPath =  menuDataList.get(ID).getTitleIntentPath();
+        if(!TextUtils.isEmpty(intentPath)) {
+            Intent intent = new Intent(intentPath);
+            intent.putExtra("param", value);
+            startActivity(intent);
+        }
     }
 
     @Override
     public void OnMenuAddClick(int ID) {
         String value = menuDataList.get(ID).getValue();
-        String intentPath =  menuDataList.get(ID).getIntentPath();
+        String intentPath =  menuDataList.get(ID).getCreateIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);

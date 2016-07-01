@@ -3,6 +3,7 @@ package com.ldedusoft.ldbm.activity.repair;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 import com.ldedusoft.ldbm.util.ParseXML;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -65,8 +68,8 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AppointmentActivity.this, response, Toast.LENGTH_SHORT).show();
-                        TextView tv = (TextView) findViewById(R.id.appointment_text);
+//                        Toast.makeText(AppointmentActivity.this, response, Toast.LENGTH_SHORT).show();
+                        //   TextView tv = (TextView) findViewById(R.id.appointment_text);
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.RP_ReceptionNewResult);
                         updateListView(result);
 
@@ -130,15 +133,69 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.apponintemnt_submit:
                 inputListView.clearFocus();//清除列表的焦点
-                StringBuilder str = new StringBuilder();
-                for(InputItem item:listData){
-                    str.append(item.getValue());
-                    str.append(",");
-                }
-                Toast.makeText(AppointmentActivity.this,str.toString(),Toast.LENGTH_SHORT).show();
+                saveAppointment();
+//                Toast.makeText(AppointmentActivity.this,str.toString(),Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
         }
+    }
+
+    private void saveAppointment(){
+        try {
+            JSONObject dataJsonObj = new JSONObject();
+            for (InputItem item : listData) {
+                dataJsonObj.put(item.getItemId(), item.getValue());
+            }
+            String number = dataJsonObj.getString("Number");
+            dataJsonObj.remove("Number");
+            String info = dataJsonObj.toString();
+            Toast.makeText(this,info,Toast.LENGTH_LONG).show();
+            Log.d("保存信息：",info);
+          //  saveHandler(number,info);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 保存信息到服务器
+     * @param number
+     * @param info
+     */
+    private void saveHandler(String number, String info){
+        String serverPath = InterfaceParam.SERVER_PATH;
+        String paramXml = InterfaceParam.getInstance().getAP_AppointmentSave(number, info);
+        HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
+            @Override
+            public void onFinish(String response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onWarning(String warning) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AppointmentActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }
