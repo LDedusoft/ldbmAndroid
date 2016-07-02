@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.WelcomeViewActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,6 @@
         </activity>
        <!-- <activity android:name=".activity.LoginActivity"></activity>
        -->
-        <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.home.HomeActivity"></activity><!--首页-->
         <activity android:name=".activity.repair.RepairActivity"></activity><!--维修管理-->
         <activity android:name=".activity.wholeCar.WholecarActivity"></activity><!--整车管理-->
@@ -83,9 +82,18 @@
             </intent-filter>
         </activity>
 
+        <!--维修接待-->
         <activity android:name=".activity.queryActivity.AppointmentQueryWX">
             <intent-filter>
                 <action android:name="activity.queryActivity.AppointmentQueryWX"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--通用简单选择列表-->
+        <activity android:name=".activity.selectActivity.CommonSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.CommonSelect"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

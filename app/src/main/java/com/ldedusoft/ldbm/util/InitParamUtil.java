@@ -136,6 +136,7 @@ public class InitParamUtil {
                 inputItem.setIntentPath(jsonObject.getString("intentPath"));
                 inputItem.setIntentRequestCode(jsonObject.getInt("intentRequestCode"));
                 inputItem.setItemId(jsonObject.getString("itemId"));
+                inputItem.setIntentParam(jsonObject.getString("intentParam"));
                 itemList.add(inputItem);
             }
         }catch (Exception e){

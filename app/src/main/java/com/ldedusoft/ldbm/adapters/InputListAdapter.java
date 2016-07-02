@@ -112,8 +112,10 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                             Log.d("跳转路径：", path);
                             Intent intent = new Intent(path);
                             intent.putExtra("position",position);
-                            intent.putExtra("itemId", inputItem.getItemId());
-                            mContext.startActivityForResult(intent,tempItem.getIntentRequestCode()); //跳转 需要返回数据
+                            intent.putExtra("id", tempItem.getItemId());
+                            intent.putExtra("title", tempItem.getItemTitle());
+                            intent.putExtra("param",tempItem.getIntentParam());
+                            mContext.startActivityForResult(intent, tempItem.getIntentRequestCode()); //跳转 需要返回数据
                         }
                     });
                     /*保存焦点位置*/

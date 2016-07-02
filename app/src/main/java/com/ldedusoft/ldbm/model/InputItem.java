@@ -21,6 +21,16 @@ public class InputItem {
     private String intentPath;
     /*跳转唯一值（一组数据中该值需唯一）*/
     private int intentRequestCode;
+    /*跳转参数*/
+    private String intentParam;
+
+    public String getIntentParam() {
+        return intentParam;
+    }
+
+    public void setIntentParam(String intentParam) {
+        this.intentParam = intentParam;
+    }
 
     public int getIntentRequestCode() {
         return intentRequestCode;

@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,11 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
             TextView deleteAction = (TextView)view.findViewById(R.id.delete_action);
             TextView settopAction = (TextView)view.findViewById(R.id.top_action);
             LinearLayout actionLayout = (LinearLayout)view.findViewById(R.id.top_del_layout);
+
+            //如果描述为空则隐藏此控件
+            if(TextUtils.isEmpty(menuItem.getMenuDescribe()) ){
+                menuItemDescribe.setVisibility(View.GONE);
+            }
 
             deleteAction.setOnClickListener(new View.OnClickListener() {
                 @Override
