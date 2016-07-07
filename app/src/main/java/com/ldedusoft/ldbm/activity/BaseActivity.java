@@ -12,4 +12,8 @@ public class BaseActivity extends Activity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
     }
+
+    public static void finishAll(){
+        //TODO 结束所有活动
+    }
 }

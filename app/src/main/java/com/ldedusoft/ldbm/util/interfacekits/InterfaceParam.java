@@ -1,4 +1,4 @@
-package com.ldedusoft.ldbm.interfacekits;
+package com.ldedusoft.ldbm.util.interfacekits;
 
 import com.ldedusoft.ldbm.model.UserProperty;
 
@@ -304,7 +304,23 @@ public class InterfaceParam {
         return PowerInfo;
     }
     /**客户类型列表*/
-    public String getPubClientTypeList() {
+    public String getPubClientTypeList(String clientType) {
+        PubClientTypeList="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PubClientTypeList xmlns=\"LDBM4S\">\n" +
+                "      <ClientType>@clientType</ClientType>\n" +
+                "    </PubClientTypeList>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        PubClientTypeList = PubClientTypeList.replace("@sysUser",SYS_USER);
+        PubClientTypeList = PubClientTypeList.replace("@sysPassword",SYS_PASSWORD);
+        PubClientTypeList = PubClientTypeList.replace("@clientType",clientType);
         return PubClientTypeList;
     }
     /**车辆信息列表*/
@@ -334,6 +350,19 @@ public class InterfaceParam {
     }
     /**车型列表*/
     public String getPub_CarTypeList() {
+        Pub_CarTypeList="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_CarTypeList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_CarTypeList = Pub_CarTypeList.replace("@sysUser",SYS_USER);
+        Pub_CarTypeList = Pub_CarTypeList.replace("@sysPassword",SYS_PASSWORD);
         return Pub_CarTypeList;
     }
     /**整车仓库列表*/
@@ -342,6 +371,19 @@ public class InterfaceParam {
     }
     /**客户信息列表*/
     public String getPub_ClientList() {
+        Pub_ClientList="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_ClientList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_ClientList = Pub_ClientList.replace("@sysUser",SYS_USER);
+        Pub_ClientList = Pub_ClientList.replace("@sysPassword",SYS_PASSWORD);
         return Pub_ClientList;
     }
     /**发票信息*/
@@ -374,11 +416,49 @@ public class InterfaceParam {
         return Pub_Salesman;
     }
     /**保存车辆信息(客户车辆)*/
-    public String getPub_SaveCar() {
+    public String getPub_SaveCar(String CarCode, String ClientCode ,String CarType) {
+        Pub_SaveCar="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_SaveCar xmlns=\"LDBM4S\">\n" +
+                "      <CarCode>@CarCode</CarCode>\n" +
+                "      <ClientCode>@ClientCode</ClientCode>\n" +
+                "      <CarType>@CarType</CarType>\n" +
+                "    </Pub_SaveCar>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_SaveCar = Pub_SaveCar.replace("@sysUser",SYS_USER);
+        Pub_SaveCar = Pub_SaveCar.replace("@sysPassword",SYS_PASSWORD);
+        Pub_SaveCar = Pub_SaveCar.replace("@CarCode",CarCode);
+        Pub_SaveCar = Pub_SaveCar.replace("@ClientCode",ClientCode);
+        Pub_SaveCar = Pub_SaveCar.replace("@CarType",CarType);
         return Pub_SaveCar;
     }
     /**保存客户信息*/
-    public String getPub_SaveClient() {
+    public String getPub_SaveClient(String userName, String clientInfo) {
+        Pub_SaveClient = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <Pub_SaveClient xmlns=\"LDBM4S\">\n" +
+                "      <UName>@userName</UName>\n" +
+                "      <Info>@clientInfo</Info>\n" +
+                "    </Pub_SaveClient>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        Pub_SaveClient = Pub_SaveClient.replace("@sysUser",SYS_USER);
+        Pub_SaveClient = Pub_SaveClient.replace("@sysPassword",SYS_PASSWORD);
+        Pub_SaveClient = Pub_SaveClient.replace("@userName",userName);
+        Pub_SaveClient = Pub_SaveClient.replace("@clientInfo",clientInfo);
         return Pub_SaveClient;
     }
     /**维修接待作废*/
@@ -386,7 +466,23 @@ public class InterfaceParam {
         return RP_DelReception;
     }
     /**维修进度*/
-    public String getRP_ProgressList() {
+    public String getRP_ProgressList(String carCode) {
+        RP_ProgressList = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_ProgressList xmlns=\"LDBM4S\">\n" +
+                "      <CarCode>@carCode</CarCode>\n" +
+                "    </RP_ProgressList>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_ProgressList = RP_ProgressList.replace("@sysUser",SYS_USER);
+        RP_ProgressList = RP_ProgressList.replace("@sysPassword",SYS_PASSWORD);
+        RP_ProgressList = RP_ProgressList.replace("@carCode", carCode);
         return RP_ProgressList;
     }
     /**新建单据*/
@@ -452,6 +548,19 @@ public class InterfaceParam {
     }
     /**维修接待列表*/
     public String getRP_ShowReception() {
+        RP_ShowReception="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <RP_ShowReception xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        RP_ShowReception = RP_ShowReception.replace("@sysUser",SYS_USER);
+        RP_ShowReception = RP_ShowReception.replace("@sysPassword",SYS_PASSWORD);
         return RP_ShowReception;
     }
     /**业务类别*/
@@ -471,12 +580,51 @@ public class InterfaceParam {
         RP_TrafficClass = RP_TrafficClass.replace("@sysPassword",SYS_PASSWORD);
         return RP_TrafficClass;
     }
-    /**销售洽谈(新建)*/
-    public String getSC_NewNegotiate() {
+
+    /**
+     * 销售洽谈(新建)
+     * @param type 类型：个人/公司
+     * @return
+     */
+    public String getSC_NewNegotiate(String userName,String type) {
+            SC_NewNegotiate = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                    "  <soap:Header>\n" +
+                    "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                    "      <UserName>@sysUser</UserName>\n" +
+                    "      <PassWord>@sysPassword</PassWord>\n" +
+                    "    </MySoapHeader>\n" +
+                    "  </soap:Header>\n" +
+                    "  <soap:Body>\n" +
+                    "    <SC_NewNegotiate xmlns=\"LDBM4S\">\n" +
+                    "      <UName>@userName</UName>\n" +
+                    "      <ClientType>@type</ClientType>\n" +
+                    "    </SC_NewNegotiate>\n" +
+                    "  </soap:Body>\n" +
+                    "</soap:Envelope>";
+        SC_NewNegotiate = SC_NewNegotiate.replace("@sysUser",SYS_USER);
+        SC_NewNegotiate = SC_NewNegotiate.replace("@sysPassword",SYS_PASSWORD);
+        SC_NewNegotiate = SC_NewNegotiate.replace("@userName",userName);
+        SC_NewNegotiate = SC_NewNegotiate.replace("@type",type);
         return SC_NewNegotiate;
     }
     /**整车销售订单(新建)*/
-    public String getSC_NewPurchase() {
+    public String getSC_NewPurchase(String userName) {
+        SC_NewPurchase = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_NewPurchase xmlns=\"LDBM4S\">\n" +
+                "      <UName>@userName</UName>\n" +
+                "    </SC_NewPurchase>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        SC_NewPurchase = SC_NewPurchase.replace("@sysUser",SYS_USER);
+        SC_NewPurchase = SC_NewPurchase.replace("@sysPassword",SYS_PASSWORD);
+        SC_NewPurchase = SC_NewPurchase.replace("@userName",userName);
         return SC_NewPurchase;
     }
     /**保存车辆信息(整车)*/
@@ -484,11 +632,51 @@ public class InterfaceParam {
         return SC_SaveCarInfo;
     }
     /**销售洽谈(保存)*/
-    public String getSC_SaveNegotiate() {
+    public String getSC_SaveNegotiate(String userName,String info,String type) {
+        SC_SaveNegotiate="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_SaveNegotiate xmlns=\"LDBM4S\">\n" +
+                "      <UName>@userName</UName>\n" +
+                "      <Info>@info</Info>\n" +
+                "      <ClientType>@type</ClientType>\n" +
+                "    </SC_SaveNegotiate>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@sysUser",SYS_USER);
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@sysPassword",SYS_PASSWORD);
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@userName",userName);
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@info",info);
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@type",type);
         return SC_SaveNegotiate;
     }
     /**整车销售订单(保存)*/
-    public String getSC_SavePurchase() {
+    public String getSC_SavePurchase(String userName, String pInfo, String cInfo) {
+        SC_SavePurchase="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_SavePurchase xmlns=\"LDBM4S\">\n" +
+                "      <Number>@userName</Number>\n" +
+                "      <pInfo>@pInfo</pInfo>\n" +
+                "      <cInfo>@cInfo</cInfo>\n" +
+                "    </SC_SavePurchase>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        SC_SavePurchase = SC_SavePurchase.replace("@sysUser",SYS_USER);
+        SC_SavePurchase = SC_SavePurchase.replace("@sysPassword",SYS_PASSWORD);
+        SC_SavePurchase = SC_SavePurchase.replace("@userName",userName);
+        SC_SavePurchase = SC_SavePurchase.replace("@pInfo",pInfo);
+        SC_SavePurchase = SC_SavePurchase.replace("@cInfo",cInfo);
         return SC_SavePurchase;
     }
     /**保存配件销售单*/

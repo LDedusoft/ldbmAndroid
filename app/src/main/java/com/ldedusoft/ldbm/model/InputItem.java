@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.model;
 
 /**
+ * 表单项
  * Created by wangjianwei on 2016/6/28.
  */
 public class InputItem {
@@ -23,6 +24,26 @@ public class InputItem {
     private int intentRequestCode;
     /*跳转参数*/
     private String intentParam;
+    /*必填*/
+    private boolean required;
+    /*关联项*/
+    private String relationItem = "";
+
+    public String getRelationItem() {
+        return relationItem;
+    }
+
+    public void setRelationItem(String relationItem) {
+        this.relationItem = relationItem;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
 
     public String getIntentParam() {
         return intentParam;

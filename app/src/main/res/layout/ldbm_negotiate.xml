@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menuItemGroupBackground"
+    >
+<!--洽谈单-->
+    <LinearLayout
+        android:id="@+id/negotiate_top_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.ldedusoft.ldbm.component.customComp.FormToolBar
+            android:id="@+id/negotiate_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height">
+        </com.ldedusoft.ldbm.component.customComp.FormToolBar>
+
+    </LinearLayout>
+
+    <!--列表  -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/negotiate_top_bar_layout"
+        >
+        <ListView
+            android:id="@+id/negotiate_menu_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -9,29 +9,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-<!--预约维修-->
-    <TextView
-        android:id="@+id/appointment_text"
-        android:text="预约维修"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp" />
-        <TextView
-            android:id="@+id/apponintemnt_submit"
-            android:text="确定"
+        <LinearLayout
+            android:id="@+id/appointment_yy_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.ldedusoft.ldbm.component.customComp.FormToolBar
+                android:id="@+id/appointment_yy_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_bar_height">
+            </com.ldedusoft.ldbm.component.customComp.FormToolBar>
+
+        </LinearLayout>
+<!--预约维修-->
+
     <ListView
         android:id="@+id/appointment_YY_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:descendantFocusability="beforeDescendants"
         android:transcriptMode="normal"
-        android:layout_above="@id/apponintemnt_submit"
-        android:layout_below="@id/appointment_text"
+        android:layout_below="@id/appointment_yy_toolbar_layout"
         ></ListView>
 
     </RelativeLayout>

@@ -22,12 +22,12 @@ import android.widget.Toast;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.home.HomeActivity;
 import com.ldedusoft.ldbm.adapters.LoginSpinnerAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
 import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.ParseXML;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
 
 /**
  * Created by wangjianwei on 2016/6/22.
@@ -112,7 +112,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     password.findFocus();
                 }else {
                     ldbmLogin();
-                   // loginSuccess();
                 }
 
         }
@@ -181,6 +180,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
+        System.gc();
     }
     private void loginError(){
         closeProgressDialog();

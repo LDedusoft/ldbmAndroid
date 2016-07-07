@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--保存车辆信息-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/new_savecar_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.ldedusoft.ldbm.component.customComp.FormToolBar
+                android:id="@+id/new_savecar_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_bar_height">
+            </com.ldedusoft.ldbm.component.customComp.FormToolBar>
+
+        </LinearLayout>
+
+    <ListView
+        android:id="@+id/new_savecar_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:transcriptMode="normal"
+        android:layout_below="@id/new_savecar_toolbar_layout"
+        ></ListView>
+
+    </RelativeLayout>
+</LinearLayout>

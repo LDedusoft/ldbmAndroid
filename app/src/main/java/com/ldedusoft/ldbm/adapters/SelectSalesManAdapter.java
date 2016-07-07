@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by wangjianwei on 2016/6/29.
  */
-public class SalesManSelectAdapter extends ArrayAdapter<SalesMan> {
+public class SelectSalesManAdapter extends ArrayAdapter<SalesMan> {
     private int resourceId;
     private TextView idText;
     private TextView nameText;
@@ -25,7 +25,7 @@ public class SalesManSelectAdapter extends ArrayAdapter<SalesMan> {
     private Context mContext;
     private SalesMan salesMan;
 
-    public SalesManSelectAdapter(Context context, int textViewResourceId, List<SalesMan> objects) {
+    public SelectSalesManAdapter(Context context, int textViewResourceId, List<SalesMan> objects) {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
         mContext = context;

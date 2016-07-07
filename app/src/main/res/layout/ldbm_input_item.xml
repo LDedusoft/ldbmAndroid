@@ -3,56 +3,78 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!--0,文本不可修改 1输入框 2文本点击跳转 3日期 4单选 5复选 6输入框限定数字 7性别选择单选-->
     <LinearLayout
         android:id="@+id/input_item_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/input_list_item_height"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         >
+        <ImageView
+            android:id="@+id/input_item_pointImg"
+            android:layout_width="@dimen/input_list_item_point"
+            android:layout_height="@dimen/input_list_item_point"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/point"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:id="@+id/input_item_title"
+            android:text="标题:  "
+            android:gravity="left|center_vertical"
+            android:layout_width="@dimen/input_list_item_title_width"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            />
+        <!--输入框-->
+        <EditText
+            android:id="@+id/input_item_edittext"
+            android:layout_width="@dimen/input_list_item_textedit_width"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@null"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            android:textColorHint="@color/inputListItemHint"
+            />
+    <!--文本不可点击-->
+        <TextView
+            android:id="@+id/input_item_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            android:textColorHint="@color/inputListItemHint"
+            />
+    <!--文本 点击跳转-->
+            <TextView
+                android:id="@+id/input_item_clicktext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/input_list_item_text"
+                android:textColor="@color/inputListItemText"
+                android:textColorHint="@color/inputListItemHint"
+                />
+    <!--时间选择-->
+            <TextView
+                android:id="@+id/input_item_timetext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/input_list_item_text"
+                android:textColor="@color/inputListItemText"
+                android:textColorHint="@color/inputListItemHint"
+                />
 
-<TextView
-    android:id="@+id/input_item_title"
-    android:text="标题:  "
-    android:gravity="right|center_vertical"
-    android:layout_width="60dp"
-    android:layout_height="match_parent"
-    android:layout_marginRight="20dp"
-    />
-<!--输入框-->
-    <EditText
-        android:id="@+id/input_item_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
-<!--文本不可点击-->
-    <TextView
-        android:id="@+id/input_item_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
-<!--文本 点击跳转-->
-        <TextView
-            android:id="@+id/input_item_clicktext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            />
-<!--时间选择-->
-        <TextView
-            android:id="@+id/input_item_timetext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            />
-<!--复选框-->
-    <CheckBox
-        android:text="复选框"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
 
         <!--单选框-->
         <RadioButton
@@ -60,14 +82,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
+        <!--复选框-->
+        <CheckBox
+            android:id="@+id/input_item_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            android:textColorHint="@color/inputListItemHint"
+            />
         <!--输入框 限定数字-->
         <EditText
             android:id="@+id/input_item_edittext_number"
+            android:layout_width="@dimen/input_list_item_textedit_width"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:numeric="integer"
+            android:background="@null"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            android:textColorHint="@color/inputListItemHint"
+            />
+        <!--性别选择-->
+        <RadioGroup
+            android:id="@+id/input_item_sex_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:numeric="integer"
-            />
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/radio_male"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/input_list_item_text"
+                android:textColor="@color/inputListItemText"
+                android:textColorHint="@color/inputListItemHint"
+                android:text="男"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/radio_female"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/input_list_item_text"
+                android:textColor="@color/inputListItemText"
+                android:textColorHint="@color/inputListItemHint"
+                android:text="女"/>
+
+        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>

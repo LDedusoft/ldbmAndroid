@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
-import com.ldedusoft.ldbm.activity.LoginActivity;
 import com.ldedusoft.ldbm.adapters.MenuListAdapter;
 import com.ldedusoft.ldbm.component.widge.sideslip.DelSlideListView;
 import com.ldedusoft.ldbm.component.widge.sideslip.ListViewonSingleTapUpListenner;
@@ -24,6 +23,8 @@ import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by wangjianwei on 2016/6/22.
@@ -38,13 +39,15 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private SharedPreferences.Editor editor;
 
+    private boolean exitFlag;
+
     private ArrayList<MenuItem> menuDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_home);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-
+        exitFlag = false;
         initMenuListData();
         initListView();
     }
@@ -58,6 +61,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         menuListView.setDeleteListioner(this);
         menuListView.setSettopListioner(this);
         menuListView.setSingleTapUpListenner(this);
+        menuListView.setDividerHeight(1); //分割线粗为1
         adapter.setOnDeleteListioner(this);
         adapter.setmOnSettopListioner(this);
         adapter.setOnMenuTitleClickListioner(this);
@@ -93,9 +97,21 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
-        finish();
+        if(!exitFlag){
+            Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+            exitFlag = true; //设置为可以退出
+            //延时两秒后，设置为false。 两秒内有效
+            TimerTask task = new TimerTask(){
+                public void run(){
+                    exitFlag = false;
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, 2000);
+        }else{
+            finish();
+            BaseActivity.finishAll();
+        }
     }
 
     @Override
@@ -167,15 +183,6 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     }
 
-//    @Override
-//    public void OnMenuTitleClick(int ID) {
-//        Toast.makeText(this,"选中标题"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void OnMenuAddClick(int ID) {
-//        Toast.makeText(this,"添加"+menuDataList.get(ID).getMenuTitle(),Toast.LENGTH_SHORT).show();
-//    }
 
     @Override
     public void OnMenuShortcutClick(int ID) {
@@ -185,33 +192,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     private void initMenuListData(){
         InitParamUtil initParam = new InitParamUtil(this);
         if(SysProperty.getInstance().getAllMenuList() == null) {
-            initParam.initAllMenuList();
-            initParam.initHomeMenuList();
-            initParam.initRepairMenuList();
+            initParam.initAllMenuList();//初始化菜单项
+            initParam.initMenu();//初始化每页的菜单
         }else {
-            initParam.initHomeMenuList();
+            initParam.initHomeMenuList();//根据用户配置重新生成首页菜单
         }
         menuDataList = SysProperty.getInstance().getHomeMenuList();
-//
-//
-//        menuDataList = new ArrayList<MenuItem>();
-//        ArrayList<MenuItem> allMenuItemList = InitParamUtil.initMenuList();//初始化菜单
-//        SysProperty.getInstance().setHomeMenuList(allMenuItemList);//全部菜单项设置到系统属性
-//        String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
-//        String[] userItemsArray = this.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
-//        if(!TextUtils.isEmpty(userItemsStr)){
-//            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
-//        }
-//            for (String itemName : userItemsArray) {
-//                for (MenuItem itemObj : allMenuItemList ) {
-//                    if (itemName.equals(itemObj.getMenuTitle())) {
-//                        menuDataList.add(itemObj);
-//                        break;
-//                    }
-//                }
-//            }
-//
-//        menuDataList.add(null); //添加快捷功能按钮
+
 
 
 

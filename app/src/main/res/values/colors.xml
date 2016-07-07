@@ -14,8 +14,13 @@
     <color name="homeTitleTextWhite">#ffffff</color><!-- 首页标题文字颜色-->
     <color name="homeTitleText2">#a4ffffff</color><!-- 首页标题文字颜色-->
     <color name="menuText">#cccccc</color><!--菜单文字颜色-->
+    <color name="menuListItemText">#474753</color><!--菜单列表文字颜色-->
     <color name="menuDelete">#ff0000</color><!--菜单移除按钮背景色-->
     <color name="menuTop">#c6c6c6</color><!--菜单置顶按钮背景色-->
-    <color name="toopBarBackground">#1a5075</color>
-
+    <color name="topBarBackground">#1a5075</color>
+    <color name="inputListItemText">#797988</color><!--输入表单文字颜色-->
+    <color name="inputListItemHint">#b8bfce</color><!--输入表单提示文字颜色-->
+    <color name="inputListItemCheckbox">#50cb3b</color><!--输入表单复选框颜色-->
+    <color name="welcomePassBtn">#a5cccccc</color><!--欢迎页面登录按钮背景色-->
+    <color name="menuItemGroupBackground">#eaedf0</color><!--菜单栏分组背景色-->
 </resources>

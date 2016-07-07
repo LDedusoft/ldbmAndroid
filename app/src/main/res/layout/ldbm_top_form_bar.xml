@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="@dimen/top_bar_height"
+    android:background="@color/topBarBackground"
+    >
+
+    <RelativeLayout
+        android:id="@+id/form_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:orientation="horizontal"
+        android:background="@color/topBarBackground"
+
+        >
+        <LinearLayout
+            android:id="@+id/form_tool_bar_back_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/top_bar_height"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            >
+        <TextView
+            android:id="@+id/form_tool_bar_back"
+            android:layout_width="@dimen/inputList_topBar_imgWidth"
+            android:layout_height="@dimen/inputList_topBar_imgHeight"
+            android:background="@drawable/top_bar_back"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:text="@string/form_toolbar_back"
+            android:id="@+id/form_tool_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/inputList_topBar_textViewHeight"
+            android:textSize="@dimen/inputList_topBar_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/homeTitleTextWhite"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                android:id="@+id/form_tool_bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/inputList_topBar_text"
+                android:gravity="center_vertical"
+                android:textColor="@color/homeTitleTextWhite"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:id="@+id/form_tool_bar_save"
+                android:text="@string/form_toolbar_save"
+                android:layout_width="@dimen/top_bar_right_button_width"
+                android:layout_height="@dimen/top_bar_height"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/inputList_topBar_text"
+                android:textColor="@color/homeTitleTextWhite"
+                android:gravity="right|center_vertical"
+                android:paddingRight="10dp"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

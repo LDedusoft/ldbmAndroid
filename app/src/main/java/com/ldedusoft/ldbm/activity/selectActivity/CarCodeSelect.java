@@ -8,9 +8,9 @@ import android.widget.ListView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
-import com.ldedusoft.ldbm.adapters.CarCodeSelectAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
-import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.adapters.SelectCarCodeAdapter;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -19,12 +19,13 @@ import com.ldedusoft.ldbm.util.ParseXML;
 import java.util.ArrayList;
 
 /**
+ * 车辆信息， 已废弃，使用 carCodeQuery
  * Created by wangjianwei on 2016/6/29.
  */
 public class CarCodeSelect extends BaseActivity {
     private ArrayList<CarCode> listData;
     private ListView carCodeListView;
-    private CarCodeSelectAdapter adapter;
+    private SelectCarCodeAdapter adapter;
     private int inputListPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,9 @@ public class CarCodeSelect extends BaseActivity {
 
         carCodeListView = (ListView)findViewById(R.id.selected_carcode_list);
         listData = new ArrayList<CarCode>();
-        adapter = new CarCodeSelectAdapter(this,R.layout.ldbm_selected_carcode_item,listData);
+        adapter = new SelectCarCodeAdapter(this,R.layout.ldbm_selected_carcode_item,listData);
         carCodeListView.setAdapter(adapter);
+        carCodeListView.setDividerHeight(1); //分割线粗为1
         carCodeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

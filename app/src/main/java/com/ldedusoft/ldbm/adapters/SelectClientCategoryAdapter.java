@@ -8,22 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
-import com.ldedusoft.ldbm.model.CarCode;
+import com.ldedusoft.ldbm.model.ClientCategory;
 
 import java.util.List;
 
 /**
  * Created by wangjianwei on 2016/6/29.
  */
-public class CarCodeSelectAdapter extends ArrayAdapter<CarCode> {
+public class SelectClientCategoryAdapter extends ArrayAdapter<ClientCategory> {
     private int resourceId;
-    private TextView codeText;
-    private TextView brandText;
-    private TextView nameText;
+    private TextView NameText;
+    private TextView idText;
     private Context mContext;
-    private CarCode carCode;
+    private ClientCategory client;
 
-    public CarCodeSelectAdapter(Context context,int textViewResourceId, List<CarCode> objects) {
+    public SelectClientCategoryAdapter(Context context, int textViewResourceId, List<ClientCategory> objects) {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
         mContext = context;
@@ -31,7 +30,7 @@ public class CarCodeSelectAdapter extends ArrayAdapter<CarCode> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        carCode = getItem(position);
+        client = getItem(position);
         View view;
         if(convertView==null){
         view = LayoutInflater.from(getContext()).inflate(resourceId, null);
@@ -39,13 +38,11 @@ public class CarCodeSelectAdapter extends ArrayAdapter<CarCode> {
             view = convertView;
         }
 
-        if(carCode!=null){
-            nameText = (TextView)view.findViewById(R.id.carcode_name);
-            brandText = (TextView)view.findViewById(R.id.carcode_brand);
-            codeText = (TextView)view.findViewById(R.id.carcode_code);
-            nameText.setText(carCode.getName());
-            brandText.setText(carCode.getBrand());
-            codeText.setText(carCode.getCarCode());
+        if(client!=null){
+            idText = (TextView)view.findViewById(R.id.client_category_id);
+            NameText =  (TextView)view.findViewById(R.id.client_category_name);
+            NameText.setText(client.getCategoryName());
+            idText.setText(String.valueOf(client.getCategoryId()));
         }
         return view;
     }

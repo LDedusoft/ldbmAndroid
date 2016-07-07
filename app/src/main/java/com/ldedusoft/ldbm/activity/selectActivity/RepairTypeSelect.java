@@ -9,8 +9,8 @@ import android.widget.ListView;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.SelectRepairTypeAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
-import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -42,6 +42,7 @@ public class RepairTypeSelect extends BaseActivity {
         listData = new ArrayList<RepaireType>();
         adapter = new SelectRepairTypeAdapter(this,R.layout.ldbm_selected_repairtype_item,listData);
         selectListView.setAdapter(adapter);
+        selectListView.setDividerHeight(1); //分割线粗为1
         selectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -64,7 +64,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
         }else if (activityName.indexOf("RepairActivity")!=-1){
             repairBtn.setBackgroundResource(R.drawable.bottom_bar_weixiu_selected);
             repairTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
-        }else if (activityName.indexOf("WholecarActivity")!=-1){
+        }else if (activityName.indexOf("WholecarActivity")!=-1||activityName.indexOf("NegotiateActivity")!=-1){
             wholecarBtn.setBackgroundResource(R.drawable.bottom_bar_zhengche_selected);
             wholecarTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }else if (activityName.indexOf("PartActivity")!=-1){

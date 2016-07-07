@@ -16,4 +16,26 @@
     <string name="menu_item_delete">移除</string>
     <string name="save_success">保存成功</string>
     <string name="save_fail">保存失败</string>
+    <string name="save_fail_carcode">车牌号已存在</string>
+    <string name="appointment_yy">预约维修</string>
+    <string name="appointment_yy_query">预约维修查询</string>
+    <string name="progresslist_query">维修进度查询</string>
+    <string name="carcode_query">车辆信息查询</string>
+    <string name="new_carcode">添加车辆信息</string>
+    <string name="appointment_wx">维修接待</string>
+    <string name="appointment_wx_query">维修接待查询</string>
+    <string name="client_query">客户信息查询</string>
+    <string name="new_client">添加客户信息</string>
+    <string name="form_toolbar_back">返回</string>
+    <string name="form_toolbar_save">保存</string>
+    <string name="repair_title">维修管理</string>
+    <string name="part_title">配件管理</string>
+    <string name="wholecar_title">整车管理</string>
+    <string name="report_title">报表管理</string>
+    <string name="negotiate_title">洽谈单</string>
+    <string name="negotiate_person_title">个人洽谈单</string>
+    <string name="negotiate_company_title">公司洽谈单</string>
+    <string name="save_car_purchase_title">整车销售单</string>
+
+
 </resources>

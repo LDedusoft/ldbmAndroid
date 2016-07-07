@@ -27,6 +27,17 @@ public class SysProperty {
     /*整车页面菜单*/
     private ArrayList<MenuItem> carMenuList;
 
+    /*洽谈页面菜单*/
+    private ArrayList<MenuItem> negotiateMenuList;
+
+    public ArrayList<MenuItem> getNegotiateMenuList() {
+        return negotiateMenuList;
+    }
+
+    public void setNegotiateMenuList(ArrayList<MenuItem> negotiateMenuList) {
+        this.negotiateMenuList = negotiateMenuList;
+    }
+
     public ArrayList<MenuItem> getAllMenuList() {
         return AllMenuList;
     }

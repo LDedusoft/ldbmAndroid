@@ -15,10 +15,10 @@ import java.util.List;
 /**
  * Created by wangjianwei on 2016/6/30.
  */
-public class QueryAppointmentAdapter extends ArrayAdapter<Appointment> {
+public class QueryAppointmentYYAdapter extends ArrayAdapter<Appointment> {
     private int resourceId;
     private Appointment appointment;
-    public QueryAppointmentAdapter(Context context, int textViewResourceId, List<Appointment> objects) {
+    public QueryAppointmentYYAdapter(Context context, int textViewResourceId, List<Appointment> objects) {
         super(context,textViewResourceId,objects);
         resourceId = textViewResourceId;
     }

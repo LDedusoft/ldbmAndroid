@@ -8,9 +8,9 @@ import android.widget.ListView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
-import com.ldedusoft.ldbm.adapters.SalesManSelectAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
-import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.adapters.SelectSalesManAdapter;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import com.ldedusoft.ldbm.model.SalesMan;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class SalesmanSelect extends BaseActivity {
     private ArrayList<SalesMan> listData;
     private ListView selectListView;
-    private SalesManSelectAdapter adapter;
+    private SelectSalesManAdapter adapter;
     private int inputListPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,9 @@ public class SalesmanSelect extends BaseActivity {
 
         selectListView = (ListView)findViewById(R.id.selected_salesman_list);
         listData = new ArrayList<SalesMan>();
-        adapter = new SalesManSelectAdapter(this,R.layout.ldbm_selected_salesman_item,listData);
+        adapter = new SelectSalesManAdapter(this,R.layout.ldbm_selected_salesman_item,listData);
         selectListView.setAdapter(adapter);
+        selectListView.setDividerHeight(1); //分割线粗为1
         selectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

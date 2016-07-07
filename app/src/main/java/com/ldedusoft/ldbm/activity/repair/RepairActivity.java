@@ -39,13 +39,14 @@ public class RepairActivity extends BaseActivity implements OnMenuTitleClickList
 
     private void initTopBar(){
         repairTopBar = (TopBar)findViewById(R.id.repair_top_bar);
-        repairTopBar.setTitle("维修");
+        repairTopBar.setTitle(getString(R.string.repair_title));
     }
     private void initRepairMenuList(){
         menuDataList = SysProperty.getInstance().getRepairMenuList();//从系统属性中获取菜单列表。登录时已初始化
         repairListView = (ListView)findViewById(R.id.repair_menu_list);
         adapter = new MenuListAdapter(this,R.layout.ldbm_menu_item,menuDataList);
         repairListView.setAdapter(adapter);
+        repairListView.setDividerHeight(1); //分割线粗为1
         adapter.setOnMenuTitleClickListioner(this);
         adapter.setOnMenuAddClickListioner(this);
 

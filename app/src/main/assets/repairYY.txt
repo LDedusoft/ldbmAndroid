@@ -7,6 +7,7 @@
 "hint":"",
 "intentPath":"",
 "intentParam":"",
+"required":true,
 "intentRequestCode":0
 },
 {"itemId":"CarCode",
@@ -15,8 +16,9 @@
 "defaultValue":"",
 "value":"",
 "hint":"请选择",
-"intentPath":"activity.selectActivity.CarCodeSelect",
+"intentPath":"activity.queryActivity.CarCodeQuery",
 "intentParam":"",
+"required":true,
 "intentRequestCode":1
 },
 {"itemId":"RepairType",
@@ -27,6 +29,7 @@
 "hint":"请选择",
 "intentPath":"activity.selectActivity.RepairTypeSelect",
 "intentParam":"",
+"required":true,
 "intentRequestCode":2
 },
 {"itemId":"BusinessType",
@@ -37,6 +40,7 @@
 "hint":"请选择",
 "intentPath":"activity.selectActivity.TrafficClassSelect",
 "intentParam":"",
+"required":true,
 "intentRequestCode":3
 },
 {"itemId":"yyTime",
@@ -47,6 +51,7 @@
 "hint":"请选择",
 "intentPath":"",
 "intentParam":"",
+"required":true,
 "intentRequestCode":0
 },
 {"itemId":"Salesman",
@@ -57,6 +62,7 @@
 "hint":"请选择",
 "intentPath":"activity.selectActivity.SalesmanSelect",
 "intentParam":"",
+"required":true,
 "intentRequestCode":4
 },
 {"itemId":"dxTime",
@@ -67,6 +73,7 @@
 "hint":"输入数字",
 "intentPath":"",
 "intentParam":"",
+"required":true,
 "intentRequestCode":0
 }
 ]

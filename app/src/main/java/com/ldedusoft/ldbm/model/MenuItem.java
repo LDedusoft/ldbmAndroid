@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.model;
 
 /**
+ * 菜单项
  * Created by wangjianwei on 2016/6/25.
  */
 public class MenuItem {
@@ -12,13 +13,32 @@ public class MenuItem {
     private int iconId;
     /*是否是首页菜单，可以删除和置顶*/
     private boolean isHomeMenu = false;
-
     /*菜单值（用于向下传递）*/
     private String value;
     /*标题点击跳转路径*/
     private String titleIntentPath;
     /*添加按钮跳转页面路径*/
     private String createIntentPath;
+    /*是否是分组栏*/
+    private boolean isGroup = false;
+    /*分组标题*/
+    private String groupTitle = "";
+
+    public boolean isGroup() {
+        return isGroup;
+    }
+
+    public void setIsGroup(boolean isGroup) {
+        this.isGroup = isGroup;
+    }
+
+    public String getGroupTitle() {
+        return groupTitle;
+    }
+
+    public void setGroupTitle(String groupTitle) {
+        this.groupTitle = groupTitle;
+    }
 
     /*是否可以新建*/
     private boolean allowCreate;

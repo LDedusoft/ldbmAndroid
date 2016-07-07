@@ -3,17 +3,17 @@ package com.ldedusoft.ldbm.activity.repair.form;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
-import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.component.customComp.FormToolBar;
+import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
 import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
@@ -23,6 +23,8 @@ import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 import com.ldedusoft.ldbm.util.ParseXML;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 
 import org.json.JSONObject;
 
@@ -38,15 +40,27 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     private ArrayList<InputItem> listData;
     private ListView inputListView;
     private InputListAdapter adapter;
-    private TextView submitText;
+    private FormToolBar formToolBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_repair_appointment_yy);
+        formToolBar = (FormToolBar)findViewById(R.id.appointment_yy_toolbar);
         String value =  getIntent().getStringExtra("param");//菜单初始化时定义了type 为：YY
         listData = InitParamUtil.getInstance(this).initRP_ReceptionNew_YY();
-        submitText = (TextView)findViewById(R.id.apponintemnt_submit);
-        submitText.setOnClickListener(this);
+        formToolBar.setTitle(this.getResources().getString(R.string.appointment_yy));
+        formToolBar.setFormToolBarListener(new FormToolBarListener() {
+            @Override
+            public void OnSaveClick() {
+                inputListView.clearFocus();//清除列表的焦点
+                saveAppointment();
+            }
+
+            @Override
+            public void OnBackClick() {
+                finish();
+            }
+        });
         getData();
         initList();
     }
@@ -62,6 +76,7 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
         inputListView = (ListView)findViewById(R.id.appointment_YY_list);
         adapter = new InputListAdapter(this,R.layout.ldbm_input_item,listData);
         inputListView.setAdapter(adapter);
+        inputListView.setDividerHeight(1); //分割线粗为1
     }
 
     private void getData(){
@@ -74,7 +89,6 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //   TextView tv = (TextView) findViewById(R.id.appointment_text);
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.RP_ReceptionNewResult);
                         updateListView(result);
 
@@ -155,14 +169,6 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.apponintemnt_submit:
-                inputListView.clearFocus();//清除列表的焦点
-                saveAppointment();
-                break;
-            default:
-                break;
-        }
     }
 
     /**
@@ -172,6 +178,10 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
         try {
             JSONObject dataJsonObj = new JSONObject();
             for (InputItem item : listData) {
+                if(item.isRequired()&&TextUtils.isEmpty(item.getValue())){ //提交数据检查
+                    Toast.makeText(this,"请填写"+item.getItemTitle(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 dataJsonObj.put(item.getItemId(), item.getValue());
             }
             String number = dataJsonObj.getString("Number");
@@ -200,7 +210,6 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
-
                         TimerTask task = new TimerTask(){
                          public void run(){
                              finish();

@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.adapters;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,93 +50,107 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
 
         final View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         if(menuItem!=null) {
-            ImageView menuItemIcon = (ImageView) view.findViewById(R.id.menu_item_icon);
-            TextView menuItemTitle = (TextView) view.findViewById(R.id.menu_item_title);
-            TextView menuItemDescribe = (TextView) view.findViewById(R.id.menu_item_describe);
-            LinearLayout menuItemCreateLayout = (LinearLayout) view.findViewById(R.id.menu_item_createLayout);
-            TextView menuItemCreateButton = (TextView) view.findViewById(R.id.menu_item_createButton);
-            LinearLayout menu_item_title_layout = (LinearLayout)view.findViewById(R.id.menu_item_title_layout);
-            LinearLayout menuBody = (LinearLayout)view.findViewById(R.id.menu_item_body);
-            TextView deleteAction = (TextView)view.findViewById(R.id.delete_action);
-            TextView settopAction = (TextView)view.findViewById(R.id.top_action);
-            LinearLayout actionLayout = (LinearLayout)view.findViewById(R.id.top_del_layout);
+            if(menuItem.isGroup()){
+                LinearLayout menuItemBody = (LinearLayout)view.findViewById(R.id.menu_item_body);
+                menuItemBody.setVisibility(View.GONE);
+                //显示添加快捷功能按钮
+                LinearLayout menuItemGroup = (LinearLayout)view.findViewById(R.id.menu_item_group_layout);
+                menuItemGroup.setVisibility(View.VISIBLE);
+                TextView deleteAction = (TextView)view.findViewById(R.id.delete_action);
+                deleteAction.setVisibility(View.GONE);
+                TextView settopAction = (TextView)view.findViewById(R.id.top_action);
+                settopAction.setVisibility(View.GONE);
+                TextView groupTitle = (TextView)view.findViewById(R.id.menu_item_group_title);
+                groupTitle.setText(menuItem.getGroupTitle());
+            }else {
 
-            //如果描述为空则隐藏此控件
-            if(TextUtils.isEmpty(menuItem.getMenuDescribe()) ){
-                menuItemDescribe.setVisibility(View.GONE);
-            }
+                ImageView menuItemIcon = (ImageView) view.findViewById(R.id.menu_item_icon);
+                TextView menuItemTitle = (TextView) view.findViewById(R.id.menu_item_title);
+                TextView menuItemDescribe = (TextView) view.findViewById(R.id.menu_item_describe);
+                LinearLayout menuItemCreateLayout = (LinearLayout) view.findViewById(R.id.menu_item_createLayout);
+                TextView menuItemCreateButton = (TextView) view.findViewById(R.id.menu_item_createButton);
+                LinearLayout menu_item_title_layout = (LinearLayout) view.findViewById(R.id.menu_item_title_layout);
+                LinearLayout menuBody = (LinearLayout) view.findViewById(R.id.menu_item_body);
+                TextView deleteAction = (TextView) view.findViewById(R.id.delete_action);
+                TextView settopAction = (TextView) view.findViewById(R.id.top_action);
+                LinearLayout actionLayout = (LinearLayout) view.findViewById(R.id.top_del_layout);
 
-            deleteAction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnDeleteListioner != null)
-                        mOnDeleteListioner.onDelete(position);
+                //如果描述为空则隐藏此控件
+                if (TextUtils.isEmpty(menuItem.getMenuDescribe())) {
+                    menuItemDescribe.setVisibility(View.GONE);
                 }
-            });
 
-            settopAction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnSettopListioner != null) {
-                        mOnSettopListioner.onSettop(position);
-                    }
-                }
-            });
-
-
-            if(menuItem.isHomeMenu()) { //如果是首页菜单，监听长按事件
-                //标题区长按事件
-                menu_item_title_layout.setOnLongClickListener(new View.OnLongClickListener() {
+                deleteAction.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onLongClick(View v) {
-                        if (tempLayout != null) {
-                            tempLayout.setVisibility(View.GONE);
-                        }
-                        LinearLayout actionLayout = (LinearLayout) v.findViewById(R.id.top_del_layout);
-                        actionLayout.setVisibility(View.VISIBLE);
-                        tempLayout = actionLayout;
-                        return true;
+                    public void onClick(View v) {
+                        if (mOnDeleteListioner != null)
+                            mOnDeleteListioner.onDelete(position);
                     }
                 });
-            }
+
+                settopAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mOnSettopListioner != null) {
+                            mOnSettopListioner.onSettop(position);
+                        }
+                    }
+                });
+
+//                if (menuItem.isHomeMenu()) { //如果是首页菜单，监听长按事件  无效改用下面的方法判断
+                String activityName = this.getContext().getClass().getName();
+                if ("com.ldedusoft.ldbm.activity.home.HomeActivity".equals(activityName)) {
+                    //标题区长按事件
+                    menu_item_title_layout.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            if (tempLayout != null) {
+                                tempLayout.setVisibility(View.GONE);
+                            }
+                            LinearLayout actionLayout = (LinearLayout) v.findViewById(R.id.top_del_layout);
+                            actionLayout.setVisibility(View.VISIBLE);
+                            tempLayout = actionLayout;
+                            return true;
+                        }
+                    });
+                }
 
 
-            //标题区域点击监听
+                //标题区域点击监听
             menu_item_title_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(tempLayout!=null){
+                    if (tempLayout != null) {
                         tempLayout.setVisibility(View.GONE);
                     }
-                    if(mOnMenuTitleClickListioner != null){
+                    if (mOnMenuTitleClickListioner != null) {
                         mOnMenuTitleClickListioner.OnMenuTitleClick(position);
                     }
-                }
-            });
+                    }
+                });
 
-            //新建按钮点击监听
+                //新建按钮点击监听
             menuItemCreateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(tempLayout!=null){
+                    if (tempLayout != null) {
                         tempLayout.setVisibility(View.GONE);
                     }
-                    if(mOnMenuAddClickListioner!=null){
+                    if (mOnMenuAddClickListioner != null) {
                         mOnMenuAddClickListioner.OnMenuAddClick(position);
                     }
-                }
-            });
-
-
+                    }
+                });
 
 
             menuItemIcon.setImageResource(menuItem.getIconId());
             menuItemTitle.setText(menuItem.getMenuTitle());
             menuItemDescribe.setText(menuItem.getMenuDescribe());
-            if (menuItem.isAllowCreate()) {
-                menuItemCreateLayout.setVisibility(View.VISIBLE);
-            } else {
-                menuItemCreateLayout.setVisibility(View.GONE);
+                if (menuItem.isAllowCreate()) {
+                    menuItemCreateLayout.setVisibility(View.VISIBLE);
+                } else {
+                    menuItemCreateLayout.setVisibility(View.GONE);
+                }
             }
 
         }else {

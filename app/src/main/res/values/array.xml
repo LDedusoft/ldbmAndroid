@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--登录下拉列表-->
     <string-array name="loginType_array">
         <item>账套1</item>
         <item>账套2</item>
         <item>账套3</item>
         <item>账套4</item>
     </string-array>
+    <!--菜单配置-->
     <string-array name="home_menu_item">
-        <item>预约维修</item>
-        <item>维修接待</item>
-        <item>库存查询1</item>
-        <item>库存查询2</item>
-        <item>库存查询4</item>
-    </string-array>
-    <string-array name="repair_menu_item">
         <item>预约维修</item>
         <item>维修接待</item>
         <item>预约维修查询</item>
         <item>维修接待查询</item>
+        <item>维修进度查询</item>
+        <item>车辆信息查询</item>
+        <item>客户信息查询</item>
     </string-array>
+    <string-array name="repair_menu_item">
+        <item>服务group</item>
+        <item>预约维修</item>
+        <item>维修接待</item>
+        <item>查询group</item>
+        <item>预约维修查询</item>
+        <item>维修接待查询</item>
+        <item>维修进度查询</item>
+        <item>车辆信息查询</item>
+        <item>客户信息查询</item>
+    </string-array>
+    <string-array name="car_menu_item">
+        <item>新建group</item>
+        <item>洽谈单</item>
+        <item>销售单</item>
+        <item>查询group</item>
+        <item>在库车辆查询</item>
+        <item>计算group</item>
+        <item>车险计算</item>
+        <item>车贷计算</item>
+    </string-array>
+    <string-array name="negotiate_menu_item">
+        <item>新建group</item>
+        <item>个人洽谈</item>
+        <item>公司洽谈</item>
+    </string-array>
+
+
+    <!--选择列表配置-->
     <string-array name="oil_amount">
         <item>满</item>
         <item>3/4</item>
@@ -33,5 +60,32 @@
         <item>93</item>
         <item>92</item>
         <item>90</item>
+    </string-array>
+    <string-array name="insurance_com">
+        <item>平安车险</item>
+        <item>人保车险</item>
+        <item>太平洋车险</item>
+        <item>阳光车险</item>
+        <item>安邦车险</item>
+    </string-array>
+    <string-array name="client_type"><!--个人洽谈  客户类型-->
+        <item>私人</item>
+        <item>公务</item>
+        <item>商用</item>
+    </string-array>
+    <string-array name="buying_plan"><!--个人洽谈  购车方案-->
+        <item>新购</item>
+        <item>二手车</item>
+        <item>增购</item>
+    </string-array>
+    <string-array name="buying_time"><!--个人洽谈  预购时间-->
+        <item>一个月内</item>
+        <item>三个月内</item>
+        <item>六个月内</item>
+    </string-array>
+
+    <string-array name="input_sex"><!--性别-->
+        <item>男</item>
+        <item>女</item>
     </string-array>
 </resources>

@@ -3,6 +3,7 @@ package com.ldedusoft.ldbm.model;
 import java.io.Serializable;
 
 /**
+ * 业务员
  * Created by wangjianwei on 2016/6/30.
  */
 public class SalesMan implements Serializable {

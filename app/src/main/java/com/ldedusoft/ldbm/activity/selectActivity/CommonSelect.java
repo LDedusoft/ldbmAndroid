@@ -13,7 +13,7 @@ import com.ldedusoft.ldbm.adapters.SelectCommonAdapter;
 import java.util.ArrayList;
 
 /**
- * 选择经手人页面
+ * 通用选择页面
  * Created by wangjianwei on 2016/6/29.
  */
 public class CommonSelect extends BaseActivity {
@@ -36,6 +36,7 @@ public class CommonSelect extends BaseActivity {
         listData = new ArrayList<String>();
         adapter = new SelectCommonAdapter(this,R.layout.ldbm_selected_common_item,listData);
         selectListView.setAdapter(adapter);
+        selectListView.setDividerHeight(1); //分割线粗为1
         selectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

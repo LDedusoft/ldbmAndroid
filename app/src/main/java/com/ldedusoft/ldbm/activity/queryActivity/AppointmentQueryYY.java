@@ -7,9 +7,11 @@ import android.widget.ListView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
-import com.ldedusoft.ldbm.adapters.QueryAppointmentAdapter;
-import com.ldedusoft.ldbm.interfacekits.InterfaceParam;
-import com.ldedusoft.ldbm.interfacekits.InterfaceResault;
+import com.ldedusoft.ldbm.adapters.QueryAppointmentYYAdapter;
+import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
+import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
+import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -24,12 +26,26 @@ import java.util.ArrayList;
 public class AppointmentQueryYY extends BaseActivity {
     private ArrayList<Appointment> listData; //!!
     private ListView selectListView;
-    private QueryAppointmentAdapter adapter; //!!
+    private QueryAppointmentYYAdapter adapter; //!!
     private int inputListPosition;
+    private QueryToolBar queryToolBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_query_appointment);//!!
+        queryToolBar = (QueryToolBar)findViewById(R.id.query_appointment_toolbar);
+        queryToolBar.setTitle(this.getResources().getString(R.string.appointment_yy_query));
+        queryToolBar.setQueryToolBarListener(new QueryToolBarListener() {
+            @Override
+            public void OnAddClick() {
+
+            }
+
+            @Override
+            public void OnBackClick() {
+                finish();
+            }
+        });
         inputListPosition = getIntent().getIntExtra("position",-1);//接收参数
         initListView();
         initData();
@@ -39,8 +55,9 @@ public class AppointmentQueryYY extends BaseActivity {
 
         selectListView = (ListView)findViewById(R.id.query_appointment_list); //!!
         listData = new ArrayList<Appointment>();//!!
-        adapter = new QueryAppointmentAdapter(this,R.layout.ldbm_query_appointment_item,listData);//!!
+        adapter = new QueryAppointmentYYAdapter(this,R.layout.ldbm_query_appointment_item,listData);//!!
         selectListView.setAdapter(adapter);
+        selectListView.setDividerHeight(1); //分割线粗为1
         selectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

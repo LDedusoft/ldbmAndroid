@@ -12,6 +12,7 @@ import com.ldedusoft.ldbm.R;
 import java.util.List;
 
 /**
+ * 通用简单类型列表
  * Created by wangjianwei on 2016/6/29.
  */
 public class SelectCommonAdapter extends ArrayAdapter<String> {
