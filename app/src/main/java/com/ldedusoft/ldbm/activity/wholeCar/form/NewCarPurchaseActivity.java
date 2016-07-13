@@ -13,9 +13,12 @@ import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
+import com.ldedusoft.ldbm.model.CarColor;
 import com.ldedusoft.ldbm.model.CarType;
+import com.ldedusoft.ldbm.model.CarWarehouse;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.SalesMan;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -31,7 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 保存个人洽谈
+ * 保存整车销售
  * Created by wangjianwei on 2016/6/28.
  */
 public class NewCarPurchaseActivity extends BaseActivity implements View.OnClickListener{
@@ -73,8 +76,9 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     }
 
 
-    private void updateListItem(String data,int position){
+    private void updateListItem(String dispValue,String data,int position){
         InputItem item = listData.get(position);
+        item.setDispValue(dispValue);
         item.setValue(data);
         listData.set(position, item);
         adapter.notifyDataSetChanged();
@@ -93,14 +97,38 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                     Client client = new Client();
                     client = (Client)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(client.getBianHao(), inputListPosition);
+                    updateListItem(client.getBianHao(),client.getBianHao(), inputListPosition);
                 }
                 break;
-            case 2: //车型选择
+            case 2: //经手人
+                if(resultCode == RESULT_OK){
+                    SalesMan salesMan = new SalesMan();
+                    salesMan = (SalesMan)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition", -1);
+                    updateListItem(salesMan.getName(),salesMan.getName(), inputListPosition);
+                }
+                break;
+            case 3: //车型选择
                 if(resultCode == RESULT_OK){
                     CarType carType = (CarType)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(String.valueOf(carType.getID()), inputListPosition);
+                    updateListItem(carType.getType(),String.valueOf(carType.getID()), inputListPosition);
+                }
+                break;
+            case 4: //仓库
+                if(resultCode == RESULT_OK){
+                    CarWarehouse carWarehouse = new CarWarehouse();
+                    carWarehouse = (CarWarehouse)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition", -1);
+                    updateListItem(carWarehouse.getName(),carWarehouse.getCode(), inputListPosition); //!!!仓库传值，未确定
+                }
+                break;
+            case 5: //颜色
+                if(resultCode == RESULT_OK){
+                    CarColor carColor = new CarColor();
+                    carColor = (CarColor)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition", -1);
+                    updateListItem(carColor.getColor(),carColor.getColor(), inputListPosition); //!!
                 }
                 break;
             default:
@@ -117,6 +145,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
         try {
             JSONObject carJsonObj = new JSONObject();
             JSONObject personJsonObj = new JSONObject();
+            String number = "";
             for (InputItem item : listData) {
                 if(item.isRequired()&&TextUtils.isEmpty(item.getValue())){ //提交数据检查
                     Toast.makeText(this,"请填写"+item.getItemTitle(),Toast.LENGTH_SHORT).show();
@@ -126,6 +155,9 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                 if("ClientId".equals(item.getItemId())||"SaleMan".equals(item.getItemId())){
                     personJsonObj.put(item.getItemId(), item.getValue());
                 }
+                if("Number".equals(item.getItemId())){
+                    number = item.getValue();
+                }
                 carJsonObj.put(item.getItemId(), item.getValue());
             }
 
@@ -133,7 +165,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
             String pInfo = personJsonObj.toString();
             Log.d("保存整车销售单信息cInfo ：", cInfo);
             Log.d("保存整车销售单信息pInfo ：", pInfo);
-           // saveHandler(cInfo,pInfo);
+            saveHandler(number,cInfo,pInfo);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -141,12 +173,13 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
 
     /**
      * 保存信息到服务器
+     * @param number
      * @param cInfo
      * @param pInfo
      */
-    private void saveHandler(String cInfo,String pInfo){
+    private void saveHandler(String number,String cInfo,String pInfo){
         String serverPath = InterfaceParam.SERVER_PATH;
-        String paramXml = InterfaceParam.getInstance().getSC_SavePurchase(UserProperty.getInstance().getUserName(),pInfo,cInfo);//!!
+        String paramXml = InterfaceParam.getInstance().getSC_SavePurchase(number,pInfo,cInfo);//!!
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
@@ -203,6 +236,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("新建整车销售返回值：",response);
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.SC_NewPurchaseResult);
                         updateListView(result);
 

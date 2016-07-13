@@ -46,7 +46,7 @@
 },
 {"itemId":"Phone",
 "itemTitle":"手机",
-"inputType":1,
+"inputType":6,
 "defaultValue":"",
 "value":"",
 "hint":"请输入",

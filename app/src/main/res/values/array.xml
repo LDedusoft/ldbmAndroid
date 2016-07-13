@@ -11,6 +11,7 @@
     <string-array name="home_menu_item">
         <item>预约维修</item>
         <item>维修接待</item>
+        <item>配件销售单</item>
         <item>预约维修查询</item>
         <item>维修接待查询</item>
         <item>维修进度查询</item>
@@ -43,7 +44,15 @@
         <item>个人洽谈</item>
         <item>公司洽谈</item>
     </string-array>
-
+    <string-array name="part_menu_item">
+        <item>新建group</item>
+        <item>配件销售单</item>
+        <item>配件采购单</item>
+        <item>新建配件单</item>
+        <item>查询group</item>
+        <item>配件库存</item>
+        <item>采购计划</item>
+    </string-array>
 
     <!--选择列表配置-->
     <string-array name="oil_amount">

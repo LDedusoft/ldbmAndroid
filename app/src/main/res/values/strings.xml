@@ -12,6 +12,9 @@
     <string name="bottom_bar_baobiao">报表</string>
     <string name="home_view_search"> 搜索</string>
     <string name="menu_item_addShortcut">添加快捷功能</string>
+    <string name="menu_item_addFix">添加配件</string>
+    <string name="menu_item_addFix_hint">请选择配件</string>
+
     <string name="menu_item_top">置顶</string>
     <string name="menu_item_delete">移除</string>
     <string name="save_success">保存成功</string>
@@ -20,7 +23,9 @@
     <string name="appointment_yy">预约维修</string>
     <string name="appointment_yy_query">预约维修查询</string>
     <string name="progresslist_query">维修进度查询</string>
+    <string name="carlist_query">在库车辆查询</string>
     <string name="carcode_query">车辆信息查询</string>
+    <string name="invoice_select">发票信息</string>
     <string name="new_carcode">添加车辆信息</string>
     <string name="appointment_wx">维修接待</string>
     <string name="appointment_wx_query">维修接待查询</string>
@@ -36,6 +41,7 @@
     <string name="negotiate_person_title">个人洽谈单</string>
     <string name="negotiate_company_title">公司洽谈单</string>
     <string name="save_car_purchase_title">整车销售单</string>
+    <string name="save_fix_sale_title">配件销售单</string>
 
 
 </resources>

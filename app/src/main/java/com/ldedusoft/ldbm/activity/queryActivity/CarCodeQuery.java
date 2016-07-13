@@ -21,6 +21,7 @@ import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import java.util.ArrayList;
 
 /**
+ * 车辆信息
  * Created by wangjianwei on 2016/6/29.
  */
 public class CarCodeQuery extends BaseActivity {

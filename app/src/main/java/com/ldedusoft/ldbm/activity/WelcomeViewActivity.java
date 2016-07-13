@@ -48,8 +48,9 @@ public class WelcomeViewActivity extends Activity {
                     // TODO Auto-generated method stub
                     Intent intent = new Intent(WelcomeViewActivity.this, LoginActivity.class);
                     v.getContext().startActivity(intent);
-                    finish();
                     System.gc();
+                    System.runFinalization();
+                    finish();
                 }
             });
 
@@ -60,8 +61,9 @@ public class WelcomeViewActivity extends Activity {
                 public void onClick(View v) {
                     Intent intent1 = new Intent(WelcomeViewActivity.this, LoginActivity.class);
                     v.getContext().startActivity(intent1);
-                    finish();
                     System.gc();
+                    System.runFinalization();
+                    finish();
                 }
             });
         }catch (Exception e){

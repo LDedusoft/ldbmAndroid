@@ -111,7 +111,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             "请输入密码!", Toast.LENGTH_SHORT).show();
                     password.findFocus();
                 }else {
-                    ldbmLogin();
+                   // ldbmLogin();
+                    loginSuccess();
                 }
 
         }
@@ -179,8 +180,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Log.d("LoginActivity", username.getText().toString() + "登录");
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
-        finish();
+
         System.gc();
+        System.runFinalization();
+        finish();
     }
     private void loginError(){
         closeProgressDialog();

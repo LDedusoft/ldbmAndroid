@@ -56,7 +56,7 @@
 },
 {"itemId":"Phone",
 "itemTitle":"电话",
-"inputType":1,
+"inputType":6,
 "defaultValue":"",
 "value":"",
 "hint":"请输入",
@@ -88,7 +88,7 @@
 "intentRequestCode":1
 },
 {"itemId":"WantCar",
-"itemTitle":"意向车型的id",
+"itemTitle":"意向车型",
 "inputType":2,
 "defaultValue":"",
 "value":"",

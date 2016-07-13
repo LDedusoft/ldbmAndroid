@@ -20,7 +20,7 @@ import com.ldedusoft.ldbm.util.ParseXML;
 import java.util.ArrayList;
 
 /**
- * 选择业务类别
+ * 维修预约查询
  * Created by wangjianwei on 2016/6/29.
  */
 public class AppointmentQueryYY extends BaseActivity {

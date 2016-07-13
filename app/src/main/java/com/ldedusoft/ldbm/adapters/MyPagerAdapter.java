@@ -20,6 +20,7 @@ public class MyPagerAdapter extends PagerAdapter {
     //销毁position位置的界面
     public void destroyItem(View arg0, int arg1, Object arg2) {
         // TODO Auto-generated method stub
+//        mListView.get(arg1).setBackground(null);
         ((ViewGroup)arg0).removeView(mListView.get(arg1));
     }
 
@@ -38,7 +39,18 @@ public class MyPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(View arg0, int arg1) {
         // TODO Auto-generated method stub
-        ((ViewGroup)arg0).addView(mListView.get(arg1), 0);
+//        View view = mListView.get(arg1);
+//        if (arg1==0) {
+//            view.setBackground(arg0.getResources().getDrawable(R.drawable.welcome_img1));
+//        }
+//        if (arg1==1) {
+//            view.setBackground(arg0.getResources().getDrawable(R.drawable.welcome_img2));
+//        }
+//        if (arg1==2) {
+//            view.setBackground(arg0.getResources().getDrawable(R.drawable.welcome_img3));
+//        }
+//        mListView.set(arg1,view);
+        ((ViewGroup) arg0).addView(mListView.get(arg1), 0);
         return mListView.get(arg1);
     }
 

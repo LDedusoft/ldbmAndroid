@@ -75,6 +75,7 @@ public class InitParamUtil {
         initRepairMenuList();
         initCarMenuList();
         initNegotiateMenuList();
+        initPartMenuList();
     }
 
     /*初始化首页菜单*/
@@ -114,10 +115,16 @@ public class InitParamUtil {
         SysProperty.getInstance().setCarMenuList(menuItemList);
     }
 
-    /*初始化整车页面菜单*/
+    /*初始化整车洽谈页面菜单*/
     private void initNegotiateMenuList() {
         ArrayList<MenuItem> menuItemList =getMenuList(R.array.negotiate_menu_item);
         SysProperty.getInstance().setNegotiateMenuList(menuItemList);
+    }
+
+    /*初始化配件页面菜单*/
+    private void initPartMenuList() {
+        ArrayList<MenuItem> menuItemList =getMenuList(R.array.part_menu_item);
+        SysProperty.getInstance().setPartMenuList(menuItemList);
     }
 
     /*获取菜单配置*/
@@ -176,6 +183,12 @@ public class InitParamUtil {
     /*整车销售form*/
     public  ArrayList<InputItem> initSC_SavePurchase() {
         String config = readConfig("saveCarPurchase.txt");
+        return createInputItemList(config);
+    }
+
+    /*配件销售form*/
+    public  ArrayList<InputItem> initSC_SaveSaleFixings() {
+        String config = readConfig("saveFixSale.txt");
         return createInputItemList(config);
     }
 

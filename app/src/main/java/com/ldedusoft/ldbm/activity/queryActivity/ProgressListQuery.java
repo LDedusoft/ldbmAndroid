@@ -21,6 +21,7 @@ import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import java.util.ArrayList;
 
 /**
+ * 进度查询
  * Created by wangjianwei on 2016/7/4.
  */
 public class ProgressListQuery extends BaseActivity {

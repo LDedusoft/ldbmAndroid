@@ -72,8 +72,9 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
     }
 
 
-    private void updateListItem(String data,int position){
+    private void updateListItem(String dispValue,String data,int position){
         InputItem item = listData.get(position);
+        item.setDispValue(dispValue);
         item.setValue(data);
         listData.set(position, item);
         adapter.notifyDataSetChanged();
@@ -91,14 +92,14 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
                 if(resultCode == RESULT_OK){
                    String result= data.getStringExtra("result");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(result, inputListPosition);
+                    updateListItem(result,result, inputListPosition);
                 }
                 break;
             case 2: //车型选择
                 if(resultCode == RESULT_OK){
                     CarType carType = (CarType)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(String.valueOf(carType.getID()), inputListPosition);
+                    updateListItem(carType.getType(),String.valueOf(carType.getID()), inputListPosition);
                 }
                 break;
             default:

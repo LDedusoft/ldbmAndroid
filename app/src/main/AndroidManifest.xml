@@ -18,7 +18,12 @@
         </activity>
        <!-- <activity android:name=".activity.LoginActivity"></activity>
        -->
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="activity.LoginActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.home.HomeActivity"></activity><!--首页-->
         <activity android:name=".activity.repair.RepairActivity"></activity><!--维修管理-->
         <activity android:name=".activity.wholeCar.WholecarActivity"></activity><!--整车管理-->
@@ -194,6 +199,54 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="activity.wholeCar.form.NewCarPurchaseActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--整车仓库列表-->
+        <activity android:name=".activity.selectActivity.CarWarehouseSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.CarWarehouseSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--车辆颜色-->
+        <activity android:name=".activity.selectActivity.CarColorSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.CarColorSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--在库车辆查询-->
+        <activity android:name=".activity.queryActivity.CarListQuery">
+            <intent-filter>
+                <action android:name="activity.queryActivity.CarListQuery"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--新建配件销售单-->
+        <activity android:name=".activity.part.form.NewFixSaleActivity">
+            <intent-filter>
+                <action android:name="activity.part.form.NewFixSaleActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <!--发票信息-->
+        <activity android:name=".activity.selectActivity.InvoiceSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.InvoiceSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--配件信息-->
+        <activity android:name=".activity.selectActivity.FixingSelect"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="activity.selectActivity.FixingSelect"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

@@ -14,6 +14,8 @@ public class InputItem {
     private int inputType;
     /*默认值*/
     private String defaultValue;
+    /*显示值*/
+    private String dispValue;
     /*实际值*/
     private String value;
     /*提示*/
@@ -28,6 +30,14 @@ public class InputItem {
     private boolean required;
     /*关联项*/
     private String relationItem = "";
+
+    public String getDispValue() {
+        return dispValue;
+    }
+
+    public void setDispValue(String dispValue) {
+        this.dispValue = dispValue;
+    }
 
     public String getRelationItem() {
         return relationItem;

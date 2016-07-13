@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--配件信息-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.ldedusoft.ldbm.component.customComp.QueryToolBar
+            android:id="@+id/selected_fixings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.ldedusoft.ldbm.component.customComp.QueryToolBar>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/page_bar_height"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:text="上一页"
+            android:id="@+id/fixing_back_page"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/page_bar_height"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            />
+        <TextView
+            android:text="aaa"
+        android:id="@+id/fixing_current_page"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/page_bar_height"
+        android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+        />
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:id="@+id/fixing_edit_page"
+            android:textSize="15sp"
+            android:layout_width="35dp"
+            android:layout_height="@dimen/page_bar_height"
+            android:layout_toRightOf="@+id/fixing_current_page"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp"
+            android:paddingTop="3dp"
+            android:numeric="integer"
+            />
+        <TextView
+            android:text="go"
+            android:id="@+id/fixing_jump"
+            android:layout_width="40dp"
+            android:layout_height="@dimen/page_bar_height"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/fixing_edit_page"
+            android:gravity="center_vertical|center_horizontal"
+
+            />
+        <TextView
+            android:text="下一页"
+            android:id="@+id/fixing_next_page"
+            android:layout_width="60dp"
+            android:layout_height="@dimen/page_bar_height"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            />
+
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/selected_fixings_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>

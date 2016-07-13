@@ -2,10 +2,15 @@ package com.ldedusoft.ldbm.util.interfacekits;
 
 import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.model.CarCode;
+import com.ldedusoft.ldbm.model.CarColor;
+import com.ldedusoft.ldbm.model.CarList;
 import com.ldedusoft.ldbm.model.CarType;
+import com.ldedusoft.ldbm.model.CarWarehouse;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.ClientType;
+import com.ldedusoft.ldbm.model.FixingInfo;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.Invoice;
 import com.ldedusoft.ldbm.model.Progress;
 import com.ldedusoft.ldbm.model.Reception;
 import com.ldedusoft.ldbm.model.RepaireType;
@@ -55,6 +60,166 @@ public class InterfaceResault {
     public static String SC_NewPurchaseResult = "SC_NewPurchaseResult";
     /*保存整车销售单*/
     public static String SC_SavePurchaseResult = "SC_SavePurchaseResult";
+    /*整车仓库列表*/
+    public static String Pub_CarWarehouseListResult = "Pub_CarWarehouseListResult";
+    /*车辆颜色列表*/
+    public static String Pub_CarColorListResult="Pub_CarColorListResult";
+    /*在库车辆列表*/
+    public static String Pub_CarListResult = "Pub_CarListResult";
+    /*新建配件销售单*/
+    public static String PT_NewSaleFixingsResult = "PT_NewSaleFixingsResult";
+    /*保存配件销售单*/
+    public static String SC_SaveSaleFixingsResult = "SC_SaveSaleFixingsResult";
+    /*发票信息*/
+    public static String Pub_InvoiceListResult = "Pub_InvoiceListResult";
+    /*配件信息*/
+    public static String PT_FixingsListResult = "PT_FixingsListResult";
+    /*保存配件采购*/
+    public static String PT_SavePurchaseFixingsResult = "PT_SavePurchaseFixingsResult";
+
+    /**
+     * 配件信息列表
+     * @param listData
+     * @param result
+     * {ID：id；BianHao：编号；MingCheng：名称；TuHao：图号；CangKu：仓库；KuCun：库存数量；
+     * KuCunJinE：库存金额；KuCunJunJia：库存均价；DanWei：单位}
+     * @return
+     */
+    public static ArrayList<FixingInfo> getPT_FixingsListResult(ArrayList<FixingInfo> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                FixingInfo item = new FixingInfo();
+                item.setID(jsonObject.getInt("ID"));
+                item.setBianHao(jsonObject.getString("BianHao"));
+                item.setMingCheng(jsonObject.getString("MingCheng"));
+                item.setTuHao(jsonObject.getString("TuHao"));
+                item.setCangKu(jsonObject.getString("CangKu"));
+                item.setKuCun(jsonObject.getString("KuCun"));
+                item.setKuCunJinE(jsonObject.getString("KuCunJinE"));
+                item.setKuCunJunJia(jsonObject.getString("KuCunJunJia"));
+                item.setDanWei(jsonObject.getString("DanWei"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+
+    /**
+     * 发票信息列表
+     * @param listData
+     * @param result
+     * {ID：id；FaPiao：名称；ShuiLv：税率}
+     * @return
+     */
+    public static ArrayList<Invoice> getPub_InvoiceListResult(ArrayList<Invoice> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Invoice item = new Invoice();
+                item.setID(jsonObject.getInt("ID"));
+                item.setFaPiao(jsonObject.getString("FaPiao"));
+                item.setShuiLv(jsonObject.getString("ShuiLv"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+    /**
+     * 新建整车销售单
+     * @param listData
+     * @param result
+     * @return
+     */
+    public static ArrayList<InputItem> getPT_NewSaleFixingsResult(ArrayList<InputItem> listData,String result){
+        listData = getNewFormResault(listData,result);
+        return listData;
+    }
+
+    /**
+     * 在库车辆列表
+     * @param listData
+     * @param result
+     * CarCode：车牌号；Color：颜色；DanJia：价格；Vin：Vin码；EngineNo：发动机号；
+     * Brand：品牌；Series：车系；Type：车型}
+     * @return
+     */
+    public static ArrayList<CarList> getPub_CarListResult(ArrayList<CarList> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                CarList item = new CarList();
+                item.setCarCode(jsonObject.getString("CarCode"));
+                item.setColor(jsonObject.getString("Color"));
+                item.setDanJia(jsonObject.getString("DanJia"));
+                item.setVin(jsonObject.getString("Vin"));
+                item.setEngineNo(jsonObject.getString("EngineNo"));
+                item.setBrand(jsonObject.getString("Brand"));
+                item.setSeries(jsonObject.getString("Series"));
+                item.setType(jsonObject.getString("Type"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+    /**
+     * 车辆颜色列表
+     * @param listData
+     * @param result
+     * {Color:颜色}
+     * @return
+     */
+    public static ArrayList<CarColor> getPub_CarColorListResult(ArrayList<CarColor> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                CarColor item = new CarColor();
+                item.setColor(jsonObject.getString("Color"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+    /**
+     * 整车仓库列表
+     * @param listData
+     * @param result
+     * {ID：id；Name：仓库名称；Code：仓库编号}
+     * @return
+     */
+    public static ArrayList<CarWarehouse> getPub_CarWarehouseListResult(ArrayList<CarWarehouse> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                CarWarehouse item = new CarWarehouse();
+                item.setID(jsonObject.getInt("ID"));
+                item.setName(jsonObject.getString("Name"));
+                item.setCode(jsonObject.getString("Code"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
 
     /**
      * 新建整车销售单

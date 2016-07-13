@@ -71,9 +71,10 @@ public class NewClientActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    private void updateListItem(String data,int position){
+    private void updateListItem(String dispValue,String data,int position){
         InputItem item = listData.get(position);
         item.setValue(data);
+        item.setDispValue(dispValue);
         listData.set(position, item);
         adapter.notifyDataSetChanged();
     }
@@ -90,14 +91,14 @@ public class NewClientActivity extends BaseActivity implements View.OnClickListe
                 if(resultCode == RESULT_OK){
                     ClientCategory clientCategory = (ClientCategory)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(String.valueOf(clientCategory.getCategoryId()), inputListPosition); //编号存入
+                    updateListItem(clientCategory.getCategoryName(),String.valueOf(clientCategory.getCategoryId()), inputListPosition); //编号存入
                 }
                 break;
             case 2: //客户类型选择
                 if(resultCode == RESULT_OK){
                     ClientType clientType = (ClientType)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(String.valueOf(clientType.getID()), inputListPosition); //编号存入
+                    updateListItem(clientType.getLeiBie(),String.valueOf(clientType.getID()), inputListPosition); //编号存入
                 }
                 break;
             default:
