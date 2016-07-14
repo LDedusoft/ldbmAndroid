@@ -20,7 +20,7 @@ import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 import java.util.ArrayList;
 
 /**
- * 车型选择
+ * 配件仓库选择
  * Created by wangjianwei on 2016/6/29.
  */
 public class FixWarehouseSelect extends BaseActivity {
