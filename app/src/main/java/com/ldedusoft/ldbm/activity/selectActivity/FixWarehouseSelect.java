@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 /**
  * 配件仓库选择
- * Created by wangjianwei on 2016/7/14.
+ * Created by wangjianwei on 2016/7/14. 
 
  */
 public class FixWarehouseSelect extends BaseActivity {
