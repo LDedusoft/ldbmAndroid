@@ -9,6 +9,7 @@ import com.ldedusoft.ldbm.model.CarWarehouse;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.ClientType;
 import com.ldedusoft.ldbm.model.FixingInfo;
+import com.ldedusoft.ldbm.model.FixingsWarehouse;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.Invoice;
 import com.ldedusoft.ldbm.model.Progress;
@@ -76,6 +77,48 @@ public class InterfaceResault {
     public static String PT_FixingsListResult = "PT_FixingsListResult";
     /*保存配件采购*/
     public static String PT_SavePurchaseFixingsResult = "PT_SavePurchaseFixingsResult";
+    /*配件仓库列表*/
+    public static String  PT_FixingsWarehouseListResult = "PT_FixingsWarehouseListResult";
+    /*新建配件采购*/
+    public static String  PT_NewPurchaseFixingsResult = "PT_NewPurchaseFixingsResult";
+
+
+    /**
+     * 新建配件采购单
+     * @param listData
+     * @param result
+     * @return
+     */
+    public static ArrayList<InputItem> getPT_NewPurchaseFixingsResult(ArrayList<InputItem> listData,String result){
+        listData = getNewFormResault(listData,result);
+        return listData;
+    }
+
+
+    /**
+     * 配件仓库列表
+     * @param listData
+     * @param result
+     *{ID：id;CangKu：仓库名称；BianHao：编号}
+     * @return
+     */
+    public static ArrayList<FixingsWarehouse> getPT_FixingsWarehouseListResult(ArrayList<FixingsWarehouse> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                FixingsWarehouse item = new FixingsWarehouse();
+                item.setId(jsonObject.getInt("ID"));
+                item.setBianHao(jsonObject.getString("BianHao"));
+                item.setCangKu(jsonObject.getString("CangKu"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
 
     /**
      * 配件信息列表
@@ -134,12 +177,23 @@ public class InterfaceResault {
         return listData;
     }
     /**
-     * 新建整车销售单
+     * 新建配件销售单
      * @param listData
      * @param result
      * @return
      */
     public static ArrayList<InputItem> getPT_NewSaleFixingsResult(ArrayList<InputItem> listData,String result){
+        listData = getNewFormResault(listData,result);
+        return listData;
+    }
+
+    /**
+     * 新建配件采购单
+     * @param listData
+     * @param result
+     * @return
+     */
+    public static ArrayList<InputItem> getPT_NewPurchaseFixings(ArrayList<InputItem> listData,String result){
         listData = getNewFormResault(listData,result);
         return listData;
     }

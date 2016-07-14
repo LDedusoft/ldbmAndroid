@@ -67,6 +67,11 @@
             />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/loginLine"
+        ></RelativeLayout>
     <ListView
         android:id="@+id/selected_fixings_list"
         android:layout_width="match_parent"

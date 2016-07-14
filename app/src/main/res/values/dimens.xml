@@ -37,5 +37,5 @@
     <dimen name="inputList_topBar_textViewHeight">22dp</dimen> <!--表单工具条文字高度-->
     <dimen name="inputList_topBar_imgWidth">10dp</dimen> <!--表单工具条 图片宽度-->
     <dimen name="inputList_topBar_text">17sp</dimen><!--输入表单工具栏文字大小-->
-    <dimen name="page_bar_height">30dp</dimen> <!--页码工具栏高度-->
+    <dimen name="page_bar_height">40dp</dimen> <!--页码工具栏高度-->
 </resources>

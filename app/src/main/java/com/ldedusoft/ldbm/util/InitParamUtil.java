@@ -192,6 +192,12 @@ public class InitParamUtil {
         return createInputItemList(config);
     }
 
+    /*配件采购form*/
+    public  ArrayList<InputItem> initPT_SavePurchaseFixings() {
+        String config = readConfig("saveFixPurchase.txt");
+        return createInputItemList(config);
+    }
+
     /**
      * 生成输入表单item列表
      * @param config

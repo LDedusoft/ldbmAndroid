@@ -234,6 +234,23 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <!--新建配件采购单-->
+        <activity android:name=".activity.part.form.NewFixPurchaseActivity">
+            <intent-filter>
+                <action android:name="activity.part.form.NewFixPurchaseActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--配件仓库列表-->
+        <activity android:name=".activity.selectActivity.FixWarehouseSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.FixWarehouseSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
         <!--发票信息-->
         <activity android:name=".activity.selectActivity.InvoiceSelect">
             <intent-filter>
