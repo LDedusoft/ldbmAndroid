@@ -257,10 +257,36 @@ public class InterfaceParam {
     }
     /**配件品牌列表*/
     public String getPT_BrandList() {
+        PT_BrandList = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_BrandList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        PT_BrandList = PT_BrandList.replace("@sysUser",SYS_USER);
+        PT_BrandList = PT_BrandList.replace("@sysPassword",SYS_PASSWORD);
         return PT_BrandList;
     }
     /**配件车型列表*/
     public String getPT_CarTypeList() {
+        PT_CarTypeList="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_CarTypeList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        PT_CarTypeList = PT_CarTypeList.replace("@sysUser",SYS_USER);
+        PT_CarTypeList = PT_CarTypeList.replace("@sysPassword",SYS_PASSWORD);
         return PT_CarTypeList;
     }
     /**配件信息列表*/
@@ -285,6 +311,19 @@ public class InterfaceParam {
     }
     /**配件类型*/
     public String getPT_FixingsTypeList() {
+        PT_FixingsTypeList = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_FixingsTypeList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        PT_FixingsTypeList = PT_FixingsTypeList.replace("@sysUser",SYS_USER);
+        PT_FixingsTypeList = PT_FixingsTypeList.replace("@sysPassword",SYS_PASSWORD);
         return PT_FixingsTypeList;
     }
     /**配件仓库列表*/

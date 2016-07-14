@@ -276,6 +276,30 @@
             </intent-filter>
         </activity>
 
+        <!--配件类别列表-->
+        <activity android:name=".activity.selectActivity.FixingsTypeSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.FixingsTypeSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--配件车型-->
+        <activity android:name=".activity.selectActivity.FixCarTypeSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.FixCarTypeSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--配件品牌-->
+        <activity android:name=".activity.selectActivity.FixBrandSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.FixBrandSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

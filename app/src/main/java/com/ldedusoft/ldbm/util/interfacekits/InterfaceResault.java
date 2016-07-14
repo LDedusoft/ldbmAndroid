@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.util.interfacekits;
 
 import com.ldedusoft.ldbm.model.Appointment;
+import com.ldedusoft.ldbm.model.Brand;
 import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.CarColor;
 import com.ldedusoft.ldbm.model.CarList;
@@ -8,7 +9,9 @@ import com.ldedusoft.ldbm.model.CarType;
 import com.ldedusoft.ldbm.model.CarWarehouse;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.ClientType;
+import com.ldedusoft.ldbm.model.FixCarType;
 import com.ldedusoft.ldbm.model.FixingInfo;
+import com.ldedusoft.ldbm.model.FixingsType;
 import com.ldedusoft.ldbm.model.FixingsWarehouse;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.Invoice;
@@ -83,7 +86,86 @@ public class InterfaceResault {
     public static String  PT_NewPurchaseFixingsResult = "PT_NewPurchaseFixingsResult";
     /*保存配件信息*/
     public static String  PT_NewFixingsResult = "PT_NewFixingsResult";
+    /*配件类型列表*/
+    public static String  PT_FixingsTypeListResult = "PT_FixingsTypeListResult";
+    /*配件车型列表*/
+    public static String  PT_CarTypeListResult = "PT_CarTypeListResult";
+    /*配件品牌列表*/
+    public static String PT_BrandListResult = "PT_BrandListResult";
 
+    /**
+     * 配件品牌列表
+     * @param listData
+     * @param result
+     * {"ID":5,"PinPai":"宝马"}
+     * @return
+     */
+    public static ArrayList<Brand> getPT_BrandListResult(ArrayList<Brand> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Brand item = new Brand();
+                item.setID(jsonObject.getInt("ID"));
+                item.setPinPai(jsonObject.getString("PinPai"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+
+    /**
+     * 配件车型列表
+     * @param listData
+     * @param result
+     * {"ID":5,"XingHao":"奥迪","BianMa":"CX00001"}
+     * @return
+     */
+    public static ArrayList<FixCarType> getPT_CarTypeListResult(ArrayList<FixCarType> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                FixCarType item = new FixCarType();
+                item.setID(jsonObject.getInt("ID"));
+                item.setXingHao(jsonObject.getString("XingHao"));
+                item.setBianMa(jsonObject.getString("BianMa"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
+
+    /**
+     * 配件类型列表
+     * @param listData
+     * @param result
+     *  {"ID":5,"LeiBie":"脚垫类","BianHao":"001001"}
+     * @return
+     */
+    public static ArrayList<FixingsType> getPT_FixingsTypeListResult(ArrayList<FixingsType> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                FixingsType item = new FixingsType();
+                item.setID(jsonObject.getInt("ID"));
+                item.setLeiBie(jsonObject.getString("LeiBie"));
+                item.setBianHao(jsonObject.getString("BianHao"));
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
 
     /**
      * 新建配件采购单

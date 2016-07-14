@@ -14,10 +14,10 @@ import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
 import com.ldedusoft.ldbm.interfaces.InputItemDelListener;
-import com.ldedusoft.ldbm.model.Client;
+import com.ldedusoft.ldbm.model.Brand;
+import com.ldedusoft.ldbm.model.FixCarType;
+import com.ldedusoft.ldbm.model.FixingsType;
 import com.ldedusoft.ldbm.model.InputItem;
-import com.ldedusoft.ldbm.model.Invoice;
-import com.ldedusoft.ldbm.model.SalesMan;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -93,28 +93,28 @@ public class NewFixInfoActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
-            case 1: //选择客户信息 设置客户编号
+            case 1: //配件类型
                 if(resultCode == RESULT_OK){
-                    Client client ;
-                    client = (Client)data.getSerializableExtra("item");
+                    FixingsType fixingsType ;
+                    fixingsType = (FixingsType)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(client.getBianHao(),client.getBianHao(), inputListPosition);
+                    updateListItem(fixingsType.getLeiBie(),String.valueOf(fixingsType.getID()), inputListPosition);
                 }
                 break;
-            case 2: //经手人
+            case 2: //配件车型
                 if(resultCode == RESULT_OK){
-                    SalesMan salesMan;
-                    salesMan = (SalesMan)data.getSerializableExtra("item");
+                    FixCarType fixCarType;
+                    fixCarType = (FixCarType)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(salesMan.getName(),salesMan.getName(), inputListPosition);
+                    updateListItem(fixCarType.getXingHao(),String.valueOf(fixCarType.getID()), inputListPosition);
                 }
                 break;
-            case 3: //发票
+            case 3: //品牌
                 if(resultCode == RESULT_OK){
-                    Invoice invoice;
-                    invoice = (Invoice)data.getSerializableExtra("item");
+                    Brand brand;
+                    brand = (Brand)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(invoice.getFaPiao(), invoice.getFaPiao(), inputListPosition);
+                    updateListItem(brand.getPinPai(),String.valueOf(brand.getID()), inputListPosition);
                 }
                 break;
             
