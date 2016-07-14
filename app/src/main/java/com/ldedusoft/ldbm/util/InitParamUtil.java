@@ -143,6 +143,11 @@ public class InitParamUtil {
         return menuItemList;
     }
 
+    /*新配件信息form*/
+    public  ArrayList<InputItem> initPT_NewFixings() {
+        String config = readConfig("saveFixInfo.txt");
+        return createInputItemList(config);
+    }
 
     /*维修预约form*/
     public  ArrayList<InputItem> initRP_ReceptionNew_YY() {

@@ -312,7 +312,25 @@ public class InterfaceParam {
         return PT_ImportPurchaseInfo;
     }
     /**保存新配件信息*/
-    public String getPT_NewFixings() {
+    public String getPT_NewFixings(String userName,String info) {
+        PT_NewFixings = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_NewFixings xmlns=\"LDBM4S\">\n" +
+                "      <info>@info</info>\n" +
+                "      <UName>@userName</UName>\n" +
+                "    </PT_NewFixings>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        PT_NewFixings = PT_NewFixings.replace("@sysUser",SYS_USER);
+        PT_NewFixings = PT_NewFixings.replace("@sysPassword",SYS_PASSWORD);
+        PT_NewFixings = PT_NewFixings.replace("@info",info);
+        PT_NewFixings = PT_NewFixings.replace("@userName",userName);
         return PT_NewFixings;
     }
     /**配件采购单（新建）*/

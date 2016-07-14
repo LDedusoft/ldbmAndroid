@@ -42,6 +42,7 @@
     <string name="negotiate_company_title">公司洽谈单</string>
     <string name="save_car_purchase_title">整车销售单</string>
     <string name="save_fix_sale_title">配件销售单</string>
+    <string name="save_fix_info_title">新建配件信息</string>
     <string name="save_fix_purchase_title">配件采购单</string>
 
 

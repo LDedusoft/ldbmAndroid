@@ -81,6 +81,8 @@ public class InterfaceResault {
     public static String  PT_FixingsWarehouseListResult = "PT_FixingsWarehouseListResult";
     /*新建配件采购*/
     public static String  PT_NewPurchaseFixingsResult = "PT_NewPurchaseFixingsResult";
+    /*保存配件信息*/
+    public static String  PT_NewFixingsResult = "PT_NewFixingsResult";
 
 
     /**

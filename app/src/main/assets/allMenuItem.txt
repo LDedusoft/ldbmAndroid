@@ -207,7 +207,7 @@
   "isGroup":false,
   "groupTitle":"",
   "titleIntentPath":"",
-  "createIntentPath":"activity.wholeCar.form.NewCarPurchaseActivity"
+  "createIntentPath":"activity.part.form.NewFixInfoActivity"
   },
 {"menuTitle":"配件库存",
 "menuDescribe":"",
@@ -216,7 +216,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.wholeCar.form.NewCarPurchaseActivity",
+"titleIntentPath":"activity.selectActivity.FixingSelect",
 "createIntentPath":""
 },
 {"menuTitle":"采购计划",

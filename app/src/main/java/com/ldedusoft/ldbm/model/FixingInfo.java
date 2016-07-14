@@ -3,7 +3,7 @@ package com.ldedusoft.ldbm.model;
 import java.io.Serializable;
 
 /**
- * 配件信息
+ * 查询配件信息
  * Created by wangjianwei on 2016/7/9.
  * {ID：id；BianHao：编号；MingCheng：名称；TuHao：图号；CangKu：仓库；KuCun：库存数量；
  * KuCunJinE：库存金额；KuCunJunJia：库存均价；DanWei：单位}
