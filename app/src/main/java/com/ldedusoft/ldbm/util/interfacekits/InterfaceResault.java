@@ -15,6 +15,7 @@ import com.ldedusoft.ldbm.model.FixingsType;
 import com.ldedusoft.ldbm.model.FixingsWarehouse;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.Invoice;
+import com.ldedusoft.ldbm.model.Plan;
 import com.ldedusoft.ldbm.model.Progress;
 import com.ldedusoft.ldbm.model.Reception;
 import com.ldedusoft.ldbm.model.RepaireType;
@@ -92,6 +93,35 @@ public class InterfaceResault {
     public static String  PT_CarTypeListResult = "PT_CarTypeListResult";
     /*配件品牌列表*/
     public static String PT_BrandListResult = "PT_BrandListResult";
+    /*采购计划列表*/
+    public static String PT_PlanListResult = "PT_PlanListResult";
+
+    /**
+     * 采购计划列表
+     * @param listData
+     * @param result
+     * {DanHao：单号;RiQi：日期；Num：单据数量；JinE：单据金额;MingCheng:供方名称}
+     * @return
+     */
+    public static ArrayList<Plan> getPT_PlanListResult(ArrayList<Plan> listData,String result) {
+        try {
+            listData.clear();
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Plan item = new Plan();
+                item.DanHao = jsonObject.getString("DanHao");
+                item.RiQi = jsonObject.getString("RiQi");
+                item.Num = jsonObject.getString("Num");
+                item.JinE = jsonObject.getString("JinE");
+                item.MingCheng = jsonObject.getString("MingCheng");
+                listData.add(item);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
+    }
 
     /**
      * 配件品牌列表

@@ -300,6 +300,14 @@
             </intent-filter>
         </activity>
 
+        <!--采购计划-->
+        <activity android:name=".activity.selectActivity.PlanSelect">
+            <intent-filter>
+                <action android:name="activity.selectActivity.PlanSelect"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -27,7 +27,6 @@
             android:layout_alignParentLeft="true"
             />
         <TextView
-            android:text="aaa"
         android:id="@+id/fixing_current_page"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/page_bar_height"

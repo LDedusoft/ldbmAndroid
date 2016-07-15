@@ -226,7 +226,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.wholeCar.form.NewCarPurchaseActivity",
+"titleIntentPath":"activity.selectActivity.PlanSelect",
 "createIntentPath":""
 }
 ]

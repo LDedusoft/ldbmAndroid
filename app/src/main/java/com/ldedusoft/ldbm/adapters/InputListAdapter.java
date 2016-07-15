@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,16 +63,16 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
     private int touchedPosition=-1;//缓存当前位置
     private String touchedId;//缓存当前点击的id
 
-    //定义一个HashMap，用来存放EditText的值，Key是position
-    HashMap<Integer, String> textHashMap = new HashMap<Integer, String>();
+    //用来存放EditText的值，Key是position
+    SparseArray<String> textHashMap = new SparseArray<String>();
 
-    //定义一个HashMap，用来存放时间的值，Key是position
-    HashMap<Integer, String> timeHashMap = new HashMap<Integer, String>();
+    //用来存放时间的值，Key是position
+    SparseArray<String> timeHashMap = new  SparseArray<String>();
 
-    //定义一个HashMap，用来存放复选框状态，Key是position
-    HashMap<Integer, String> checkBoxMap = new HashMap<Integer, String>();
+    //用来存放复选框状态，Key是position
+    SparseArray<String> checkBoxMap = new  SparseArray<String>();
 
-    //定义一个HashMap，用来存放数据对象，Key是position
+    //用来存放数据对象，Key是position
     HashMap<Integer, InputItem> inputItemMap = new HashMap<Integer, InputItem>();
 
     //存放fix组件的价格值
