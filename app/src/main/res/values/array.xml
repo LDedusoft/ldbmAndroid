@@ -54,6 +54,20 @@
         <item>采购计划</item>
     </string-array>
 
+    <string-array name="report_menu_item">
+        <item>综合统计group</item>
+        <item>经营</item>
+        <item>库存</item>
+        <item>维修</item>
+        <item>收款</item>
+        <item>客户信息</item>
+        <item>进货统计group</item>
+        <item>进货汇总</item>
+        <item>采购订单</item>
+        <item>供应商累计。。。</item>
+
+    </string-array>
+
     <!--选择列表配置-->
     <string-array name="oil_amount">
         <item>满</item>

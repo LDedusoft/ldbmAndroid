@@ -64,10 +64,12 @@ public class ReportActivity extends BaseActivity implements OnMenuTitleClickList
     public void OnMenuTitleClick(int ID) {
 
         String value = menuDataList.get(ID).getValue();
+        String title =  menuDataList.get(ID).getMenuTitle();
         String intentPath =  menuDataList.get(ID).getTitleIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);
+            intent.putExtra("title",title);
             startActivity(intent);
         }
     }
