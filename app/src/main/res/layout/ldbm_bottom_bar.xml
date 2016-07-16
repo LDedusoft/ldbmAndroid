@@ -26,15 +26,25 @@
             android:orientation="vertical"
             android:gravity="center"
             >
+
+            <com.ldedusoft.ldbm.component.iconfont.IconfontView
+                android:id="@+id/btn_toolbar_home"
+                android:text="@string/icon_bottomBar_home"
+                android:textColor="@color/bottomBarText"
+                android:textSize="@dimen/bottom_bar_btn_icon_size"
+                android:layout_width="@dimen/bottom_bar_btn_size"
+                android:layout_height="@dimen/bottom_bar_btn_size" />
+
+            <!--
             <Button
                 android:id="@+id/btn_toolbar_home"
                 android:layout_width="@dimen/bottom_bar_btn_size"
                 android:layout_height="@dimen/bottom_bar_btn_size"
                 android:background="@drawable/bottom_bar_home"
                 />
+                -->
             <TextView
                 android:id="@+id/txt_toolbar_home"
-                android:layout_marginTop="3dp"
                 android:text="@string/bottom_bar_home"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -54,15 +64,22 @@
             android:gravity="center"
 
             >
-            <Button
+            <com.ldedusoft.ldbm.component.iconfont.IconfontView
                 android:id="@+id/btn_toolbar_repair"
+                android:text="@string/icon_bottomBar_repair"
+                android:textColor="@color/bottomBarText"
+                android:textSize="@dimen/bottom_bar_btn_icon_size"
                 android:layout_width="@dimen/bottom_bar_btn_size"
-                android:layout_height="@dimen/bottom_bar_btn_size"
-                android:background="@drawable/bottom_bar_weixiu"
-                />
+                android:layout_height="@dimen/bottom_bar_btn_size" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_toolbar_repair"-->
+                <!--android:layout_width="@dimen/bottom_bar_btn_size"-->
+                <!--android:layout_height="@dimen/bottom_bar_btn_size"-->
+                <!--android:background="@drawable/bottom_bar_weixiu"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/txt_bar_weixiu"
-                android:layout_marginTop="3dp"
                 android:text="@string/bottom_bar_weixiu"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -81,15 +98,23 @@
             android:gravity="center"
 
             >
-            <Button
+            <com.ldedusoft.ldbm.component.iconfont.IconfontView
+
                 android:id="@+id/btn_toolbar_wholecar"
+                android:text="@string/icon_bottomBar_car"
+                android:textColor="@color/bottomBarText"
+                android:textSize="@dimen/bottom_bar_btn_icon_car_size"
                 android:layout_width="@dimen/bottom_bar_btn_size"
-                android:layout_height="@dimen/bottom_bar_btn_size"
-                android:background="@drawable/bottom_bar_zhengche"
-                />
+                android:layout_height="@dimen/bottom_bar_btn_size" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_toolbar_wholecar"-->
+                <!--android:layout_width="@dimen/bottom_bar_btn_size"-->
+                <!--android:layout_height="@dimen/bottom_bar_btn_size"-->
+                <!--android:background="@drawable/bottom_bar_zhengche"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/txt_bar_zhengche"
-                android:layout_marginTop="3dp"
                 android:text="@string/bottom_bar_zhengche"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -109,15 +134,22 @@
             android:gravity="center"
 
             >
-            <Button
+            <com.ldedusoft.ldbm.component.iconfont.IconfontView
                 android:id="@+id/btn_toolbar_part"
+                android:text="@string/icon_bottomBar_part"
+                android:textColor="@color/bottomBarText"
+                android:textSize="@dimen/bottom_bar_btn_icon_size"
                 android:layout_width="@dimen/bottom_bar_btn_size"
-                android:layout_height="@dimen/bottom_bar_btn_size"
-                android:background="@drawable/bottom_bar_peijian"
-                />
+                android:layout_height="@dimen/bottom_bar_btn_size" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_toolbar_part"-->
+                <!--android:layout_width="@dimen/bottom_bar_btn_size"-->
+                <!--android:layout_height="@dimen/bottom_bar_btn_size"-->
+                <!--android:background="@drawable/bottom_bar_peijian"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/txt_bar_peijian"
-                android:layout_marginTop="3dp"
                 android:text="@string/bottom_bar_peijian"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -137,15 +169,22 @@
             android:gravity="center"
 
             >
-            <Button
+            <com.ldedusoft.ldbm.component.iconfont.IconfontView
                 android:id="@+id/btn_toolbar_report"
+                android:text="@string/icon_bottomBar_report"
+                android:textColor="@color/bottomBarText"
+                android:textSize="@dimen/bottom_bar_btn_icon_size"
                 android:layout_width="@dimen/bottom_bar_btn_size"
-                android:layout_height="@dimen/bottom_bar_btn_size"
-                android:background="@drawable/bottom_bar_baobiao"
-                />
+                android:layout_height="@dimen/bottom_bar_btn_size" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_toolbar_report"-->
+                <!--android:layout_width="@dimen/bottom_bar_btn_size"-->
+                <!--android:layout_height="@dimen/bottom_bar_btn_size"-->
+                <!--android:background="@drawable/bottom_bar_baobiao"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/txt_bar_baobiao"
-                android:layout_marginTop="3dp"
                 android:text="@string/bottom_bar_baobiao"
                 android:gravity="center"
                 android:layout_width="match_parent"

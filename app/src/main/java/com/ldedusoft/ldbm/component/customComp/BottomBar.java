@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ import com.ldedusoft.ldbm.activity.part.PartActivity;
 import com.ldedusoft.ldbm.activity.repair.RepairActivity;
 import com.ldedusoft.ldbm.activity.report.ReportActivity;
 import com.ldedusoft.ldbm.activity.wholeCar.WholecarActivity;
+import com.ldedusoft.ldbm.component.iconfont.IconfontView;
 
 /**
  * Created by wangjianwei on 2016/6/24.
@@ -46,11 +46,11 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
         wholecarLayout.setOnClickListener(this);
         reportLayout.setOnClickListener(this);
 
-        Button homeBtn = (Button)findViewById(R.id.btn_toolbar_home); //主页
-        Button partBtn = (Button)findViewById(R.id.btn_toolbar_part); //配件
-        Button repairBtn = (Button)findViewById(R.id.btn_toolbar_repair); //修理
-        Button wholecarBtn = (Button)findViewById(R.id.btn_toolbar_wholecar); //整车
-        Button reportBtn = (Button)findViewById(R.id.btn_toolbar_report); //报表
+        IconfontView homeBtn = (IconfontView)findViewById(R.id.btn_toolbar_home); //主页
+        IconfontView partBtn = (IconfontView)findViewById(R.id.btn_toolbar_part); //配件
+        IconfontView repairBtn = (IconfontView)findViewById(R.id.btn_toolbar_repair); //修理
+        IconfontView wholecarBtn = (IconfontView)findViewById(R.id.btn_toolbar_wholecar); //整车
+        IconfontView reportBtn = (IconfontView)findViewById(R.id.btn_toolbar_report); //报表
         homeBtn.setOnClickListener(this);
         partBtn.setOnClickListener(this);
         repairBtn.setOnClickListener(this);
@@ -59,19 +59,24 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
 
         String activityName = context.getClass().getName();
         if(activityName.indexOf("HomeActivity")!=-1){
-            homeBtn.setBackgroundResource(R.drawable.bottom_bar_home_selected);
+           // homeBtn.setBackgroundResource(R.drawable.bottom_bar_home_selected);
+            homeBtn.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
             homeTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }else if (activityName.indexOf("RepairActivity")!=-1){
-            repairBtn.setBackgroundResource(R.drawable.bottom_bar_weixiu_selected);
+//            repairBtn.setBackgroundResource(R.drawable.bottom_bar_weixiu_selected);
+            repairBtn.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
             repairTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }else if (activityName.indexOf("WholecarActivity")!=-1||activityName.indexOf("NegotiateActivity")!=-1){
-            wholecarBtn.setBackgroundResource(R.drawable.bottom_bar_zhengche_selected);
+//            wholecarBtn.setBackgroundResource(R.drawable.bottom_bar_zhengche_selected);
+            wholecarBtn.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
             wholecarTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }else if (activityName.indexOf("PartActivity")!=-1){
-            partBtn.setBackgroundResource(R.drawable.bottom_bar_peijian_selected);
+//            partBtn.setBackgroundResource(R.drawable.bottom_bar_peijian_selected);
+            partBtn.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
             partTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }else if (activityName.indexOf("ReportActivity")!=-1){
-            reportBtn.setBackgroundResource(R.drawable.bottom_bar_baobiao_selected);
+//            reportBtn.setBackgroundResource(R.drawable.bottom_bar_baobiao_selected);
+            reportBtn.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
             reportTxt.setTextColor(this.getResources().getColor(R.color.bootomBarTextSelected));
         }
     }

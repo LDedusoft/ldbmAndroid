@@ -76,6 +76,7 @@ public class InitParamUtil {
         initCarMenuList();
         initNegotiateMenuList();
         initPartMenuList();
+        initReportMenuList();
     }
 
     /*初始化首页菜单*/
@@ -125,6 +126,12 @@ public class InitParamUtil {
     private void initPartMenuList() {
         ArrayList<MenuItem> menuItemList =getMenuList(R.array.part_menu_item);
         SysProperty.getInstance().setPartMenuList(menuItemList);
+    }
+
+    /*初始化报表页面菜单*/
+    private void initReportMenuList() {
+        ArrayList<MenuItem> menuItemList =getMenuList(R.array.repair_menu_item);
+        SysProperty.getInstance().setRepairMenuList(menuItemList);
     }
 
     /*获取菜单配置*/

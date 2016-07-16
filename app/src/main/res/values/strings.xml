@@ -44,6 +44,11 @@
     <string name="save_fix_sale_title">配件销售单</string>
     <string name="save_fix_info_title">新建配件信息</string>
     <string name="save_fix_purchase_title">配件采购单</string>
+    <string name="icon_bottomBar_home">&#xe604;</string><!--首页图标-->
+    <string name="icon_bottomBar_repair">&#xe645;</string><!--维修图标-->
+    <string name="icon_bottomBar_car">&#xe6bb;</string><!--整车图标-->
+    <string name="icon_bottomBar_part">&#xe600;</string><!--配件图标-->
+    <string name="icon_bottomBar_report">&#xe618;</string><!--报表图标-->
 
 
 </resources>

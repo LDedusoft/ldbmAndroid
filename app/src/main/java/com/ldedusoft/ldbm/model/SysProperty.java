@@ -21,6 +21,9 @@ public class SysProperty {
     /*维修页面菜单列表*/
     private ArrayList<MenuItem> repairMenuList;
 
+    /*维修报表菜单列表*/
+    private ArrayList<MenuItem> reportMenuList;
+
     /*配件页面菜单*/
     private ArrayList<MenuItem> partMenuList;
 
@@ -29,6 +32,14 @@ public class SysProperty {
 
     /*洽谈页面菜单*/
     private ArrayList<MenuItem> negotiateMenuList;
+
+    public ArrayList<MenuItem> getReportMenuList() {
+        return reportMenuList;
+    }
+
+    public void setReportMenuList(ArrayList<MenuItem> reportMenuList) {
+        this.reportMenuList = reportMenuList;
+    }
 
     public ArrayList<MenuItem> getNegotiateMenuList() {
         return negotiateMenuList;

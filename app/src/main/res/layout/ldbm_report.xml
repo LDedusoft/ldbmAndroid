@@ -3,12 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="报表页面"
+    <LinearLayout
+        android:id="@+id/report_top_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+        <com.ldedusoft.ldbm.component.customComp.TopBar
+            android:id="@+id/report_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.ldedusoft.ldbm.component.customComp.TopBar>
+    </LinearLayout>
+
+    <!--列表  -->
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/report_top_bar_layout"
+        android:layout_above="@+id/report_bottom_bar_layout"
+        >
+        <ListView
+            android:id="@+id/report_menu_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/report_bottom_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -18,7 +42,6 @@
             android:layout_height="wrap_content">
 
         </com.ldedusoft.ldbm.component.customComp.BottomBar>
-
 
     </LinearLayout>
 </RelativeLayout>
