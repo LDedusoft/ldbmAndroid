@@ -1,14 +1,13 @@
 package com.ldedusoft.ldbm.activity.selectActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.SelectPlanAdapter;
+import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
+import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
 import com.ldedusoft.ldbm.model.Plan;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
@@ -24,17 +23,38 @@ import java.util.ArrayList;
  * Created by wangjianwei on 2016/6/29.
  */
 public class PlanSelect extends BaseActivity {
+    private QueryToolBar queryToolBar;
     private ArrayList<Plan> listData;
     private ListView listView;
     private SelectPlanAdapter adapter;
     private int inputListPosition;
+    private String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_selected_plan);
         inputListPosition = getIntent().getIntExtra("position",-1);//接收参数
+        title = getIntent().getStringExtra("title");
+
         initListView();
         initData();
+        initQueryToolBar();
+    }
+
+    private void initQueryToolBar(){
+        queryToolBar = (QueryToolBar)findViewById(R.id.selected_plan_toolbar);
+//        queryToolBar.showAddBtn();
+        queryToolBar.setTitle(title);
+        queryToolBar.setQueryToolBarListener(new QueryToolBarListener() {
+            @Override
+            public void OnAddClick() {
+            }
+
+            @Override
+            public void OnBackClick() {
+                finish();
+            }
+        });
     }
 
     private void initListView(){
@@ -44,7 +64,7 @@ public class PlanSelect extends BaseActivity {
         adapter = new SelectPlanAdapter(this,R.layout.ldbm_selected_plan_item,listData);
         listView.setAdapter(adapter);
         listView.setDividerHeight(1); //分割线粗为1
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Plan plan = new Plan();
@@ -58,7 +78,7 @@ public class PlanSelect extends BaseActivity {
                 setResult(RESULT_OK,intent);
                 finish();
             }
-        });
+        });*/
     }
     private void initData(){
         String serverPath = InterfaceParam.SERVER_PATH;

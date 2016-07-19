@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.ldedusoft.ldbm.Application.MyApplication;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.MenuListAdapter;
@@ -46,6 +47,8 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_home);
+        MyApplication myApplication = MyApplication.getInstance();
+        myApplication.setContext(this);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         exitFlag = false;
         initMenuListData();

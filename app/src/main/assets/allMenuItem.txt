@@ -246,7 +246,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"activity.queryActivity.CommonQuery",
 "createIntentPath":""
 },
 {"menuTitle":"库存",
@@ -256,7 +256,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
 {"menuTitle":"维修",
@@ -266,7 +266,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
 {"menuTitle":"收款",
@@ -276,7 +276,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
 {"menuTitle":"客户信息",
@@ -286,7 +286,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
 {"menuTitle":"进货统计group",
@@ -306,7 +306,7 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
 {"menuTitle":"采购订单",
@@ -316,17 +316,17 @@
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 },
-{"menuTitle":"供应商累计。。。",
+{"menuTitle":"供应商累计",
 "menuDescribe":"",
 "iconId":"list_icon_3",
 "allowCreate":false,
 "value":"",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.CarListQuery",
+"titleIntentPath":"",
 "createIntentPath":""
 }
 ]

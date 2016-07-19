@@ -65,7 +65,6 @@
         <item>进货汇总</item>
         <item>采购订单</item>
         <item>供应商累计。。。</item>
-
     </string-array>
 
     <!--选择列表配置-->
@@ -110,5 +109,29 @@
     <string-array name="input_sex"><!--性别-->
         <item>男</item>
         <item>女</item>
+    </string-array>
+
+    <string-array name="report_jingYing"><!--报表经营-标题 -->
+        <item>本期营业总额</item>
+        <item>-其中销售总额</item>
+        <item>----减：销售退回总额</item>
+        <item>----加：维修业务总额</item>
+        <item>----加：索赔业务总额</item>
+        <item>----加：理赔业务总额</item>
+        <item>本期成本总额</item>
+        <item>-其中销售成本</item>
+        <item>----减：销售退回成本</item>
+        <item>----维修业务成本</item>
+        <item>----索赔业务成本</item>
+        <item>----理赔业务成本</item>
+        <item>减：本期免收损失（优惠、应收免收）</item>
+        <item>本期盘点盘盈盘亏净额</item>
+        <item>本期毛利润</item>
+        <item>减：本期费用合计</item>
+        <item>本期纯利润</item>
+        <item>本期应付款总额</item>
+        <item>本期实付款总额</item>
+        <item>本期应收款总额</item>
+        <item>本期实收款总额</item>
     </string-array>
 </resources>

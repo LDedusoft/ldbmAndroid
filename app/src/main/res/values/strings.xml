@@ -49,6 +49,31 @@
     <string name="icon_bottomBar_car">&#xe6bb;</string><!--整车图标-->
     <string name="icon_bottomBar_part">&#xe600;</string><!--配件图标-->
     <string name="icon_bottomBar_report">&#xe618;</string><!--报表图标-->
+    <string name="report_jingYing">经营</string>
+    <string name="report_kuCun">库存</string>
+    <string name="report_weiXiu">维修</string>
+    <string name="report_shouKuan">收款</string>
+    <string name="report_keHuXinXi">客户信息</string>
+    <string name="report_jinHuoHuiZong">进货汇总</string>
+    <string name="report_caiGouDingDan">采购订单</string>
+    <string name="report_gongYingShangLeiJi">供应商累计供货排行</string>
+    <string name="report_yingYeE">营业额</string>
+    <string name="report_xiaoShouJiHua">销售计划</string>
+    <string name="report_keHuXiaoShouE">客户销售额</string>
+    <string name="report_riQiXiaoShou">日期销售</string>
+    <string name="report_cangKuXiaoShou">仓库销售</string>
+    <string name="report_xiaoShouRenYuanYJ">销售人员业绩</string>
+    <string name="report_cheLiangXiaoShou">车辆销售</string>
+    <string name="report_yuanGongXiaoShou">员工销售</string>
+    <string name="report_renYuanHuiKuan">人员回款</string>
+    <string name="report_yueXiaoShou">月销售</string>
+    <string name="report_shangPinLeiJiJH">商品累计进货</string>
+    <string name="report_leiJiShangPinXS">累计商品销售</string>
+    <string name="report_shangPinJinHuoYFX">商品进货月分析</string>
+    <string name="report_chengBenYiChang">成本异常</string>
+    <string name="report_queHuoBaoJing">缺货报警</string>
+    <string name="report_fuKuCunBaoJing">负库存报警</string>
+
 
 
 </resources>

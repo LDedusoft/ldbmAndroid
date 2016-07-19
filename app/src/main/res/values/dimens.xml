@@ -40,4 +40,9 @@
     <dimen name="inputList_topBar_imgWidth">10dp</dimen> <!--表单工具条 图片宽度-->
     <dimen name="inputList_topBar_text">17sp</dimen><!--输入表单工具栏文字大小-->
     <dimen name="page_bar_height">40dp</dimen> <!--页码工具栏高度-->
+
+    <dimen name="commonQuery_item_height">60dp</dimen> <!--通用列表item高度-->
+    <dimen name="commonQuery_item_title_width">150dp</dimen> <!--通用列表标题宽度-->
+    <dimen name="commonQuery_item_action_width">60dp</dimen> <!--通用列详情按钮宽度-->
+
 </resources>

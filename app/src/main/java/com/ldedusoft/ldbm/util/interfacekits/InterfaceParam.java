@@ -1,5 +1,7 @@
 package com.ldedusoft.ldbm.util.interfacekits;
 
+import com.ldedusoft.ldbm.Application.MyApplication;
+import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.UserProperty;
 
 /**
@@ -973,7 +975,25 @@ public class InterfaceParam {
         return ZH_Inventory;
     }
     /**经营统计*/
-    public String getZH_Operation() {
+    public String getZH_Operation(String startTime,String endTime) {
+        ZH_Operation = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <ZH_Operation xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </ZH_Operation>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        ZH_Operation = ZH_Operation.replace("@sysUser",SYS_USER);
+        ZH_Operation = ZH_Operation.replace("@sysPassword",SYS_PASSWORD);
+        ZH_Operation = ZH_Operation.replace("@startTime",startTime);
+        ZH_Operation = ZH_Operation.replace("@endTime",endTime);
         return ZH_Operation;
     }
     /**收款统计*/
@@ -994,4 +1014,14 @@ public class InterfaceParam {
     }
 
 
+    public String getCommonParam(String name,String param){
+        MyApplication myApplication = MyApplication.getInstance();
+        String xml="";
+        if(name.equals(myApplication.getStr(R.string.report_jingYing))){
+           xml = getZH_Operation("2016/6/28","2016/7/28");
+        }else if(name.equals("配件查询")){
+
+        }
+        return xml;
+    }
 }

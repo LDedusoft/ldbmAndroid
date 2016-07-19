@@ -1,5 +1,9 @@
 package com.ldedusoft.ldbm.util.interfacekits;
 
+import android.text.TextUtils;
+
+import com.ldedusoft.ldbm.Application.MyApplication;
+import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.model.Brand;
 import com.ldedusoft.ldbm.model.CarCode;
@@ -21,6 +25,7 @@ import com.ldedusoft.ldbm.model.Reception;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
 import com.ldedusoft.ldbm.model.TrafficClass;
+import com.ldedusoft.ldbm.model.common.CommonNormal;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -694,6 +699,75 @@ public class InterfaceResault {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+        return listData;
+    }
+
+    /*经营
+    * 返回值格式：1,2,3,4
+    * */
+    private static ArrayList addJingying(ArrayList listData,String result){
+        MyApplication myApplication = MyApplication.getInstance();
+        String[] labelArray = myApplication.getArray(R.array.report_jingYing);
+        if (!TextUtils.isEmpty(result)) {
+            String[] resultArray = result.split(",");
+            for(int i=0;i<resultArray.length;i++){
+                try{
+                    CommonNormal cn = new CommonNormal();
+                    cn.name1 = labelArray[i];
+                    cn.value1 = resultArray[i];
+                    cn.details = false;
+                    listData.add(cn);
+                }catch (Exception e){}
+            }
+        }
+        return listData;
+    }
+
+    /********************************************************/
+    private static ArrayList test(ArrayList listData,String result){
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                CommonNormal cn = new CommonNormal();
+                cn.name1 = jsonObject.getString("ID");
+                cn.value1 = jsonObject.getString("PinPai");
+                cn.details = true;
+                cn.dataSource = jsonObject.toString();
+                listData.add(cn);
+            }
+        }catch (Exception e){e.printStackTrace();}
+        return listData;
+    }
+
+    /**
+     * 通用获取返回值节点名
+     * @param inName
+     * @return
+     */
+    public static String getCommonRsName(String inName){
+        MyApplication myApplication = MyApplication.getInstance();
+        String resault="";
+        if(inName.equals(myApplication.getStr(R.string.report_jingYing))) {
+            resault = "ZH_OperationResult";
+        }else if(inName.equals("订单查询")){
+
+        }
+        return resault;
+    }
+
+    /**
+     * 通用解析返回值方法
+     * @param listData
+     * @param result
+     * @param inName
+     * @return
+     */
+    public static ArrayList getCommonResault(ArrayList listData,String result,String inName){
+        MyApplication myApplication = MyApplication.getInstance();
+        if(inName.equals(myApplication.getStr(R.string.report_jingYing))) {
+            listData = addJingying(listData, result);
         }
         return listData;
     }

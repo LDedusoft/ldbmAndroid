@@ -131,7 +131,7 @@ public class InitParamUtil {
     /*初始化报表页面菜单*/
     private void initReportMenuList() {
         ArrayList<MenuItem> menuItemList =getMenuList(R.array.report_menu_item);
-        SysProperty.getInstance().setRepairMenuList(menuItemList);
+        SysProperty.getInstance().setReportMenuList(menuItemList);
     }
 
     /*获取菜单配置*/

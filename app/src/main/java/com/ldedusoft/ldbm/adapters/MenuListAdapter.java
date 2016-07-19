@@ -2,7 +2,6 @@ package com.ldedusoft.ldbm.adapters;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.ldedusoft.ldbm.model.MenuItem;
 import java.util.List;
 
 /**
+ * 菜单适配器
  * Created by wangjianwei on 2016/6/25.
  */
 public class MenuListAdapter extends ArrayAdapter<MenuItem> {
@@ -31,10 +31,6 @@ public class MenuListAdapter extends ArrayAdapter<MenuItem> {
     private OnMenuTitleClickListioner mOnMenuTitleClickListioner;
     private OnMenuAddClickListioner mOnMenuAddClickListioner;
     private OnMenuShortcutClickListioner mOnMenuShortcutClickListioner;
-//    private TextView deleteAction;
-//    private TextView settopAction;
-//LinearLayout actionLayout;
-//    private  ImageView menuItemIcon;
     private LinearLayout tempLayout; //临时保存actionLayout
 
 

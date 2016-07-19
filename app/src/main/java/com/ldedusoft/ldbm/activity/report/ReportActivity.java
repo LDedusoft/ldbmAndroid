@@ -42,7 +42,7 @@ public class ReportActivity extends BaseActivity implements OnMenuTitleClickList
         reportTopBar.setTitle(getString(R.string.report_title));
     }
     private void initRepairMenuList(){
-        menuDataList = SysProperty.getInstance().getRepairMenuList();//从系统属性中获取菜单列表。登录时已初始化
+        menuDataList = SysProperty.getInstance().getReportMenuList();//从系统属性中获取菜单列表。登录时已初始化
         reportListView = (ListView)findViewById(R.id.report_menu_list);
         adapter = new MenuListAdapter(this,R.layout.ldbm_menu_item,menuDataList);
         reportListView.setAdapter(adapter);

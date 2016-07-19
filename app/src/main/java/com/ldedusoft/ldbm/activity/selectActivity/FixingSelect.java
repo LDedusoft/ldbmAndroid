@@ -17,6 +17,7 @@ import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.SelectFixingAdapter;
 import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
+import com.ldedusoft.ldbm.component.myAdapter.CommonAdapter;
 import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
 import com.ldedusoft.ldbm.model.FixingInfo;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 public class FixingSelect extends BaseActivity implements QueryToolBarListener {
     private ArrayList<FixingInfo> listData;
     private ListView listView;
-    private SelectFixingAdapter adapter;
+    private CommonAdapter adapter;
     private int inputListPosition;
     private int page = 0;//页数
     private TextView nextPageBtn;
@@ -136,11 +137,11 @@ public class FixingSelect extends BaseActivity implements QueryToolBarListener {
     }
 
     private void initListView(){
-
         listView = (ListView)findViewById(R.id.selected_fixings_list);
-        listData = new ArrayList<FixingInfo>();
+        listData = new ArrayList();
         adapter = new SelectFixingAdapter(this,R.layout.ldbm_selected_fixings_item,listData);
         listView.setAdapter(adapter);
+
         listView.setDividerHeight(1); //分割线粗为1
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
