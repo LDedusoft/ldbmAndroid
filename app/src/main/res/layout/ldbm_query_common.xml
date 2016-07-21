@@ -12,6 +12,16 @@
             android:layout_height="wrap_content">
         </com.ldedusoft.ldbm.component.customComp.QueryToolBar>
     </LinearLayout>
+<!--查询工具栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.ldedusoft.ldbm.component.customComp.CommonQueryBar
+            android:id="@+id/selected_commonQuery_conditionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.ldedusoft.ldbm.component.customComp.CommonQueryBar>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

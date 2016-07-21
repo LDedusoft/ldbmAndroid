@@ -17,7 +17,7 @@
     <dimen name="bottom_bar_btn_icon_car_size">30sp</dimen> <!-- 整车图尺寸 -->
     <dimen name="bottom_bar_height">46dp</dimen><!-- 底工具栏整体高度 -->
     <dimen name="top_bar_height">45dp</dimen><!--顶部工具栏高度-->
-    <dimen name="top_bar_right_button_width">60dp</dimen><!--顶部工具栏右侧按钮宽度-->
+    <dimen name="top_bar_right_button_width">50dp</dimen><!--顶部工具栏右侧按钮宽度-->
 
     <dimen name="top_menu_icon_width">50dp</dimen><!--顶部工具栏菜单图片宽度-->
     <dimen name="top_menu_icon_height">40dp</dimen><!--顶部工具栏菜单图片高度-->
@@ -44,5 +44,7 @@
     <dimen name="commonQuery_item_height">60dp</dimen> <!--通用列表item高度-->
     <dimen name="commonQuery_item_title_width">150dp</dimen> <!--通用列表标题宽度-->
     <dimen name="commonQuery_item_action_width">60dp</dimen> <!--通用列详情按钮宽度-->
+    <dimen name="commonQuery_condition_height">35dp</dimen> <!--通用列表 查询栏高度-->
+    <dimen name="commonQuery_condition_textsize">15dp</dimen> <!--通用列表 查询栏高度-->
 
 </resources>

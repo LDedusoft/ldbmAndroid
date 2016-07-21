@@ -144,7 +144,7 @@
         android:visibility="gone"
         android:paddingLeft="5dp"
         >
-        <Button
+        <TextView
             android:id="@+id/input_item_add_btn"
             android:layout_width="@dimen/input_list_item_addIcon"
             android:layout_height="@dimen/input_list_item_addIcon"

@@ -13,6 +13,7 @@ import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
+import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
@@ -47,6 +48,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
         String value =  getIntent().getStringExtra("param");
         formToolBar = (FormToolBar)findViewById(R.id.appointment_wx_toolbar);
         formToolBar.setTitle(this.getResources().getString(R.string.appointment_wx));
+        formToolBar.showImportBtn();//显示导入按钮
         formToolBar.setFormToolBarListener(new FormToolBarListener() {
             @Override
             public void OnSaveClick() {
@@ -57,6 +59,13 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
             @Override
             public void OnBackClick() {
                 finish();
+            }
+
+            @Override
+            public void OnImportClick() {
+                //选择预约单
+               Intent intent = new Intent("activity.queryActivity.AppointmentQueryYY");
+                AppointmentActivityWX.this.startActivityForResult(intent, 10);
             }
         });
         listData = InitParamUtil.getInstance(this).initRP_ReceptionNew_WX(); //!!
@@ -175,6 +184,27 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                     SalesMan salesMan = (SalesMan)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
                     updateListItem(salesMan.getName(),inputListPosition);
+                }
+                break;
+            case 10://预约单
+                if(resultCode == RESULT_OK){
+                    Appointment appointment = (Appointment)data.getSerializableExtra("item");
+                    for (int i=0;i<listData.size();i++){
+                        InputItem item = listData.get(i);
+                        if("CarCode".equals(item.getItemId())){
+                            item.setValue(appointment.getCarCode());
+                        }else if ("Driver".equals(item.getItemId())){
+                            item.setValue(appointment.getMingCheng());
+                        }else if ("PhoneNum".equals(item.getItemId())){
+                            item.setValue("");
+                        }else if ("RepairType".equals(item.getItemId())){
+                            item.setValue(appointment.getWxFangShi());
+                        }else if ("BusinessType".equals(item.getItemId())){
+                            item.setValue(appointment.getYwLeiBie());
+                        }
+                        listData.set(i, item);
+                    }
+                    adapter.notifyDataSetChanged();
                 }
                 break;
             default:

@@ -12,8 +12,6 @@
         <item>预约维修</item>
         <item>维修接待</item>
         <item>配件销售单</item>
-        <item>预约维修查询</item>
-        <item>维修接待查询</item>
         <item>维修进度查询</item>
         <item>车辆信息查询</item>
         <item>客户信息查询</item>
@@ -23,14 +21,12 @@
         <item>预约维修</item>
         <item>维修接待</item>
         <item>查询group</item>
-        <item>预约维修查询</item>
-        <item>维修接待查询</item>
         <item>维修进度查询</item>
         <item>车辆信息查询</item>
         <item>客户信息查询</item>
     </string-array>
     <string-array name="car_menu_item">
-        <item>新建group</item>
+        <item>制单group</item>
         <item>洽谈单</item>
         <item>销售单</item>
         <item>查询group</item>
@@ -40,12 +36,12 @@
         <item>车贷计算</item>
     </string-array>
     <string-array name="negotiate_menu_item">
-        <item>新建group</item>
+        <item>制单group</item>
         <item>个人洽谈</item>
         <item>公司洽谈</item>
     </string-array>
     <string-array name="part_menu_item">
-        <item>新建group</item>
+        <item>制单group</item>
         <item>配件销售单</item>
         <item>配件采购单</item>
         <item>新建配件单</item>
@@ -56,10 +52,10 @@
 
     <string-array name="report_menu_item">
         <item>综合统计group</item>
-        <item>经营</item>
-        <item>库存</item>
-        <item>维修</item>
-        <item>收款</item>
+        <item>经营统计</item>
+        <item>库存统计</item>
+        <item>维修统计</item>
+        <item>收款统计</item>
         <item>客户信息</item>
         <item>进货统计group</item>
         <item>进货汇总</item>
@@ -133,5 +129,39 @@
         <item>本期实付款总额</item>
         <item>本期应收款总额</item>
         <item>本期实收款总额</item>
+    </string-array>
+    <string-array name="report_kuCun">
+        <item>本期入库总额</item>
+        <item>-其中进货入库</item>
+        <item>----内部调拨入库</item>
+        <item>----采购退货入库</item>
+        <item>----盘点盘盈入库</item>
+        <item>----其他入库</item>
+        <item>----调价入库</item>
+        <item>本期出库总额</item>
+        <item>-其中销售出库</item>
+        <item>----内部调拨出库</item>
+        <item>----销售退回出库</item>
+        <item>----领料出库</item>
+        <item>----盘点盘亏出库</item>
+        <item>----其他出库</item>
+        <item>期末库存余额</item>
+    </string-array>
+
+    <string-array name="report_weiXiu">
+        <item>接待车辆台次</item>
+        <item>-其中已结算台次</item>
+        <item>----未结算台次</item>
+        <item>结算总金额</item>
+        <item>-其中工时费金额</item>
+        <item>----材料费金额</item>
+        <item>----其他费金额</item>
+        <item>----管理费金额</item>
+        <item>优惠金额</item>
+        <item>应收款金额</item>
+        <item>实收款金额</item>
+        <item>欠款金额</item>
+        <item>维修成本金额</item>
+        <item>维修毛利润</item>
     </string-array>
 </resources>

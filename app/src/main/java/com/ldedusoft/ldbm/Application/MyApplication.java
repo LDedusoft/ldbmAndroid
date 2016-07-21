@@ -2,11 +2,12 @@ package com.ldedusoft.ldbm.Application;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by wangjianwei on 2016/7/16.
  */
-public class MyApplication extends Application {
+public class MyApplication extends Application implements Thread.UncaughtExceptionHandler {
     private Context myContext;
     private static MyApplication myApplication;
 
@@ -32,5 +33,11 @@ public class MyApplication extends Application {
 
     public String[] getArray(int id){
         return myContext.getResources().getStringArray(id);
+    }
+
+    @Override
+    public void uncaughtException(Thread thread, Throwable ex) {
+        Log.d("MyApplication","FC异常！");
+        thread.setDefaultUncaughtExceptionHandler(this);
     }
 }

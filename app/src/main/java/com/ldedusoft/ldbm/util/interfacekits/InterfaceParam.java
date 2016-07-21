@@ -4,6 +4,8 @@ import com.ldedusoft.ldbm.Application.MyApplication;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.UserProperty;
 
+import org.json.JSONObject;
+
 /**
  * Created by wangjianwei on 2016/6/27.
  */
@@ -971,7 +973,25 @@ public class InterfaceParam {
         return ZH_InfoForBoss;
     }
     /**库存统计*/
-    public String getZH_Inventory() {
+    public String getZH_Inventory(String startTime,String endTime) {
+        ZH_Inventory ="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <ZH_Inventory xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </ZH_Inventory>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        ZH_Inventory = ZH_Inventory.replace("@sysUser",SYS_USER);
+        ZH_Inventory = ZH_Inventory.replace("@sysPassword",SYS_PASSWORD);
+        ZH_Inventory = ZH_Inventory.replace("@startTime",startTime);
+        ZH_Inventory = ZH_Inventory.replace("@endTime",endTime);
         return ZH_Inventory;
     }
     /**经营统计*/
@@ -1001,7 +1021,25 @@ public class InterfaceParam {
         return ZH_Payment;
     }
     /**维修统计*/
-    public String getZH_Repair() {
+    public String getZH_Repair(String startTime,String endTime) {
+        ZH_Repair="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <ZH_Repair xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </ZH_Repair>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        ZH_Repair = ZH_Repair.replace("@sysUser",SYS_USER);
+        ZH_Repair = ZH_Repair.replace("@sysPassword",SYS_PASSWORD);
+        ZH_Repair = ZH_Repair.replace("@startTime",startTime);
+        ZH_Repair = ZH_Repair.replace("@endTime",endTime);
         return ZH_Repair;
     }
     /**人员回款统计*/
@@ -1014,14 +1052,18 @@ public class InterfaceParam {
     }
 
 
-    public String getCommonParam(String name,String param){
+    public String getCommonParam(String name,JSONObject param){
         MyApplication myApplication = MyApplication.getInstance();
         String xml="";
-        if(name.equals(myApplication.getStr(R.string.report_jingYing))){
-           xml = getZH_Operation("2016/6/28","2016/7/28");
-        }else if(name.equals("配件查询")){
-
-        }
+        try {
+            if (name.equals(myApplication.getStr(R.string.report_jingYing))) {
+                xml = getZH_Operation(param.getString("startTime"), param.getString("endTime"));
+            } else if (name.equals(myApplication.getStr(R.string.report_kuCun))) {
+                xml = getZH_Inventory(param.getString("startTime"), param.getString("endTime"));
+            } else if (name.equals(myApplication.getStr(R.string.report_weiXiu))) {
+                xml = getZH_Repair(param.getString("startTime"), param.getString("endTime"));
+            }
+        }catch (Exception e){e.printStackTrace();}
         return xml;
     }
 }

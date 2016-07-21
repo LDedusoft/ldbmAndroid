@@ -23,4 +23,7 @@
     <color name="inputListItemCheckbox">#50cb3b</color><!--输入表单复选框颜色-->
     <color name="welcomePassBtn">#a5cccccc</color><!--欢迎页面登录按钮背景色-->
     <color name="menuItemGroupBackground">#eaedf0</color><!--菜单栏分组背景色-->
+    <color name="commonQueryConditionText">#474753</color><!--通用查询条件文字颜色-->
+    <color name="commonQueryConditionLine">#c7d2ea</color><!-- 通用查询条件分割线颜色-->
+    <color name="commonQueryConditionBackground">#f0eef4</color> <!-- 通用查询条件栏背景色-->
 </resources>

@@ -18,6 +18,7 @@ public class FormToolBar extends LinearLayout {
     private TextView titleText;
     private TextView backText;
     private TextView saveBtn;
+    private TextView importBtn;
     private FormToolBarListener formToolBarListener;
     private LinearLayout backLayout;
     public FormToolBar(Context context, AttributeSet attrs){
@@ -27,6 +28,15 @@ public class FormToolBar extends LinearLayout {
         back  = (TextView)findViewById(R.id.form_tool_bar_back);
         titleText = (TextView)findViewById(R.id.form_tool_bar_title);
         backText = (TextView)findViewById(R.id.form_tool_bar_text);
+        importBtn = (TextView)findViewById(R.id.form_tool_bar_import);
+        importBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(formToolBarListener!=null){
+                    formToolBarListener.OnImportClick();
+                }
+            }
+        });
         saveBtn = (TextView)findViewById(R.id.form_tool_bar_save);
         saveBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -66,6 +76,9 @@ public class FormToolBar extends LinearLayout {
 
     }
 
+    public void showImportBtn(){
+        importBtn.setVisibility(VISIBLE);
+    }
     public void setTitle(String title){
         titleText.setText(title);
     }

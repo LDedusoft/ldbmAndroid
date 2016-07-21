@@ -706,9 +706,9 @@ public class InterfaceResault {
     /*经营
     * 返回值格式：1,2,3,4
     * */
-    private static ArrayList addJingying(ArrayList listData,String result){
+    private static ArrayList addFixedCondition(ArrayList listData,String result,int arrayId){
         MyApplication myApplication = MyApplication.getInstance();
-        String[] labelArray = myApplication.getArray(R.array.report_jingYing);
+        String[] labelArray = myApplication.getArray(arrayId);
         if (!TextUtils.isEmpty(result)) {
             String[] resultArray = result.split(",");
             for(int i=0;i<resultArray.length;i++){
@@ -723,6 +723,8 @@ public class InterfaceResault {
         }
         return listData;
     }
+
+
 
     /********************************************************/
     private static ArrayList test(ArrayList listData,String result){
@@ -751,8 +753,10 @@ public class InterfaceResault {
         String resault="";
         if(inName.equals(myApplication.getStr(R.string.report_jingYing))) {
             resault = "ZH_OperationResult";
-        }else if(inName.equals("订单查询")){
-
+        }else if(inName.equals(myApplication.getStr(R.string.report_kuCun))) {
+            resault = "ZH_InventoryResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_weiXiu))) {
+            resault = "ZH_RepairResult";
         }
         return resault;
     }
@@ -767,7 +771,11 @@ public class InterfaceResault {
     public static ArrayList getCommonResault(ArrayList listData,String result,String inName){
         MyApplication myApplication = MyApplication.getInstance();
         if(inName.equals(myApplication.getStr(R.string.report_jingYing))) {
-            listData = addJingying(listData, result);
+            listData = addFixedCondition(listData, result, R.array.report_jingYing);
+        }else if(inName.equals(myApplication.getStr(R.string.report_kuCun))) {
+            listData = addFixedCondition(listData, result, R.array.report_kuCun);
+        }else if(inName.equals(myApplication.getStr(R.string.report_weiXiu))) {
+            listData = addFixedCondition(listData, result, R.array.report_weiXiu);
         }
         return listData;
     }

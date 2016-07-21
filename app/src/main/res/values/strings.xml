@@ -32,6 +32,7 @@
     <string name="client_query">客户信息查询</string>
     <string name="new_client">添加客户信息</string>
     <string name="form_toolbar_back">返回</string>
+    <string name="form_toolbar_import">导入</string>
     <string name="form_toolbar_save">保存</string>
     <string name="repair_title">维修管理</string>
     <string name="part_title">配件管理</string>
@@ -49,10 +50,10 @@
     <string name="icon_bottomBar_car">&#xe6bb;</string><!--整车图标-->
     <string name="icon_bottomBar_part">&#xe600;</string><!--配件图标-->
     <string name="icon_bottomBar_report">&#xe618;</string><!--报表图标-->
-    <string name="report_jingYing">经营</string>
-    <string name="report_kuCun">库存</string>
-    <string name="report_weiXiu">维修</string>
-    <string name="report_shouKuan">收款</string>
+    <string name="report_jingYing">经营统计</string>
+    <string name="report_kuCun">库存统计</string>
+    <string name="report_weiXiu">维修统计</string>
+    <string name="report_shouKuan">收款统计</string>
     <string name="report_keHuXinXi">客户信息</string>
     <string name="report_jinHuoHuiZong">进货汇总</string>
     <string name="report_caiGouDingDan">采购订单</string>

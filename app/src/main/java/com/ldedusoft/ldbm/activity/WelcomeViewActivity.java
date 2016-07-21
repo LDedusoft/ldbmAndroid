@@ -1,6 +1,5 @@
 package com.ldedusoft.ldbm.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * 主界面：ViewPagerViewPager不在android sdk 自带jar包中，来源google 的补充组件android-support-v4.jar
  */
-public class WelcomeViewActivity extends Activity {
+public class WelcomeViewActivity extends BaseActivity {
     private ViewPager mViewPager;
     List<View> viewList;
     @Override

@@ -1,12 +1,14 @@
 package com.ldedusoft.ldbm.model;
 
+import java.io.Serializable;
+
 /**
  *  预约维修信息
  * Created by wangjianwei on 2016/6/30.
  * {Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；
  * MingCheng：客户名称；wxFangShi：维修方式；ywLeiBie：业务类别}
  */
-public class Appointment {
+public class Appointment implements Serializable {
     private int id;
     private String danHao;
     private String djTime;

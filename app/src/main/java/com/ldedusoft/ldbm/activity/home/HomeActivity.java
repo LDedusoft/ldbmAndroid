@@ -21,6 +21,7 @@ import com.ldedusoft.ldbm.component.widge.sideslip.OnSettopListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
 import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
+import com.ldedusoft.ldbm.util.ActivityCollector;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 
 import java.util.ArrayList;
@@ -112,8 +113,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
             Timer timer = new Timer();
             timer.schedule(task, 2000);
         }else{
-            finish();
-            BaseActivity.finishAll();
+            ActivityCollector.finishAll();
         }
     }
 
