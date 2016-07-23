@@ -107,12 +107,12 @@ public class ViewHolder {
         return this;
     }
 
-    public ViewHolder setLayoutClickAction(int viewId, final String datasource,final CommonNormalDetailListener listener){
+    public ViewHolder setLayoutClickAction(int viewId, final String datasource,final String title, final CommonNormalDetailListener listener){
         LinearLayout layout = getView(viewId);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.OnDetailClick(datasource);
+                listener.OnDetailClick(datasource,title);
             }
         });
         return this;

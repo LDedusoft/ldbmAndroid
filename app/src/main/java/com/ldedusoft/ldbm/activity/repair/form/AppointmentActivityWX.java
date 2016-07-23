@@ -132,22 +132,22 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
             case 1: //车牌选择
                 if(resultCode == RESULT_OK){
                     CarCode car = (CarCode)data.getSerializableExtra("item");
-                   // int inputListPosition = data.getIntExtra("inputListPosition",-1);
-                   // updateListItem(car.getCarCode(), inputListPosition);
-                    String code = car.getCarCode();
-                    String linkMan = car.getLinkMan();
-                    String telephone = car.getTelephone();
-                    for (int i=0;i<listData.size();i++){
-                        InputItem item = listData.get(i);
-                        if("CarCode".equals(item.getItemId())){
-                            item.setValue(code);
-                        }else if ("Driver".equals(item.getItemId())){
-                            item.setValue(linkMan);
-                        }else if ("PhoneNum".equals(item.getItemId())){
-                            item.setValue(telephone);
-                        }
-                        listData.set(i, item);
-                    }
+                    int inputListPosition = data.getIntExtra("inputListPosition", -1);
+                    updateListItem(car.getCarCode(), inputListPosition);
+//                    String code = car.getCarCode();
+//                    String linkMan = car.getLinkMan();
+//                    String telephone = car.getTelephone();
+//                    for (int i=0;i<listData.size();i++){
+//                        InputItem item = listData.get(i);
+//                        if("CarCode".equals(item.getItemId())){
+//                            item.setValue(code);
+//                        }else if ("Driver".equals(item.getItemId())){
+//                            item.setValue(linkMan);
+//                        }else if ("PhoneNum".equals(item.getItemId())){
+//                            item.setValue(telephone);
+//                        }
+//                        listData.set(i, item);
+//                    }
                     adapter.notifyDataSetChanged();
                 }
                 break;
@@ -193,10 +193,6 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                         InputItem item = listData.get(i);
                         if("CarCode".equals(item.getItemId())){
                             item.setValue(appointment.getCarCode());
-                        }else if ("Driver".equals(item.getItemId())){
-                            item.setValue(appointment.getMingCheng());
-                        }else if ("PhoneNum".equals(item.getItemId())){
-                            item.setValue("");
                         }else if ("RepairType".equals(item.getItemId())){
                             item.setValue(appointment.getWxFangShi());
                         }else if ("BusinessType".equals(item.getItemId())){
@@ -250,10 +246,11 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
         String paramXml = InterfaceParam.getInstance().getRP_ReceptionSave(number, info);//!!
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
-            public void onFinish(String response) {
+            public void onFinish(final String response) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("维修接待保存返回值：", response);
                         Toast.makeText(AppointmentActivityWX.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
                         TimerTask task = new TimerTask(){
                             public void run(){

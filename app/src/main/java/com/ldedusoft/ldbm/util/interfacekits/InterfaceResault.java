@@ -724,22 +724,273 @@ public class InterfaceResault {
         return listData;
     }
 
+    /*收款
+   * 返回值格式：{BianHao：客户编号；MingCheng：客户名称；QianKuan：客户欠款；ShiShou：实际收款；YingShou：应收款}
+   * */
+    private static ArrayList addZH_PaymentResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "客户名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "客户编号";
+                    cn.value2 = jsonObject.getString("BianHao");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
 
+    /*
+    * 客户账务统计
+    * 返回值格式：{BianHao：客户编号；MingCheng：客户名称；QianKuan：客户欠款；LinkMan：联系人；ZuiDaEDu：信誉额度金额；cedu：超信誉额度金额}
+    * */
+    private static ArrayList addZH_CustomerAccountsResult(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "客户名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "客户编号";
+                    cn.value2 = jsonObject.getString("BianHao");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+    * 进货汇总
+    * 返回值格式：{XiangMu：项目；Num：数量合计；NPercent：数量百分比；Jine：金额合计；JPercent：金额百分比}
+    * */
+    private static ArrayList addJH_RestockResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "项目";
+                    cn.value1 = jsonObject.getString("XiangMu");
+                    cn.name2 = "数量合计";
+                    cn.value2 = jsonObject.getString("Num");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+    * 采购订单
+    * 返回值格式：{BianHao：配件编号；MingCheng：配件名称；DNum：订单数量；DJine：订单金额；GNum：进货数量；GJine：进货金额；RNum：入库数量；RJine：入库金额；JBilv：进货比率；RBilv：入库比率}
+    * */
+    private static ArrayList addJH_BuyProjectResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "配件名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "订单数量";
+                    cn.value2 = jsonObject.getString("DNum");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+       * 供应商累计供货排行
+       * {BianHao：供商编号；MingCheng：供商名称；Num：累计供货数量；Jine：含税金额；BJine：不含税金额}
+       * */
+    private static ArrayList addJH_SupplyResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "供商名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "累计供货数量";
+                    cn.value2 = jsonObject.getString("Num");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+      * 销售计划分析表
+      * {BianHao：配件编号；MingCheng：配件名称；DNum：订单数量；DJine：订单金额；GNum：进货数量；GJine：进货金额；RNum：出库数量；RJine：出库金额；JBilv：销售比率；RBilv：出库比率}
+      * */
+    private static ArrayList addXS_SaleProjectResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "供商名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "订单数量";
+                    cn.value2 = jsonObject.getString("DNum");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+    /*
+     * 客户销售额排行
+     * {BianHao：供商编号；MingCheng：供商名称；Num：销售数量；Jine：销售金额；LinkMan：联系人；ChengBenZh：成本金额；LiRun：毛利润}
+     * */
+    private static ArrayList addXS_ClientSalesVolumeCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "供商名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "销售数量";
+                    cn.value2 = jsonObject.getString("Num");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+
+    /*
+     * 日期销售报表
+     * {RiQi：日期；Jine：销售额；ChengBen：销售成本；LiRun：毛利润；Count：来客数；PingJun：平均客买}
+     * */
+    private static ArrayList addXS_DateSaleResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "日期";
+                    cn.value1 = jsonObject.getString("RiQi");
+                    cn.name2 = "销售额";
+                    cn.value2 = jsonObject.getString("Jine");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+    * 仓库销售排行
+    * {BianHao：仓库编号；CangKu：仓库名称；Num：销售数量；Jine：销售金额；ChengBen：成本金额；LiRun：毛利润}
+    * */
+    private static ArrayList addXS_StockSaleResultCondition(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "仓库名称";
+                    cn.value1 = jsonObject.getString("CangKu");
+                    cn.name2 = "销售数量";
+                    cn.value2 = jsonObject.getString("Num");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
 
     /********************************************************/
     private static ArrayList test(ArrayList listData,String result){
-        try {
-            JSONArray jsonArray = new JSONArray(result);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                CommonNormal cn = new CommonNormal();
-                cn.name1 = jsonObject.getString("ID");
-                cn.value1 = jsonObject.getString("PinPai");
-                cn.details = true;
-                cn.dataSource = jsonObject.toString();
-                listData.add(cn);
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.name1 = jsonObject.getString("ID");
+                    cn.value1 = jsonObject.getString("PinPai");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){e.printStackTrace();}
+        }
         return listData;
     }
 
@@ -757,6 +1008,24 @@ public class InterfaceResault {
             resault = "ZH_InventoryResult";
         }else if(inName.equals(myApplication.getStr(R.string.report_weiXiu))) {
             resault = "ZH_RepairResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_shouKuan))) {
+            resault = "ZH_PaymentResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_keHuZhangWuTJ))) {
+            resault = "ZH_CustomerAccountsResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_jinHuoHuiZong))) {
+            resault = "JH_RestockResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_caiGouDingDan))) {
+            resault = "JH_BuyProjectResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_gongYingShangLeiJi))) {
+            resault = "JH_SupplyResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_xiaoShouJiHua))) {
+            resault = "XS_SaleProjectResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_keHuXiaoShouE))) {
+            resault = "XS_ClientSalesVolumeResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_riQiXiaoShou))) {
+            resault = "XS_DateSaleResult";
+        }else if(inName.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
+            resault = "XS_StockSaleResult";
         }
         return resault;
     }
@@ -776,6 +1045,24 @@ public class InterfaceResault {
             listData = addFixedCondition(listData, result, R.array.report_kuCun);
         }else if(inName.equals(myApplication.getStr(R.string.report_weiXiu))) {
             listData = addFixedCondition(listData, result, R.array.report_weiXiu);
+        }else if(inName.equals(myApplication.getStr(R.string.report_shouKuan))) {
+            listData = addZH_PaymentResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_keHuZhangWuTJ))) {
+            listData = addZH_PaymentResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_jinHuoHuiZong))) {
+            listData = addJH_RestockResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_caiGouDingDan))) {
+            listData = addJH_BuyProjectResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_gongYingShangLeiJi))) {
+            listData = addJH_SupplyResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_xiaoShouJiHua))) {
+            listData = addXS_SaleProjectResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_keHuXiaoShouE))) {
+            listData = addXS_ClientSalesVolumeCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_riQiXiaoShou))) {
+            listData = addXS_DateSaleResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
+            listData = addXS_StockSaleResultCondition(listData, result,inName);
         }
         return listData;
     }

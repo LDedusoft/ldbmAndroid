@@ -14,7 +14,9 @@ import com.ldedusoft.ldbm.component.customComp.CommonQueryBar;
 import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
 import com.ldedusoft.ldbm.interfaces.CommonQueryBarListener;
 import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
+import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.common.CommonNormal;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -28,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 /**
  * 通用列表
@@ -68,9 +71,12 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
         String endTime = sDateFormat.format(new java.util.Date());
         JSONObject param =new JSONObject();
         try {
+            //必须加入默认参数
             param.put("startTime", startTime);
             param.put("endTime", endTime);
             param.put("salesMan", "");
+            param.put("clientBianHao","");
+            param.put("restockType","1");
         }catch (Exception e){}
         return  param;
     }
@@ -93,6 +99,19 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
                 Intent intent = new Intent("activity.selectActivity.SalesmanSelect");
                 startActivityForResult(intent, 1);
             }
+
+            @Override
+            public void OnClientSelect() {
+                Intent intent = new Intent("activity.selectActivity.ClientSelect");
+                startActivityForResult(intent, 2);
+            }
+
+            @Override
+            public void OnRestockTypeSelect() {
+                Intent intent = new Intent("activity.selectActivity.CommonSelect");
+                intent.putExtra("param","restock_type");
+                startActivityForResult(intent, 3);
+            }
         });
 
         conditionBar.setConditionType(Integer.parseInt(intentParam));
@@ -101,6 +120,7 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
     private void initToolBar(){
         toolBar = (QueryToolBar)findViewById(R.id.selected_commonQuery_toolbar);
         toolBar.setQueryToolBarListener(this);
+        toolBar.setTitle(interfaceName);
     }
 
     @Override
@@ -115,7 +135,6 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
 
 
     private void initListView(){
-
         listView = (ListView)findViewById(R.id.selected_commonQuery_list);
         listData = new ArrayList();
         //设置通用适配器
@@ -152,17 +171,23 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
                 }
             });
         }else{
-            //遍历json，生成commonNormal 加入listData。更新adapter
+            //遍历字典linkedHashMap()有序 获取key，取中文
             try {
                 JSONObject dsJson = new JSONObject(dataSource);
-                Iterator iterator = dsJson.keys();
-                while(iterator.hasNext()){
-                    String key = (String) iterator.next();
-                    CommonNormal cn = new CommonNormal();
-                    cn.name1 = key;
-                    cn.value1 =dsJson.getString(key);
-                    listData.add(cn);
+                LinkedHashMap<String,String> dicKeyMap = SysProperty.getInstance().getReportKeyDic();
+                for(String dicKey:dicKeyMap.keySet()){
+                    Iterator iterator = dsJson.keys();
+                    while(iterator.hasNext()){
+                        String jsonKey = (String) iterator.next();
+                        if(dicKey.equals(interfaceName+jsonKey)) {
+                            CommonNormal cn = new CommonNormal();
+                            cn.name1 = dicKeyMap.get(dicKey);//取中文名
+                            cn.value1 = dsJson.getString(jsonKey);
+                            listData.add(cn);
+                        }
+                    }
                 }
+
                 adapter.notifyDataSetChanged();
                 closeProgressDialog();
             }catch (Exception e){
@@ -191,6 +216,18 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
                 if(resultCode == RESULT_OK){
                     SalesMan salesMan = (SalesMan)data.getSerializableExtra("item");
                     conditionBar.setSalesmanValue(salesMan.getName());
+                }
+                break;
+            case 2: //客户信息选择
+                if(resultCode == RESULT_OK){
+                    Client client = (Client)data.getSerializableExtra("item");
+                    conditionBar.setClientValue(client.getName(), client.getBianHao());
+                }
+                break;
+            case 3: //汇总类型
+                if(resultCode == RESULT_OK){
+                    String type = data.getStringExtra("item");
+                    conditionBar.setRestockTypeValue(type);
                 }
                 break;
             default:

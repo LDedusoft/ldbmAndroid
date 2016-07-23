@@ -195,10 +195,10 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     private void initMenuListData(){
         InitParamUtil initParam = new InitParamUtil(this);
         if(SysProperty.getInstance().getAllMenuList() == null) {
-            initParam.initAllMenuList();//初始化菜单项
+            initParam.initAllMenuList();//初始化菜单项,只初始一次
             initParam.initMenu();//初始化每页的菜单
         }else {
-            initParam.initHomeMenuList();//根据用户配置重新生成首页菜单
+            initParam.initHomeMenuList();//根据用户配置重新生成首页菜单，每次访问首页执行
         }
         menuDataList = SysProperty.getInstance().getHomeMenuList();
 

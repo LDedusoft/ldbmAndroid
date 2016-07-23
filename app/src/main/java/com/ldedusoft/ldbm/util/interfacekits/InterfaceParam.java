@@ -222,15 +222,71 @@ public class InterfaceParam {
         return BJ_OutofStock;
     }
     /**采购订单分析*/
-    public String getJH_BuyProject() {
+    public String getJH_BuyProject(String startTime,String endTime) {
+        JH_BuyProject = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <JH_BuyProject xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </JH_BuyProject>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        JH_BuyProject = JH_BuyProject.replace("@sysUser",SYS_USER);
+        JH_BuyProject = JH_BuyProject.replace("@sysPassword",SYS_PASSWORD);
+        JH_BuyProject = JH_BuyProject.replace("@startTime",startTime);
+        JH_BuyProject = JH_BuyProject.replace("@endTime",endTime);
         return JH_BuyProject;
     }
     /**进货汇总表*/
-    public String getJH_Restock() {
+    public String getJH_Restock(String startTime,String endTime,String typeId) {
+        JH_Restock = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <JH_Restock xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "      <typeId>@typeId</typeId>\n" +
+                "    </JH_Restock>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        JH_Restock = JH_Restock.replace("@sysUser",SYS_USER);
+        JH_Restock = JH_Restock.replace("@sysPassword",SYS_PASSWORD);
+        JH_Restock = JH_Restock.replace("@startTime",startTime);
+        JH_Restock = JH_Restock.replace("@endTime",endTime);
+        JH_Restock = JH_Restock.replace("@typeId",typeId);
         return JH_Restock;
     }
     /**供应商累计供货排行*/
-    public String getJH_Supply() {
+    public String getJH_Supply(String startTime,String endTime) {
+        JH_Supply="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <JH_Supply xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </JH_Supply>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        JH_Supply = JH_Supply.replace("@sysUser",SYS_USER);
+        JH_Supply = JH_Supply.replace("@sysPassword",SYS_PASSWORD);
+        JH_Supply = JH_Supply.replace("@startTime",startTime);
+        JH_Supply = JH_Supply.replace("@endTime",endTime);
         return JH_Supply;
     }
     /**登陆*/
@@ -937,11 +993,47 @@ public class InterfaceParam {
         return SignIn;
     }
     /**客户销售额排行*/
-    public String getXS_ClientSalesVolume() {
+    public String getXS_ClientSalesVolume(String startTime,String endTime) {
+        XS_ClientSalesVolume = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <XS_ClientSalesVolume xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </XS_ClientSalesVolume>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        XS_ClientSalesVolume = XS_ClientSalesVolume.replace("@sysUser",SYS_USER);
+        XS_ClientSalesVolume = XS_ClientSalesVolume.replace("@sysPassword",SYS_PASSWORD);
+        XS_ClientSalesVolume = XS_ClientSalesVolume.replace("@startTime",startTime);
+        XS_ClientSalesVolume = XS_ClientSalesVolume.replace("@endTime",endTime);
         return XS_ClientSalesVolume;
     }
     /**日期销售报表*/
-    public String getXS_DateSale() {
+    public String getXS_DateSale(String startTime,String endTime) {
+        XS_DateSale = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <XS_DateSale xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </XS_DateSale>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        XS_DateSale = XS_DateSale.replace("@sysUser",SYS_USER);
+        XS_DateSale = XS_DateSale.replace("@sysPassword",SYS_PASSWORD);
+        XS_DateSale = XS_DateSale.replace("@startTime",startTime);
+        XS_DateSale = XS_DateSale.replace("@endTime",endTime);
         return XS_DateSale;
     }
     /**营业额统计*/
@@ -949,11 +1041,47 @@ public class InterfaceParam {
         return XS_OperatingAmount;
     }
     /**销售计划分析表*/
-    public String getXS_SaleProject() {
+    public String getXS_SaleProject(String startTime,String endTime) {
+        XS_SaleProject = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <XS_SaleProject xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </XS_SaleProject>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        XS_SaleProject = XS_SaleProject.replace("@sysUser",SYS_USER);
+        XS_SaleProject = XS_SaleProject.replace("@sysPassword",SYS_PASSWORD);
+        XS_SaleProject = XS_SaleProject.replace("@startTime",startTime);
+        XS_SaleProject = XS_SaleProject.replace("@endTime",endTime);
         return XS_SaleProject;
     }
     /**仓库销售排行*/
-    public String getXS_StockSale() {
+    public String getXS_StockSale(String startTime,String endTime) {
+        XS_StockSale = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <XS_StockSale xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </XS_StockSale>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        XS_StockSale = XS_StockSale.replace("@sysUser",SYS_USER);
+        XS_StockSale = XS_StockSale.replace("@sysPassword",SYS_PASSWORD);
+        XS_StockSale = XS_StockSale.replace("@startTime",startTime);
+        XS_StockSale = XS_StockSale.replace("@endTime",endTime);
         return XS_StockSale;
     }
     /**车辆销售统计*/
@@ -965,7 +1093,23 @@ public class InterfaceParam {
         return ZC_SalesPerformance;
     }
     /**客户账务统计*/
-    public String getZH_CustomerAccounts() {
+    public String getZH_CustomerAccounts(String clientId) {
+        ZH_CustomerAccounts = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <ZH_CustomerAccounts xmlns=\"LDBM4S\">\n" +
+                "      <ClientId>@clientId</ClientId>\n" +
+                "    </ZH_CustomerAccounts>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        ZH_CustomerAccounts = ZH_CustomerAccounts.replace("@sysUser",SYS_USER);
+        ZH_CustomerAccounts = ZH_CustomerAccounts.replace("@sysPassword",SYS_PASSWORD);
+        ZH_CustomerAccounts = ZH_CustomerAccounts.replace("@clientId",clientId);
         return ZH_CustomerAccounts;
     }
     /**老板信息中心*/
@@ -1017,7 +1161,25 @@ public class InterfaceParam {
         return ZH_Operation;
     }
     /**收款统计*/
-    public String getZH_Payment() {
+    public String getZH_Payment(String startTime,String endTime) {
+        ZH_Payment="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <ZH_Payment xmlns=\"LDBM4S\">\n" +
+                "      <startTime>@startTime</startTime>\n" +
+                "      <endTime>@endTime</endTime>\n" +
+                "    </ZH_Payment>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        ZH_Payment = ZH_Payment.replace("@sysUser",SYS_USER);
+        ZH_Payment = ZH_Payment.replace("@sysPassword",SYS_PASSWORD);
+        ZH_Payment = ZH_Payment.replace("@startTime",startTime);
+        ZH_Payment = ZH_Payment.replace("@endTime",endTime);
         return ZH_Payment;
     }
     /**维修统计*/
@@ -1062,6 +1224,24 @@ public class InterfaceParam {
                 xml = getZH_Inventory(param.getString("startTime"), param.getString("endTime"));
             } else if (name.equals(myApplication.getStr(R.string.report_weiXiu))) {
                 xml = getZH_Repair(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_shouKuan))) {
+                xml = getZH_Payment(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_keHuZhangWuTJ))) {
+                xml = getZH_CustomerAccounts(param.getString("clientBianHao"));
+            }else if (name.equals(myApplication.getStr(R.string.report_jinHuoHuiZong))) {
+                xml = getJH_Restock(param.getString("startTime"), param.getString("endTime"), param.getString("restockType"));
+            }else if (name.equals(myApplication.getStr(R.string.report_caiGouDingDan))) {
+                xml = getJH_BuyProject(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_gongYingShangLeiJi))) {
+                xml = getJH_Supply(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_xiaoShouJiHua))) {
+                xml = getXS_SaleProject(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_keHuXiaoShouE))) {
+                xml = getXS_ClientSalesVolume(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_riQiXiaoShou))) {
+                xml = getXS_DateSale(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
+                xml = getXS_StockSale(param.getString("startTime"), param.getString("endTime"));
             }
         }catch (Exception e){e.printStackTrace();}
         return xml;

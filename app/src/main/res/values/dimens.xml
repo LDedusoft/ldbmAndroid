@@ -35,6 +35,7 @@
     <dimen name="input_list_item_fix_text">15sp</dimen><!--输入表特殊item文字-->
     <dimen name="input_list_item_text">17sp</dimen><!--输入表单文字-->
     <dimen name="input_list_item_textedit_width">140dp</dimen><!--输入表单文字框宽度-->
+    <dimen name="input_list_item_unit_width">60dp</dimen><!--输入表单单位宽度-->
     <dimen name="inputList_topBar_imgHeight">20dp</dimen> <!--表单工具条 图片高度-->
     <dimen name="inputList_topBar_textViewHeight">22dp</dimen> <!--表单工具条文字高度-->
     <dimen name="inputList_topBar_imgWidth">10dp</dimen> <!--表单工具条 图片宽度-->

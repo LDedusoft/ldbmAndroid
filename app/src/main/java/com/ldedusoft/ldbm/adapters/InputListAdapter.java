@@ -57,6 +57,7 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
     private EditText fixNumber ;
     private TextView delButton;
     private LinearLayout delLayout;
+    private TextView unitBtn;
 
 
     private InputItemDelListener inputItemDelListener;
@@ -136,8 +137,12 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
              fixNumber = (EditText) view.findViewById(R.id.input_list_item_fix_number);
             delButton = (TextView)view.findViewById(R.id.input_list_item_fix_delBtn);
             delLayout = (LinearLayout)view.findViewById(R.id.input_list_item_fix_del_layout);
+            unitBtn = (TextView)view.findViewById(R.id.input_item_unit);
 
-
+            if(!TextUtils.isEmpty(inputItem.getUnit())){
+                unitBtn.setVisibility(View.VISIBLE);
+                unitBtn.setText(inputItem.getUnit());
+            }
             titleView.setText(inputItem.getItemTitle());
             if(inputItem.isRequired()){
                 pointImg.setVisibility(View.VISIBLE);

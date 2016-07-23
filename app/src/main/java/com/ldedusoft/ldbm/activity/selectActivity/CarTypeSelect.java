@@ -37,7 +37,6 @@ public class CarTypeSelect extends BaseActivity {
     }
 
     private void initListView(){
-
         carCodeListView = (ListView)findViewById(R.id.selected_cartype_list);
         listData = new ArrayList<CarType>();
         adapter = new SelectCarTypeAdapter(this,R.layout.ldbm_selected_cartype_item,listData);

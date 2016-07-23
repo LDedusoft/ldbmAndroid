@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by wangjianwei on 2016/6/23.
@@ -32,6 +33,17 @@ public class SysProperty {
 
     /*洽谈页面菜单*/
     private ArrayList<MenuItem> negotiateMenuList;
+
+    /*报表页面key对应中文字典*/
+    private LinkedHashMap<String,String> reportKeyDic;
+
+    public LinkedHashMap<String, String> getReportKeyDic() {
+        return reportKeyDic;
+    }
+
+    public void setReportKeyDic(LinkedHashMap<String, String> reportKeyDic) {
+        this.reportKeyDic = reportKeyDic;
+    }
 
     public ArrayList<MenuItem> getReportMenuList() {
         return reportMenuList;

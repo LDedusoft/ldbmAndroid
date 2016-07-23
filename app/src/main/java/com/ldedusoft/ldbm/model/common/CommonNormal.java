@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Created by wangjianwei on 2016/7/18.
  */
 public class CommonNormal implements Serializable {
+    public String title;//接口标题
     public  String name1;
     public String name2;
     public String value1;

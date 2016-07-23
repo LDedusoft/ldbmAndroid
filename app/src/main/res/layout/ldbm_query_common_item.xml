@@ -5,6 +5,7 @@
     <!--通用列表布局-->
     <!-- name1 name2 value1 value2-->
     <LinearLayout
+        android:id="@+id/commonNormal_item_all"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

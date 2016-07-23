@@ -8,4 +8,6 @@ import org.json.JSONObject;
 public interface CommonQueryBarListener {
     public abstract void OnSelectClick(JSONObject paramObj);
     public abstract void OnSalesmanSelect();
+    public abstract void OnClientSelect();
+    public abstract void OnRestockTypeSelect();
 }

@@ -74,6 +74,7 @@
 "intentPath":"",
 "intentParam":"",
 "required":true,
-"intentRequestCode":0
+"intentRequestCode":0,
+"unit":"(小时)"
 }
 ]

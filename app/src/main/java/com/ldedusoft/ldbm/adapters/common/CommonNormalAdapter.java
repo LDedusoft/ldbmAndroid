@@ -35,11 +35,22 @@ public class CommonNormalAdapter extends CommonAdapter {
         }else{ //有详情，增加点击事件
             viewHolder.hiddenLayout(R.id.commonNormal_item_actionLayout, View.VISIBLE);
             String dataSource = ((CommonNormal) item).dataSource;
-            viewHolder.setLayoutClickAction(R.id.commonNormal_item_actionLayout, dataSource, new CommonNormalDetailListener() {
+            String title = ((CommonNormal) item).title;
+            viewHolder.setLayoutClickAction(R.id.commonNormal_item_actionLayout, dataSource,title, new CommonNormalDetailListener() {
                 @Override
-                public void OnDetailClick(String ds) {
+                public void OnDetailClick(String ds,String title) {
                     Intent intent = new Intent("activity.queryActivity.CommonQuery");
                     intent.putExtra("dataSource", ds);
+                    intent.putExtra("title", title);
+                    mContext.startActivity(intent);
+                }
+            });
+            viewHolder.setLayoutClickAction(R.id.commonNormal_item_all, dataSource,title, new CommonNormalDetailListener() {
+                @Override
+                public void OnDetailClick(String ds,String title) {
+                    Intent intent = new Intent("activity.queryActivity.CommonQuery");
+                    intent.putExtra("dataSource", ds);
+                    intent.putExtra("title", title);
                     mContext.startActivity(intent);
                 }
             });

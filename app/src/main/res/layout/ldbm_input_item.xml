@@ -106,6 +106,20 @@
             android:textColor="@color/inputListItemText"
             android:textColorHint="@color/inputListItemHint"
             />
+        <EditText
+            android:id="@+id/input_item_unit"
+            android:layout_width="@dimen/input_list_item_unit_width"
+            android:layout_height="match_parent"
+            android:numeric="decimal"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            android:textSize="@dimen/input_list_item_text"
+            android:textColor="@color/inputListItemText"
+            android:textColorHint="@color/inputListItemHint"
+            android:visibility="gone"
+            />
+
         <!--性别选择-->
         <RadioGroup
             android:id="@+id/input_item_sex_radio"

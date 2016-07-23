@@ -30,6 +30,16 @@ public class InputItem {
     private boolean required;
     /*关联项*/
     private String relationItem = "";
+    /*单位*/
+    private String unit = "";
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public String getDispValue() {
         return dispValue;

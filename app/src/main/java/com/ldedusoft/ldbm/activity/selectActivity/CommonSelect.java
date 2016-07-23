@@ -45,6 +45,7 @@ public class CommonSelect extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra("inputListPosition", inputListPosition);//表单传来的item位置，返回回去
                 intent.putExtra("result", itemValue);
+                intent.putExtra("item", itemValue);
                 setResult(RESULT_OK, intent);
                 finish();
             }

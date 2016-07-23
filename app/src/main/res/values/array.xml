@@ -56,11 +56,16 @@
         <item>库存统计</item>
         <item>维修统计</item>
         <item>收款统计</item>
-        <item>客户信息</item>
+        <item>客户账务统计</item>
         <item>进货统计group</item>
         <item>进货汇总</item>
         <item>采购订单</item>
-        <item>供应商累计。。。</item>
+        <item>供应商累计供货排行</item>
+        <item>销售统计group</item>
+        <item>销售计划分析表</item>
+        <item>客户销售额排行</item>
+        <item>日期销售报表</item>
+        <item>仓库销售排行</item>
     </string-array>
 
     <!--选择列表配置-->
@@ -105,6 +110,12 @@
     <string-array name="input_sex"><!--性别-->
         <item>男</item>
         <item>女</item>
+    </string-array>
+
+    <string-array name="restock_type"><!--进货汇总类别-->
+        <item>按仓库汇总</item><!--1-->
+        <item>按配件类别汇总</item><!--2-->
+        <item>按供应商汇总</item><!--3-->
     </string-array>
 
     <string-array name="report_jingYing"><!--报表经营-标题 -->
