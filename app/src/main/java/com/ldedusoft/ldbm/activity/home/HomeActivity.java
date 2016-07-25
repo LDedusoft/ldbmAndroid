@@ -5,6 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.Application.MyApplication;
@@ -23,8 +29,12 @@ import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.ActivityCollector;
 import com.ldedusoft.ldbm.util.InitParamUtil;
+import com.ldedusoft.ldbm.util.Util;
+import com.ldedusoft.ldbm.view.DragLayout;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,6 +43,7 @@ import java.util.TimerTask;
  */
 public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSettopListioner, ListViewonSingleTapUpListenner,OnMenuAddClickListioner,OnMenuTitleClickListioner,OnMenuShortcutClickListioner{
 
+    private DragLayout dl;
     private DelSlideListView menuListView;
 
     private MenuListAdapter adapter;
@@ -43,6 +54,9 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private boolean exitFlag;
 
+    private ImageView iv_icon;
+    private ListView lv;
+
     private ArrayList<MenuItem> menuDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +66,56 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         myApplication.setContext(this);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         exitFlag = false;
+        initDragLayout();
+        initView();
         initMenuListData();
         initListView();
+    }
+
+    private void initDragLayout() {
+        dl = (DragLayout) findViewById(R.id.dl);
+        dl.setDragListener(new DragLayout.DragListener() {
+            @Override
+            public void onOpen() {
+                lv.smoothScrollToPosition(new Random().nextInt(30));
+            }
+
+            @Override
+            public void onClose() {
+                shake();
+            }
+
+
+            @Override
+            public void onDrag(float percent) {
+                ViewHelper.setAlpha(iv_icon, 1 - percent);
+            }
+        });
+    }
+
+    private void shake() {
+        iv_icon.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
+    }
+
+    private void initView(){
+        lv = (ListView) findViewById(R.id.lv);
+        lv.setAdapter(new ArrayAdapter<String>(HomeActivity.this,
+                R.layout.item_text, new String[] { "首页", "关于",
+                "用户信息" }));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+                Util.t(getApplicationContext(), "click " + position);
+            }
+        });
+        iv_icon = (ImageView) findViewById(R.id.iv_icon);
+        iv_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dl.open();
+            }
+        });
     }
 
     /**

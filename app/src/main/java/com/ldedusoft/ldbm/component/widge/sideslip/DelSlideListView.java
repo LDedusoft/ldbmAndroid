@@ -71,30 +71,30 @@ public class DelSlideListView extends ListView implements
 	}
 
 	public boolean onDown(MotionEvent e) {
-		if (thisonSingleTapUpListenner != null) {
-			thisonSingleTapUpListenner.onSingleTapUp();
-		}
-		mLastMotionX = e.getX();
-		pointToPosition = this.pointToPosition((int) e.getX(), (int) e.getY());
-		final int p = pointToPosition - this.getFirstVisiblePosition();
-		if (mScrollLinerLayout != null) {
-			mScrollLinerLayout.onDown();
-			mScrollLinerLayout.setSingleTapUp(true);
-		}
-		if (deleteView && p != position) {
-			deleteView = false;
-			if (mScrollLinerLayout != null) {
-				mScrollLinerLayout.snapToScreen(0);
-				mScrollLinerLayout.setSingleTapUp(false);
-			}
-			position = p;
-			scroll = false;
-			return true;
-		}
-		isLongPress = false;
-		position = p;
-		scroll = false;
-		listViewMoving = false;
+//		if (thisonSingleTapUpListenner != null) {
+//			thisonSingleTapUpListenner.onSingleTapUp();
+//		}
+//		mLastMotionX = e.getX();
+//		pointToPosition = this.pointToPosition((int) e.getX(), (int) e.getY());
+//		final int p = pointToPosition - this.getFirstVisiblePosition();
+//		if (mScrollLinerLayout != null) {
+//			mScrollLinerLayout.onDown();
+//			mScrollLinerLayout.setSingleTapUp(true);
+//		}
+//		if (deleteView && p != position) {
+//			deleteView = false;
+//			if (mScrollLinerLayout != null) {
+//				mScrollLinerLayout.snapToScreen(0);
+//				mScrollLinerLayout.setSingleTapUp(false);
+//			}
+//			position = p;
+//			scroll = false;
+//			return true;
+//		}
+//		isLongPress = false;
+//		position = p;
+//		scroll = false;
+//		listViewMoving = false;
 		return false;
 	}
 
@@ -110,52 +110,52 @@ public class DelSlideListView extends ListView implements
 
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
 			float distanceY) {
-		if (listViewMoving && !scroll) {
-			if (mScrollLinerLayout != null)
-				mScrollLinerLayout.snapToScreen(0);
-			return false;
-		} else if (scroll) {
-			if (mScrollLinerLayout != null) {
-				int deltaX = (int) (mLastMotionX - e2.getX());
-				if (deleteView) {
-					deltaX += standard_touch_target_size;
-				}
-				if (deltaX >= 0 && deltaX <= standard_touch_target_size) {
-					mScrollLinerLayout.scrollBy(
-							deltaX - mScrollLinerLayout.getScrollX(), 0);
-				}
-			}
-		} else {
-			if (Math.abs(distanceX) > Math.abs(distanceY)) {
-				final int pointToPosition1 = this.pointToPosition(
-						(int) e2.getX(), (int) e2.getY());
-				final int p1 = pointToPosition1
-						- this.getFirstVisiblePosition();
-				if (p1 == position && mOnDeleteListioner.isCandelete(p1)) {
-					mScrollLinerLayout = (ScrollLinerLayout) this
-							.getChildAt(p1);
-					if (mScrollLinerLayout != null) {
-						int deltaX = (int) (mLastMotionX - e2.getX());
-						if (deleteView) {
-							deltaX += standard_touch_target_size;
-						}
-						if (deltaX >= 0 && deltaX <= standard_touch_target_size
-								&& Math.abs(distanceY) < 5) {
-							isLongPress = true;
-							scroll = true;
-							listViewMoving = false;
-							mScrollLinerLayout.setSingleTapUp(false);
-							mScrollLinerLayout.scrollBy(
-									(int) (e1.getX() - e2.getX()), 0);
-
-						}
-					}
-				}
-			}
-		}
-		if (scroll) {
-			return true;
-		}
+//		if (listViewMoving && !scroll) {
+//			if (mScrollLinerLayout != null)
+//				mScrollLinerLayout.snapToScreen(0);
+//			return false;
+//		} else if (scroll) {
+//			if (mScrollLinerLayout != null) {
+//				int deltaX = (int) (mLastMotionX - e2.getX());
+//				if (deleteView) {
+//					deltaX += standard_touch_target_size;
+//				}
+//				if (deltaX >= 0 && deltaX <= standard_touch_target_size) {
+//					mScrollLinerLayout.scrollBy(
+//							deltaX - mScrollLinerLayout.getScrollX(), 0);
+//				}
+//			}
+//		} else {
+//			if (Math.abs(distanceX) > Math.abs(distanceY)) {
+//				final int pointToPosition1 = this.pointToPosition(
+//						(int) e2.getX(), (int) e2.getY());
+//				final int p1 = pointToPosition1
+//						- this.getFirstVisiblePosition();
+//				if (p1 == position && mOnDeleteListioner.isCandelete(p1)) {
+//					mScrollLinerLayout = (ScrollLinerLayout) this
+//							.getChildAt(p1);
+//					if (mScrollLinerLayout != null) {
+//						int deltaX = (int) (mLastMotionX - e2.getX());
+//						if (deleteView) {
+//							deltaX += standard_touch_target_size;
+//						}
+//						if (deltaX >= 0 && deltaX <= standard_touch_target_size
+//								&& Math.abs(distanceY) < 5) {
+//							isLongPress = true;
+//							scroll = true;
+//							listViewMoving = false;
+//							mScrollLinerLayout.setSingleTapUp(false);
+//							mScrollLinerLayout.scrollBy(
+//									(int) (e1.getX() - e2.getX()), 0);
+//
+//						}
+//					}
+//				}
+//			}
+//		}
+//		if (scroll) {
+//			return true;
+//		}
 		return false;
 	}
 
@@ -163,13 +163,13 @@ public class DelSlideListView extends ListView implements
 	}
 
 	public boolean onSingleTapUp(MotionEvent e) {
-		if (deleteView) {
-			position = -1;
-			deleteView = false;
-			mScrollLinerLayout.snapToScreen(0);
-			scroll = false;
-			return true;
-		}
+//		if (deleteView) {
+//			position = -1;
+//			deleteView = false;
+//			mScrollLinerLayout.snapToScreen(0);
+//			scroll = false;
+//			return true;
+//		}
 		return false;
 	}
 
@@ -182,44 +182,44 @@ public class DelSlideListView extends ListView implements
 	public boolean onTouchEvent(MotionEvent event) {
 
 
-		if (scroll || deleteView) {
-			return true;
-		}
+//		if (scroll || deleteView) {
+//			return true;
+//		}
 		return super.onTouchEvent(event);
 	}
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		if (isDelAll()) {
-			return false;
-		} else {
-			if (event.getAction() == MotionEvent.ACTION_UP
-					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
-				int deltaX2 = (int) (mLastMotionX - event.getX());
-				if (scroll) {
-					if (!deleteView
-							&& deltaX2 >= standard_touch_target_size / 2) {
-						mScrollLinerLayout
-								.snapToScreen(standard_touch_target_size);
-						position = pointToPosition
-								- this.getFirstVisiblePosition();
-						deleteView = true;
-					} else {
-						position = -1;
-						deleteView = false;
-						mScrollLinerLayout.snapToScreen(0);
-					}
-					scroll = false;
-					return true;
-				}/* else if (Math.abs(velocityX) > Math.abs(velocityY)
-						&& deltaX2 < -80) {
-					mOnDeleteListioner.onBack();
-					return false;
-				}*/
-			}
-			return mDetector.onTouchEvent(event);
-		}
-
+//		if (isDelAll()) {
+//			return false;
+//		} else {
+//			if (event.getAction() == MotionEvent.ACTION_UP
+//					|| event.getAction() == MotionEvent.ACTION_CANCEL) {
+//				int deltaX2 = (int) (mLastMotionX - event.getX());
+//				if (scroll) {
+//					if (!deleteView
+//							&& deltaX2 >= standard_touch_target_size / 2) {
+//						mScrollLinerLayout
+//								.snapToScreen(standard_touch_target_size);
+//						position = pointToPosition
+//								- this.getFirstVisiblePosition();
+//						deleteView = true;
+//					} else {
+//						position = -1;
+//						deleteView = false;
+//						mScrollLinerLayout.snapToScreen(0);
+//					}
+//					scroll = false;
+//					return true;
+//				}/* else if (Math.abs(velocityX) > Math.abs(velocityY)
+//						&& deltaX2 < -80) {
+//					mOnDeleteListioner.onBack();
+//					return false;
+//				}*/
+//			}
+//			return mDetector.onTouchEvent(event);
+//		}
+return false;
 	}
 
 	public void deleteItem() {
