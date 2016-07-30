@@ -626,7 +626,7 @@ public class InterfaceParam {
         return Pub_CarWarehouseList;
     }
     /**客户信息列表*/
-    public String getPub_ClientList() {
+    public String getPub_ClientList(String name) {
         Pub_ClientList="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
                 "  <soap:Header>\n" +
                 "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
@@ -635,11 +635,14 @@ public class InterfaceParam {
                 "    </MySoapHeader>\n" +
                 "  </soap:Header>\n" +
                 "  <soap:Body>\n" +
-                "    <Pub_ClientList xmlns=\"LDBM4S\" />\n" +
+                "    <Pub_ClientList xmlns=\"LDBM4S\">\n" +
+                "      <cName>@name</cName>\n" +
+                "    </Pub_ClientList>\n" +
                 "  </soap:Body>\n" +
                 "</soap:Envelope>";
         Pub_ClientList = Pub_ClientList.replace("@sysUser",SYS_USER);
         Pub_ClientList = Pub_ClientList.replace("@sysPassword",SYS_PASSWORD);
+        Pub_ClientList = Pub_ClientList.replace("@name",name);
         return Pub_ClientList;
     }
     /**发票信息*/

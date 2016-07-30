@@ -21,8 +21,10 @@ public class SelectClientAdapter extends ArrayAdapter<Client> {
     private TextView LinkNameText;
     private TextView BianHaoText;
     private TextView MobilephoneText;
+    private TextView LeiBieText;
     private Context mContext;
     private Client client;
+
 
     public SelectClientAdapter(Context context, int textViewResourceId, List<Client> objects) {
         super(context, textViewResourceId, objects);
@@ -45,10 +47,12 @@ public class SelectClientAdapter extends ArrayAdapter<Client> {
             LinkNameText = (TextView)view.findViewById(R.id.client_LinkMan);
             MobilephoneText = (TextView)view.findViewById(R.id.client_Mobilephone);
             NameText = (TextView)view.findViewById(R.id.client_Name);
+            LeiBieText =  (TextView)view.findViewById(R.id.client_LeiBie);
             BianHaoText.setText(client.getBianHao());
             LinkNameText.setText(client.getLinkMan());
             MobilephoneText.setText(client.getMobilephone());
             NameText.setText(client.getName());
+            LeiBieText.setText(client.getLeiBie());
         }
         return view;
     }

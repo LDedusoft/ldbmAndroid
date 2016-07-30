@@ -54,8 +54,6 @@ public class CarCodeSelect extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item",car);
                 intent.putExtras(bundle);
-
-
                 setResult(RESULT_OK,intent);
                 finish();
             }

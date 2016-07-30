@@ -1,6 +1,7 @@
 package com.ldedusoft.ldbm.util.interfacekits;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.ldedusoft.ldbm.Application.MyApplication;
 import com.ldedusoft.ldbm.R;
@@ -473,8 +474,9 @@ public class InterfaceResault {
          * @param result
          * @return
          */
-    public static ArrayList<Client> getPub_ClientListResult(ArrayList<Client> listData,String result) {
+    public static ArrayList<Client> getPub_ClientListResult(ArrayList<Client> listData,String result,String clientType) {
         try {
+            Log.d("客户信息返回：",result);
             listData.clear();
             JSONArray jsonArray = new JSONArray(result);
             for(int i=0;i<jsonArray.length();i++){
@@ -484,7 +486,16 @@ public class InterfaceResault {
                 item.setLinkMan(jsonObject.getString("LinkMan"));
                 item.setName(jsonObject.getString("Name"));
                 item.setMobilephone(jsonObject.getString("Mobilephone"));
-                listData.add(item);
+                item.setLeiBie(jsonObject.getString("LeiBie"));
+                if(!"".equals(clientType)) {  //有类型参数
+                    if(jsonObject.getString("LeiBie").equals(clientType)) { //符合类型 加入返回列表
+                        listData.add(item);
+                    }else {
+                        continue; //不符合类型，进入下次循环
+                    }
+                }else {
+                    listData.add(item); //类型参数为空，全部加入返回列表
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

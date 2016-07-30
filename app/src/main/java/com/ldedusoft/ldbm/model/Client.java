@@ -5,13 +5,22 @@ import java.io.Serializable;
 /**
  * 客户信息
  * Created by wangjianwei on 2016/7/5.
- * {BianHao：编号；LinkMan：联系人；Name：名称；Mobilephone：手机}
+ * {BianHao：编号；LinkMan：联系人；Name：名称；Mobilephone：手机;LeiBie：客户类别}
  */
 public class Client implements Serializable {
     private String BianHao;
     private String LinkMan;
     private String Name;
     private String Mobilephone;
+    private String LeiBie;
+
+    public String getLeiBie() {
+        return LeiBie;
+    }
+
+    public void setLeiBie(String leiBie) {
+        LeiBie = leiBie;
+    }
 
     public String getBianHao() {
         return BianHao;

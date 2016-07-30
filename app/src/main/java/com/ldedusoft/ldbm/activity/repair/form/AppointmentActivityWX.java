@@ -15,6 +15,7 @@ import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
 import com.ldedusoft.ldbm.model.Appointment;
 import com.ldedusoft.ldbm.model.CarCode;
+import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
@@ -165,7 +166,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                     updateListItem(trafficClass.getTypeName(), inputListPosition);
                 }
                 break;
-            case 4://油量,油品，保险
+            case 4://油量,油品
                 if(resultCode == RESULT_OK){
                     String result = data.getStringExtra("result");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
@@ -184,6 +185,13 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                     SalesMan salesMan = (SalesMan)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
                     updateListItem(salesMan.getName(),inputListPosition);
+                }
+                break;
+            case 7://保险公司
+                if(resultCode == RESULT_OK){
+                    Client client = (Client)data.getSerializableExtra("item");
+                    int inputListPosition = data.getIntExtra("inputListPosition",-1);
+                    updateListItem(client.getName(),inputListPosition);
                 }
                 break;
             case 10://预约单

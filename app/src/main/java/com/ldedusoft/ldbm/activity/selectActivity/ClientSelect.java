@@ -86,7 +86,10 @@ public class ClientSelect extends BaseActivity {
     }
     private void initData(){
         String serverPath = InterfaceParam.SERVER_PATH;
-        String paramXml = InterfaceParam.getInstance().getPub_ClientList(); //!!接口参数
+       String clientName = "";
+        if("insurance_com".equals(intentParam)){
+        }
+        String paramXml = InterfaceParam.getInstance().getPub_ClientList(clientName); //!!接口参数
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
@@ -114,7 +117,11 @@ public class ClientSelect extends BaseActivity {
 
     private void updateListView(String result){
         //!!接口返回值解析
-        listData = InterfaceResault.getPub_ClientListResult(listData, result);
+        String clientType = "";
+        if("insuranceCom".equals(intentParam)){
+            clientType = "保险公司";
+        }
+        listData = InterfaceResault.getPub_ClientListResult(listData, result,clientType);
         adapter.notifyDataSetChanged();
     }
 
