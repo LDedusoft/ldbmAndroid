@@ -5,56 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/topBarBackground"
     ><!--背景图 空-->
-    <RelativeLayout
+    <com.ldedusoft.ldbm.component.customComp.SysInfoPage
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="30dp"
-        android:paddingLeft="30dp"
-        android:paddingTop="50dp" >
-
-        <LinearLayout
-            android:id="@+id/ll1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/iv_bottom"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:text="BlueMor"
-                android:textColor="#ffffff"
-                android:textSize="25sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="龙鼎科技有限公司"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
-
-        <ListView
-            android:id="@+id/lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/tv_mail"
-            android:layout_below="@id/ll1"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="20dp"
-            android:cacheColorHint="#00000000"
-            android:divider="@null"
-            android:textColor="#ffffff" />
-    </RelativeLayout>
+        android:layout_height="match_parent"></com.ldedusoft.ldbm.component.customComp.SysInfoPage>
     <com.ldedusoft.ldbm.view.MyRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

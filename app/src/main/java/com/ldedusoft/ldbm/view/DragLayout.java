@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.ldedusoft.ldbm.R;
+import com.ldedusoft.ldbm.component.customComp.SysInfoPage;
 import com.nineoldandroids.view.ViewHelper;
 
 public class DragLayout extends FrameLayout {
@@ -31,7 +31,7 @@ public class DragLayout extends FrameLayout {
     private int mainLeft;
     private Context context;
     private ImageView iv_shadow;
-    private RelativeLayout vg_left;
+    private SysInfoPage vg_left;
     private MyRelativeLayout vg_main;
     private Status status = Status.Close;
 
@@ -143,7 +143,7 @@ public class DragLayout extends FrameLayout {
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             addView(iv_shadow, 1, lp);
         }
-        vg_left = (RelativeLayout) getChildAt(0);
+        vg_left = (SysInfoPage) getChildAt(0);
         vg_main = (MyRelativeLayout) getChildAt(isShowShadow ? 2 : 1);
         vg_main.setDragLayout(this);
         vg_left.setClickable(true);

@@ -52,7 +52,20 @@ public class CommonQueryBar extends LinearLayout {
         restockCondition =(LinearLayout)findViewById(R.id.common_query_restockCondition);
         /*开始时间（上月）*/
         Calendar c = Calendar.getInstance();
-        startTime.setText(c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH)+ "-" + c.get(Calendar.DAY_OF_MONTH));
+        int year = c.get(Calendar.YEAR);
+        int month =  c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        if(month==6||month==9||month==11){
+            if(day>30){
+                day=30;
+            }
+        }
+        if(month==2){
+            if(day>28){
+                day =28;
+            }
+        }
+        startTime.setText(year + "-" + month+ "-" + day);
         /*结束时间（当前）*/
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = sDateFormat.format(new java.util.Date());

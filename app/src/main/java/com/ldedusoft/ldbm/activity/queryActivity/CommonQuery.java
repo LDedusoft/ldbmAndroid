@@ -162,12 +162,12 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
 
                 @Override
                 public void onWarning(String warning) {
-
+                    closeProgressDialog();
                 }
 
                 @Override
                 public void onError(Exception e) {
-
+                    closeProgressDialog();
                 }
             });
         }else{
@@ -198,9 +198,10 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
     }
 
     private void updateListView(String result,String inName){
+        closeProgressDialog();
         InterfaceResault.getCommonResault(listData, result, inName);
         adapter.notifyDataSetChanged();
-        closeProgressDialog();
+
     }
 
     /**
