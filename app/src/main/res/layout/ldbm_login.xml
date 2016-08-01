@@ -69,15 +69,14 @@
                         android:layout_gravity="top"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/loginText"
-                        android:textColorHint="@color/loginText"
+                        android:textColor="@color/loginEditText"
+                        android:textColorHint="@color/loginHintText"
                         android:textSize="15dp"
-                        android:text="李涛"
                         android:hint="@string/input_userName" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
+                        android:layout_height="1dp"
                         android:background="@color/loginLine"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="top"/>
@@ -90,7 +89,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:gravity="left"
-                android:paddingRight="10dp"
+                android:paddingRight="20dp"
                 >
                 <RelativeLayout
                     android:layout_width="1dp"
@@ -102,10 +101,10 @@
 
                     />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="45dp"
                     android:orientation="vertical"
-                    android:layout_marginRight="10dp"
                     >
                     <EditText
                         android:id="@+id/edittext_password"
@@ -116,18 +115,33 @@
                         android:cursorVisible="true"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/loginText"
-                        android:textColorHint="@color/loginText"
+                        android:textColor="@color/loginEditText"
+                        android:textColorHint="@color/loginHintText"
                         android:inputType="textPassword"
                         android:textSize="15dp"
-                        android:text="123456"
                         android:hint="@string/input_password" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
+                        android:layout_height="1dp"
                         android:background="@color/loginLine"
                         android:layout_marginLeft="10dp"
+                        android:layout_gravity="bottom"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="25dp"
+                    android:layout_height="45dp"
+                    android:orientation="vertical"
+                    >
+                   <CheckBox
+                       android:id="@+id/login_savePassword"
+                       style="@style/CheckBoxStyleSavePsd"
+                       android:layout_width="25dp"
+                       android:layout_height="43dp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/loginLine"
                         android:layout_gravity="bottom"/>
                 </LinearLayout>
             </LinearLayout>
@@ -160,8 +174,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="5dp"
-
-
                         >
                     </Spinner>
                 </LinearLayout>

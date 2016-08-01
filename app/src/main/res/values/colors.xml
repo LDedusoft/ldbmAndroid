@@ -5,7 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="loginBackground">#f3f1f6</color><!-- 登录页面背景色-->
     <color name="loginButton">#56adf9</color><!-- 登录按钮颜色-->
+    <color name="loginEditText">#7a7b7c</color><!-- 登录页面文字颜色-->
     <color name="loginText">#b5bccc</color><!-- 登录页面文字颜色-->
+    <color name="loginHintText">#b5bccc</color><!-- 登录页面提示文字颜色-->
     <color name="loginLine">#b6bdcd</color><!-- 登录页面线条颜色-->
     <color name="loginInputLeftLine">#50cb3b</color><!-- 登录页面输入框左侧的竖线-->
     <color name="bottomBarBackground">#f9f9f9</color> <!-- 下工具栏背景色-->

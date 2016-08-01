@@ -13,8 +13,9 @@
         <item>维修接待</item>
         <item>配件销售单</item>
         <item>维修进度查询</item>
-        <item>车辆信息查询</item>
         <item>客户信息查询</item>
+        <item>车辆信息查询</item>
+
     </string-array>
     <string-array name="repair_menu_item">
         <item>服务group</item>
