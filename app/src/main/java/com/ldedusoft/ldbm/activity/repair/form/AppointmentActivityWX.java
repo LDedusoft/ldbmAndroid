@@ -205,6 +205,10 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                             item.setValue(appointment.getWxFangShi());
                         }else if ("BusinessType".equals(item.getItemId())){
                             item.setValue(appointment.getYwLeiBie());
+                        }else if ("Number".equals(item.getItemId())){
+                           //单号不做处理
+                        }else{
+                            item.setValue("");//其他项目置空
                         }
                         listData.set(i, item);
                     }
