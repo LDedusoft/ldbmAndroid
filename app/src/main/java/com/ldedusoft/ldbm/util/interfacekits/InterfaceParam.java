@@ -22,6 +22,8 @@ public class InterfaceParam {
 
     public static final String SYS_PASSWORD = "zwj6756";
 
+    /**销售洽谈单*/
+    private String SC_NegotiateList;
     /**预约维修列表*/
     private String AP_AppointmentList;
     /**保存预约维修*/
@@ -904,7 +906,7 @@ public class InterfaceParam {
         return SC_SaveCarInfo;
     }
     /**销售洽谈(保存)*/
-    public String getSC_SaveNegotiate(String userName,String info,String type) {
+    public String getSC_SaveNegotiate(String danHao,String userName,String info,String type) {
         SC_SaveNegotiate="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
                 "  <soap:Header>\n" +
                 "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
@@ -917,6 +919,7 @@ public class InterfaceParam {
                 "      <UName>@userName</UName>\n" +
                 "      <Info>@info</Info>\n" +
                 "      <ClientType>@type</ClientType>\n" +
+                "       <DanHao>@danHao</DanHao>"+
                 "    </SC_SaveNegotiate>\n" +
                 "  </soap:Body>\n" +
                 "</soap:Envelope>";
@@ -925,6 +928,7 @@ public class InterfaceParam {
         SC_SaveNegotiate = SC_SaveNegotiate.replace("@userName",userName);
         SC_SaveNegotiate = SC_SaveNegotiate.replace("@info",info);
         SC_SaveNegotiate = SC_SaveNegotiate.replace("@type",type);
+        SC_SaveNegotiate = SC_SaveNegotiate.replace("@danHao",danHao);
         return SC_SaveNegotiate;
     }
     /**整车销售订单(保存)*/
@@ -1207,14 +1211,82 @@ public class InterfaceParam {
         ZH_Repair = ZH_Repair.replace("@endTime",endTime);
         return ZH_Repair;
     }
-    /**人员回款统计*/
-    public String getZY_BackPayment() {
-        return ZY_BackPayment;
+    /**销售洽谈列表*/
+    public String getSC_NegotiateList(String type) {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_NegotiateList xmlns=\"LDBM4S\">\n" +
+                "      <ClientType>@type</ClientType>\n" +
+                "    </SC_NegotiateList>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        xml = xml.replace("@type",type);
+        return xml;
     }
-    /**员工销售排行*/
-    public String getZY_StaffSale() {
-        return ZY_StaffSale;
+
+    /**整车销售列表*/
+    public String getSC_PurchaseList() {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_PurchaseList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        return xml;
     }
+
+    /**配件销售单列表*/
+    public String getSC_SaleFixingsList() {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_SaleFixingsList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        return xml;
+    }
+
+
+    /**配件采购单列表*/
+    public String getPT_PurchaseFixingsList() {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_PurchaseFixingsList xmlns=\"LDBM4S\" />\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        return xml;
+    }
+
 
 
     public String getCommonParam(String name,JSONObject param){
@@ -1245,7 +1317,18 @@ public class InterfaceParam {
                 xml = getXS_DateSale(param.getString("startTime"), param.getString("endTime"));
             }else if (name.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
                 xml = getXS_StockSale(param.getString("startTime"), param.getString("endTime"));
+            }else if (name.equals(myApplication.getStr(R.string.select_geRenQiaTan))) {
+                xml = getSC_NegotiateList("个人");
+            }else if (name.equals(myApplication.getStr(R.string.select_gongSiQiaTan))) {
+                xml =  getSC_NegotiateList("公司");
+            }else if (name.equals(myApplication.getStr(R.string.select_xiaoShouDan))) {
+                xml =  getSC_PurchaseList();
+            }else if (name.equals(myApplication.getStr(R.string.select_peiJianXiaoShouDan))) {
+                xml =  getSC_SaleFixingsList();
+            }else if (name.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
+                xml =  getPT_PurchaseFixingsList();
             }
+
         }catch (Exception e){e.printStackTrace();}
         return xml;
     }

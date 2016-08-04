@@ -33,7 +33,7 @@ public class CommonQueryBar extends LinearLayout {
     private LinearLayout timeCondition;
     private LinearLayout salesmanCondition;
     private LinearLayout clientCondition;
-    private LinearLayout restockCondition;
+    private LinearLayout restockCondition,allCondition;
 
     public CommonQueryBar(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -50,6 +50,7 @@ public class CommonQueryBar extends LinearLayout {
         salesmanCondition = (LinearLayout)findViewById(R.id.common_query_salesmanCondition);
         clientCondition =  (LinearLayout)findViewById(R.id.common_query_ClientCondition);
         restockCondition =(LinearLayout)findViewById(R.id.common_query_restockCondition);
+        allCondition = (LinearLayout)findViewById(R.id.common_query_All_condition);
         /*开始时间（上月）*/
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -180,6 +181,8 @@ public class CommonQueryBar extends LinearLayout {
     }
     public void setConditionType(int type){
         switch (type){
+            case 0://隐藏所有条件
+                allCondition.setVisibility(GONE);
             case 1: //只显示时间
                 timeCondition.setVisibility(VISIBLE);
                 salesmanCondition.setVisibility(GONE);

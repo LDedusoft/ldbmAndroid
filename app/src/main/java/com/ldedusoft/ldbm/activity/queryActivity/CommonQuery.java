@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -148,12 +149,14 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
         if(TextUtils.isEmpty(dataSource)) {
             String serverPath = InterfaceParam.SERVER_PATH;
             String paramXml = InterfaceParam.getInstance().getCommonParam(interfaceName,param);
+            Log.d(interfaceName+"接口参数：",paramXml);
             HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
                 @Override
                 public void onFinish(final String response) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d(interfaceName+" 查询返回数据：",response);
                             String result = ParseXML.getItemValueWidthName(response, InterfaceResault.getCommonRsName(interfaceName));
                             updateListView(result, interfaceName);
                         }

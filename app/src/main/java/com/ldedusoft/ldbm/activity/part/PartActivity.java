@@ -62,12 +62,13 @@ public class PartActivity extends BaseActivity implements OnMenuTitleClickListio
 
     @Override
     public void OnMenuTitleClick(int ID) {
-
+        String title = menuDataList.get(ID).getMenuTitle();
         String value = menuDataList.get(ID).getValue();
         String intentPath =  menuDataList.get(ID).getTitleIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);
+            intent.putExtra("title",title);
             startActivity(intent);
         }
     }
@@ -75,10 +76,12 @@ public class PartActivity extends BaseActivity implements OnMenuTitleClickListio
     @Override
     public void OnMenuAddClick(int ID) {
         String value = menuDataList.get(ID).getValue();
+        String title = menuDataList.get(ID).getMenuTitle();
         String intentPath =  menuDataList.get(ID).getCreateIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);
+            intent.putExtra("title",title);
             startActivity(intent);
         }
 

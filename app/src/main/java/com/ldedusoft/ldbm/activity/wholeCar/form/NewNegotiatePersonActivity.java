@@ -114,18 +114,22 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
 
     private void saveInfo(){
         try {
+            String danHao= "";
             JSONObject dataJsonObj = new JSONObject();
             for (InputItem item : listData) {
                 if(item.isRequired()&&TextUtils.isEmpty(item.getValue())){ //提交数据检查
                     Toast.makeText(this,"请填写"+item.getItemTitle(),Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if("Number".equals(item.getItemId())){
+                    danHao = item.getValue();
+                }
                 dataJsonObj.put(item.getItemId(), item.getValue());
             }
 
             String info = dataJsonObj.toString();
             Log.d("保存个人洽谈信息：", info);
-            saveHandler(info);
+            saveHandler(danHao,info);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -135,9 +139,9 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
      * 保存信息到服务器
      * @param info
      */
-    private void saveHandler(String info){
+    private void saveHandler(String danHao, String info){
         String serverPath = InterfaceParam.SERVER_PATH;
-        String paramXml = InterfaceParam.getInstance().getSC_SaveNegotiate(UserProperty.getInstance().getUserName(),info,"个人");//!!
+        String paramXml = InterfaceParam.getInstance().getSC_SaveNegotiate(danHao,UserProperty.getInstance().getUserName(),info,"个人");//!!
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {

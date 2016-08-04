@@ -984,6 +984,146 @@ public class InterfaceResault {
         return listData;
     }
 
+    /*
+   * 个人洽谈单
+    * {Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；Time：方便时间；Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+ * */
+    private static ArrayList addSC_NegotiateList(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "客户名称";
+                    cn.value1 = jsonObject.getString("Name");
+                    cn.name2 = "购车方案";
+                    cn.value2 = jsonObject.getString("WantCar");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+  * 公司洽谈单
+   * ClientType为"公司"时{Name：公司名称；Sex：负责人；Phone：电话；cType：联系人；Time：联系人电话；
+   * Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+* */
+    private static ArrayList addSC_NegotiateListGongSi(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "公司名称";
+                    cn.value1 = jsonObject.getString("Name");
+                    cn.name2 = "购车方案";
+                    cn.value2 = jsonObject.getString("WantCar");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+    /*
+* 整车销售订单单据列表
+ *{ID：ID；DanHao：单号；Date：时间；dPrice：订金总额；Num：订单数量；Price：订单金额；ZhiDanRen：制单人；JingShouRen：经手人}
+* */
+    private static ArrayList addSC_PurchaseList(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "单号";
+                    cn.value1 = jsonObject.getString("DanHao");
+                    cn.name2 = "制单人";
+                    cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+    /*
+* 配件销售单单据列表
+*{ID：ID；DanHao：单号；RiQi：日期；JinE：单据金额；Num：单据数量；GongFang：供方单位；JingShouRen：经手人；ZhiDanRen：制单人}
+* */
+    private static ArrayList addSC_SaleFixingsList(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "单号";
+                    cn.value1 = jsonObject.getString("DanHao");
+                    cn.name2 = "制单人";
+                    cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+    /*
+* 配件采购单单据列表
+*{ID：ID；DanHao：单号；RiQi：日期；JinE：金额；Num：数量；JingShouRen：经手人；ZhiDanRen：制单人}
+* */
+    private static ArrayList addPT_PurchaseFixingsList(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "单号";
+                    cn.value1 = jsonObject.getString("DanHao");
+                    cn.name2 = "制单人";
+                    cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+
+
     /********************************************************/
     private static ArrayList test(ArrayList listData,String result){
         if (!TextUtils.isEmpty(result)) {
@@ -1037,6 +1177,16 @@ public class InterfaceResault {
             resault = "XS_DateSaleResult";
         }else if(inName.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
             resault = "XS_StockSaleResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_geRenQiaTan))) {
+            resault = "SC_NegotiateListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_gongSiQiaTan))) {
+            resault = "SC_NegotiateListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_xiaoShouDan))) {
+            resault = "SC_PurchaseListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_peiJianXiaoShouDan))) {
+            resault = "SC_SaleFixingsListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
+            resault = "PT_PurchaseFixingsListResult";
         }
         return resault;
     }
@@ -1074,7 +1224,18 @@ public class InterfaceResault {
             listData = addXS_DateSaleResultCondition(listData, result,inName);
         }else if(inName.equals(myApplication.getStr(R.string.report_cangKuXiaoShou))) {
             listData = addXS_StockSaleResultCondition(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_geRenQiaTan))) {
+            listData = addSC_NegotiateList(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_gongSiQiaTan))) {
+            listData = addSC_NegotiateListGongSi(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_xiaoShouDan))) {
+            listData = addSC_PurchaseList(listData, result, inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_peiJianXiaoShouDan))) {
+            listData = addSC_SaleFixingsList(listData, result, inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
+            listData = addPT_PurchaseFixingsList(listData, result,inName);
         }
+
         return listData;
     }
 }

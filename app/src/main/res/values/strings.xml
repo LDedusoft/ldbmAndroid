@@ -74,6 +74,11 @@
     <string name="report_chengBenYiChang">成本异常</string>
     <string name="report_queHuoBaoJing">缺货报警</string>
     <string name="report_fuKuCunBaoJing">负库存报警</string>
+    <string name="select_geRenQiaTan">个人洽谈</string>
+    <string name="select_gongSiQiaTan">公司洽谈</string>
+    <string name="select_xiaoShouDan">销售单</string>
+    <string name="select_peiJianXiaoShouDan">配件销售单</string>
+    <string name="select_peiJianCaiGouDan">配件采购单</string>
 
 
 

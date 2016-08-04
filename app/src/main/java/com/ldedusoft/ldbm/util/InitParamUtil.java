@@ -387,6 +387,73 @@ public class InitParamUtil {
         dic.put("仓库销售排行ChengBen","成本金额");
         dic.put("仓库销售排行LiRun","毛利润");
 
+
+       /*
+   * 个人洽谈
+    * {Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；Time：方便时间；Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+ * */
+        dic.put("个人洽谈Name","客户名称");
+        dic.put("个人洽谈Sex","客户性别");
+        dic.put("个人洽谈cType","客户类型");
+        dic.put("个人洽谈Phone","电话");
+        dic.put("个人洽谈Time","方便时间");
+        dic.put("个人洽谈Plan","购车方案");
+        dic.put("个人洽谈WantCar","意向车型的id");
+        dic.put("个人洽谈WantTime","预购时间");
+
+
+         /*
+  * 公司洽谈
+   * ClientType为"公司"时{Name：公司名称；Sex：负责人；Phone：电话；cType：联系人；Time：联系人电话；
+   * Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+* */
+        dic.put("公司洽谈Name","公司名称");
+        dic.put("公司洽谈Sex","负责人");
+        dic.put("公司洽谈Phone","电话");
+        dic.put("公司洽谈cType","联系人");
+        dic.put("公司洽谈Time","联系人电话");
+        dic.put("公司洽谈Plan","购车方案");
+        dic.put("公司洽谈WantCar","意向车型的id");
+        dic.put("公司洽谈WantTime","预购时间");
+
+
+        /*
+* 销售单
+ *{ID：ID；DanHao：单号；Date：时间；dPrice：订金总额；Num：订单数量；Price：订单金额；ZhiDanRen：制单人；JingShouRen：经手人}
+* */
+        dic.put("销售单DanHao","单号");
+        dic.put("销售单Date","时间");
+        dic.put("销售单dPrice","订金总额");
+        dic.put("销售单Num","订单数量");
+        dic.put("销售单Price","订单金额");
+        dic.put("销售单ZhiDanRen","制单人");
+        dic.put("销售单JingShouRen","经手人");
+
+
+           /*
+* 配件销售单
+*{ID：ID；DanHao：单号；RiQi：日期；JinE：单据金额；Num：单据数量；GongFang：供方单位；JingShouRen：经手人；ZhiDanRen：制单人}
+* */
+        dic.put("配件销售单DanHao","单号");
+        dic.put("配件销售单RiQi","日期");
+        dic.put("配件销售单JinE","单据金额");
+        dic.put("配件销售单Num","单据数量");
+        dic.put("配件销售单GongFang","供方单位");
+        dic.put("配件销售单JingShouRen","经手人");
+        dic.put("配件销售单ZhiDanRen","制单人");
+
+
+            /*
+* 配件采购单
+*{ID：ID；DanHao：单号；RiQi：日期；JinE：金额；Num：数量；JingShouRen：经手人；ZhiDanRen：制单人}
+* */
+        dic.put("配件采购单DanHao","单号");
+        dic.put("配件采购单RiQi","日期");
+        dic.put("配件采购单JinE","金额");
+        dic.put("配件采购单Num","数量");
+        dic.put("配件采购单JingShouRen","经手人");
+        dic.put("配件采购单ZhiDanRen","制单人");
+
         SysProperty.getInstance().setReportKeyDic(dic);
     }
 

@@ -73,12 +73,13 @@ public class NegotiateActivity extends BaseActivity implements OnMenuTitleClickL
 
     @Override
     public void OnMenuTitleClick(int ID) {
-
+        String title = menuDataList.get(ID).getMenuTitle();
         String value = menuDataList.get(ID).getValue();
         String intentPath =  menuDataList.get(ID).getTitleIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);
+            intent.putExtra("title",title);
             startActivity(intent);
         }
     }
