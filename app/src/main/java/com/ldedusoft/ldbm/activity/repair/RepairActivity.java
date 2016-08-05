@@ -3,7 +3,9 @@ package com.ldedusoft.ldbm.activity.repair;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.BaseActivity;
@@ -14,6 +16,7 @@ import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuAddClickListioner;
 import com.ldedusoft.ldbm.component.widge.sideslip.OnMenuTitleClickListioner;
 import com.ldedusoft.ldbm.model.MenuItem;
 import com.ldedusoft.ldbm.model.SysProperty;
+import com.ldedusoft.ldbm.view.DragLayout;
 
 import java.util.ArrayList;
 
@@ -29,12 +32,29 @@ public class RepairActivity extends BaseActivity implements OnMenuTitleClickList
     private MenuListAdapter adapter;
 
     private TopBar repairTopBar;
+
+    private TextView iv_icon;
+    private DragLayout dl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_repair);
         initTopBar();
         initRepairMenuList();
+        initDragLayout();
+    }
+
+    private void initDragLayout() {
+        dl = (DragLayout) findViewById(R.id.dl);
+
+        iv_icon = (TextView) findViewById(R.id.top_bar_menu);
+        iv_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dl.open();
+            }
+        });
     }
 
     private void initTopBar(){

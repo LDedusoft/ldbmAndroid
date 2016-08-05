@@ -25,11 +25,21 @@ public class CommonNormalAdapter extends CommonAdapter {
     {
         viewHolder.setText(R.id.commonNormal_item_name1,((CommonNormal)item).name1);
         viewHolder.setText(R.id.commonNormal_item_name2,((CommonNormal)item).name2);
+        viewHolder.setText(R.id.commonNormal_item_name3,((CommonNormal)item).name3);
+        viewHolder.setText(R.id.commonNormal_item_name4,((CommonNormal)item).name4);
         viewHolder.setText(R.id.commonNormal_item_value1,((CommonNormal)item).value1);
         viewHolder.setText(R.id.commonNormal_item_value2, ((CommonNormal) item).value2);
+        viewHolder.setText(R.id.commonNormal_item_value3, ((CommonNormal) item).value3);
+        viewHolder.setText(R.id.commonNormal_item_value4, ((CommonNormal) item).value4);
         if(TextUtils.isEmpty(((CommonNormal) item).name2)) { //如果没有第二行标题，则隐藏
             viewHolder.hiddenLayout(R.id.commonNormal_item_subTitle, View.GONE);
         }
+        if(TextUtils.isEmpty(((CommonNormal) item).name3)) { //如果没有第二行标题，则隐藏
+            viewHolder.hiddenLayout(R.id.commonNormal_item_thdTitle, View.GONE);
+        }
+        if(TextUtils.isEmpty(((CommonNormal) item).name4)) { //如果没有第二行标题，则隐藏
+        viewHolder.hiddenLayout(R.id.commonNormal_item_fourTitle, View.GONE);
+    }
         if(((CommonNormal)item).details==false) { //如果没有详情，则隐藏按钮
             viewHolder.hiddenLayout(R.id.commonNormal_item_actionLayout, View.INVISIBLE);
         }else{ //有详情，增加点击事件

@@ -999,7 +999,7 @@ public class InterfaceResault {
                     cn.name1 = "客户名称";
                     cn.value1 = jsonObject.getString("Name");
                     cn.name2 = "购车方案";
-                    cn.value2 = jsonObject.getString("WantCar");
+                    cn.value2 = jsonObject.getString("Plan");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
                     listData.add(cn);
@@ -1028,7 +1028,7 @@ public class InterfaceResault {
                     cn.name1 = "公司名称";
                     cn.value1 = jsonObject.getString("Name");
                     cn.name2 = "购车方案";
-                    cn.value2 = jsonObject.getString("WantCar");
+                    cn.value2 = jsonObject.getString("Plan");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
                     listData.add(cn);
@@ -1057,6 +1057,10 @@ public class InterfaceResault {
                     cn.value1 = jsonObject.getString("DanHao");
                     cn.name2 = "制单人";
                     cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.name3 = "订金金额";
+                    cn.value3 = jsonObject.getString("dPrice");
+                    cn.name3 = "订单数量";
+                    cn.value3 = jsonObject.getString("Num");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
                     listData.add(cn);
@@ -1084,6 +1088,10 @@ public class InterfaceResault {
                     cn.value1 = jsonObject.getString("DanHao");
                     cn.name2 = "制单人";
                     cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.name3 = "单据金额";
+                    cn.value3 = jsonObject.getString("JinE");
+                    cn.name4 = "单据数量";
+                    cn.value4 = jsonObject.getString("Num");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
                     listData.add(cn);

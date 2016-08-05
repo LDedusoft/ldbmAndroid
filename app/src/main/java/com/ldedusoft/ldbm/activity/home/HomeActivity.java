@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,7 +26,6 @@ import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.ActivityCollector;
 import com.ldedusoft.ldbm.util.InitParamUtil;
-import com.ldedusoft.ldbm.util.Util;
 import com.ldedusoft.ldbm.view.DragLayout;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -67,13 +63,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         exitFlag = false;
         initDragLayout();
-        initView();
         initMenuListData();
         initListView();
     }
 
     private void initDragLayout() {
         dl = (DragLayout) findViewById(R.id.dl);
+        lv =  lv = (ListView) findViewById(R.id.lv);
         dl.setDragListener(new DragLayout.DragListener() {
             @Override
             public void onOpen() {
@@ -91,24 +87,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
                 ViewHelper.setAlpha(iv_icon, 1 - percent);
             }
         });
-    }
 
-    private void shake() {
-        iv_icon.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
-    }
-
-    private void initView(){
-        lv = (ListView) findViewById(R.id.lv);
-        lv.setAdapter(new ArrayAdapter<String>(HomeActivity.this,
-                R.layout.item_text, new String[] { "首页", "关于",
-                "用户信息" }));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,
-                                    int position, long arg3) {
-                Util.t(getApplicationContext(), "click " + position);
-            }
-        });
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
         iv_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +96,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
             }
         });
     }
+
+    /*图片抖动*/
+    private void shake() {
+//        iv_icon.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
+    }
+
+
 
     /**
      * 初始化列表
@@ -140,11 +126,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     @Override
     public void OnMenuTitleClick(int ID) {
+        String title = menuDataList.get(ID).getMenuTitle();
         String value = menuDataList.get(ID).getValue();
         String intentPath =  menuDataList.get(ID).getTitleIntentPath();
         if(!TextUtils.isEmpty(intentPath)) {
             Intent intent = new Intent(intentPath);
             intent.putExtra("param", value);
+            intent.putExtra("title",title);
             startActivity(intent);
         }
     }
