@@ -324,7 +324,7 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                         }
                     });
                     break;
-                case 11:
+                case 11: //增加配件
                     itemlayout.setVisibility(View.GONE);
                     actionLayout.setVisibility(View.GONE);
                     customLayout.setVisibility(View.VISIBLE);

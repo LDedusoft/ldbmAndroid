@@ -4,7 +4,6 @@ package com.ldedusoft.ldbm.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.InputItem;
@@ -19,7 +18,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangjianwei on 2016/6/27.
@@ -87,16 +89,28 @@ public class InitParamUtil {
         ArrayList<MenuItem> homeMenuItemList = new ArrayList<MenuItem>();
         ArrayList<MenuItem> allMenuItemList = SysProperty.getInstance().getAllMenuList();
         String userItemsStr = pref.getString(UserProperty.getInstance().getUserName(), "");//获取用户配置
-        String[] userItemsArray = mContent.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
-        if(!TextUtils.isEmpty(userItemsStr)){  //如果用户已修改菜单，则使用用户配置
-            userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
-        }
-        for (String itemName : userItemsArray) {
-            for (MenuItem itemObj : allMenuItemList ) {
-                if (itemName.equals(itemObj.getMenuTitle())) {
-                    itemObj.setIsHomeMenu(true); //加入首页时需要设置标志（废除，改在MenuListAdapter中判断当前activity）
-                    homeMenuItemList.add(itemObj);
-                    break;
+        String[] sysItemsArray = mContent.getResources().getStringArray(R.array.home_menu_item);//从配置中获取默认的菜单项
+//        if(!TextUtils.isEmpty(userItemsStr)){  //如果用户已修改菜单，则使用用户配置
+        String[]  userItemsArray = userItemsStr.split(","); //用户配置文件中保存的菜单项
+//        }
+        if(userItemsArray!=null&&userItemsArray.length>0) { //如果用户配置不为空,遍历用户配置
+            for (String itemName : userItemsArray) {
+                for (MenuItem itemObj : allMenuItemList) {
+                    if (itemName.equals(itemObj.getMenuTitle())) {
+                        itemObj.setIsHomeMenu(true); //加入首页时需要设置标志（废除，改在MenuListAdapter中判断当前activity）
+                        homeMenuItemList.add(itemObj);
+                        break;
+                    }
+                }
+            }
+        }else{  //如果用户配置为空,使用默认配置
+            for (String itemName : sysItemsArray) {
+                for (MenuItem itemObj : allMenuItemList) {
+                    if (itemName.equals(itemObj.getMenuTitle())) {
+                        itemObj.setIsHomeMenu(true); //加入首页时需要设置标志（废除，改在MenuListAdapter中判断当前activity）
+                        homeMenuItemList.add(itemObj);
+                        break;
+                    }
                 }
             }
         }
@@ -400,6 +414,11 @@ public class InitParamUtil {
         dic.put("个人洽谈Plan","购车方案");
         dic.put("个人洽谈WantCar","意向车型的id");
         dic.put("个人洽谈WantTime","预购时间");
+        dic.put("个人洽谈LinkTime","方便时间");
+        dic.put("个人洽谈DanHao","单号");
+        dic.put("个人洽谈Date","日期");
+        dic.put("个人洽谈jsr","经手人");
+        dic.put("个人洽谈zdr","制单人");
 
 
          /*
@@ -415,6 +434,11 @@ public class InitParamUtil {
         dic.put("公司洽谈Plan","购车方案");
         dic.put("公司洽谈WantCar","意向车型的id");
         dic.put("公司洽谈WantTime","预购时间");
+        dic.put("个人洽谈LinkTime","方便时间");
+        dic.put("个人洽谈DanHao","单号");
+        dic.put("个人洽谈Date","日期");
+        dic.put("个人洽谈jsr","经手人");
+        dic.put("个人洽谈zdr","制单人");
 
 
         /*
@@ -454,8 +478,90 @@ public class InitParamUtil {
         dic.put("配件采购单JingShouRen","经手人");
         dic.put("配件采购单ZhiDanRen","制单人");
 
+                    /*
+        * 预约维修
+        *{Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；MingCheng：客户名称；
+        * wxFangShi：维修方式；ywLeiBie：业务类别；dxTime:弹性时间}
+        * */
+        dic.put("预约维修DanHao","单号");
+        dic.put("预约维修djTime","登记时间");
+        dic.put("预约维修yyTime","预约时间");
+        dic.put("预约维修CarCode","车牌号");
+        dic.put("预约维修MingCheng","客户名称");
+        dic.put("预约维修wxFangShi","维修方式");
+        dic.put("预约维修ywLeiBie","业务类别");
+        dic.put("预约维修dxTime","弹性时间");
+
+       /*
+       * 维修接待
+       * {Id：id；DanHao：单号；jdTime：接待时间；CarCode：车牌号；MingCheng：客户名称；WeiXiuWay：维修方式；
+       * ywLeiBie：业务类别;SongXiuPeople:送修人；SongXiuPhone：送修人电话；CarOils：油品；BenCiCunYou：油量；
+       * BenCiMileage：里程；NextByTime：下次保养时间；ChengBaoGongSi：承包公司；DingSunYuan：定损员；YeWuBeiZhu：备注；
+       * JingShouRen：业务员；ZhiDanRen：制单人；IsBywh：是否是保养；NextByMileage：下次保养里程；YuJiWanGong：预计完工时间}
+       * */
+        dic.put("维修接待DanHao","单号");
+        dic.put("维修接待jdTime","接待时间");
+        dic.put("维修接待CarCode","车牌号");
+        dic.put("维修接待MingCheng","客户名称");
+        dic.put("维修接待WeiXiuWay","维修方式");
+        dic.put("维修接待ywLeiBie","业务类别");
+        dic.put("维修接待SongXiuPeople","送修人");
+        dic.put("维修接待SongXiuPhone","送修人电话");
+        dic.put("维修接待CarOils","油品");
+        dic.put("维修接待BenCiCunYou","油量");
+        dic.put("维修接待BenCiMileage","里程");
+        dic.put("维修接待NextByTime","下次保养时间");
+        dic.put("维修接待ChengBaoGongSi","承包公司");
+        dic.put("维修接待DingSunYuan","定损员");
+        dic.put("维修接待YeWuBeiZhu","备注");
+        dic.put("维修接待JingShouRen","业务员");
+        dic.put("维修接待ZhiDanRen","制单人");
+        dic.put("维修接待IsBywh","是否是保养");
+        dic.put("维修接待NextByMileage","下次保养里程");
+        dic.put("维修接待YuJiWanGong","预计完工时间");
+
         SysProperty.getInstance().setReportKeyDic(dic);
     }
 
+
+    public static List<Map<String, String>> getGroupMenuList(){
+         List<Map<String, String>> parentList = new ArrayList<Map<String, String>>();
+        String[] groupArray = {"维修管理","整车管理","配件管理","报表管理"};
+        for (int i = 0; i < groupArray.length; i++)
+        {
+            Map<String, String> groupMap = new HashMap<String, String>();
+            groupMap.put("groupText",groupArray[i]);
+            groupMap.put("isGroupCheckd", "No");
+            parentList.add(groupMap);
+        }
+        return parentList;
+    }
+
+    public static  List<List<Map<String, String>>> getChildMenuList(String[] userConfigArray){
+         List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
+        String[][] groupArray = {{"预约维修","维修接待","进度查询"},
+                {"洽谈","销售"},
+                {"采购计划","配件采购","配件销售单"},
+                {"报表","库存","销售查询","销量"}};
+        for (int i = 0; i < groupArray.length; i++)
+        {
+            List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+            for (int j = 0; j < groupArray[i].length; j++)
+            {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("childItem", groupArray[i][j]);
+                for(int k=0;k<userConfigArray.length;k++){ //判断是否已选中
+                    if(groupArray[i][j].equals(userConfigArray[k])){
+                        map.put("isChecked", "Yes");
+                        break;
+                    }
+                }
+
+                list.add(map);
+            }
+            childData.add(list);
+        }
+        return childData;
+    }
 
 }

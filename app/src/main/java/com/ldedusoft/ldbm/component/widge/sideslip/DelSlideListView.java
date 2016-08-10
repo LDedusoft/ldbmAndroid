@@ -222,7 +222,16 @@ public class DelSlideListView extends ListView implements
 return false;
 	}
 
-	public void deleteItem() {
+//	public void deleteItem() {
+//		position = -1;
+//		deleteView = false;
+//		scroll = false;
+//		if (mScrollLinerLayout != null) {
+//			mScrollLinerLayout.snapToScreen(0);
+//		}
+//	}
+
+	public void refresh() {
 		position = -1;
 		deleteView = false;
 		scroll = false;
@@ -232,6 +241,6 @@ return false;
 	}
 
 	public void settopItem(){
-		deleteItem();
+		refresh();
 	}
 }

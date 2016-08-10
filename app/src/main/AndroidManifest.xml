@@ -27,7 +27,12 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.home.HomeActivity"></activity><!--首页-->
+        <activity android:name=".activity.home.HomeActivity">
+            <intent-filter>
+                <action android:name="activity.HomeActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity><!--首页-->
         <activity android:name=".activity.repair.RepairActivity"></activity><!--维修管理-->
         <activity android:name=".activity.wholeCar.WholecarActivity"></activity><!--整车管理-->
         <activity android:name=".activity.part.PartActivity"></activity><!--配件管理-->
@@ -315,6 +320,13 @@
         <activity android:name=".activity.queryActivity.CommonQuery">
             <intent-filter>
                 <action android:name="activity.queryActivity.CommonQuery"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <!--全部菜单列表-->
+        <activity android:name=".activity.AllMenuListActivity">
+            <intent-filter>
+                <action android:name="activity.AllMenuListActivity"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

@@ -186,13 +186,15 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     @Override
     public void onDelete(int ID) {
         menuDataList.remove(ID);
-        menuListView.deleteItem();
+        menuListView.refresh();
         adapter.notifyDataSetChanged();
         //暂存到全局变量
        // SysProperty.getInstance().setHomeMenuList(menuDataList);
         //TODO-更新用户配置
         updateUserConfig();
     }
+
+
 
     /**
      * 列表项置顶
@@ -239,7 +241,9 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     @Override
     public void OnMenuShortcutClick(int ID) {
-        Toast.makeText(this,"快捷功能",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent("activity.AllMenuListActivity");
+        startActivityForResult(intent, 1);
+//        Toast.makeText(this,"快捷功能",Toast.LENGTH_SHORT).show();
     }
 
     private void initMenuListData(){
@@ -251,10 +255,146 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
             initParam.initHomeMenuList();//根据用户配置重新生成首页菜单，每次访问首页执行
         }
         menuDataList = SysProperty.getInstance().getHomeMenuList();
-
-
-
-
-
     }
+    /**
+     * 活动返回
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1: //快捷菜单
+                if(resultCode == RESULT_OK) {
+                    String selectedMenu = data.getStringExtra("result");
+//                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                    updateMenuList(selectedMenu);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 添加快捷方式返回更新列表
+     * @param selectedMenu
+     */
+    private void updateMenuList(String selectedMenu){
+        ArrayList<String> nowMenuList = getNowMenuList();
+        ArrayList<String> selectMenuList =  strToList(selectedMenu);
+        ArrayList<String> delMenus = getDelMenus(nowMenuList,selectMenuList);
+        ArrayList<String> addMenus = getAddMenus(nowMenuList,selectMenuList);
+        doDelMenus(delMenus);
+        doAddMenus(addMenus);
+        menuListView.refresh();
+        adapter.notifyDataSetChanged();
+        //TODO-更新用户配置
+        updateUserConfig();
+    }
+
+    /**
+     * 删除菜单项
+     * @param delMenus
+     */
+    private void doDelMenus(ArrayList<String> delMenus){
+//        for(String menuName :delMenus){
+//            for(MenuItem menuItem:menuDataList){
+//                if(menuItem!=null){
+//                    if(menuName.equals(menuItem.getMenuTitle())) {
+//                        menuDataList.remove(menuItem);
+//                    }
+//                }
+//            }
+//        }
+        for(String menuName :delMenus){
+            for(int i=menuDataList.size()-1;i>=0;i--){
+                if(menuDataList.get(i)!=null) {
+                    MenuItem menuItem = menuDataList.get(i);
+                    if (menuName.equals(menuItem.getMenuTitle())) {
+                        menuDataList.remove(i);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 添加菜单
+     * @param addMenus
+     */
+    private void doAddMenus(ArrayList<String> addMenus){
+        for (String itemName : addMenus) {
+            ArrayList<MenuItem> sysAllMenu = SysProperty.getInstance().getAllMenuList();
+            for (MenuItem itemObj : sysAllMenu) {
+                if (itemName.equals(itemObj.getMenuTitle())) {
+                    menuDataList.add(menuDataList.size()-1,itemObj);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取当前菜单列表
+     * @return
+     */
+    private ArrayList<String> getNowMenuList(){
+        ArrayList<String> nowMenuList = new ArrayList<String>();
+        for(MenuItem item:menuDataList){
+            if(item!=null) {
+                nowMenuList.add(item.getMenuTitle());
+            }
+        }
+        return  nowMenuList;
+    }
+
+    /**
+     * 字符串转list
+     * @param menuStr
+     * @return
+     */
+    private ArrayList<String> strToList(String menuStr){
+        ArrayList<String> selectMenuList = new ArrayList<String>();
+        String[] menuArray = menuStr.split(",");
+        for(String menu:menuArray){
+            selectMenuList.add(menu);
+        }
+        return selectMenuList;
+    }
+
+    /**
+     * 获取需要删除的菜单
+     * @param nowMenuList
+     * @param selectMenuList
+     * @return
+     */
+    private ArrayList<String> getDelMenus(ArrayList<String> nowMenuList,ArrayList<String> selectMenuList){
+        ArrayList<String> delMenus = new ArrayList<String>();
+        for(String item:nowMenuList){
+            if(!selectMenuList.contains(item)){
+                delMenus.add(item);
+            }
+        }
+        return delMenus;
+    }
+
+    /**
+     * 要添加的菜单
+     * @param nowMenuList
+     * @param selectMenuList
+     * @return
+     */
+    private ArrayList<String> getAddMenus(ArrayList<String> nowMenuList,ArrayList<String> selectMenuList){
+        ArrayList<String> addMenus = new ArrayList<String>();
+        for(String item:selectMenuList){
+            if(!nowMenuList.contains(item)){
+                addMenus.add(item);
+            }
+        }
+        return addMenus;
+    }
+
+
 }

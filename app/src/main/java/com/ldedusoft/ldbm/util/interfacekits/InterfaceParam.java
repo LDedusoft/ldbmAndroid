@@ -1327,6 +1327,10 @@ public class InterfaceParam {
                 xml =  getSC_SaleFixingsList();
             }else if (name.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
                 xml =  getPT_PurchaseFixingsList();
+            }else if (name.equals(myApplication.getStr(R.string.select_yueYueWeiXiu))) {
+                xml =  getAP_AppointmentList();
+            }else if (name.equals(myApplication.getStr(R.string.select_weiXiuJieDai))) {
+                xml =  getRP_ShowReception();
             }
 
         }catch (Exception e){e.printStackTrace();}

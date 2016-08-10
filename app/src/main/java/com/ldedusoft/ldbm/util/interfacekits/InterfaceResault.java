@@ -1103,6 +1103,7 @@ public class InterfaceResault {
         return listData;
     }
 
+
     /*
 * 配件采购单单据列表
 *{ID：ID；DanHao：单号；RiQi：日期；JinE：金额；Num：数量；JingShouRen：经手人；ZhiDanRen：制单人}
@@ -1130,6 +1131,68 @@ public class InterfaceResault {
         return listData;
     }
 
+    //预约维修
+    //{Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；MingCheng：客户名称；wxFangShi：维修方式；ywLeiBie：业务类别；dxTime:弹性时间}
+    private static ArrayList addAP_AppointmentList(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "客户名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "预约时间";
+                    cn.value2 = jsonObject.getString("yyTime");
+                    cn.name3 = "维修方式";
+                    cn.value3 = jsonObject.getString("wxFangShi");
+                    cn.name4 = "登记时间";
+                    cn.value4 = jsonObject.getString("djTime");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
+
+    /*
+    * 维修接待
+    * {Id：id；DanHao：单号；jdTime：接待时间；CarCode：车牌号；MingCheng：客户名称；WeiXiuWay：维修方式；
+    * ywLeiBie：业务类别;SongXiuPeople:送修人；SongXiuPhone：送修人电话；CarOils：油品；BenCiCunYou：油量；
+    * BenCiMileage：里程；NextByTime：下次保养时间；ChengBaoGongSi：承包公司；DingSunYuan：定损员；YeWuBeiZhu：
+    * 备注；JingShouRen：业务员；ZhiDanRen：制单人；IsBywh：是否是保养；NextByMileage：下次保养里程；YuJiWanGong：预计完工时间}
+    * */
+    private static ArrayList addRP_ShowReception(ArrayList listData,String result,String title){
+        if (!TextUtils.isEmpty(result)) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    CommonNormal cn = new CommonNormal();
+                    cn.title = title;
+                    cn.name1 = "客户名称";
+                    cn.value1 = jsonObject.getString("MingCheng");
+                    cn.name2 = "接待时间";
+                    cn.value2 = jsonObject.getString("jdTime");
+                    cn.name3 = "维修方式";
+                    cn.value3 = jsonObject.getString("WeiXiuWay");
+                    cn.name4 = "制单人";
+                    cn.value4 = jsonObject.getString("ZhiDanRen");
+                    cn.details = true;
+                    cn.dataSource = jsonObject.toString();
+                    listData.add(cn);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listData;
+    }
 
 
     /********************************************************/
@@ -1195,6 +1258,10 @@ public class InterfaceResault {
             resault = "SC_SaleFixingsListResult";
         }else if(inName.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
             resault = "PT_PurchaseFixingsListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_yueYueWeiXiu))) {
+            resault = "AP_AppointmentListResult";
+        }else if(inName.equals(myApplication.getStr(R.string.select_weiXiuJieDai))) {
+            resault = "RP_ShowReceptionResult";
         }
         return resault;
     }
@@ -1242,6 +1309,10 @@ public class InterfaceResault {
             listData = addSC_SaleFixingsList(listData, result, inName);
         }else if(inName.equals(myApplication.getStr(R.string.select_peiJianCaiGouDan))) {
             listData = addPT_PurchaseFixingsList(listData, result,inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_yueYueWeiXiu))) {
+            listData = addAP_AppointmentList(listData, result, inName);
+        }else if(inName.equals(myApplication.getStr(R.string.select_weiXiuJieDai))) {
+            listData = addRP_ShowReception(listData, result, inName);
         }
 
         return listData;

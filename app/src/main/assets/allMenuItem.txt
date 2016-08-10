@@ -6,7 +6,8 @@
 "value":"YY",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.AppointmentQueryYY",
+//"titleIntentPath":"activity.queryActivity.AppointmentQueryYY",
+"titleIntentPath":"activity.queryActivity.CommonQuery",
 "createIntentPath":"activity.repair.form.AppointmentActivityYY"
 },
 {"menuTitle":"维修接待",
@@ -16,7 +17,8 @@
 "value":"WX",
 "isGroup":false,
 "groupTitle":"",
-"titleIntentPath":"activity.queryActivity.AppointmentQueryWX",
+//"titleIntentPath":"activity.queryActivity.AppointmentQueryWX",
+"titleIntentPath":"activity.queryActivity.CommonQuery",
 "createIntentPath":"activity.repair.form.AppointmentActivityWX"
 },
 {"menuTitle":"服务group",

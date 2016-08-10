@@ -114,8 +114,12 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
                 startActivityForResult(intent, 3);
             }
         });
+        int conditionType = 0;
+        try{
+            conditionType =Integer.parseInt(intentParam);
+        }catch (Exception e){}
 
-        conditionBar.setConditionType(Integer.parseInt(intentParam));
+        conditionBar.setConditionType(conditionType);
     }
 
     private void initToolBar(){
@@ -185,7 +189,14 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
                         if(dicKey.equals(interfaceName+jsonKey)) {
                             CommonNormal cn = new CommonNormal();
                             cn.name1 = dicKeyMap.get(dicKey);//取中文名
-                            cn.value1 = dsJson.getString(jsonKey);
+                            String value = dsJson.getString(jsonKey);
+                            if("true".equals(value)){
+                                value = "是";
+                            }
+                            if("false".equals(value)){
+                                value = "否";
+                            }
+                            cn.value1 = value;
                             listData.add(cn);
                         }
                     }

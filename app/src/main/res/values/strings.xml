@@ -79,6 +79,8 @@
     <string name="select_xiaoShouDan">销售单</string>
     <string name="select_peiJianXiaoShouDan">配件销售单</string>
     <string name="select_peiJianCaiGouDan">配件采购单</string>
+    <string name="select_yueYueWeiXiu">预约维修</string>
+    <string name="select_weiXiuJieDai">维修接待</string>
 
 
 
