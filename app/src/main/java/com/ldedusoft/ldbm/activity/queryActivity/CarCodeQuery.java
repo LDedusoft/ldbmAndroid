@@ -55,6 +55,11 @@ public class CarCodeQuery extends BaseActivity {
             }
 
             @Override
+            public void OnModifyClick() {
+
+            }
+
+            @Override
             public void OnBackClick() {
                 finish();
             }

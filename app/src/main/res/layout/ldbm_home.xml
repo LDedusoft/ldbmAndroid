@@ -3,7 +3,7 @@
     android:id="@+id/dl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/topBarBackground"
+    android:background="@drawable/home_title_bottom_background"
     ><!--背景图 空-->
     <com.ldedusoft.ldbm.component.customComp.SysInfoPage
         android:layout_width="match_parent"
@@ -42,7 +42,6 @@
                     android:src="@drawable/home_title_menu" />
 
                 <EditText
-
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"

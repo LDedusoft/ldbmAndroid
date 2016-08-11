@@ -20,11 +20,11 @@
                 android:src="@drawable/ic_launcher" />
 
             <TextView
+                android:id="@+id/sys_info_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:text="BlueMor"
                 android:textColor="#ffffff"
                 android:textSize="25sp" />
         </LinearLayout>

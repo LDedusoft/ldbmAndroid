@@ -1,5 +1,8 @@
 package com.ldedusoft.ldbm.util;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,9 +28,17 @@ public class HttpUtil {
                     OutputStream outStream = conn.getOutputStream();
                     outStream.write(entity);
                     if (conn.getResponseCode() == 200) {
-                        listener.onFinish(StreamTool.streamToString(conn.getInputStream()));
+                        InputStream in = conn.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                        StringBuilder response = new StringBuilder();
+                        String line;
+                        while((line = reader.readLine())!=null){
+                            response.append(line);
+                        }
+                        listener.onFinish(response.toString());
+//                        listener.onFinish(StreamTool.streamToString(conn.getInputStream()));
                     } else {
-                        listener.onWarning("网络返回异常:" + conn.getResponseCode());
+                        listener.onWarning("服务器错误:" + conn.getResponseCode());
                     }
                 }catch (Exception e){
                     listener.onError(e);

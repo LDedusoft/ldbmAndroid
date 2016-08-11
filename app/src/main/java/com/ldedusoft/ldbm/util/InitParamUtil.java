@@ -478,7 +478,7 @@ public class InitParamUtil {
         dic.put("配件采购单JingShouRen","经手人");
         dic.put("配件采购单ZhiDanRen","制单人");
 
-                    /*
+        /*
         * 预约维修
         *{Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；MingCheng：客户名称；
         * wxFangShi：维修方式；ywLeiBie：业务类别；dxTime:弹性时间}
@@ -511,7 +511,7 @@ public class InitParamUtil {
         dic.put("维修接待BenCiCunYou","油量");
         dic.put("维修接待BenCiMileage","里程");
         dic.put("维修接待NextByTime","下次保养时间");
-        dic.put("维修接待ChengBaoGongSi","承包公司");
+        dic.put("维修接待ChengBaoGongSi","承保公司");
         dic.put("维修接待DingSunYuan","定损员");
         dic.put("维修接待YeWuBeiZhu","备注");
         dic.put("维修接待JingShouRen","业务员");
@@ -539,10 +539,10 @@ public class InitParamUtil {
 
     public static  List<List<Map<String, String>>> getChildMenuList(String[] userConfigArray){
          List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
-        String[][] groupArray = {{"预约维修","维修接待","进度查询"},
-                {"洽谈","销售"},
-                {"采购计划","配件采购","配件销售单"},
-                {"报表","库存","销售查询","销量"}};
+        String[][] groupArray = {{"预约维修","维修接待","维修进度查询","车辆信息查询","客户信息查询"},
+                {"个人洽谈","公司洽谈","销售单","在库车辆查询","车险计算","车贷计算"},
+                {"配件销售单","配件采购单","新建配件","配件库存","采购计划"},
+                {"经营统计","库存统计","维修统计","收款统计","客户账务统计","进货汇总","采购订单","供应商累计供货排行","销售计划分析表","客户销售额排行","日期销售报表","仓库销售排行"}};
         for (int i = 0; i < groupArray.length; i++)
         {
             List<Map<String, String>> list = new ArrayList<Map<String, String>>();

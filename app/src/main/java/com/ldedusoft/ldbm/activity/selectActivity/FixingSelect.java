@@ -69,7 +69,10 @@ public class FixingSelect extends BaseActivity implements QueryToolBarListener {
     public void OnAddClick() {
 
     }
+    @Override
+    public void OnModifyClick() {
 
+    }
     private void initPageBar(){
         nextPageBtn = (TextView)findViewById(R.id.fixing_next_page);
         backPageBtn = (TextView)findViewById(R.id.fixing_back_page);

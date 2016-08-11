@@ -43,6 +43,11 @@ public class AppointmentQueryYY extends BaseActivity {
             }
 
             @Override
+            public void OnModifyClick() {
+
+            }
+
+            @Override
             public void OnBackClick() {
                 finish();
             }

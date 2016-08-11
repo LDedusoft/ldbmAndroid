@@ -262,18 +262,24 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                     break;
                 case 5: //复选
                     checkBox.setVisibility(View.VISIBLE);
+                    InputItem ti = inputItemMap.get(position);
+                    if("true".equals(ti.getValue())){
+                        checkBox.setChecked(true);
+                    }else if("false".equals(ti.getValue())) {
+                        checkBox.setChecked(false);
+                    }
                     checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            InputItem tempItem = inputItemMap.get(position);
-                            String val ="false";
-                            if (isChecked){
-                                val = "true";
-                            }else {
-                                val = "false";
-                            }
-                            tempItem.setValue(val);
-                            checkBoxMap.put(position,val);
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        InputItem tempItem = inputItemMap.get(position);
+                        String val = "false";
+                        if (isChecked) {
+                            val = "true";
+                        } else {
+                            val = "false";
+                        }
+                        tempItem.setValue(val);
+                        checkBoxMap.put(position, val);
                         }
                     });
                     /*保存焦点位置*/

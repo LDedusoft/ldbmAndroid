@@ -111,7 +111,10 @@ public class ProgressListQuery extends BaseActivity {
             public void OnAddClick() {
 
             }
+            @Override
+            public void OnModifyClick() {
 
+            }
             @Override
             public void OnBackClick() {
                 finish();

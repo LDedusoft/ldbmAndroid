@@ -52,7 +52,10 @@ public class ClientSelect extends BaseActivity {
                 Intent intent = new Intent("activity.repair.form.NewClientActivity");
                 ClientSelect.this.startActivityForResult(intent,1);
             }
+            @Override
+            public void OnModifyClick() {
 
+            }
             @Override
             public void OnBackClick() {
                 finish();

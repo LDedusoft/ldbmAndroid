@@ -3,6 +3,7 @@ package com.ldedusoft.ldbm.activity.repair.form;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.ldedusoft.ldbm.model.CarCode;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.TrafficClass;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -41,12 +43,14 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     private ListView inputListView;
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
+    private String dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_repair_appointment_yy);
         formToolBar = (FormToolBar)findViewById(R.id.appointment_yy_toolbar);
         String value =  getIntent().getStringExtra("param");//菜单初始化时定义了type 为：YY
+        dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
         listData = InitParamUtil.getInstance(this).initRP_ReceptionNew_YY();
         formToolBar.setTitle(this.getResources().getString(R.string.appointment_yy));
         formToolBar.setFormToolBarListener(new FormToolBarListener() {
@@ -80,6 +84,10 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     }
 
     private void getData(){
+        if(!TextUtils.isEmpty(dataSource)){
+            updateListViewWithDS(dataSource);
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
         String typeValue =  getIntent().getStringExtra("param");
         String paramXml = InterfaceParam.getInstance().getRP_ReceptionNew(typeValue);
@@ -112,6 +120,35 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
     private void updateListView(String result){
         listData = InterfaceResault.getRP_ReceptionNewResult_YY(listData,result);
         adapter.notifyDataSetChanged();
+    }
+
+    //修改时更新列表
+    //列表值(提交接口){CarCode:车牌号；RepairType:维修类型；BusinessType:业务类型；yyTime:预约时间；Salesman:业务员；dxTime:弹性时间}
+    ////查询数据{Id：id；DanHao：单号；djTime：登记时间；yyTime：预约时间；CarCode：车牌号；MingCheng：客户名称；wxFangShi：维修方式；ywLeiBie：业务类别；dxTime:弹性时间}
+    private void  updateListViewWithDS(String ds){
+        try{
+            JSONObject jsonObject = new JSONObject(ds);
+            String danhao = jsonObject.getString("DanHao");
+           // String formMaker = jsonObject.getString("FormMaker");
+            for (InputItem item : listData){
+                if("Number".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("DanHao"));
+                }else if("CarCode".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("CarCode"));
+                }else if("RepairType".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("wxFangShi"));
+                }else if("BusinessType".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("ywLeiBie"));
+                }else if("yyTime".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("yyTime"));
+//                }else if("Salesman".equals(item.getItemId())) { //查询返回数据没有业务员
+//                    item.setValue(jsonObject.getString(""));
+                }else if("dxTime".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("txTime"));
+                }
+            }
+            adapter.notifyDataSetChanged();
+        }catch(Exception e){e.printStackTrace();}
     }
 
     private void updateListItem(String data,int position){
@@ -205,18 +242,27 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
         String paramXml = InterfaceParam.getInstance().getAP_AppointmentSave(number, info);
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
-            public void onFinish(String response) {
+            public void onFinish(final String response) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AppointmentActivityYY.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
-                        TimerTask task = new TimerTask(){
-                         public void run(){
-                             finish();
-                            }
-                        };
-                        Timer timer = new Timer();
-                        timer.schedule(task, 1000);
+                        String result = ParseXML.getItemValueWidthName(response, "AP_AppointmentSaveResult");
+                        if("false".equals(result)||TextUtils.isEmpty(result)) {
+                            Toast.makeText(AppointmentActivityYY.this, getString(R.string.save_fail), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(AppointmentActivityYY.this, getString(R.string.save_success), Toast.LENGTH_SHORT).show();
+                            //发送刷新列表广播
+                            Intent intent = new Intent(SysProperty.getInstance().Broadcast_commlist_refresh);
+                             LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(AppointmentActivityYY.this);
+                            localBroadcastManager.sendBroadcast(intent);//发送广播
+                            TimerTask task = new TimerTask() {
+                                public void run() {
+                                    finish();
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
                     }
                 });
             }

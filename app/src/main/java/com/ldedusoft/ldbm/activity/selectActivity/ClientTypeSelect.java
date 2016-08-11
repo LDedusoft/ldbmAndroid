@@ -50,7 +50,10 @@ public class ClientTypeSelect extends BaseActivity {
             @Override
             public void OnAddClick() {
             }
+            @Override
+            public void OnModifyClick() {
 
+            }
             @Override
             public void OnBackClick() {
                 finish();

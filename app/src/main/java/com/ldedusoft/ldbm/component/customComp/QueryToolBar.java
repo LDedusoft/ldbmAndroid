@@ -17,7 +17,7 @@ public class QueryToolBar extends LinearLayout {
     private TextView back;
     private TextView titleText;
     private TextView backText;
-    private TextView addBtn;
+    private TextView addBtn,modifyBtn;
     private QueryToolBarListener queryToolBarListener;
     private LinearLayout backLayout;
     public QueryToolBar(Context context, AttributeSet attrs){
@@ -28,11 +28,21 @@ public class QueryToolBar extends LinearLayout {
         titleText = (TextView)findViewById(R.id.query_tool_bar_title);
         backText = (TextView)findViewById(R.id.query_tool_bar_back);
         addBtn = (TextView)findViewById(R.id.query_tool_bar_add);
+        modifyBtn =(TextView)findViewById(R.id.query_tool_bar_modify);
         addBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(queryToolBarListener!=null){
                     queryToolBarListener.OnAddClick();
+                }
+            }
+        });
+
+        modifyBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(queryToolBarListener!=null){
+                    queryToolBarListener.OnModifyClick();
                 }
             }
         });
@@ -72,6 +82,9 @@ public class QueryToolBar extends LinearLayout {
 
     public void showAddBtn(){
         addBtn.setVisibility(VISIBLE);
+    }
+    public void showModifyBtn(){
+        modifyBtn.setVisibility(VISIBLE);
     }
 
     public void hiddenAddBtn(){

@@ -6,5 +6,7 @@ package com.ldedusoft.ldbm.interfaces;
 public interface QueryToolBarListener {
     public abstract void OnAddClick();
 
+    public abstract void OnModifyClick();
+
     public abstract void OnBackClick();
 }

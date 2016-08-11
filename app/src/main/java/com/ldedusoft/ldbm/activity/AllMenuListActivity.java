@@ -20,10 +20,13 @@ import android.widget.TextView;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
+import com.ldedusoft.ldbm.model.MenuItem;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +39,7 @@ public class AllMenuListActivity extends Activity {
     private MyAdapter adapter;
     private SharedPreferences pref; //保存文件
     private FormToolBar toolBar;
+    private HashMap<String,Integer> iconMap = new HashMap<String,Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,10 +47,18 @@ public class AllMenuListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_allmenu_list);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
+        initIconMap();
         initView();
         initData();
         setListener();
         exListView.requestFocus();
+    }
+
+    private void initIconMap(){
+        ArrayList<MenuItem> allMenuItemList = SysProperty.getInstance().getAllMenuList();
+        for (MenuItem item:allMenuItemList){
+            iconMap.put(item.getMenuTitle(),item.getIconId());
+        }
     }
 
     /**
@@ -103,9 +115,9 @@ public class AllMenuListActivity extends Activity {
                         hashSet.remove("选定" + childPosition);
                     }
                 }
-                System.out.println("选定的长度==1" + hashSet.size());
-                System.out.println("选定的长度==2"
-                        + childData.get(groupPosition).size());
+//                System.out.println("选定的长度==1" + hashSet.size());
+//                System.out.println("选定的长度==2"
+//                        + childData.get(groupPosition).size());
                 if (hashSet.size() == childData.get(groupPosition).size())
                 {
                     parentList.get(groupPosition).put("isGroupCheckd", "Yes");
@@ -207,6 +219,8 @@ public class AllMenuListActivity extends Activity {
                 holder = new ViewHolder();
                 convertView = View.inflate(context, R.layout.item_allmenu_child,
                         null);
+                holder.iconText =  (TextView) convertView
+                        .findViewById(R.id.allmenu_icon);
                 holder.childText = (TextView) convertView
                         .findViewById(R.id.id_text);
                 holder.childBox = (CheckBox) convertView
@@ -217,6 +231,9 @@ public class AllMenuListActivity extends Activity {
             {
                 holder = (ViewHolder) convertView.getTag();
             }
+            int iconId = iconMap.get(childData.get(groupPosition)
+                    .get(childPosition).get("childItem"));
+            holder.iconText.setBackgroundDrawable(getResources().getDrawable(iconId));
             holder.childText.setText(childData.get(groupPosition)
                     .get(childPosition).get("childItem"));
             String isChecked = childData.get(groupPosition).get(childPosition)
@@ -356,7 +373,8 @@ public class AllMenuListActivity extends Activity {
     }
 
     private class ViewHolder {
-        TextView groupText, childText;
+
+        TextView groupText, childText,iconText;
         CheckBox groupBox, childBox;
     }
 }

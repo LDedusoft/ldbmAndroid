@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
  */
 public class SysProperty {
 
+    public static String Broadcast_commlist_refresh = "LOCAL_COMMLIST_REFRESH";
+
     private static SysProperty sysp;
 
     /*登录模式*/

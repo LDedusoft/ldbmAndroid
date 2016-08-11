@@ -1,8 +1,12 @@
 package com.ldedusoft.ldbm.activity.queryActivity;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,7 @@ import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
 import com.ldedusoft.ldbm.interfaces.CommonQueryBarListener;
 import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
 import com.ldedusoft.ldbm.model.Client;
+import com.ldedusoft.ldbm.model.MenuItem;
 import com.ldedusoft.ldbm.model.SalesMan;
 import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.common.CommonNormal;
@@ -38,6 +43,9 @@ import java.util.LinkedHashMap;
  * Created by wangjianwei on 2016/7/16.
  */
 public class CommonQuery extends BaseActivity implements QueryToolBarListener {
+    private IntentFilter intentFilter;
+    private LocalReceiver localReceiver;
+    private LocalBroadcastManager localBroadcastManager;
     private ArrayList listData;
     private ListView listView;
     private CommonNormalAdapter adapter;
@@ -52,16 +60,28 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_query_common);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         showProgressDialog();
         inputListPosition = getIntent().getIntExtra("position", -1);//接收参数
         interfaceName = getIntent().getStringExtra("title");
         intentParam = getIntent().getStringExtra("param");
         dataSource = getIntent().getStringExtra("dataSource"); //数据源，如果不为空，则不从服务器取值
+        registBroadcast();
         initConditionBar();
         initListView();
         initToolBar();
         initData(createDefaultParam());
 
+    }
+
+    /**
+     * 注册本地广播
+     */
+    private void registBroadcast(){
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(SysProperty.getInstance().Broadcast_commlist_refresh);
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver,intentFilter);
     }
 
     /*生成初始化参数*/
@@ -110,7 +130,7 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
             @Override
             public void OnRestockTypeSelect() {
                 Intent intent = new Intent("activity.selectActivity.CommonSelect");
-                intent.putExtra("param","restock_type");
+                intent.putExtra("param", "restock_type");
                 startActivityForResult(intent, 3);
             }
         });
@@ -126,6 +146,13 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
         toolBar = (QueryToolBar)findViewById(R.id.selected_commonQuery_toolbar);
         toolBar.setQueryToolBarListener(this);
         toolBar.setTitle(interfaceName);
+        String[] needModify = {"预约维修","维修接待","个人洽谈","公司洽谈","销售单"};
+        for(String name:needModify){
+            if(interfaceName.equals(name)&&!TextUtils.isEmpty(dataSource)){ //只有在查询详情时才显示编辑,即dataSource不为空时
+                toolBar.showModifyBtn();
+                break;
+            }
+        }
     }
 
     @Override
@@ -138,6 +165,25 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
 
     }
 
+    @Override
+    public void OnModifyClick() {
+        //从全部菜单列表中获取当前菜单的新建页面
+        //将dataSource作为参数传给新建页面(新建页面判断如果有数据源,则不再请求新单号)
+        String intentPath = "";
+        ArrayList<MenuItem> allMenu =  SysProperty.getInstance().getAllMenuList();
+        for(MenuItem item:allMenu){
+            if(item.getMenuTitle().equals(interfaceName)){
+                intentPath = item.getCreateIntentPath();
+                break;
+            }
+        }
+        if(!TextUtils.isEmpty(intentPath)){
+            Intent intent = new Intent(intentPath);
+            intent.putExtra("dataSource",dataSource);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     private void initListView(){
         listView = (ListView)findViewById(R.id.selected_commonQuery_list);
@@ -269,6 +315,20 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
     private void closeProgressDialog(){
         if(progressDialog != null){
             progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        localBroadcastManager.unregisterReceiver(localReceiver);
+    }
+
+    class LocalReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+           // Toast.makeText(context,"接收到广播",Toast.LENGTH_SHORT).show();
+            initData(new JSONObject()); //刷新数据
         }
     }
 }

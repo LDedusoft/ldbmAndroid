@@ -88,7 +88,10 @@ public class CarListQuery extends BaseActivity {
             public void OnAddClick() {
 
             }
+            @Override
+            public void OnModifyClick() {
 
+            }
             @Override
             public void OnBackClick() {
                 finish();

@@ -27,10 +27,8 @@ import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.ActivityCollector;
 import com.ldedusoft.ldbm.util.InitParamUtil;
 import com.ldedusoft.ldbm.view.DragLayout;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,24 +67,25 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private void initDragLayout() {
         dl = (DragLayout) findViewById(R.id.dl);
-        lv =  lv = (ListView) findViewById(R.id.lv);
-        dl.setDragListener(new DragLayout.DragListener() {
-            @Override
-            public void onOpen() {
-                lv.smoothScrollToPosition(new Random().nextInt(30));
-            }
-
-            @Override
-            public void onClose() {
-                shake();
-            }
-
-
-            @Override
-            public void onDrag(float percent) {
-                ViewHelper.setAlpha(iv_icon, 1 - percent);
-            }
-        });
+        /*右侧缩小动画*/
+//        lv =  lv = (ListView) findViewById(R.id.lv);
+//        dl.setDragListener(new DragLayout.DragListener() {
+//            @Override
+//            public void onOpen() {
+//                lv.smoothScrollToPosition(new Random().nextInt(30));
+//            }
+//
+//            @Override
+//            public void onClose() {
+//                shake();
+//            }
+//
+//
+//            @Override
+//            public void onDrag(float percent) {
+//                ViewHelper.setAlpha(iv_icon, 1 - percent);
+//            }
+//        });
 
         iv_icon = (ImageView) findViewById(R.id.iv_icon);
         iv_icon.setOnClickListener(new View.OnClickListener() {

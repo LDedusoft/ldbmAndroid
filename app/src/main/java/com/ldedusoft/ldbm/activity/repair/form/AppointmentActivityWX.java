@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.activity.repair.form;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.TrafficClass;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -42,11 +44,13 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     private ListView inputListView;
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
+    private String dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_repair_appointment_wx); //!!
         String value =  getIntent().getStringExtra("param");
+        dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
         formToolBar = (FormToolBar)findViewById(R.id.appointment_wx_toolbar);
         formToolBar.setTitle(this.getResources().getString(R.string.appointment_wx));
         formToolBar.showImportBtn();//显示导入按钮
@@ -83,6 +87,10 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     }
 
     private void getData(){
+        if(!TextUtils.isEmpty(dataSource)){
+            updateListViewWithDS(dataSource);
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
         String typeValue =  getIntent().getStringExtra("param"); //菜单初始化时定义了type 为：WX
         String paramXml = InterfaceParam.getInstance().getRP_ReceptionNew(typeValue);
@@ -224,6 +232,63 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
         }
     }
 
+    //修改时更新列表
+    //列表值(提交接口)
+    // {CarCode:车牌号,Driver:送修人,PhoneNum:送修人电话,RepairType:维修类型,BusinessType:业务类型,OilAmount:油量,
+    // OilQuality:油品,Mileage:里程,NextDate:下次保养时间,NextMileage:下次保养里程,FinishTime:预计完工时间,
+    // InsuranceCom:保险公司,PEDS:定损员,Remarks:备注,Salesman:业务员,IsMaintain:是否为保养}
+
+    // 查询数据{
+    //{Id：id；DanHao：单号；jdTime：接待时间；CarCode：车牌号；MingCheng：客户名称；WeiXiuWay：维修方式；
+    // ywLeiBie：业务类别;SongXiuPeople:送修人；SongXiuPhone：送修人电话；CarOils：油品；BenCiCunYou：油量；
+    // BenCiMileage：里程；NextByTime：下次保养时间；ChengBaoGongSi：承包公司；DingSunYuan：定损员；YeWuBeiZhu：备注；
+    // JingShouRen：业务员；ZhiDanRen：制单人；IsBywh：是否是保养；NextByMileage：下次保养里程；YuJiWanGong：预计完工时间}
+    private void  updateListViewWithDS(String ds){
+        try{
+            JSONObject jsonObject = new JSONObject(ds);
+            String danhao = jsonObject.getString("DanHao");
+            // String formMaker = jsonObject.getString("FormMaker");
+            for (InputItem item : listData){
+                if("Number".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("DanHao"));
+                }else if("CarCode".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("CarCode"));
+                }else if("Driver".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("SongXiuPeople"));
+                }else if("PhoneNum".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("SongXiuPhone"));
+                }else if("RepairType".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("WeiXiuWay"));
+                }else if("BusinessType".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("ywLeiBie"));
+                }else if("OilAmount".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("BenCiCunYou"));
+                }else if("OilQuality".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("CarOils"));
+                }else if("Mileage".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("BenCiMileage"));
+                }else if("NextDate".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("NextByTime"));
+                }else if("NextMileage".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("NextByMileage"));
+                }else if("FinishTime".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("YuJiWanGong"));
+                }else if("InsuranceCom".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("ChengBaoGongSi"));
+                }else if("PEDS".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("DingSunYuan"));
+                }else if("Remarks".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("YeWuBeiZhu"));
+                }else if("Salesman".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("JingShouRen"));
+                }else if("IsMaintain".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("IsBywh"));
+                }
+            }
+            adapter.notifyDataSetChanged();
+        }catch(Exception e){e.printStackTrace();}
+    }
+
     @Override
     public void onClick(View v) {
     }
@@ -262,15 +327,24 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("维修接待保存返回值：", response);
-                        Toast.makeText(AppointmentActivityWX.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
-                        TimerTask task = new TimerTask(){
-                            public void run(){
-                                finish();
-                            }
-                        };
-                        Timer timer = new Timer();
-                        timer.schedule(task, 1000);
+                        String result = ParseXML.getItemValueWidthName(response, "RP_ReceptionSaveResult");
+                        if("false".equals(result)||TextUtils.isEmpty(result)) {
+                            Toast.makeText(AppointmentActivityWX.this, getString(R.string.save_fail), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.d("维修接待保存返回值：", response);
+                            Toast.makeText(AppointmentActivityWX.this, getString(R.string.save_success), Toast.LENGTH_SHORT).show();
+                            //发送刷新列表广播
+                            Intent intent = new Intent(SysProperty.getInstance().Broadcast_commlist_refresh);
+                            LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(AppointmentActivityWX.this);
+                            localBroadcastManager.sendBroadcast(intent);//发送广播
+                            TimerTask task = new TimerTask() {
+                                public void run() {
+                                    finish();
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1000);
+                        }
                     }
                 });
             }

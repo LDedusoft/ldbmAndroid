@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
-    android:padding="10dp" >
+    android:layout_height="@dimen/menu_item_height"
+    android:descendantFocusability="blocksDescendants">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/menu_item_height"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/allmenu_icon"
+            android:layout_width="@dimen/menu_item_icon"
+            android:layout_height="@dimen/menu_item_icon"
+            />
+    </LinearLayout>
 
     <TextView
+        android:text="ssssssssssss"
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/menu_item_height"
         android:layout_centerVertical="true"
-        android:padding="10dp"
-        android:layout_marginLeft="30dp"
-        android:textColor="#55acac"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/menuListItemText"
         android:textIsSelectable="true"
-        android:textSize="15sp" >
+        android:textSize="15sp"
+        android:gravity="center"
+        >
     </TextView>
 
     <CheckBox
         android:id="@+id/id_checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:clickable="false"
+        style="@style/CheckBoxStyleSavePsd"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
 

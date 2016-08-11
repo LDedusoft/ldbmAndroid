@@ -39,8 +39,15 @@ public class AppointmentQueryWX extends BaseActivity {
             @Override
             public void OnAddClick() {
             }
+
+            @Override
+            public void OnModifyClick() {
+
+            }
+
             @Override
             public void OnBackClick() { finish(); }
+
         });
         inputListPosition = getIntent().getIntExtra("position",-1);//接收参数
         initListView();
