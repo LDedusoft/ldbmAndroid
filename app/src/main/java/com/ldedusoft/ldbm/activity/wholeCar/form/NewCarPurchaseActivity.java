@@ -145,7 +145,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                     CarWarehouse carWarehouse = new CarWarehouse();
                     carWarehouse = (CarWarehouse)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListCustomItem("cangku", carWarehouse.getName(), carWarehouse.getCode(), inputListPosition); //!!!仓库传值，未确定
+                    updateListCustomItem("cangku", carWarehouse.getName(), carWarehouse.getName(), inputListPosition); //!!!仓库传值，未确定
                 }
                 break;
             case 5: //颜色
@@ -375,7 +375,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * 修改时查询车练列表
+     * 修改时查询车辆列表
      */
     private void getCarListData(){
         String serverPath = InterfaceParam.SERVER_PATH;

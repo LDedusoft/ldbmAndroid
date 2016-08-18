@@ -73,7 +73,11 @@ public class InterfaceResault {
     public static String SC_SavePurchaseResult = "SC_SavePurchaseResult";
     /*整车销售订单车辆列表*/
     public static String SC_PurchaseCarListResult = "SC_PurchaseCarListResult";
+    /*配件销售订单配件列表*/
+    public static String SC_SaleFixingsFixingsListResult = "SC_SaleFixingsFixingsListResult";
 
+    /*配件采购订单配件列表*/
+    public static String PT_PurchaseFixingsFixingsListResult = "PT_PurchaseFixingsFixingsListResult";
     /*整车仓库列表*/
     public static String Pub_CarWarehouseListResult = "Pub_CarWarehouseListResult";
     /*车辆颜色列表*/
@@ -1102,9 +1106,9 @@ public class InterfaceResault {
                     cn.value1 = jsonObject.getString("DanHao");
                     cn.name2 = "制单人";
                     cn.value2 = jsonObject.getString("ZhiDanRen");
-                    cn.name3 = "单据金额";
+                    cn.name3 = "金额";
                     cn.value3 = jsonObject.getString("JinE");
-                    cn.name4 = "单据数量";
+                    cn.name4 = "数量";
                     cn.value4 = jsonObject.getString("Num");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
@@ -1134,6 +1138,10 @@ public class InterfaceResault {
                     cn.value1 = jsonObject.getString("DanHao");
                     cn.name2 = "制单人";
                     cn.value2 = jsonObject.getString("ZhiDanRen");
+                    cn.name3 = "金额";
+                    cn.value3 = jsonObject.getString("JinE");
+                    cn.name4 = "数量";
+                    cn.value4 = jsonObject.getString("Num");
                     cn.details = true;
                     cn.dataSource = jsonObject.toString();
                     listData.add(cn);

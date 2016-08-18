@@ -146,7 +146,7 @@ public class CommonQuery extends BaseActivity implements QueryToolBarListener {
         toolBar = (QueryToolBar)findViewById(R.id.selected_commonQuery_toolbar);
         toolBar.setQueryToolBarListener(this);
         toolBar.setTitle(interfaceName);
-        String[] needModify = {"预约维修","维修接待","个人洽谈","公司洽谈","整车销售单"};
+        String[] needModify = {"预约维修","维修接待","个人洽谈","公司洽谈","整车销售单","配件采购单","配件销售单"};
         for(String name:needModify){
             if(interfaceName.equals(name)&&!TextUtils.isEmpty(dataSource)){ //只有在查询详情时才显示编辑,即dataSource不为空时
                 toolBar.showModifyBtn();

@@ -15,8 +15,8 @@
     <string name="menu_item_addShortcut">添加快捷功能</string>
     <string name="menu_item_addFix">添加配件</string>
     <string name="menu_item_addCar">添加车辆</string>
-    <string name="menu_item_addFix_hint">请选择配件</string>
-    <string name="menu_item_addCar_hint">请选择车辆</string>
+    <string name="menu_item_addFix_hint">点击添加配件</string>
+    <string name="menu_item_addCar_hint">点击添加车辆</string>
 
     <string name="menu_item_top">置顶</string>
     <string name="menu_item_delete">移除</string>

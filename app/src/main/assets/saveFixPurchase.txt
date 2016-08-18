@@ -71,7 +71,7 @@
  "inputType":10,
  "defaultValue":"",
  "value":"",
- "hint":"请选择配件",
+ "hint":"点击添加配件",
  "intentPath":"activity.selectActivity.FixingSelect",
  "intentParam":"",
  "required":false,

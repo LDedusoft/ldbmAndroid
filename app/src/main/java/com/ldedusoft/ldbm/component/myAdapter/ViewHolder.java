@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.interfaces.CommonNormalDetailListener;
 
 /**
@@ -24,6 +25,9 @@ public class ViewHolder {
             mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
                     false);
             //setTag
+            if(position%2!=0){
+                mConvertView.setBackgroundResource(R.color.lisetItemBackground);
+            }
             mConvertView.setTag(this);
 
 

@@ -48,6 +48,7 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
     private String dataSource;
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -266,7 +267,7 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     private void getData(){
         if(!TextUtils.isEmpty(dataSource)){
             //// TODO: 2016/8/12  需要获取当前订单的配件列表
-//            updateListViewWithDS(dataSource);
+            updateListViewWithDS(dataSource);
             return;
         }
         String serverPath = InterfaceParam.SERVER_PATH;
@@ -334,8 +335,110 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     //列表值(提交接口)
     //
     // 查询数据
-    //
+    //列表值(提交接口)
+    //{ClientId：客户编号；SaleMan：经手人名称；CangKu：仓库id；Invoice：发票类型名称}   FormMaker  Number
+    // 查询数据
+    //{ID：ID；DanHao：单号；RiQi：日期；JinE：金额；Num：数量；JingShouRen：经手人；ZhiDanRen：制单人}
+
     private void  updateListViewWithDS(String ds){
+        try{
+            JSONObject jsonObject = new JSONObject(ds);
+            id = jsonObject.getString("ID");
+            for (InputItem item : listData){
+                if("FormMaker".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("ZhiDanRen"));
+                }else  if("Number".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("DanHao"));
+                }else if("SaleMan".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("JingShouRen"));
+                }else if("ClientId".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("BianHao"));
+                } else  if("Invoice".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("FaPiao"));
+                } else  if("CangKu".equals(item.getItemId())) {
+                    item.setDispValue(jsonObject.getString("CangKu"));
+                    item.setValue(jsonObject.getString("CangKuId"));
+                }
+            }
+            //获取配件列表
+            //每个json生成inputItem, json字符串放入item的value里
+            //item加入listData
+            getFixListData();
+//            adapter.notifyDataSetChanged(); //添加车辆列表完毕后的方法里执行
+        }catch(Exception e){e.printStackTrace();}
+
+    }
+
+    /**
+     * 修改时查询配件列表
+     */
+    private void getFixListData(){
+        String serverPath = InterfaceParam.SERVER_PATH;
+        String paramXml = InterfaceParam.getInstance().getPT_PurchaseFixingsFixingsList(id);//!!
+        Log.d("获取配件采购配件列表参数：",paramXml);
+        HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
+            @Override
+            public void onFinish(final String response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("获取配件采购配件列表返回值：",response);
+                        String result = ParseXML.getItemValueWidthName(response, InterfaceResault.PT_PurchaseFixingsFixingsListResult);
+                        addFixList(result);
+                    }
+                });
+            }
+            @Override
+            public void onWarning(String warning) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewFixPurchaseActivity.this,"获取配件列表失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewFixPurchaseActivity.this,"获取车辆列表失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 配件添加到列表
+     * @param result
+     * 查询返回的数据：{ID：ID；BianId：配件ID；MingCheng：配件名称；HanShuiDanJIa：含税单价；HanShuiJinE：含税金额；Num：数量；CangKu：仓库}
+     * 需要转换为：Name  Id  Num  Price
+     * //{"Name":""+name+"\",\"Id\":\""+id+"\",\"Num\":\""+number+"\",\"Price\":\""+price+"\"}");
+     */
+    private void addFixList(String result){
+        if(TextUtils.isEmpty(result)){
+            adapter.notifyDataSetChanged();
+            return;
+        }
+        try{
+            InputItem item;
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONObject newJson = new JSONObject();
+                newJson.put("Name",jsonObject.get("MingCheng"));
+                newJson.put("Id",jsonObject.get("BianId"));
+                newJson.put("Num",jsonObject.get("Num"));
+                newJson.put("Price",jsonObject.get("HanShuiDanJIa"));
+                item = new InputItem();
+                item.setValue(newJson.toString());
+                item.setInputType(11);//配件
+                listData.add(item);
+            }
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){e.printStackTrace();}
 
     }
 }

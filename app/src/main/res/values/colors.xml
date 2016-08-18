@@ -30,4 +30,5 @@
     <color name="commonQueryConditionBackground">#f0eef4</color> <!-- 通用查询条件栏背景色-->
     <color name="showPictureBackground">#f1f1f1</color> <!-- 显示照片页面,背景色-->
     <color name="shouXieBackground">#fdfdf2</color> <!-- 手写签名区,背景色-->
+    <color name="lisetItemBackground">#f7f7f7</color> <!--列表隔行异色-->
 </resources>

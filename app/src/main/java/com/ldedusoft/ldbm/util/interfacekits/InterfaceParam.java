@@ -959,7 +959,7 @@ public class InterfaceParam {
     }
 
 
-    /**整车销售订单(保存)*/
+    /**整车销售订单车辆列表*/
     public String getSC_PurchaseCarList(String id) {
        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
                "  <soap:Header>\n" +
@@ -979,6 +979,49 @@ public class InterfaceParam {
         xml = xml.replace("@id",id);
         return xml;
     }
+
+    /**配件销售订单配件列表*/
+    public String getSC_SaleFixingsFixingsList(String id) {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <SC_SaleFixingsFixingsList xmlns=\"LDBM4S\">\n" +
+                "      <id>@id</id>\n" +
+                "    </SC_SaleFixingsFixingsList>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        xml = xml.replace("@id",id);
+        return xml;
+    }
+
+    /**配件采购单配件列表*/
+    public String getPT_PurchaseFixingsFixingsList(String id) {
+        String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                "  <soap:Header>\n" +
+                "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+                "      <UserName>@sysUser</UserName>\n" +
+                "      <PassWord>@sysPassword</PassWord>\n" +
+                "    </MySoapHeader>\n" +
+                "  </soap:Header>\n" +
+                "  <soap:Body>\n" +
+                "    <PT_PurchaseFixingsFixingsList xmlns=\"LDBM4S\">\n" +
+                "      <id>@id</id>\n" +
+                "    </PT_PurchaseFixingsFixingsList>\n" +
+                "  </soap:Body>\n" +
+                "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        xml = xml.replace("@id",id);
+        return xml;
+    }
+
     /**保存配件销售单*/
     public String getSC_SaveSaleFixings(String number,String info,String fInfo) {
         SC_SaveSaleFixings= "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
