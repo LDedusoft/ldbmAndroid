@@ -3,6 +3,9 @@
     package="com.ldedusoft.ldbm">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name=".Application.MyApplication"
         android:allowBackup="true"
@@ -331,7 +334,35 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ShouXieActivity">
+            <intent-filter>
+                <action android:name="activity.ShouXieActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
+        <activity android:name=".activity.showSignature">
+            <intent-filter>
+                <action android:name="activity.showSignature"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.ShowPictureActivity"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="activity.ShowPictureActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.ShowBigPictureActivity">
+            <intent-filter>
+                <action android:name="activity.ShowBigPictureActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

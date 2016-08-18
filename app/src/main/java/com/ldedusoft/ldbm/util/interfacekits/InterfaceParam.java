@@ -872,6 +872,7 @@ public class InterfaceParam {
                     "    <SC_NewNegotiate xmlns=\"LDBM4S\">\n" +
                     "      <UName>@userName</UName>\n" +
                     "      <ClientType>@type</ClientType>\n" +
+                    "      <ImgName>@image</ImgName>\n" +
                     "    </SC_NewNegotiate>\n" +
                     "  </soap:Body>\n" +
                     "</soap:Envelope>";
@@ -879,6 +880,7 @@ public class InterfaceParam {
         SC_NewNegotiate = SC_NewNegotiate.replace("@sysPassword",SYS_PASSWORD);
         SC_NewNegotiate = SC_NewNegotiate.replace("@userName",userName);
         SC_NewNegotiate = SC_NewNegotiate.replace("@type",type);
+        SC_NewNegotiate = SC_NewNegotiate.replace("@image",""); //图片名列表
         return SC_NewNegotiate;
     }
     /**整车销售订单(新建)*/
@@ -954,6 +956,28 @@ public class InterfaceParam {
         SC_SavePurchase = SC_SavePurchase.replace("@pInfo",pInfo);
         SC_SavePurchase = SC_SavePurchase.replace("@cInfo",cInfo);
         return SC_SavePurchase;
+    }
+
+
+    /**整车销售订单(保存)*/
+    public String getSC_PurchaseCarList(String id) {
+       String xml="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+               "  <soap:Header>\n" +
+               "    <MySoapHeader xmlns=\"LDBM4S\">\n" +
+               "      <UserName>@sysUser</UserName>\n" +
+               "      <PassWord>@sysPassword</PassWord>\n" +
+               "    </MySoapHeader>\n" +
+               "  </soap:Header>\n" +
+               "  <soap:Body>\n" +
+               "    <SC_PurchaseCarList xmlns=\"LDBM4S\">\n" +
+               "      <id>@id</id>\n" +
+               "    </SC_PurchaseCarList>\n" +
+               "  </soap:Body>\n" +
+               "</soap:Envelope>";
+        xml = xml.replace("@sysUser",SYS_USER);
+        xml = xml.replace("@sysPassword",SYS_PASSWORD);
+        xml = xml.replace("@id",id);
+        return xml;
     }
     /**保存配件销售单*/
     public String getSC_SaveSaleFixings(String number,String info,String fInfo) {

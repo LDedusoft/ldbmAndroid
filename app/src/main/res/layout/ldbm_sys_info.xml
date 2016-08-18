@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
-    android:paddingLeft="30dp"
     android:paddingTop="50dp">
 
 
@@ -11,21 +10,25 @@
             android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical"
+            android:gravity="left"
+            android:paddingLeft="80dp"
+
+            >
 
             <ImageView
                 android:id="@+id/iv_bottom"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/user" />
 
             <TextView
+                android:text="李涛"
                 android:id="@+id/sys_info_user"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textColor="#fff"
                 android:textSize="25sp" />
         </LinearLayout>
 
@@ -34,8 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="龙鼎科技有限公司"
+            android:text="@string/company"
             android:textColor="#ffffff"
+            android:paddingLeft="30dp"
             android:textSize="15sp" />
 
         <ListView

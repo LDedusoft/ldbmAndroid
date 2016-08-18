@@ -108,7 +108,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 //            controlKeyboardLayout(mainLayout, findViewById(R.id.btn_login));
 //        }
 
-
     }
 
     @Override

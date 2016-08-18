@@ -29,10 +29,12 @@
     <dimen name="input_list_item_title_width">120dp</dimen><!--输入表单标题宽度-->
     <dimen name="input_list_item_fix_addtitle_width">90dp</dimen><!--输入表单特殊item添加标题宽度-->
     <dimen name="input_list_item_fix_height">80dp</dimen><!--输入表单特殊item高度-->
+    <dimen name="input_list_item_car_height">160dp</dimen><!--输入表单特殊item高度-->
     <dimen name="input_list_item_fix_del_btn">50dp</dimen><!--输入表单特殊item高度-->
     <dimen name="input_list_item_fix_sub_height">35dp</dimen><!--输入表单特殊item子项高度-->
     <dimen name="input_list_item_fix_title_width">80dp</dimen><!--输入表特殊item单标题宽度-->
     <dimen name="input_list_item_fix_text">15sp</dimen><!--输入表特殊item文字-->
+    <dimen name="input_list_item_car_small_text">13sp</dimen><!--输入表特殊item文字-->
     <dimen name="input_list_item_text">17sp</dimen><!--输入表单文字-->
     <dimen name="input_list_item_textedit_width">140dp</dimen><!--输入表单文字框宽度-->
     <dimen name="input_list_item_unit_width">60dp</dimen><!--输入表单单位宽度-->
@@ -47,5 +49,6 @@
     <dimen name="commonQuery_item_action_width">60dp</dimen> <!--通用列详情按钮宽度-->
     <dimen name="commonQuery_condition_height">35dp</dimen> <!--通用列表 查询栏高度-->
     <dimen name="commonQuery_condition_textsize">15dp</dimen> <!--通用列表 查询栏高度-->
+    <dimen name="form_bottom_height">50dp</dimen> <!--表单底部工具条高度-->
 
 </resources>

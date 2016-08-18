@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.activity.wholeCar.form;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
 import com.ldedusoft.ldbm.model.CarType;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -38,11 +40,13 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
     private ListView inputListView;
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
+    private String dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_new_negotiate_person); //!!
         String value =  getIntent().getStringExtra("param");
+        dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
         formToolBar = (FormToolBar)findViewById(R.id.new_person_nego_toolbar);
       formToolBar.setTitle(this.getResources().getString(R.string.negotiate_person_title));
 
@@ -154,13 +158,17 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
                             Toast.makeText(NewNegotiatePersonActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
                         }else if("true".equals(result)){
                             Toast.makeText(NewNegotiatePersonActivity.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                            //发送刷新列表广播
+                            Intent intent = new Intent(SysProperty.getInstance().Broadcast_commlist_refresh);
+                            LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(NewNegotiatePersonActivity.this);
+                            localBroadcastManager.sendBroadcast(intent);//发送广播
                             TimerTask task = new TimerTask(){
                                 public void run(){
                                     finish();
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }
@@ -190,6 +198,10 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
     }
 
     private void getData(){
+        if(!TextUtils.isEmpty(dataSource)){
+            updateListViewWithDS(dataSource);
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
         String typeValue =  "个人";
         String paramXml = InterfaceParam.getInstance().getSC_NewNegotiate(UserProperty.getInstance().getUserName(),typeValue);
@@ -223,4 +235,42 @@ public class NewNegotiatePersonActivity extends BaseActivity implements View.OnC
         listData = InterfaceResault.getSC_NewNegotiateResult(listData, result);
         adapter.notifyDataSetChanged();
     }
+
+    //修改时更新列表
+    //列表值(提交接口)
+    //{Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；Time：方便时间；Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+
+    // 查询数据
+    //{Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；LinkTime：方便时间；Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间；
+    // DanHao：单号；Date：日期；jsr：经手人；zdr：制单人}
+    private void  updateListViewWithDS(String ds){
+        try{
+            JSONObject jsonObject = new JSONObject(ds);
+            for (InputItem item : listData){
+                if("FormMaker".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("zdr"));
+                }else  if("Number".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("DanHao"));
+                }else if("Name".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("Name"));
+                }else if("Sex".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("Sex"));
+                }else if("cType".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("cType"));
+                }else if("Phone".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("Phone"));
+                }else if("Time".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("LinkTime"));
+                }else if("Plan".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("Plan"));
+                }else if("WantCar".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("WantCar"));
+                }else if("WantTime".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("WantTime"));
+                }
+            }
+            adapter.notifyDataSetChanged();
+        }catch(Exception e){e.printStackTrace();}
+    }
+
 }

@@ -121,7 +121,7 @@
 "titleIntentPath":"activity.wholeCar.NegotiateActivity",
 "createIntentPath":"activity.wholeCar.NegotiateActivity"
 },
-{"menuTitle":"销售单",
+{"menuTitle":"整车销售单",
 "menuDescribe":"",
 "iconId":"list_icon_3",
 "allowCreate":true,

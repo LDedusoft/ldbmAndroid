@@ -1,8 +1,19 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/menu_title"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/input_list_item_height"
     android:gravity="center_vertical"
     android:paddingBottom="15dp"
     android:paddingTop="15dp"
+    android:paddingLeft="30dp"
     android:textColor="#ffffff" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/loginLine"
+        ></RelativeLayout>
+    </LinearLayout>

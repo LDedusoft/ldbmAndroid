@@ -174,7 +174,7 @@ public class NewFixInfoActivity extends BaseActivity implements View.OnClickList
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }
@@ -201,6 +201,11 @@ public class NewFixInfoActivity extends BaseActivity implements View.OnClickList
                 });
             }
         });
+    }
+
+    @Override
+    public void OnDelCarClick(int position) {
+
     }
 
     @Override

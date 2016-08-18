@@ -49,14 +49,14 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
     private LinearLayout itemlayout;
     private CheckBox checkBox;
     private ImageView pointImg;
-    private LinearLayout actionLayout;
-    private LinearLayout customLayout;
-    private TextView fixName ;
-    private TextView fixId ;
-    private EditText fixPirce ;
-    private EditText fixNumber ;
-    private TextView delButton;
-    private LinearLayout delLayout;
+    private LinearLayout actionLayout,actionCarLayout;
+    private LinearLayout customLayout,customCarLayout;
+    private TextView fixName,carBrand;
+    private TextView fixId,carId,carCangku,carColor,carType,carSeries;
+    private EditText fixPirce,carPirce ;
+    private EditText fixNumber,carDingjin ;
+    private TextView delButton,delCarButton;
+    private LinearLayout delLayout,delCarLayout;
     private TextView unitBtn;
 
 
@@ -80,6 +80,16 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
     HashMap<Integer, String> fixPriceHashMap = new HashMap<Integer, String>();
     //存放fix组件的数量值
     HashMap<Integer, String> fixNumberHashMap = new HashMap<Integer, String>();
+    //存放car组件的价格值
+    HashMap<Integer, String> carPriceHashMap = new HashMap<Integer, String>();
+    //存放car组件的订金值
+    HashMap<Integer, String> carDingjinHashMap = new HashMap<Integer, String>();
+    //存放car组件的仓库值
+    HashMap<Integer, String> carCangkuHashMap = new HashMap<Integer, String>();
+    //存放car组件的颜色值
+    HashMap<Integer, String> carColorHashMap = new HashMap<Integer, String>();
+
+
 
 
 
@@ -130,14 +140,26 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
             checkBox = (CheckBox)view.findViewById(R.id.input_item_checkbox);
             pointImg = (ImageView)view.findViewById(R.id.input_item_pointImg);
             actionLayout = (LinearLayout)view.findViewById(R.id.input_item_add_layout);
+            actionCarLayout = (LinearLayout)view.findViewById(R.id.input_item_addCar_layout);
             customLayout = (LinearLayout)view.findViewById(R.id.input_item_custom_layout);
+            customCarLayout = (LinearLayout)view.findViewById(R.id.input_item_custom_car_layout);
              fixName = (TextView) view.findViewById(R.id.input_list_item_fix_name);
              fixId = (TextView) view.findViewById(R.id.input_list_item_fix_id);
              fixPirce = (EditText) view.findViewById(R.id.input_list_item_fix_price);
              fixNumber = (EditText) view.findViewById(R.id.input_list_item_fix_number);
             delButton = (TextView)view.findViewById(R.id.input_list_item_fix_delBtn);
+            delCarButton = (TextView)view.findViewById(R.id.input_list_item_car_delBtn);
             delLayout = (LinearLayout)view.findViewById(R.id.input_list_item_fix_del_layout);
+            delCarLayout = (LinearLayout)view.findViewById(R.id.input_list_item_car_del_layout);
             unitBtn = (TextView)view.findViewById(R.id.input_item_unit);
+            carId = (TextView) view.findViewById(R.id.input_list_item_car_id);
+            carBrand = (TextView) view.findViewById(R.id.input_list_item_car_brand);
+            carSeries = (TextView) view.findViewById(R.id.input_list_item_car_series);
+            carType = (TextView) view.findViewById(R.id.input_list_item_car_type);
+            carPirce = (EditText) view.findViewById(R.id.input_list_item_car_price);
+            carDingjin = (EditText) view.findViewById(R.id.input_list_item_car_dingjin);
+            carCangku = (TextView) view.findViewById(R.id.input_list_item_car_cangku);
+            carColor= (TextView) view.findViewById(R.id.input_list_item_car_color);
 
             if(!TextUtils.isEmpty(inputItem.getUnit())){
                 unitBtn.setVisibility(View.VISIBLE);
@@ -385,11 +407,9 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                         @Override
                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                         }
-
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                         }
-
                         @Override
                         public void afterTextChanged(Editable s) {
                             //将editText中改变的值设置的HashMap中
@@ -409,11 +429,9 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                         @Override
                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                         }
-
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                         }
-
                         @Override
                         public void afterTextChanged(Editable s) {
                             //将editText中改变的值设置的HashMap中
@@ -426,6 +444,193 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                                 tempItem.setValue(obj.toString());
                             }catch (Exception e){}
                             inputItemMap.put(position,tempItem);
+                        }
+                    });
+                    break;
+                 case 12: //添加车辆按钮
+                    itemlayout.setVisibility(View.GONE);
+                    actionCarLayout.setVisibility(View.VISIBLE);
+                     actionCarLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            InputItem tempItem = inputItemMap.get(position);
+                            String path = tempItem.getIntentPath();
+                            if (!TextUtils.isEmpty(path)) {
+                                Log.d("跳转路径：", path);
+                                Intent intent = new Intent(path);
+                                intent.putExtra("position", position);
+                                intent.putExtra("id", tempItem.getItemId());
+                                intent.putExtra("title", tempItem.getItemTitle());
+                                intent.putExtra("param", tempItem.getIntentParam());
+                                intent.putExtra("relation", ""); //传入关联值
+                                mContext.startActivityForResult(intent, tempItem.getIntentRequestCode()); //跳转 需要返回数据
+                            }
+
+                        }
+                    });
+                    break;
+                case 13: //增加车辆
+                    itemlayout.setVisibility(View.GONE);
+                    actionLayout.setVisibility(View.GONE);
+                    customCarLayout.setVisibility(View.VISIBLE);
+                    delCarButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            inputItemDelListener.OnDelCarClick(position);
+                        }
+                    });
+                    delCarLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            inputItemDelListener.OnDelCarClick(position);
+                        }
+                    });
+
+                    String carValueStr = inputItem.getValue();
+                    //{CarCode：车牌号；Color：颜色；DanJia：价格；Vin：Vin码；EngineNo：发动机号；Brand：品牌；Series：车系；Type：车型} dingjin:订金 cangku:""
+                    try {
+                        JSONObject valueJson = new JSONObject(carValueStr);
+                        carBrand.setText(valueJson.getString("Brand"));
+                        carSeries.setText(valueJson.getString("Series"));
+                        carType.setText(valueJson.getString("Type"));
+                        carId.setText(valueJson.getString("CarCode"));
+                        carPirce.setText(valueJson.getString("DanJia"));
+                        carPriceHashMap.put(position, valueJson.getString("DanJia")); //加入缓存
+                        carDingjin.setText(valueJson.getString("dingjin"));
+                        carDingjinHashMap.put(position, valueJson.getString("dingjin")); //加入缓存
+                        carColor.setText(valueJson.getString("Color"));
+                        carColorHashMap.put(position, valueJson.getString("Color")); //加入缓存
+                        carCangku.setText(valueJson.getString("cangku"));
+                        carCangkuHashMap.put(position, valueJson.getString("cangku")); //加入缓存
+                    }catch (Exception e){e.printStackTrace();}
+                     /*保存焦点位置*/
+                    carPirce.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                touchedId = "fixPirce";
+                                touchedPosition = position;
+                            }
+                            return false;
+                        }
+                    });
+                    /*保存焦点位置*/
+                    carDingjin.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                touchedId = "fixNumber";
+                                touchedPosition = position;
+                            }
+                            return false;
+                        }
+                    });
+                    /*选择仓库*/
+                    carCangku.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            InputItem tempItem = inputItemMap.get(position);
+                            String path = "activity.selectActivity.CarWarehouseSelect";
+                            if(!TextUtils.isEmpty(path)){
+                                Log.d("跳转路径：", path);
+                                Intent intent = new Intent(path);
+                                intent.putExtra("position",position);
+                                intent.putExtra("id", tempItem.getItemId());
+                                intent.putExtra("title", "仓库列表");
+                                intent.putExtra("param","");
+                                intent.putExtra("relation",""); //传入关联值
+                                mContext.startActivityForResult(intent,4); //跳转 需要返回数据
+                            }
+
+                        }
+                    });
+                    /*选择颜色*/
+                    carColor.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            InputItem tempItem = inputItemMap.get(position);
+                            String path = "activity.selectActivity.CarColorSelect";
+                            if (!TextUtils.isEmpty(path)) {
+                                Log.d("跳转路径：", path);
+                                Intent intent = new Intent(path);
+                                intent.putExtra("position", position);
+                                intent.putExtra("id", tempItem.getItemId());
+                                intent.putExtra("title", "车辆颜色");
+                                intent.putExtra("param", "");
+                                intent.putExtra("relation", ""); //传入关联值
+                                mContext.startActivityForResult(intent, 5); //跳转 需要返回数据
+                            }
+
+                        }
+                    });
+
+
+
+
+                    /*保存焦点位置*/
+                    carPirce.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                touchedId = "carPirce";
+                                touchedPosition = position;
+                            }
+                            return false;
+                        }
+                    });
+                    /*保存焦点位置*/
+                    carDingjin.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                touchedId = "carDingjin";
+                                touchedPosition = position;
+                            }
+                            return false;
+                        }
+                    });
+                    //输入文字改变后保存到map中，防止滚动后错乱
+                    carPirce.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            //将editText中改变的值设置的HashMap中
+                            carPriceHashMap.put(position, s.toString());
+                            InputItem tempItem = inputItemMap.get(position);
+                            String tempValue = tempItem.getValue();
+                            try{
+                                JSONObject obj = new JSONObject(tempValue);
+                                obj.put("DanJia",s.toString());
+                                tempItem.setValue(obj.toString());
+                            }catch (Exception e){}
+                            inputItemMap.put(position,tempItem);
+                        }
+                    });
+                    //输入文字改变后保存到map中，防止滚动后错乱
+                    carDingjin.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            //将editText中改变的值设置的HashMap中
+                            carDingjinHashMap.put(position, s.toString());
+                            InputItem tempItem = inputItemMap.get(position);
+                            String tempValue = tempItem.getValue();
+                            try{
+                                JSONObject obj = new JSONObject(tempValue);
+                                obj.put("dingjin",s.toString());
+                                tempItem.setValue(obj.toString());
+                            }catch (Exception e){}
+                            inputItemMap.put(position, tempItem);
                         }
                     });
                     break;
@@ -476,11 +681,17 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
             String tempValuePic = "{\"Name\":\""+fixName.getText()+"\",\"Id\":\""+ fixId.getText()+"\",\"Num\":\""+fixNumber.getText()+"\",\"Price\":\""+fixPirce.getText()+"\"}";
             inputItem.setValue(tempValuePic);
         }
-//        if(fixNumberHashMap.get(position) != null){
-//            fixNumber.setText(fixNumberHashMap.get(position));
-//            String tempValueNum = "{\"Name\":\""+fixName.getText()+"\",\"Id\":\""+ fixId.getText()+"\",\"Num\":\""+fixNumber.getText()+"\",\"Price\":\""+fixPirce.getText()+"\"}";
-//            inputItem.setValue(tempValueNum);
-//        }
+        if(carPriceHashMap.get(position) != null||carDingjinHashMap.get(position) != null||carCangkuHashMap.get(position) != null||carColorHashMap.get(position) != null){
+            carPirce.setText(carPriceHashMap.get(position));
+            carDingjin.setText(carDingjinHashMap.get(position));
+            carCangku.setText(carCangkuHashMap.get(position));
+            carColor.setText(carColorHashMap.get(position));
+            //{CarCode：车牌号；Color：颜色；DanJia：价格；Vin：Vin码；EngineNo：发动机号；Brand：品牌；Series：车系；Type：车型 ;dingjin:订金 ;cangku:仓库}
+            String tempValuePic = "{\"CarCode\":\""+ carId.getText()+"\",\"Color\":\""+ carColor.getText()+"\",\"DanJia\":\""+carPirce.getText()+"\"," +
+                    "\"Brand\":\""+carBrand.getText()+"\",\"Series\":\""+carSeries.getText()+"\",\"Type\":\""+carType.getText()+"\"," +
+                    "\"dingjin\":\""+carDingjin.getText()+"\",\"cangku\":\""+carCangku.getText()+"\"}";
+            inputItem.setValue(tempValuePic);
+        }
         if(timeHashMap.get(position) != null){
             timeText.setText(timeHashMap.get(position));
             inputItem.setValue(timeHashMap.get(position));
@@ -505,11 +716,20 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
                     fixNumber.requestFocus();
                 }
             }
+            if(inputItemMap.get(position).getInputType()==13) {
+                if("carPirce".equals(touchedId)){
+                    carPirce.requestFocus();
+                }else{
+                    carDingjin.requestFocus();
+                }
+            }
         }else {
             editText.clearFocus();
             numberEdit.clearFocus();
             fixNumber.clearFocus();
             fixPirce.clearFocus();
+            carPirce.clearFocus();
+            carDingjin.clearFocus();
         }
         return view;
     }
@@ -532,31 +752,61 @@ public class InputListAdapter extends ArrayAdapter<InputItem> {
             inputItemMap.remove(key+1);//删除后一位的值
             inputItemMap.put(key,temp_inputItemMap.get(key));//将缓存的后一位值写入
         }
-        /*更新配件价格缓存*/
-        HashMap<Integer, String> temp_fixPriceHashMap= new HashMap<Integer, String>();
-        for (Integer key : fixPriceHashMap.keySet()) {
-            if (key > position) {
-                temp_fixPriceHashMap.put(key - 1, fixPriceHashMap.get(key));
-            }
-        }
-        fixPriceHashMap.remove(position);
-        for (Integer key : temp_fixPriceHashMap.keySet()) {
-            fixPriceHashMap.remove(key+1);//删除后一位的值
-            fixPriceHashMap.put(key, temp_fixPriceHashMap.get(key));
-        }
-        /*更新配件数量缓存*/
-        HashMap<Integer, String> temp_fixNumberHashMap = new HashMap<Integer, String>();
-        for (Integer key : fixNumberHashMap.keySet()) {
-            if (key > position) {
-                temp_fixNumberHashMap.put(key - 1, fixNumberHashMap.get(key));
-            }
-        }
-        fixNumberHashMap.remove(position);
-        for (Integer key : temp_fixNumberHashMap.keySet()) {
-            fixNumberHashMap.remove(key+1);//删除后一位的值
-            fixNumberHashMap.put(key, temp_fixNumberHashMap.get(key));
-        }
+//        /*更新配件价格缓存*/
+//        HashMap<Integer, String> temp_fixPriceHashMap= new HashMap<Integer, String>();
+//        for (Integer key : fixPriceHashMap.keySet()) {
+//            if (key > position) {
+//                temp_fixPriceHashMap.put(key - 1, fixPriceHashMap.get(key));
+//            }
+//        }
+//        fixPriceHashMap.remove(position);
+//        for (Integer key : temp_fixPriceHashMap.keySet()) {
+//            fixPriceHashMap.remove(key+1);//删除后一位的值
+//            fixPriceHashMap.put(key, temp_fixPriceHashMap.get(key));
+//        }
+//        /*更新配件数量缓存*/
+//        HashMap<Integer, String> temp_fixNumberHashMap = new HashMap<Integer, String>();
+//        for (Integer key : fixNumberHashMap.keySet()) {
+//            if (key > position) {
+//                temp_fixNumberHashMap.put(key - 1, fixNumberHashMap.get(key));
+//            }
+//        }
+//        fixNumberHashMap.remove(position);
+//        for (Integer key : temp_fixNumberHashMap.keySet()) {
+//            fixNumberHashMap.remove(key+1);//删除后一位的值
+//            fixNumberHashMap.put(key, temp_fixNumberHashMap.get(key));
+//        }
 
+        fixPriceHashMap =  delListItem(fixPriceHashMap,position);
+        fixNumberHashMap =  delListItem(fixNumberHashMap,position);
+        carPriceHashMap =  delListItem(carPriceHashMap,position);
+        carDingjinHashMap=  delListItem(carDingjinHashMap,position);
+        carCangkuHashMap=  delListItem(carCangkuHashMap,position);
+        carColorHashMap=  delListItem(carColorHashMap,position);
+
+
+    }
+
+    /**
+     * 从list中删除元素
+     * * @param thisMap
+     * @param position
+     * @return
+     */
+    private HashMap<Integer, String> delListItem(HashMap<Integer, String> thisMap,int position){
+         /*更新配件数量缓存*/
+        HashMap<Integer, String> temp_fixNumberHashMap = new HashMap<Integer, String>();
+        for (Integer key : thisMap.keySet()) {
+            if (key > position) {
+                temp_fixNumberHashMap.put(key - 1, thisMap.get(key));
+            }
+        }
+        thisMap.remove(position);
+        for (Integer key : temp_fixNumberHashMap.keySet()) {
+            thisMap.remove(key+1);//删除后一位的值
+            thisMap.put(key, temp_fixNumberHashMap.get(key));
+        }
+        return thisMap;
     }
 
     public void setInputItemDelListener(InputItemDelListener inputItemDelListener){

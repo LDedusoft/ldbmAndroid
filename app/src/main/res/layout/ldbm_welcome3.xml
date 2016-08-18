@@ -4,8 +4,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/welcome_img3"
     >
+    <ImageView
+        android:id="@+id/welcome_3_image"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/button_1"

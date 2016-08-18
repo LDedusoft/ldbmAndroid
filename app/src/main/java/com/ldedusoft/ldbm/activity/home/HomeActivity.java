@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private ImageView iv_icon;
     private ListView lv;
+    private Button camera;
 
     private ArrayList<MenuItem> menuDataList;
     @Override
@@ -60,9 +62,25 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         myApplication.setContext(this);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         exitFlag = false;
+        initTopMenu();
         initDragLayout();
         initMenuListData();
         initListView();
+    }
+
+    private void initTopMenu(){
+        camera = (Button)findViewById(R.id.home_top_camera);
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //手写
+//                Intent intent = new Intent("activity.ShouXieActivity");
+//                startActivity(intent);
+//               打开摄像头
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initDragLayout() {

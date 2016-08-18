@@ -1,12 +1,14 @@
 package com.ldedusoft.ldbm.model;
 
+import java.io.Serializable;
+
 /**
  * 在库车辆
  * Created by wangjianwei on 2016/7/8.
  * {CarCode：车牌号；Color：颜色；DanJia：价格；Vin：Vin码；EngineNo：发动机号；
  * Brand：品牌；Series：车系；Type：车型}
  */
-public class CarList {
+public class CarList implements Serializable {
     private String CarCode;
     private String Color;
     private String DanJia;

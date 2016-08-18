@@ -156,7 +156,7 @@ public class NewClientActivity extends BaseActivity implements View.OnClickListe
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }

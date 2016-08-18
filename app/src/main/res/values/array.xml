@@ -29,7 +29,7 @@
     <string-array name="car_menu_item">
         <item>制单group</item>
         <item>洽谈单</item>
-        <item>销售单</item>
+        <item>整车销售单</item>
         <item>查询group</item>
         <item>在库车辆查询</item>
         <item>计算group</item>

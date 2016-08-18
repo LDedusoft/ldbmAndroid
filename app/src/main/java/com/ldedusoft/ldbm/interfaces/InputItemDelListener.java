@@ -5,4 +5,5 @@ package com.ldedusoft.ldbm.interfaces;
  */
 public interface InputItemDelListener {
     public abstract void OnDelClick(int position);
+    public abstract void OnDelCarClick(int position);
 }

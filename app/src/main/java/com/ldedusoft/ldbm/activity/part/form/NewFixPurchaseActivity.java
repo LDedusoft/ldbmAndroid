@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.activity.part.form;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.ldedusoft.ldbm.model.FixingsWarehouse;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.Invoice;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -37,7 +39,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 保存整车采购
+ * 保存配件采购
  * Created by wangjianwei on 2016/6/28.
  */
 public class NewFixPurchaseActivity extends BaseActivity implements View.OnClickListener,InputItemDelListener{
@@ -45,11 +47,13 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     private ListView inputListView;
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
+    private String dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_new_fix_purchase); //!!
         String value =  getIntent().getStringExtra("param");
+        dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
         formToolBar = (FormToolBar)findViewById(R.id.new_fixPurchase_toolbar);
       formToolBar.setTitle(this.getResources().getString(R.string.save_fix_purchase_title));
 
@@ -95,7 +99,7 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
         item.setValue(jsonObject.toString());
         item.setInputType(11);
 //        listData.add(listData.size() - 1, item);
-        listData.add( item);
+        listData.add(item);
         adapter.notifyDataSetChanged();
     }
     private void updateListItem(String dispValue,String data,int position){
@@ -220,13 +224,17 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
                             Toast.makeText(NewFixPurchaseActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
                         }else if("true".equals(result)){
                             Toast.makeText(NewFixPurchaseActivity.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                            //发送刷新列表广播
+                            Intent intent = new Intent(SysProperty.getInstance().Broadcast_commlist_refresh);
+                            LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(NewFixPurchaseActivity.this);
+                            localBroadcastManager.sendBroadcast(intent);//发送广播
                             TimerTask task = new TimerTask(){
                                 public void run(){
                                     finish();
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }
@@ -256,6 +264,11 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     }
 
     private void getData(){
+        if(!TextUtils.isEmpty(dataSource)){
+            //// TODO: 2016/8/12  需要获取当前订单的配件列表
+//            updateListViewWithDS(dataSource);
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
         String paramXml = InterfaceParam.getInstance().getPT_NewPurchaseFixings(UserProperty.getInstance().getUserName());
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
@@ -291,6 +304,11 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
+    public void OnDelCarClick(int position) {
+
+    }
+
+    @Override
     public void OnDelClick(int position) {
         Iterator<InputItem> it = listData.iterator();
         int i=0;
@@ -310,5 +328,14 @@ public class NewFixPurchaseActivity extends BaseActivity implements View.OnClick
 //        }
         adapter.updateCache(position);
         adapter.notifyDataSetChanged();
+    }
+
+    //修改时更新列表
+    //列表值(提交接口)
+    //
+    // 查询数据
+    //
+    private void  updateListViewWithDS(String ds){
+
     }
 }

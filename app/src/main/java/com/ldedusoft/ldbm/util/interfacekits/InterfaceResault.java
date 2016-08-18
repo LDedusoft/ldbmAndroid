@@ -71,6 +71,9 @@ public class InterfaceResault {
     public static String SC_NewPurchaseResult = "SC_NewPurchaseResult";
     /*保存整车销售单*/
     public static String SC_SavePurchaseResult = "SC_SavePurchaseResult";
+    /*整车销售订单车辆列表*/
+    public static String SC_PurchaseCarListResult = "SC_PurchaseCarListResult";
+
     /*整车仓库列表*/
     public static String Pub_CarWarehouseListResult = "Pub_CarWarehouseListResult";
     /*车辆颜色列表*/
@@ -633,6 +636,17 @@ public class InterfaceResault {
      * @return
      */
     public static ArrayList<InputItem> getRP_ReceptionNewResult_YY(ArrayList<InputItem> listData,String result){
+        listData = getNewFormResault(listData,result);
+        return listData;
+    }
+
+    /**
+     * 维修接待
+     * @param listData
+     * @param result
+     * @return
+     */
+    public static ArrayList<InputItem> getRP_ReceptionNewResult_WX(ArrayList<InputItem> listData,String result){
         listData = getNewFormResault(listData,result);
         return listData;
     }

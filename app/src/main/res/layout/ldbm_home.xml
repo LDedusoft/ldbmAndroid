@@ -3,7 +3,7 @@
     android:id="@+id/dl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_title_bottom_background"
+    android:background="@drawable/sys_menu_background"
     ><!--背景图 空-->
     <com.ldedusoft.ldbm.component.customComp.SysInfoPage
         android:layout_width="match_parent"
@@ -24,16 +24,17 @@
             android:id="@+id/home_title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/home_menu_background"
             android:orientation="vertical">
             <!--搜索栏-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:orientation="horizontal"
-                android:background="@drawable/home_title_top_background"
+
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                >
+                ><!--android:background="@drawable/home_title_top_background"-->
                 <ImageView
                     android:id="@+id/iv_icon"
                     android:layout_gravity="center_vertical"
@@ -56,6 +57,7 @@
 
                     />
                 <Button
+                    android:id="@+id/home_top_camera"
                     android:layout_gravity="center_vertical"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
@@ -69,11 +71,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:orientation="horizontal"
-                android:background="@drawable/home_title_background"
+
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                >
+                ><!--android:background="@drawable/home_title_background"-->
                 <TextView
                     android:text="今日销售毛利"
                     android:textColor="@color/homeTitleText2"
@@ -94,14 +96,19 @@
                     />
 
             </LinearLayout>
-
+            <!--分割线-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#98949393"
+                ></RelativeLayout>
             <!-- 今日销售额-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:orientation="horizontal"
-                android:background="@drawable/home_title_bottom_background"
-                >
+                ><!--android:background="@drawable/home_title_bottom_background"-->
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

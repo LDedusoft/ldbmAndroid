@@ -3,7 +3,7 @@
     android:id="@+id/dl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/topBarBackground"
+    android:background="@drawable/sys_menu_background"
     ><!--背景图 空-->
     <com.ldedusoft.ldbm.component.customComp.SysInfoPage
         android:layout_width="match_parent"

@@ -1,5 +1,5 @@
 ﻿[
-{"itemId":"CarCode",
+{"itemId":"CarCode",//新建车辆
 "itemTitle":"车牌号",
 "inputType":1,
 "defaultValue":"",

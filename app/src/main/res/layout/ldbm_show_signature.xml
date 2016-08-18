@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.ldedusoft.ldbm.component.customComp.QueryToolBar
+        android:id="@+id/show_sig_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height">
+
+    </com.ldedusoft.ldbm.component.customComp.QueryToolBar>
+    <ImageView
+        android:id="@+id/show_sig_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/show_sig_bottom"
+        android:layout_below="@+id/show_sig_topBar"
+        />
+    <!--分割线-->
+    <RelativeLayout
+        android:id="@+id/show_pic_line"
+        android:background="@color/loginLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/show_sig_bottom"
+        ></RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/show_sig_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/form_bottom_height"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:background="@color/menuItemGroupBackground"
+            >
+        <Button
+            android:text="返回"
+            android:id="@+id/show_sig_back"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_style"
+            android:padding="0dp"
+            android:gravity="center"
+            />
+        <Button
+            android:text="重签"
+            android:id="@+id/show_sig_btn"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:textSize="13sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_style"
+            android:padding="0dp"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

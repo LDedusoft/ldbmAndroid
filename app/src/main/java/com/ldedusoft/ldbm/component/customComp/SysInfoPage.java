@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -30,7 +31,7 @@ public class SysInfoPage extends LinearLayout {
         TextView userTxt = (TextView)findViewById(R.id.sys_info_user);
         userTxt.setText(UserProperty.getInstance().getUserName());
         lv = (ListView) findViewById(R.id.lv);
-        lv.setAdapter(new ArrayAdapter<String>(context,
+        lv.setAdapter(new MyAdapter(context,
                 R.layout.item_text, new String[] { "首页", "关于",
                 "用户信息" }));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,4 +61,24 @@ public class SysInfoPage extends LinearLayout {
     }
 
 
+}
+
+class MyAdapter extends ArrayAdapter<String>{
+    private int resourceId;
+        public MyAdapter(Context context,int resId,String[] objects){
+            super(context,resId,objects);
+            this.resourceId = resId;
+        }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        String item = getItem(position);
+        View view = convertView;
+        if(convertView==null){
+            view = LayoutInflater.from(getContext()).inflate(resourceId,null);
+        }
+        TextView tv = (TextView)view.findViewById(R.id.menu_title);
+        tv.setText(item);
+        return view;
+    }
 }

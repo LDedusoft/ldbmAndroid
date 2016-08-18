@@ -404,18 +404,19 @@ public class InitParamUtil {
 
        /*
    * 个人洽谈
-    * {Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；Time：方便时间；Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+    * {Name：客户名称；Sex：客户性别；cType：客户类型：Phone：电话；LinkTime：方便时间；Plan：购车方案；
+    * WantCar：意向车型的id；WantTime：预购时间；DanHao：单号；Date：日期；jsr：经手人；zdr：制单人}
  * */
+
+        dic.put("个人洽谈DanHao","单号");
         dic.put("个人洽谈Name","客户名称");
         dic.put("个人洽谈Sex","客户性别");
         dic.put("个人洽谈cType","客户类型");
         dic.put("个人洽谈Phone","电话");
-        dic.put("个人洽谈Time","方便时间");
+        dic.put("个人洽谈LinkTime","方便时间");
         dic.put("个人洽谈Plan","购车方案");
         dic.put("个人洽谈WantCar","意向车型的id");
         dic.put("个人洽谈WantTime","预购时间");
-        dic.put("个人洽谈LinkTime","方便时间");
-        dic.put("个人洽谈DanHao","单号");
         dic.put("个人洽谈Date","日期");
         dic.put("个人洽谈jsr","经手人");
         dic.put("个人洽谈zdr","制单人");
@@ -423,35 +424,35 @@ public class InitParamUtil {
 
          /*
   * 公司洽谈
-   * ClientType为"公司"时{Name：公司名称；Sex：负责人；Phone：电话；cType：联系人；Time：联系人电话；
-   * Plan：购车方案；WantCar：意向车型的id；WantTime：预购时间}
+   * ClientType为"公司"时{Name：公司名称；Boss：负责人；Phone：电话；LinkMan：联系人；lPhone：联系人电话；Plan：购车方案；WantCar：意向车型的id；
+   // WantTime：预购时间；DanHao：单号；Date：日期；jsr：经手人；zdr：制单人}
 * */
+        dic.put("公司洽谈DanHao","单号");
         dic.put("公司洽谈Name","公司名称");
-        dic.put("公司洽谈Sex","负责人");
+        dic.put("公司洽谈Boss","负责人");
         dic.put("公司洽谈Phone","电话");
-        dic.put("公司洽谈cType","联系人");
-        dic.put("公司洽谈Time","联系人电话");
+        dic.put("公司洽谈LinkMan","联系人");
+        dic.put("公司洽谈lPhone","联系人电话");
         dic.put("公司洽谈Plan","购车方案");
         dic.put("公司洽谈WantCar","意向车型的id");
         dic.put("公司洽谈WantTime","预购时间");
-        dic.put("个人洽谈LinkTime","方便时间");
-        dic.put("个人洽谈DanHao","单号");
-        dic.put("个人洽谈Date","日期");
-        dic.put("个人洽谈jsr","经手人");
-        dic.put("个人洽谈zdr","制单人");
+        dic.put("公司洽谈Date","日期");
+        dic.put("公司洽谈jsr","经手人");
+        dic.put("公司洽谈zdr","制单人");
 
 
         /*
-* 销售单
- *{ID：ID；DanHao：单号；Date：时间；dPrice：订金总额；Num：订单数量；Price：订单金额；ZhiDanRen：制单人；JingShouRen：经手人}
+* 整车销售单
+ *{ID：ID；DanHao：单号；Date：时间；dPrice：订金总额；Num：订单数量；Price：订单金额；ZhiDanRen：制单人；JingShouRen：经手人；BianHao 客户编号}
 * */
-        dic.put("销售单DanHao","单号");
-        dic.put("销售单Date","时间");
-        dic.put("销售单dPrice","订金总额");
-        dic.put("销售单Num","订单数量");
-        dic.put("销售单Price","订单金额");
-        dic.put("销售单ZhiDanRen","制单人");
-        dic.put("销售单JingShouRen","经手人");
+        dic.put("整车销售单DanHao","单号");
+        dic.put("整车销售单Date","时间");
+        dic.put("整车销售单dPrice","订金总额");
+        dic.put("整车销售单Num","订单数量");
+        dic.put("整车销售单Price","订单金额");
+        dic.put("整车销售单BianHao","客户编号");
+        dic.put("整车销售单ZhiDanRen","制单人");
+        dic.put("整车销售单JingShouRen","经手人");
 
 
            /*
@@ -540,7 +541,7 @@ public class InitParamUtil {
     public static  List<List<Map<String, String>>> getChildMenuList(String[] userConfigArray){
          List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
         String[][] groupArray = {{"预约维修","维修接待","维修进度查询","车辆信息查询","客户信息查询"},
-                {"个人洽谈","公司洽谈","销售单","在库车辆查询","车险计算","车贷计算"},
+                {"个人洽谈","公司洽谈","整车销售单","在库车辆查询","车险计算","车贷计算"},
                 {"配件销售单","配件采购单","新建配件","配件库存","采购计划"},
                 {"经营统计","库存统计","维修统计","收款统计","客户账务统计","进货汇总","采购订单","供应商累计供货排行","销售计划分析表","客户销售额排行","日期销售报表","仓库销售排行"}};
         for (int i = 0; i < groupArray.length; i++)

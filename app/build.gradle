@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
 }
 
 dependencies {
@@ -26,4 +33,5 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
     compile files('libs/android-support-v4.jar')
+    compile(name:'andbase-2.0', ext:'aar')
 }

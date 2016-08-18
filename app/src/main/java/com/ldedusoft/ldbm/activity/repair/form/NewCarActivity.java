@@ -150,7 +150,7 @@ public class NewCarActivity extends BaseActivity implements View.OnClickListener
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }

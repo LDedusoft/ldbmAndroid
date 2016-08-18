@@ -1,5 +1,5 @@
 ﻿[
-{"itemId":"Name",
+{"itemId":"Name",//新建配件
 "itemTitle":"名称",
 "inputType":1,
 "defaultValue":"",

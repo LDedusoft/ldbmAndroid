@@ -6,6 +6,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,12 +46,42 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
     private String dataSource;
+    private Button picture,qianming;
+    private String danHao;//单号
+    private boolean signed = false; //是否已签名
+    private boolean hasPic = false; //是否已拍照
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_repair_appointment_wx); //!!
         String value =  getIntent().getStringExtra("param");
         dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
+        picture =  (Button)findViewById(R.id.form_bottom_picture);
+        picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("activity.ShowPictureActivity");
+                intent.putExtra("danHao",danHao);
+                intent.putExtra("hasPic",hasPic);
+                startActivityForResult(intent, 21);
+            }
+        });
+        qianming = (Button)findViewById(R.id.form_bottom_qianming);
+        qianming.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //手写
+                String intentPath = "";
+                if(!signed){
+                    intentPath = "activity.ShouXieActivity";
+                }else{
+                    intentPath = "activity.showSignature";
+                }
+                Intent intent = new Intent(intentPath);
+                intent.putExtra("danHao",danHao+"_signature");
+                startActivityForResult(intent, 20);
+            }
+        });
         formToolBar = (FormToolBar)findViewById(R.id.appointment_wx_toolbar);
         formToolBar.setTitle(this.getResources().getString(R.string.appointment_wx));
         formToolBar.showImportBtn();//显示导入按钮
@@ -119,7 +150,13 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     }
 
     private void updateListView(String result){
-        listData = InterfaceResault.getRP_ReceptionNewResult_YY(listData,result);
+        listData = InterfaceResault.getRP_ReceptionNewResult_WX(listData,result);
+        for(InputItem item:listData){
+            if(item.getItemId().equals("Number")){
+                danHao = item.getValue();
+                break;
+            }
+        }
         adapter.notifyDataSetChanged();
     }
 
@@ -223,6 +260,18 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                     adapter.notifyDataSetChanged();
                 }
                 break;
+            case 20://签名返回
+                if(resultCode == RESULT_OK){
+                    qianming.setText("已签名");
+                    signed = true;
+                }
+                break;
+            case 21://拍照返回
+                if(resultCode == RESULT_OK){
+                    picture.setText("已拍照");
+                    hasPic = true;
+                }
+                break;
             default:
                 if(resultCode == RESULT_OK){
                     int inputListPosition = data.getIntExtra("inputListPosition",-1);
@@ -246,8 +295,6 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
     private void  updateListViewWithDS(String ds){
         try{
             JSONObject jsonObject = new JSONObject(ds);
-            String danhao = jsonObject.getString("DanHao");
-            // String formMaker = jsonObject.getString("FormMaker");
             for (InputItem item : listData){
                 if("Number".equals(item.getItemId())){
                     item.setValue(jsonObject.getString("DanHao"));
@@ -343,7 +390,7 @@ public class AppointmentActivityWX extends BaseActivity implements View.OnClickL
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
                     }
                 });

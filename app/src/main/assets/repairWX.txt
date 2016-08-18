@@ -1,5 +1,5 @@
 ﻿[
-{"itemId":"Number",
+{"itemId":"Number",//维修接待
 "itemTitle":"单号",
 "inputType":0,
 "defaultValue":"",

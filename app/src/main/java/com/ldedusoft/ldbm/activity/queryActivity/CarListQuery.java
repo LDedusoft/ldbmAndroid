@@ -1,6 +1,9 @@
 package com.ldedusoft.ldbm.activity.queryActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -78,6 +81,21 @@ public class CarListQuery extends BaseActivity {
         listView.setDividerHeight(1); //分割线粗为1
         adapter = new QueryCarlistAdapter(this,R.layout.ldbm_query_carlist_item,listData);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CarList car = new CarList();
+                car = listData.get(position);
+                //返回数据到上一个活动
+                Intent intent = new Intent();
+//                intent.putExtra("inputListPosition", inputListPosition);//表单传来的item位置，返回回去
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", car);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     private void initQueryToolBar(){

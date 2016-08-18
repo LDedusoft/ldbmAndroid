@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.activity.wholeCar.form;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +14,15 @@ import com.ldedusoft.ldbm.activity.BaseActivity;
 import com.ldedusoft.ldbm.adapters.InputListAdapter;
 import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
+import com.ldedusoft.ldbm.interfaces.InputItemDelListener;
 import com.ldedusoft.ldbm.model.CarColor;
+import com.ldedusoft.ldbm.model.CarList;
 import com.ldedusoft.ldbm.model.CarType;
 import com.ldedusoft.ldbm.model.CarWarehouse;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.InputItem;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.UserProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
@@ -27,9 +31,11 @@ import com.ldedusoft.ldbm.util.ParseXML;
 import com.ldedusoft.ldbm.util.interfacekits.InterfaceParam;
 import com.ldedusoft.ldbm.util.interfacekits.InterfaceResault;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,16 +43,19 @@ import java.util.TimerTask;
  * 保存整车销售
  * Created by wangjianwei on 2016/6/28.
  */
-public class NewCarPurchaseActivity extends BaseActivity implements View.OnClickListener{
+public class NewCarPurchaseActivity extends BaseActivity implements View.OnClickListener,InputItemDelListener{
     private ArrayList<InputItem> listData;
     private ListView inputListView;
     private InputListAdapter adapter;
     private FormToolBar formToolBar;
+    private String dataSource;
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ldbm_new_carpurchase); //!!
         String value =  getIntent().getStringExtra("param");
+        dataSource =  getIntent().getStringExtra("dataSource");//编辑时会传此参数
         formToolBar = (FormToolBar)findViewById(R.id.new_carpurchase_toolbar);
       formToolBar.setTitle(this.getResources().getString(R.string.save_car_purchase_title));
 
@@ -71,6 +80,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     private void initList(){
         inputListView = (ListView)findViewById(R.id.new_carpurchase_listview); //!!
         adapter = new InputListAdapter(this,R.layout.ldbm_input_item,listData);
+        adapter.setInputItemDelListener(this);
         inputListView.setAdapter(adapter);
         inputListView.setDividerHeight(1); //分割线粗为1
     }
@@ -83,6 +93,21 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
         listData.set(position, item);
         adapter.notifyDataSetChanged();
     }
+
+    private void updateListCustomItem(String itemName,String dispValue,String data,int position){
+        InputItem item = listData.get(position);
+        String valStr = item.getValue();
+        JSONObject jsonObject;
+        try{
+            jsonObject = new JSONObject(valStr);
+            jsonObject.put(itemName,data);
+            item.setDispValue(jsonObject.toString());
+            item.setValue(jsonObject.toString());
+        }catch (Exception e){e.printStackTrace();}
+        listData.set(position, item);
+        adapter.notifyDataSetChanged();
+    }
+
     /**
      * 活动返回
      * @param requestCode
@@ -120,7 +145,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                     CarWarehouse carWarehouse = new CarWarehouse();
                     carWarehouse = (CarWarehouse)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(carWarehouse.getName(),carWarehouse.getCode(), inputListPosition); //!!!仓库传值，未确定
+                    updateListCustomItem("cangku", carWarehouse.getName(), carWarehouse.getCode(), inputListPosition); //!!!仓库传值，未确定
                 }
                 break;
             case 5: //颜色
@@ -128,13 +153,49 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                     CarColor carColor = new CarColor();
                     carColor = (CarColor)data.getSerializableExtra("item");
                     int inputListPosition = data.getIntExtra("inputListPosition", -1);
-                    updateListItem(carColor.getColor(),carColor.getColor(), inputListPosition); //!!
+                    updateListCustomItem("Color", carColor.getColor(), carColor.getColor(), inputListPosition); //!!
+                }
+                break;
+            case 6: //添加车辆
+                if(resultCode == RESULT_OK){
+                    CarList car = (CarList)data.getSerializableExtra("item");
+                    addListItem(car);
                 }
                 break;
             default:
-
                 break;
         }
+    }
+
+    ////{CarCode：车牌号；Color：颜色；DanJia：价格；
+    // Brand：品牌；Series：车系；Type：车型; dingjin:订金:cangku:仓库}
+    private void addListItem(CarList car){
+        InputItem item = new InputItem();
+
+
+        String Brand = car.getBrand();
+        String CarCode =car.getCarCode();
+        String Color = car.getColor();
+        String DanJia = car.getDanJia();
+        String dingjin = "0.00";
+        String cangku = "";
+        String Series = car.getSeries();
+        String Type = car.getType();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Brand", Brand);
+            jsonObject.put("CarCode", CarCode);
+            jsonObject.put("Color", Color);
+            jsonObject.put("DanJia", DanJia);
+            jsonObject.put("dingjin", dingjin);
+            jsonObject.put("cangku", cangku);
+            jsonObject.put("Series", Series);
+            jsonObject.put("Type", Type);
+        }catch (Exception e){}
+        item.setValue(jsonObject.toString());
+        item.setInputType(13);
+        listData.add(item);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -143,8 +204,8 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
 
     private void saveInfo(){
         try {
-            JSONObject carJsonObj = new JSONObject();
             JSONObject personJsonObj = new JSONObject();
+            JSONArray carJsonArray = new JSONArray();
             String number = "";
             for (InputItem item : listData) {
                 if(item.isRequired()&&TextUtils.isEmpty(item.getValue())){ //提交数据检查
@@ -158,10 +219,21 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                 if("Number".equals(item.getItemId())){
                     number = item.getValue();
                 }
-                carJsonObj.put(item.getItemId(), item.getValue());
+                if(item.getValue().indexOf("{")==0){
+                    //value数据{CarCode：车牌号；Color：颜色；DanJia：价格；Vin：Vin码；EngineNo：发动机号；Brand：品牌；Series：车系；Type：车型} dingjin:订金 cangku:""
+                    //提交格式{Code：车辆编号；Price：单价；Deposit：订金；Warehouse：仓库；Color：颜色}
+                    JSONObject json = new JSONObject(item.getValue());
+                    JSONObject submitJson = new JSONObject();
+                    submitJson.put("Code",json.getString("CarCode"));
+                    submitJson.put("Price",json.getString("DanJia"));
+                    submitJson.put("Deposit",json.getString("dingjin"));
+                    submitJson.put("Warehouse",json.getString("cangku"));
+                    submitJson.put("Color",json.getString("Color"));
+                    carJsonArray.put(submitJson);
+                }
             }
 
-            String cInfo = carJsonObj.toString();
+            String cInfo = carJsonArray.toString();
             String pInfo = personJsonObj.toString();
             Log.d("保存整车销售单信息cInfo ：", cInfo);
             Log.d("保存整车销售单信息pInfo ：", pInfo);
@@ -180,6 +252,7 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     private void saveHandler(String number,String cInfo,String pInfo){
         String serverPath = InterfaceParam.SERVER_PATH;
         String paramXml = InterfaceParam.getInstance().getSC_SavePurchase(number,pInfo,cInfo);//!!
+        Log.d("保存整车销售单参数：",paramXml);
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
@@ -192,13 +265,17 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
                             Toast.makeText(NewCarPurchaseActivity.this,getString(R.string.save_fail),Toast.LENGTH_SHORT).show();
                         }else if("true".equals(result)){
                             Toast.makeText(NewCarPurchaseActivity.this,getString(R.string.save_success),Toast.LENGTH_SHORT).show();
+                            //发送刷新列表广播
+                            Intent intent = new Intent(SysProperty.getInstance().Broadcast_commlist_refresh);
+                            LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(NewCarPurchaseActivity.this);
+                            localBroadcastManager.sendBroadcast(intent);//发送广播
                             TimerTask task = new TimerTask(){
                                 public void run(){
                                     finish();
                                 }
                             };
                             Timer timer = new Timer();
-                            timer.schedule(task, 1000);
+                            timer.schedule(task, 700);
                         }
 
                     }
@@ -228,6 +305,10 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     }
 
     private void getData(){
+        if(!TextUtils.isEmpty(dataSource)){
+            updateListViewWithDS(dataSource);
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
         String paramXml = InterfaceParam.getInstance().getSC_NewPurchase(UserProperty.getInstance().getUserName());
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
@@ -260,5 +341,135 @@ public class NewCarPurchaseActivity extends BaseActivity implements View.OnClick
     private void updateListView(String result){
         listData = InterfaceResault.getSC_NewPurchaseResult(listData, result);
         adapter.notifyDataSetChanged();
+    }
+
+    //修改时更新列表
+    //列表值(提交接口)
+    //{ClientId：客户编号；SaleMan：经手人}</Describe>
+    //{Code：车辆编号；Price：单价；Deposit：订金；Warehouse：仓库；Color：颜色}
+
+    // 查询数据
+
+    // {ID：ID；DanHao：单号；Date：时间；dPrice：订金总额；Num：订单数量；Price：订单金额；ZhiDanRen：制单人；JingShouRen：经手人 BianHao 客户编号}
+    private void  updateListViewWithDS(String ds){
+        try{
+            JSONObject jsonObject = new JSONObject(ds);
+            id = jsonObject.getString("ID");
+            for (InputItem item : listData){
+                if("FormMaker".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("ZhiDanRen"));
+                }else  if("Number".equals(item.getItemId())){
+                    item.setValue(jsonObject.getString("DanHao"));
+                }else if("SaleMan".equals(item.getItemId())) {
+                    item.setValue(jsonObject.getString("JingShouRen"));
+                }else if("ClientId".equals(item.getItemId())){
+                    item.setValue(jsonObject.has("BianHao")?jsonObject.getString("BianHao"):""); //查询数据中没有返回客户编号
+                }
+            }
+            //获取车辆列表
+            //每个json生成inputItem, json字符串放入item的value里
+            //item加入listData
+            getCarListData();
+//            adapter.notifyDataSetChanged(); //添加车辆列表完毕后的方法里执行
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+    /**
+     * 修改时查询车练列表
+     */
+    private void getCarListData(){
+        String serverPath = InterfaceParam.SERVER_PATH;
+        String paramXml = InterfaceParam.getInstance().getSC_PurchaseCarList(id);//!!
+        Log.d("获取整车销售车辆列表参数：",paramXml);
+        HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
+            @Override
+            public void onFinish(final String response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("获取整车销售车辆列表返回值：",response);
+                        String result = ParseXML.getItemValueWidthName(response, InterfaceResault.SC_PurchaseCarListResult);
+                        addCarList(result);
+                        }
+                });
+            }
+
+            @Override
+            public void onWarning(String warning) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewCarPurchaseActivity.this,"获取车辆列表失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewCarPurchaseActivity.this,"获取车辆列表失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 车辆添加到列表
+     * @param result
+     * 查询返回的数据：{ID：ID；CarCode：车辆编号；CangKu：仓库；Color：颜色；DPrice：订金；Price：单价}
+     * 需要转换为：CarCode  Color  DanJia  Brand  Series  Type  dingjin  cangku
+     * String tempValuePic = "{\"CarCode\":\""+ carId.getText()+"\",\"Color\":\""+ carColor.getText()+"\",\"DanJia\":\""+carPirce.getText()+"\"," +
+    "\"Brand\":\""+carBrand.getText()+"\",\"Series\":\""+carSeries.getText()+"\",\"Type\":\""+carType.getText()+"\"," +
+    "\"dingjin\":\""+carDingjin.getText()+"\",\"cangku\":\""+carCangku.getText()+"\"}";
+     */
+    private void addCarList(String result){
+        if(TextUtils.isEmpty(result)){
+            adapter.notifyDataSetChanged();
+            return;
+        }
+        try{
+            InputItem item;
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONObject newJson = new JSONObject();
+                newJson.put("CarCode",jsonObject.get("CarCode"));
+                newJson.put("Color",jsonObject.get("Color"));
+                newJson.put("DanJia",jsonObject.get("Price"));
+                newJson.put("Brand",jsonObject.get("Brand"));
+                newJson.put("Series",jsonObject.get("Series"));
+                newJson.put("Type",jsonObject.get("Type"));
+                newJson.put("dingjin",jsonObject.get("DPrice"));
+                newJson.put("cangku",jsonObject.get("CangKu"));
+                item = new InputItem();
+                item.setValue(newJson.toString());
+                item.setInputType(13);
+                listData.add(item);
+            }
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){e.printStackTrace();}
+
+    }
+    @Override
+    public void OnDelCarClick(int position) {
+        Iterator<InputItem> it = listData.iterator();
+        int i=0;
+        while (it.hasNext()) {
+            InputItem item = it.next();
+            if(i==position){
+                it.remove();
+            }
+            i++;
+        }
+        adapter.updateCache(position);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void OnDelClick(int position) {
+
     }
 }

@@ -10,7 +10,7 @@
 "required":true,
 "intentRequestCode":0
 },
-{"itemId":"FormMaker",
+{"itemId":"FormMaker",//个人洽谈
 "itemTitle":"制单人",
 "inputType":0,
 "defaultValue":"",
