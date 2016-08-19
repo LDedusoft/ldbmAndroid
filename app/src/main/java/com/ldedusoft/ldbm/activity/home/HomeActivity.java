@@ -77,7 +77,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 //                Intent intent = new Intent("activity.ShouXieActivity");
 //                startActivity(intent);
 //               打开摄像头
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+               // Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                Intent intent = new Intent("opencv.OpenCVMainActivity");
+//                Intent intent = new Intent("tutorial1.Tutorial1Activity");
+//                Intent intent = new Intent("org.opencv.samples.facedetect.FdActivity");
+
+
+
                 startActivity(intent);
             }
         });

@@ -363,6 +363,31 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.daiyinger.carplate.OpenCVMainActivity">
+            <intent-filter>
+                <action android:name="opencv.OpenCVMainActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name="tutorial1.Tutorial1Activity">
+            <intent-filter>
+                <action android:name="tutorial1.Tutorial1Activity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name="org.opencv.samples.facedetect.FdActivity">
+            <intent-filter>
+                <action android:name="org.opencv.samples.facedetect.FdActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+
+
+
     </application>
+
 
 </manifest>
