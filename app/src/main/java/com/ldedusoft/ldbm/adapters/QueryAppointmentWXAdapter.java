@@ -52,6 +52,9 @@ public class QueryAppointmentWXAdapter extends ArrayAdapter<Reception> {
             weiXiuWayText.setText(reception.getWeiXiuWay());
             ywLeiBieText.setText(reception.getYwLeiBie());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 

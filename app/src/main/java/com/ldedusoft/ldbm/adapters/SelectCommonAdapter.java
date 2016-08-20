@@ -41,6 +41,9 @@ public class SelectCommonAdapter extends ArrayAdapter<String> {
             nameText = (TextView)view.findViewById(R.id.common_item_name);
             nameText.setText(itemValue);
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

@@ -51,6 +51,9 @@ public class QueryAppointmentYYAdapter extends ArrayAdapter<Appointment> {
             ywLeiBieText.setText(appointment.getYwLeiBie());
             yyTimeText.setText(appointment.getYyTime());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 

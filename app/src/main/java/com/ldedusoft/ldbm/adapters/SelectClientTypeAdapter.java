@@ -47,6 +47,10 @@ public class SelectClientTypeAdapter extends ArrayAdapter<ClientType> {
             idText.setText(String.valueOf(client.getID()));
             bianHaoText.setText(client.getBianHao());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
+
         return view;
     }
 }

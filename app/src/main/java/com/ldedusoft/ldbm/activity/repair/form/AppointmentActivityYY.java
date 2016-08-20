@@ -65,8 +65,9 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
                 finish();
             }
         });
-        getData();
         initList();
+        getData();
+
     }
 
     /*启动活动方法*/

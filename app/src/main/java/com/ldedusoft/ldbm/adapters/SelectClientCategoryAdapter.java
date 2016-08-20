@@ -44,6 +44,9 @@ public class SelectClientCategoryAdapter extends ArrayAdapter<ClientCategory> {
             NameText.setText(client.getCategoryName());
             idText.setText(String.valueOf(client.getCategoryId()));
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

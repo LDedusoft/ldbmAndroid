@@ -43,16 +43,19 @@ public class SelectSalesManAdapter extends ArrayAdapter<SalesMan> {
 
         if(salesMan!=null){
             nameText = (TextView)view.findViewById(R.id.salesman_name);
-            idText = (TextView)view.findViewById(R.id.salesman_id);
+//            idText = (TextView)view.findViewById(R.id.salesman_id);
             numberText = (TextView)view.findViewById(R.id.salesman_number);
             departmentText = (TextView)view.findViewById(R.id.salesman_department);
             companyText = (TextView)view.findViewById(R.id.salesman_company);
 
-            idText.setText(String.valueOf(salesMan.getId()));
+//            idText.setText(String.valueOf(salesMan.getId()));
             numberText.setText(salesMan.getNumber());
             nameText.setText(salesMan.getName());
             departmentText.setText(salesMan.getDepartment());
             companyText.setText(salesMan.getCompany());
+        }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
         }
         return view;
     }

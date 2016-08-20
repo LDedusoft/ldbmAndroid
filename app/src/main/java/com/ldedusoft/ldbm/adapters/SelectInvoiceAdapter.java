@@ -53,6 +53,9 @@ public class SelectInvoiceAdapter extends ArrayAdapter<Invoice> {
             viewHolder.faPiaoText.setText(invoice.getFaPiao());
             viewHolder.shuiLvText.setText(invoice.getShuiLv());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 

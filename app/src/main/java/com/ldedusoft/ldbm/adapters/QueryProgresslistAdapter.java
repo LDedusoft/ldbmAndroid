@@ -53,6 +53,9 @@ public class QueryProgresslistAdapter extends ArrayAdapter<Progress> {
             MingChengText.setText(item.getMingCheng());
             CarCodeText.setText(item.getCarCode());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 

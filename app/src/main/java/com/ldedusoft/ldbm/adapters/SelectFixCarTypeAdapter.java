@@ -47,6 +47,9 @@ public class SelectFixCarTypeAdapter extends ArrayAdapter<FixCarType> {
             xinghaoText.setText(fixCarType.getXingHao());
             bianmaText.setText(fixCarType.getBianMa());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

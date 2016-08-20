@@ -41,6 +41,9 @@ public class SelectTrafficClassAdapter extends ArrayAdapter<TrafficClass> {
             nameText = (TextView)view.findViewById(R.id.trafficClass_name);//!!
             nameText.setText(trafficClass.getTypeName());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

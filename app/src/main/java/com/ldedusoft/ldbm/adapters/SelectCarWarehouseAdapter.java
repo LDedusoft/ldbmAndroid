@@ -49,6 +49,9 @@ public class SelectCarWarehouseAdapter extends ArrayAdapter<CarWarehouse> {
             nameText.setText(carWarehouse.getName());
             codeText.setText(carWarehouse.getCode());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

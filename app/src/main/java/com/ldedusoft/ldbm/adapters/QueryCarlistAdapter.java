@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.model.CarList;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
@@ -56,6 +54,9 @@ public class QueryCarlistAdapter extends ArrayAdapter<CarList> {
             BrandText.setText(item.getBrand());
             SeriesText.setText(item.getSeries());
             TypeText.setText(item.getType());
+        }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
         }
         return view;
     }

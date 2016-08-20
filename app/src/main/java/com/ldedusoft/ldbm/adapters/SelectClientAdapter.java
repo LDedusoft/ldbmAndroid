@@ -54,6 +54,9 @@ public class SelectClientAdapter extends ArrayAdapter<Client> {
             NameText.setText(client.getName());
             LeiBieText.setText(client.getLeiBie());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

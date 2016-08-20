@@ -47,6 +47,9 @@ public class SelectFixingsTypeAdapter extends ArrayAdapter<FixingsType> {
             LeiBieText.setText(fixingsType.getLeiBie());
             BianHaoText.setText(fixingsType.getBianHao());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

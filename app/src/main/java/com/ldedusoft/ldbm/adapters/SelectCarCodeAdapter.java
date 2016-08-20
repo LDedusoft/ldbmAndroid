@@ -47,6 +47,9 @@ public class SelectCarCodeAdapter extends ArrayAdapter<CarCode> {
             brandText.setText(carCode.getBrand());
             codeText.setText(carCode.getCarCode());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

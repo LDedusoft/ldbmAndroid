@@ -52,6 +52,9 @@ public class SelectPlanAdapter extends ArrayAdapter<Plan> {
             viewHolder.JinEText.setText(plan.JinE);
             viewHolder.NumText.setText(plan.Num);
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 

@@ -40,6 +40,9 @@ public class SelectCarColorAdapter extends ArrayAdapter<CarColor> {
             colorText = (TextView)view.findViewById(R.id.carcolor_Color);
             colorText.setText(carColor.getColor());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

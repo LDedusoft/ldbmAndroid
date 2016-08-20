@@ -370,13 +370,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="tutorial1.Tutorial1Activity">
-            <intent-filter>
-                <action android:name="tutorial1.Tutorial1Activity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
 
-        </activity>
         <activity android:name="org.opencv.samples.facedetect.FdActivity">
             <intent-filter>
                 <action android:name="org.opencv.samples.facedetect.FdActivity"/>

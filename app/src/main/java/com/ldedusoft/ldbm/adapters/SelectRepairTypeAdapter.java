@@ -41,6 +41,9 @@ public class SelectRepairTypeAdapter extends ArrayAdapter<RepaireType> {
             nameText = (TextView)view.findViewById(R.id.repairType_name);
             nameText.setText(repaireType.getTypeName());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

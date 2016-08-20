@@ -52,6 +52,9 @@ public class SelectCarTypeAdapter extends ArrayAdapter<CarType> {
             BrandText.setText(carType.getBrand());
             PriceOut1Text.setText(carType.getPriceOut1());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }

@@ -44,6 +44,9 @@ public class SelectFixBrandTypeAdapter extends ArrayAdapter<Brand> {
             idText.setText(String.valueOf(brand.getID()));
             pinpaiText.setText(brand.getPinPai());
         }
+        if(position%2!=0){
+            view.setBackgroundResource(R.color.lisetItemBackground);
+        }
         return view;
     }
 }
