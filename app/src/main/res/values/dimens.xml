@@ -46,6 +46,7 @@
 
     <dimen name="commonQuery_item_height">35dp</dimen> <!--通用列表item高度-->
     <dimen name="commonQuery_item_title_width">100dp</dimen> <!--通用列表标题宽度-->
+    <dimen name="commonQuery_item_small_title_width">60dp</dimen> <!--通用列表标题宽度-->
     <dimen name="commonQuery_item_action_width">60dp</dimen> <!--通用列详情按钮宽度-->
     <dimen name="commonQuery_condition_height">35dp</dimen> <!--通用列表 查询栏高度-->
     <dimen name="commonQuery_condition_textsize">15dp</dimen> <!--通用列表 查询栏高度-->
