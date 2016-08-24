@@ -1,15 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--维修进度查询-->
     <!-- *  DanHao：单号；JcDate：进出日期；JdDate：接待日期；WgDate：完工日期；
      * JinDu：进度；MingCheng：客户名称；CarCode：车牌号-->
-
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="客户名称"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                />
+            <TextView
+                android:id="@+id/progresslist_MingCheng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="车牌号"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                />
+            <TextView
+                android:id="@+id/progresslist_CarCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="进度"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                />
+            <TextView
+                android:id="@+id/progresslist_JinDu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         >
         <LinearLayout
@@ -22,13 +91,13 @@
                 android:text="单号"
                 android:layout_width="@dimen/commonQuery_item_small_title_width"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 />
             <TextView
                 android:id="@+id/progresslist_DanHao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 />
 
         </LinearLayout>
@@ -43,13 +112,13 @@
                 android:text="进出日期"
                 android:layout_width="@dimen/commonQuery_item_small_title_width"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 />
             <TextView
                 android:id="@+id/progresslist_JcDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 />
         </LinearLayout>
 
@@ -63,13 +132,13 @@
                 android:text="接待日期"
                 android:layout_width="@dimen/commonQuery_item_small_title_width"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 />
             <TextView
                 android:id="@+id/progresslist_JdDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 />
         </LinearLayout>
 
@@ -83,86 +152,18 @@
                 android:text="完工日期"
                 android:layout_width="@dimen/commonQuery_item_small_title_width"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 />
             <TextView
                 android:id="@+id/progresslist_WgDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 />
         </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/commonQuery_item_height"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            >
-            <TextView
-                android:text="进度"
-                android:layout_width="@dimen/commonQuery_item_small_title_width"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                />
-            <TextView
-                android:id="@+id/progresslist_JinDu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                />
 
-        </LinearLayout>
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/commonQuery_item_height"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        >
-        <TextView
-            android:text="客户名称"
-            android:layout_width="@dimen/commonQuery_item_small_title_width"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            />
-        <TextView
-            android:id="@+id/progresslist_MingCheng"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            />
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/commonQuery_item_height"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            >
-            <TextView
-                android:text="车牌号"
-                android:layout_width="@dimen/commonQuery_item_small_title_width"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                />
-            <TextView
-                android:id="@+id/progresslist_CarCode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 
 

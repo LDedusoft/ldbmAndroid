@@ -11,23 +11,87 @@
         android:layout_weight="1"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/carlist_item_CarCode"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_Color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_DanJia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_Vin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="品牌"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_Brand"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="车型"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_Type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="车系"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_Series"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="发动机号"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_EngineNo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
@@ -35,25 +99,86 @@
         android:layout_weight="1"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/carlist_item_EngineNo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_Brand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_Series"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/carlist_item_Type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="车牌号"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_CarCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="颜色"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_Color"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="价格"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_DanJia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="Vin码"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/carlist_item_Vin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
     </LinearLayout>
-
-
 
 </LinearLayout>
