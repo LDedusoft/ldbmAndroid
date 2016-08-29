@@ -21,7 +21,7 @@ public class SelectFixingAdapter extends CommonAdapter {
     }
     public void convert(ViewHolder viewHolder, Object fixing)
     {
-        viewHolder.setText(R.id.fixings_item_ID,((FixingInfo)fixing).getID());
+        //viewHolder.setText(R.id.fixings_item_ID,((FixingInfo)fixing).getID());
         viewHolder.setText(R.id.fixings_item_BianHao,((FixingInfo)fixing).getBianHao());
         viewHolder.setText(R.id.fixings_item_MingCheng,((FixingInfo)fixing).getMingCheng());
         viewHolder.setText(R.id.fixings_item_TuHao,((FixingInfo)fixing).getTuHao());

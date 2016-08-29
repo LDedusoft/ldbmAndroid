@@ -11,26 +11,87 @@
         android:layout_weight="1"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/fixings_item_MingCheng"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_ID"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="名称"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_MingCheng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_BianHao"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="编号"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_BianHao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_TuHao"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="图号"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_TuHao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_CangKu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="仓库"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_CangKu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
     <LinearLayout
@@ -39,22 +100,86 @@
         android:layout_weight="1"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/fixings_item_KuCun"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_KuCunJinE"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="库存数量"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_KuCun"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_KuCunJunJia"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="库存金额"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_KuCunJinE"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/fixings_item_DanWei"
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="库存均价"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_KuCunJunJia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/commonQuery_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:text="单位"
+                android:layout_width="@dimen/commonQuery_item_small_title_width"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/fixings_item_DanWei"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 

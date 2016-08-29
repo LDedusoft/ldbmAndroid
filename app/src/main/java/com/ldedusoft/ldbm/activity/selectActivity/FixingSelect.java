@@ -58,6 +58,7 @@ public class FixingSelect extends BaseActivity implements QueryToolBarListener {
     private void initToolBar(){
         toolBar = (QueryToolBar)findViewById(R.id.selected_fixings_toolbar);
         toolBar.setQueryToolBarListener(this);
+        toolBar.setTitle("配件库存");
     }
 
     @Override
