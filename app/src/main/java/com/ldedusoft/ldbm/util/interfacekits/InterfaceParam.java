@@ -16,7 +16,7 @@ public class InterfaceParam {
     /**
      * 服务器地址
      */
-    public static final String SERVER_PATH = "http://ldbm.ld-edusoft.com/webservers/WebService.asmx";
+    public static  String SERVER_PATH ="";// "http://ldbm.ld-edusoft.com/webservers/WebService.asmx"
 
     public static final String SYS_USER = "admin";
 

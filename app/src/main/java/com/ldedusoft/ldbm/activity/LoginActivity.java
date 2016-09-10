@@ -40,7 +40,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private final String CONFIG_SAVEPASSWORD = "config_savePassword";
     private final String CONFIG_USERNAME = "config_username";
     private final String CONFIG_PASSWORD = "config_password";
+    private final String CONFIG_SERVERPATH = "config_serverPath";
     private EditText username;
+    private EditText serverEditText;
     private EditText password;
     private Button loginBtn;
     private String serverPath ;
@@ -73,12 +75,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         mainLayout = (LinearLayout)findViewById(R.id.root_layout);
         username = (EditText)findViewById(R.id.edittext_username);
+        serverEditText = (EditText)findViewById(R.id.edittext_serverPath);
         password = (EditText)findViewById(R.id.edittext_password);
         loginTypeSpinner = (Spinner)findViewById(R.id.spinner_loginType);
         loginBtn = (Button)findViewById(R.id.btn_login);
         savePassword = (CheckBox)findViewById(R.id.login_savePassword);
         loginBtn.setOnClickListener(this);
         username.setText(pref.getString(CONFIG_USERNAME, ""));
+        serverEditText.setText(pref.getString(CONFIG_SERVERPATH,""));
         String savePd = pref.getString(CONFIG_SAVEPASSWORD,"");
         if("true".equals(savePd)){
             savePassword.setChecked(true);
@@ -129,8 +133,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             "请输入密码!", Toast.LENGTH_SHORT).show();
                     password.findFocus();
                 }else {
-//                    ldbmLogin();
-                    loginSuccess();
+                    ldbmLogin();
+//                    loginSuccess();
                 }
 
         }
@@ -141,6 +145,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      */
     private void ldbmLogin(){
         showProgressDialog();
+        editor = pref.edit();
+        editor.putString(CONFIG_SERVERPATH,serverEditText.getText().toString());
+        editor.commit();
+        InterfaceParam.SERVER_PATH = serverEditText.getText().toString();
+        if("".equals(serverEditText.getText().toString())){
+            InterfaceParam.SERVER_PATH = "http://ldbm.ld-edusoft.com/webservers/WebService.asmx";
+        }
         serverPath =InterfaceParam.SERVER_PATH;
         paramXml = InterfaceParam.getInstance().getLogin(username.getText().toString(), password.getText().toString());
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
@@ -193,6 +204,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         editor = pref.edit();
         //保存用户名
         editor.putString(CONFIG_USERNAME,username.getText().toString());
+       // editor.putString(CONFIG_SERVERPATH,serverEditText.getText().toString());
         //// TODO: 2016/8/1 保存密码
         String savePd;
         if(savePassword.isChecked()){

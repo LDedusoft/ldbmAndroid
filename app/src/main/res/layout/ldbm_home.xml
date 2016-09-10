@@ -85,7 +85,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:text="888.88元"
+                    android:text="0元"
                     android:textColor="@color/homeTitleTextWhite"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"

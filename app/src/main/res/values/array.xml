@@ -4,8 +4,6 @@
     <string-array name="loginType_array">
         <item>账套1</item>
         <item>账套2</item>
-        <item>账套3</item>
-        <item>账套4</item>
     </string-array>
     <!--菜单配置-->
     <string-array name="home_menu_item">

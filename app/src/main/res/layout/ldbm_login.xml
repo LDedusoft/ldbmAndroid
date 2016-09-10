@@ -12,7 +12,7 @@
         <!-- 用户头像区域 -->
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1.2"
             android:background="#ffffff">
             <ImageView
@@ -26,8 +26,8 @@
         <!-- 用户名密码输入区域-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:background="#ffffff"
             android:orientation="vertical"
             android:paddingLeft="10dp"
@@ -143,6 +143,53 @@
                         android:layout_gravity="bottom"/>
                 </LinearLayout>
             </LinearLayout>
+            <!-- 服务器地址 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:paddingRight="10dp"
+
+                >
+                <RelativeLayout
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/loginInputLeftLine"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="vertical"
+                    android:layout_marginRight="10dp">
+                    <EditText
+                        android:id="@+id/edittext_serverPath"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:cursorVisible="true"
+                        android:layout_gravity="top"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/loginEditText"
+                        android:textColorHint="@color/loginHintText"
+                        android:textSize="15dp"
+                        android:hint="@string/input_serverPath" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/loginLine"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="top"/>
+                </LinearLayout>
+            </LinearLayout>
             <!-- 下拉 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,6 +198,7 @@
                 android:orientation="horizontal"
                 android:gravity="left"
                 android:paddingRight="10dp"
+                android:visibility="gone"
                 >
                 <RelativeLayout
                     android:layout_width="1dp"
@@ -176,6 +224,8 @@
                     </Spinner>
                 </LinearLayout>
             </LinearLayout>
+
+
 
             <!-- 登录 -->
             <LinearLayout
@@ -223,7 +273,7 @@
         <!--  留白-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="#ffffff">
