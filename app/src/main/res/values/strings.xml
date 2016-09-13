@@ -92,8 +92,8 @@
     <string name="action_view_file">viewFile</string>
     <string name="action_view_image">viewImage</string>
     <string name="hello_world">Hello world!</string>
-    <string name="Pick">选择图片</string>
-    <string name="planedetect">车牌检测</string>
+    <string name="Pick">重新拍摄</string>
+    <string name="planedetect">提取牌照</string>
     <string name="str_proc">Car Plate Detection and Recognition</string>
     <string name="wait_detect">等待检测.</string>
 

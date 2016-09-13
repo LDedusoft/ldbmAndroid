@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     private ImageView iv_icon;
     private ListView lv;
     private Button camera;
+    private EditText topEdit;
 
     private ArrayList<MenuItem> menuDataList;
     @Override
@@ -69,6 +71,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
     }
 
     private void initTopMenu(){
+        topEdit = (EditText)findViewById(R.id.home_top_edit);
         camera = (Button)findViewById(R.id.home_top_camera);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,13 +80,13 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 //                Intent intent = new Intent("activity.ShouXieActivity");
 //                startActivity(intent);
 //               打开摄像头
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
-//                Intent intent = new Intent("opencv.OpenCVMainActivity"); //车牌
+                Intent intent = new Intent("opencv.OpenCVMainActivity"); //车牌
 
 
 
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
     }
@@ -418,5 +421,15 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         return addMenus;
     }
 
-
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        switch (resultCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    String carCode = data.getStringExtra("carCode");
+                    topEdit.setText(carCode);
+                }
+                break;
+        }
+    }
 }

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images.ImageColumns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
+import com.ldedusoft.ldbm.activity.ShowBigPictureActivity;
+import com.ldedusoft.ldbm.activity.ShowPictureActivity;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -40,7 +43,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class OpenCVMainActivity extends Activity {
-
+	private String carCode="";
+	private Uri imageUri;
+	private String imgName = "pic_car_code.png";
 	private int window_width, window_height;// 控件宽度
 	private int state_height;// 状态栏的高度
 	private DragImageView  mZoomView = null;
@@ -50,6 +55,7 @@ public class OpenCVMainActivity extends Activity {
 	private Button btnPic = null;
 	private TextView m_text = null;
 	private String path = null; //SDCARD 根目录
+	private Button btnOk;
 	String imgpath = null;
 	boolean selected_img_flag = false;
 	@SuppressWarnings({ "deprecation" })
@@ -60,8 +66,21 @@ public class OpenCVMainActivity extends Activity {
 		m_text = (TextView) findViewById(R.id.myshow);
 		btnTrain = (Button) findViewById(R.id.btn_plate);
 		btnPic = (Button) findViewById(R.id.btn_pick);
-
 		mZoomView = (DragImageView)findViewById(R.id.imageview);
+		btnOk = (Button) findViewById(R.id.btn_ok);
+
+		newPhoto(); //进入页面立即打开相机
+
+		btnOk.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			//	Toast.makeText(OpenCVMainActivity.this,carCode,Toast.LENGTH_LONG).show();
+				Intent ii = new Intent();
+//				ii.putExtra("carCode",carCode.toString());
+				setResult(RESULT_OK,ii);
+				finish();
+			}
+		});
 
 		btnTrain.setOnClickListener( new OnClickListener(){
 
@@ -79,6 +98,7 @@ public class OpenCVMainActivity extends Activity {
 					bmp = getLoacalBitmap(imgpath);
 					mZoomView.setImageBitmap(bmp);
 					selected_img_flag = true;
+
 				}
 				new MyTask().execute();
 			}});
@@ -86,11 +106,13 @@ public class OpenCVMainActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(
-						Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				// 从相册选择照片
+//				Intent i = new Intent(
+//						Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//
+//				startActivityForResult(i, 1);
 
-				startActivityForResult(i, 1);
+				newPhoto();
 			}});
 		//将汽车完整图像加载程序中并进行显示
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ai);
@@ -123,6 +145,23 @@ public class OpenCVMainActivity extends Activity {
 		imgpath = path+"/ai/plate_locate.jpg";
 		System.out.println(path);
 		InitEnv();
+	}
+
+	private void newPhoto(){
+
+		File outputImage = new File(Environment.getExternalStorageDirectory()+"/LDBM/",imgName);
+		try{
+			if(outputImage.exists()){
+				outputImage.delete();
+			}
+			outputImage.createNewFile();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		imageUri = Uri.fromFile(outputImage);
+		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+		startActivityForResult(intent, 3);
 	}
 
 	//查询xml资源是否存在 如果不存在则从assets进行拷贝
@@ -164,6 +203,7 @@ public class OpenCVMainActivity extends Activity {
 				//用putString的方法保存数据
 				editor.putString("version",curVersion);
 				editor.commit();
+
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -207,25 +247,58 @@ public class OpenCVMainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (resultCode == RESULT_OK && null != data) {
+		if (resultCode == RESULT_OK ) {
 			if(requestCode == 1)
 			{
 				Uri uri = data.getData();
 				ContentResolver cr = this.getContentResolver();
 				try {
-					bmp = BitmapFactory.decodeStream(cr.openInputStream(uri));
+				//	bmp = BitmapFactory.decodeStream(cr.openInputStream(uri));
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+getImagePath(uri,null));
+					bmp = ShowBigPictureActivity.getimage(getImagePath(uri,null));//压缩
+					//bmp= BitmapFactory.decodeFile(getImagePath(uri,null));//原图
 					mZoomView.setImageBitmap(bmp);
 					imgpath = getRealFilePath(getApplicationContext(), uri);
-				} catch (FileNotFoundException e) {
+				} catch (Exception e) {
 					//Log.e("Exception", e.getMessage(),e);
 				}
 			}
 			else if(requestCode == 2)
 			{
 
+			}else if(requestCode == 3){
+				try{
+				//	Uri uri = data.getData();
+					BitmapFactory.Options options = new BitmapFactory.Options();
+					options.inPreferredConfig = Bitmap.Config.RGB_565;
+					String filePath = Environment.getExternalStorageDirectory()+"/LDBM/"+imgName;
+					Bitmap bitmap = ShowBigPictureActivity.getimage(filePath);
+					mZoomView.setImageBitmap(bitmap);
+					imgpath = filePath;
+					selected_img_flag = true;
+					//	imageArray[index].setImageBitmap(bitmap);
+					//	picNameArr[index] = filePath;
+					//	index++;
+				}catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 	}
+
+	private String getImagePath(Uri uri,String selection){
+		String path = null;
+		Cursor cursor = getContentResolver().query(uri,null,selection,null,null);
+		if(cursor!=null){
+			if(cursor.moveToFirst()) {
+				path = cursor.getString(
+						cursor.getColumnIndex(MediaStore.Audio.Media.DATA)
+				);
+			}
+			cursor.close();
+			}
+			return  path;
+		}
 
 
 	/**
@@ -309,6 +382,9 @@ public class OpenCVMainActivity extends Activity {
 					m_text.setText((String)msg.obj);
 					break;
 				case 2:
+
+					carCode = (String)msg.obj;
+					carCode = carCode.substring(carCode.indexOf(":")+1);
 					Toast.makeText(getApplicationContext(), (String)msg.obj, Toast.LENGTH_SHORT).show();
 					break;
 				case 3:
