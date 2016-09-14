@@ -12,6 +12,8 @@ public class SysProperty {
 
     private static SysProperty sysp;
 
+    public static String carCode;
+
     /*登录模式*/
     private String mode;
 

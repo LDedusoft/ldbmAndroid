@@ -12,6 +12,7 @@ import com.ldedusoft.ldbm.adapters.QueryProgresslistAdapter;
 import com.ldedusoft.ldbm.component.customComp.QueryToolBar;
 import com.ldedusoft.ldbm.interfaces.QueryToolBarListener;
 import com.ldedusoft.ldbm.model.Progress;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.ParseXML;
@@ -46,6 +47,7 @@ public class ProgressListQuery extends BaseActivity {
 
         carcodeText = (EditText)findViewById(R.id.progresslist_editText);
         carcodeText.clearFocus();
+        carcodeText.setText(SysProperty.carCode);
         carcodeText.setSelected(false);
         queryBtn = (Button)findViewById(R.id.progresslist_select_btn);
         queryBtn.setOnClickListener(new View.OnClickListener() {

@@ -15,6 +15,7 @@ import com.ldedusoft.ldbm.component.customComp.FormToolBar;
 import com.ldedusoft.ldbm.interfaces.FormToolBarListener;
 import com.ldedusoft.ldbm.model.Client;
 import com.ldedusoft.ldbm.model.InputItem;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.util.HttpCallbackListener;
 import com.ldedusoft.ldbm.util.HttpUtil;
 import com.ldedusoft.ldbm.util.InitParamUtil;
@@ -57,6 +58,14 @@ public class NewCarActivity extends BaseActivity implements View.OnClickListener
             }
         });
         listData = InitParamUtil.getInstance(this).initPub_SaveCar(); //!!  初始化表单内容
+        listData.get(0).setValue(SysProperty.carCode);
+//        for (InputItem item : listData) {
+//            if("CarCode".equals(item.getItemId())){
+//                if(!TextUtils.isEmpty(SysProperty.carCode)){
+//                    item.setValue(SysProperty.carCode);
+//                }
+//            }
+//        }
         initList();
     }
 

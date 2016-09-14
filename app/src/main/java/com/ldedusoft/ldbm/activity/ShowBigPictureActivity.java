@@ -44,8 +44,8 @@ public class ShowBigPictureActivity extends BaseActivity {
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
         //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float hh = 1000f;//这里设置高度为800f
-        float ww = 600f;//这里设置宽度为480f
+        float hh = 800f;//这里设置高度为800f
+        float ww = 480f;//这里设置宽度为480f
         //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
         int be = 1;//be=1表示不缩放
         if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
@@ -55,15 +55,17 @@ public class ShowBigPictureActivity extends BaseActivity {
         }
         if (be <= 0)
             be = 1;
-        System.out.println("缩放比例"+be);
+        System.out.println("》》》》》》》》》》》》》》》》》》缩放比例"+be);
         newOpts.inSampleSize = be;//设置缩放比例
-        newOpts.inPreferredConfig = Bitmap.Config.RGB_565;
+        newOpts.inPreferredConfig = Bitmap.Config.ARGB_8888;
         //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
         bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
         if(bitmap==null){
             return null;
         }
-        return compressImage(bitmap);//压缩好比例大小后再进行质量压缩
+        //  bitmap = rotaingImageView(90, bitmap);//旋转角度,有些手机需要旋转
+//        bitmap =  compressImage(bitmap);//压缩好比例大小后再进行质量压缩
+        return bitmap;
     }
 
     /**
@@ -76,12 +78,12 @@ public class ShowBigPictureActivity extends BaseActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.out.println("图片大小:" + baos.toByteArray().length);
 
-        int options = 60;
+        int options = 80;
         image.compress(Bitmap.CompressFormat.JPEG, options, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         System.out.println("图片压缩比例:"+options+" 压缩后大小:"+baos.toByteArray().length);
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        bitmap = rotaingImageView(90, bitmap);//旋转角度,有些手机需要旋转
+
         return bitmap;
     }
 

@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.ImageColumns;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,20 +27,25 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldedusoft.ldbm.R;
 import com.ldedusoft.ldbm.activity.ShowBigPictureActivity;
 import com.ldedusoft.ldbm.activity.ShowPictureActivity;
+import com.ldedusoft.ldbm.model.SysProperty;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class OpenCVMainActivity extends Activity {
@@ -53,7 +59,7 @@ public class OpenCVMainActivity extends Activity {
 	private Bitmap bmp = null;
 	private Button btnTrain = null;
 	private Button btnPic = null;
-	private TextView m_text = null;
+	private EditText m_text = null;
 	private String path = null; //SDCARD 根目录
 	private Button btnOk;
 	String imgpath = null;
@@ -63,7 +69,7 @@ public class OpenCVMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.opencv_main);
-		m_text = (TextView) findViewById(R.id.myshow);
+		m_text = (EditText) findViewById(R.id.myshow);
 		btnTrain = (Button) findViewById(R.id.btn_plate);
 		btnPic = (Button) findViewById(R.id.btn_pick);
 		mZoomView = (DragImageView)findViewById(R.id.imageview);
@@ -74,11 +80,12 @@ public class OpenCVMainActivity extends Activity {
 		btnOk.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			//	Toast.makeText(OpenCVMainActivity.this,carCode,Toast.LENGTH_LONG).show();
-				Intent ii = new Intent();
-//				ii.putExtra("carCode",carCode.toString());
-				setResult(RESULT_OK,ii);
-				finish();
+					carCode= m_text.getText().toString();
+					SysProperty.carCode = carCode;
+					Intent ii = new Intent();
+					ii.putExtra("carCode", carCode);
+					setResult(RESULT_OK, ii);
+					finish();
 			}
 		});
 
@@ -247,14 +254,13 @@ public class OpenCVMainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (resultCode == RESULT_OK ) {
+		if (resultCode == RESULT_OK ) { //相册选择
 			if(requestCode == 1)
 			{
 				Uri uri = data.getData();
 				ContentResolver cr = this.getContentResolver();
 				try {
 				//	bmp = BitmapFactory.decodeStream(cr.openInputStream(uri));
-					System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+getImagePath(uri,null));
 					bmp = ShowBigPictureActivity.getimage(getImagePath(uri,null));//压缩
 					//bmp= BitmapFactory.decodeFile(getImagePath(uri,null));//原图
 					mZoomView.setImageBitmap(bmp);
@@ -266,15 +272,17 @@ public class OpenCVMainActivity extends Activity {
 			else if(requestCode == 2)
 			{
 
-			}else if(requestCode == 3){
+			}else if(requestCode == 3){//拍照返回
 				try{
 				//	Uri uri = data.getData();
 					BitmapFactory.Options options = new BitmapFactory.Options();
 					options.inPreferredConfig = Bitmap.Config.RGB_565;
 					String filePath = Environment.getExternalStorageDirectory()+"/LDBM/"+imgName;
+					String newFilePath = Environment.getExternalStorageDirectory()+"/LDBM/temp.png";
 					Bitmap bitmap = ShowBigPictureActivity.getimage(filePath);
+					saveFile(bitmap,newFilePath);
 					mZoomView.setImageBitmap(bitmap);
-					imgpath = filePath;
+					imgpath = newFilePath;
 					selected_img_flag = true;
 					//	imageArray[index].setImageBitmap(bitmap);
 					//	picNameArr[index] = filePath;
@@ -283,6 +291,44 @@ public class OpenCVMainActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	public void saveFile111(Bitmap bm, String fileName) throws IOException {
+
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		int options = 100;
+		bm.compress(Bitmap.CompressFormat.PNG, options, os);
+		FileOutputStream fos = new FileOutputStream(fileName);
+		fos.write(os.toByteArray());
+		fos.flush();
+		fos.close();
+	}
+
+	public void saveFile(Bitmap mBitmap,String fileName){
+		File f = new File(fileName);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("在保存图片时出错："+e.toString());
+		}
+		FileOutputStream fOut = null;
+		try {
+			fOut = new FileOutputStream(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+		try {
+			fOut.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			fOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -379,13 +425,15 @@ public class OpenCVMainActivity extends Activity {
 			switch(msg.what)
 			{
 				case 1:
-					m_text.setText((String)msg.obj);
+					carCode = (String)msg.obj;
+					carCode = carCode.substring(carCode.indexOf(":")+1);
+					m_text.setText(carCode);
 					break;
 				case 2:
 
 					carCode = (String)msg.obj;
 					carCode = carCode.substring(carCode.indexOf(":")+1);
-					Toast.makeText(getApplicationContext(), (String)msg.obj, Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), (String)msg.obj, Toast.LENGTH_SHORT).show();
 					break;
 				case 3:
 					mZoomView.setImageBitmap(bmp);

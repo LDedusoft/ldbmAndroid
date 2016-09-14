@@ -83,10 +83,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 //                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
                 Intent intent = new Intent("opencv.OpenCVMainActivity"); //车牌
-
-
-
-                startActivityForResult(intent,1);
+                startActivityForResult(intent,2);
             }
         });
     }
@@ -297,6 +294,12 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
                     updateMenuList(selectedMenu);
                 }
                 break;
+            case 2: //车牌识别
+                if(resultCode == RESULT_OK){
+                    String carCode = data.getStringExtra("carCode");
+                    topEdit.setText(carCode);
+                }
+                break;
             default:
                 break;
         }
@@ -421,15 +424,4 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
         return addMenus;
     }
 
-    @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        switch (resultCode){
-            case 1:
-                if(resultCode == RESULT_OK){
-                    String carCode = data.getStringExtra("carCode");
-                    topEdit.setText(carCode);
-                }
-                break;
-        }
-    }
 }

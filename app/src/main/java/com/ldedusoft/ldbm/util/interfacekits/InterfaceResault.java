@@ -2,6 +2,7 @@ package com.ldedusoft.ldbm.util.interfacekits;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 
 import com.ldedusoft.ldbm.Application.MyApplication;
 import com.ldedusoft.ldbm.R;
@@ -25,6 +26,7 @@ import com.ldedusoft.ldbm.model.Progress;
 import com.ldedusoft.ldbm.model.Reception;
 import com.ldedusoft.ldbm.model.RepaireType;
 import com.ldedusoft.ldbm.model.SalesMan;
+import com.ldedusoft.ldbm.model.SysProperty;
 import com.ldedusoft.ldbm.model.TrafficClass;
 import com.ldedusoft.ldbm.model.common.CommonNormal;
 
@@ -724,6 +726,11 @@ public class InterfaceResault {
                 }
                 if("FormMaker".equals(item.getItemId())){
                     item.setValue(formMaker);
+                }
+                if("CarCode".equals(item.getItemId())){
+                    if(!TextUtils.isEmpty(SysProperty.carCode)){
+                        item.setValue(SysProperty.carCode);
+                    }
                 }
             }
         }catch (Exception e){
