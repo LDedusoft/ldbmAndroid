@@ -72,6 +72,7 @@ public class HomeActivity extends BaseActivity implements OnDeleteListioner,OnSe
 
     private void initTopMenu(){
         topEdit = (EditText)findViewById(R.id.home_top_edit);
+        topEdit.setText(SysProperty.carCode);
         camera = (Button)findViewById(R.id.home_top_camera);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override

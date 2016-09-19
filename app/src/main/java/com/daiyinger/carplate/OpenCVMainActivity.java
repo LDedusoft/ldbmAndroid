@@ -81,6 +81,9 @@ public class OpenCVMainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 					carCode= m_text.getText().toString();
+					if (carCode.indexOf("识别失败")!=-1){
+						carCode = "";
+					}
 					SysProperty.carCode = carCode;
 					Intent ii = new Intent();
 					ii.putExtra("carCode", carCode);
@@ -275,15 +278,19 @@ public class OpenCVMainActivity extends Activity {
 			}else if(requestCode == 3){//拍照返回
 				try{
 				//	Uri uri = data.getData();
-					BitmapFactory.Options options = new BitmapFactory.Options();
-					options.inPreferredConfig = Bitmap.Config.RGB_565;
+
 					String filePath = Environment.getExternalStorageDirectory()+"/LDBM/"+imgName;
 					String newFilePath = Environment.getExternalStorageDirectory()+"/LDBM/temp.png";
-					Bitmap bitmap = ShowBigPictureActivity.getimage(filePath);
+					Bitmap bitmap = ShowBigPictureActivity.getimageForCarCode(filePath);
 					saveFile(bitmap,newFilePath);
+					m_text.setText("");
+					carCode = "";
 					mZoomView.setImageBitmap(bitmap);
 					imgpath = newFilePath;
 					selected_img_flag = true;
+
+					//自动开始识别
+					new MyTask().execute();
 					//	imageArray[index].setImageBitmap(bitmap);
 					//	picNameArr[index] = filePath;
 					//	index++;
@@ -294,16 +301,7 @@ public class OpenCVMainActivity extends Activity {
 		}
 	}
 
-	public void saveFile111(Bitmap bm, String fileName) throws IOException {
 
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		int options = 100;
-		bm.compress(Bitmap.CompressFormat.PNG, options, os);
-		FileOutputStream fos = new FileOutputStream(fileName);
-		fos.write(os.toByteArray());
-		fos.flush();
-		fos.close();
-	}
 
 	public void saveFile(Bitmap mBitmap,String fileName){
 		File f = new File(fileName);

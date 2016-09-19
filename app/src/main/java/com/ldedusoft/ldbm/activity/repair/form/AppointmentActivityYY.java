@@ -249,7 +249,11 @@ public class AppointmentActivityYY extends BaseActivity implements View.OnClickL
                     public void run() {
                         String result = ParseXML.getItemValueWidthName(response, "AP_AppointmentSaveResult");
                         if("false".equals(result)||TextUtils.isEmpty(result)) {
-                            Toast.makeText(AppointmentActivityYY.this, getString(R.string.save_fail), Toast.LENGTH_SHORT).show();
+                            if(!"".equals(SysProperty.carCode)){
+                                Toast.makeText(AppointmentActivityYY.this, "保存失败,请确认车牌号已添加到客户车辆列表", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(AppointmentActivityYY.this, "保存失败", Toast.LENGTH_SHORT).show();
+                            }
                         }else {
                             Toast.makeText(AppointmentActivityYY.this, getString(R.string.save_success), Toast.LENGTH_SHORT).show();
                             //发送刷新列表广播
