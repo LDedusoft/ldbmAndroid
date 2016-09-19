@@ -363,7 +363,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.daiyinger.carplate.OpenCVMainActivity">
+        <activity android:name="com.daiyinger.carplate.OpenCVMainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="opencv.OpenCVMainActivity"/>
                 <category android:name="android.intent.category.DEFAULT"/>
